@@ -1,107 +1,74 @@
+<!-- ═══ NAV ═══════════════════════════════════════════════════════════════ -->
 <nav class="nav-bar">
-    <div id="logoImg" [class.img-scaleLarge]="isLogoLarge$ | async">
-        <a routerLink="/">
-            <img src="assets/shared/img/logo/mark.png" alt="logo">
-        </a>
-    </div>
 
-    <div class="ml-auto mt-3 flex items-center space-x-4">
-        <web-glass-bg class="container-hover hidden lg:block">
-            <div class="flex items-center">
-                <ng-container *ngFor="let menu of navList">
-                    <div class="menu-wrap" *ngIf="menu.children; else singleLink">
-                        <button mat-button (click)="toggleNavbarMenu(menu.label)"
-                            [class.active]="activeMenu === menu.label" class="nav-link">{{ menu.label }}</button>
-                        <div [class.show]="activeMenu === menu.label" class="menu-list">
-                            <web-glass-bg class="container-hover">
-                                <a *ngFor="let item of menu.children" (click)="closeNavbarMenu()"
-                                    [routerLink]="item.link">
-                                    {{ item.label }}
-                                </a>
-                            </web-glass-bg>
-                        </div>
-                    </div>
-                    <ng-template #singleLink>
-                        <a mat-button class="nav-link" [routerLink]="menu.link">
-                            {{ menu.label }}
-                        </a>
-                    </ng-template>
-                </ng-container>
-            </div>
-        </web-glass-bg>
+  <!-- Logo -->
+  <a routerLink="/" class="nav-logo shrink-0">
+    <img src="assets/image/logo/landscape.svg" alt="蘊和堂" />
+  </a>
 
-        <web-glass-bg class="container-hover">
-            <div class="flex items-center px-1">
-                <div *ngIf="!isSignin" class="items-center hidden lg:flex">
-                    <a mat-button class="nav-link" routerLink="/auth/signup">註冊</a>
-                    <span>/</span>
-                    <a mat-button class="nav-link" routerLink="/auth/signin">登入</a>
-                </div>
+  <!-- Desktop links -->
+  <div class="hidden lg:flex items-center gap-1 ml-auto">
+    <a *ngFor="let menu of navList"
+       class="nav-link"
+       [routerLink]="menu.link"
+       routerLinkActive="active">
+      {{ menu.label }}
+    </a>
 
-                <div *ngIf="isSignin" class="hidden items-center lg:flex">
-                    <div class="menu-wrap">
-                        <button (click)="toggleSingleMenu()" [class.active]="isMenuOpen" class="avatar-btn nav-links">
-                            <span class="user">{{ (currUserInfo?.name || '-').charAt(0) }}</span>
-                        </button>
+    <!-- CTA -->
+    <a routerLink="/product"
+       class="ml-6 px-6 py-2.5 text-xs tracking-widest hover:opacity-90 transition-opacity"
+       style="background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); font-family: 'Work Sans', sans-serif;">
+      立即選購
+    </a>
+  </div>
 
-                        <div class="menu-list" (click)="closeNavbarMenu()" [class.show]="isMenuOpen">
-                            <web-glass-bg class="container-hover">
-                                <a *ngFor="let item of accountMenu" [routerLink]="item.link" (click)="snav.close()">{{
-                                    item.label }}
-                                </a>
-                                <button (click)="appAuthApiServ.signout()">
-                                    <span class="material-symbols-rounded pr-2">logout</span>登出
-                                </button>
-                            </web-glass-bg>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="lg:hidden">
-                    <button (click)="toggleSideMenu()" class="h-10 w-11">
-                        <span class="material-symbols-rounded" *ngIf="!snav?.opened">menu</span>
-                        <span class="material-symbols-rounded" *ngIf="snav?.opened">menu_open</span>
-                    </button>
-                </div>
-            </div>
-        </web-glass-bg>
-    </div>
+  <!-- Mobile hamburger -->
+  <button class="lg:hidden ml-auto w-10 h-10 flex items-center justify-center"
+          style="color: var(--md-sys-color-primary);"
+          (click)="toggleSideMenu()"
+          aria-label="開啟選單">
+    <span class="material-symbols-outlined" *ngIf="!snav?.opened">menu</span>
+    <span class="material-symbols-outlined" *ngIf="snav?.opened">menu_open</span>
+  </button>
 </nav>
 
-<mat-sidenav-container hasBackdrop="false">
-    <!-- Mobile Menu -->
-    <mat-sidenav #snav mode="over" position="end" class="sidenav-container">
+<!-- ═══ SIDENAV CONTAINER ═══════════════════════════════════════════════════ -->
+<mat-sidenav-container hasBackdrop="true">
 
-        <div class="sidemenu-inner">
-            <mat-nav-list class="sidenav-list">
-                <a *ngIf="!isSignin" (click)="snav.close()">
-                    <span routerLink="/auth/signin">會員登入</span>
-                </a>
-                <div *ngIf="isSignin">
-                    <a *ngFor="let item of accountMenu" [routerLink]="item.link" (click)="snav.close()">{{ item.label }}
-                    </a>
-                    <div>
-                        <button (click)="appAuthApiServ.signout();snav.close();">
-                            登出</button>
-                    </div>
-                </div>
-            </mat-nav-list>
-            <mat-nav-list class="sidenav-list">
-                <a *ngFor="let menu of navList" [routerLink]="menu.link" (click)="snav.close()">
-                    {{ menu.label }}
-                </a>
-            </mat-nav-list>
-        </div>
-    </mat-sidenav>
+  <!-- Mobile side menu -->
+  <mat-sidenav #snav mode="over" position="end" class="sidenav-container">
+    <div class="sidemenu-inner">
 
-    <mat-sidenav-content>
-        <div class="floating-bg">
-            <img src="/assets/image/illustration/sphere-001.webp" alt="" class="sphere-01">
-            <img src="/assets/image/illustration/sphere-002.webp" alt="" class="sphere-02">
-        </div>
-        <div class="main-container">
-            <router-outlet></router-outlet>
-        </div>
-        <web-footer></web-footer>
-    </mat-sidenav-content>
+      <!-- Brand in drawer -->
+      <div class="px-6 py-5 border-b" style="border-color: var(--md-sys-color-outline-variant);">
+        <img src="assets/image/logo/landscape.svg" alt="蘊和堂" class="h-8" />
+      </div>
+
+      <mat-nav-list class="sidenav-list">
+        <a *ngFor="let menu of navList"
+           [routerLink]="menu.link"
+           (click)="snav.close()">
+          {{ menu.label }}
+        </a>
+      </mat-nav-list>
+
+      <div class="px-6 pt-4">
+        <a routerLink="/product" (click)="snav.close()"
+           class="block w-full text-center py-3 text-xs tracking-widest"
+           style="background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); font-family: 'Work Sans', sans-serif;">
+          立即選購
+        </a>
+      </div>
+    </div>
+  </mat-sidenav>
+
+  <!-- Main content -->
+  <mat-sidenav-content>
+    <div class="main-container">
+      <router-outlet></router-outlet>
+    </div>
+    <web-footer></web-footer>
+  </mat-sidenav-content>
+
 </mat-sidenav-container>

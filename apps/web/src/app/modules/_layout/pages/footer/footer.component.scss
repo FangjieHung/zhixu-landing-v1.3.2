@@ -1,19 +1,68 @@
-footer {
-    @apply text-white relative p-6 flex flex-col flex-wrap lg:flex-row;
-    background-color: var(--md-sys-color-on-sky-fixed-variant);
+// ─── Footer Root ─────────────────────────────────────────────────────────────
+.footer-root {
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
 
-    p,
-    li {
-        @apply text-white font-light;
+  p, li, address {
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+// ─── 主體三欄 ─────────────────────────────────────────────────────────────────
+.footer-body {
+  @apply max-w-7xl mx-auto
+         px-6 md:px-10 xl:px-16
+         py-14 md:py-16
+         grid grid-cols-1 md:grid-cols-3 gap-12;
+}
+
+// ─── 品牌欄 ───────────────────────────────────────────────────────────────────
+.footer-brand {
+  @apply flex flex-col;
+}
+
+// ─── 欄位標題 ─────────────────────────────────────────────────────────────────
+.footer-heading {
+  @apply text-[10px] tracking-widest uppercase mb-5;
+  font-family: 'Work Sans', sans-serif;
+  color: var(--md-sys-color-secondary-fixed);
+}
+
+// ─── 連結清單 ─────────────────────────────────────────────────────────────────
+.footer-links {
+  @apply space-y-3;
+
+  a {
+    @apply text-sm block;
+    transition: color 0.2s;
+    color: rgba(255, 255, 255, 0.6);
+
+    &:hover {
+      color: var(--md-sys-color-secondary-fixed);
     }
+  }
 }
 
-.logo-col {
-    @apply max-w-fit p-5 flex flex-col;
-    background-color: var(--md-sys-color-surface-dim);
+// ─── 社群按鈕 ─────────────────────────────────────────────────────────────────
+.footer-social-btn {
+  @apply w-9 h-9 flex items-center justify-center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.6);
+  transition: border-color 0.2s, color 0.2s;
+
+  &:hover {
+    border-color: var(--md-sys-color-secondary-fixed);
+    color: var(--md-sys-color-secondary-fixed);
+  }
 }
 
-.copy-right {
-    @apply w-full flex flex-col lg:flex-row lg:justify-between pt-6 border-t border-white opacity-40;
+// ─── Copyright ────────────────────────────────────────────────────────────────
+.footer-copyright {
+  @apply max-w-7xl mx-auto
+         px-6 md:px-10 xl:px-16
+         py-5
+         flex flex-col md:flex-row justify-between items-start md:items-center
+         text-[11px];
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.3);
 }
-

@@ -1,0 +1,255 @@
+// ─── HERO ─────────────────────────────────────────────────────────────────────
+.svc-hero {
+  @apply grid grid-cols-1 lg:grid-cols-2 min-h-screen;
+  background-color: var(--md-sys-color-primary);
+}
+
+.svc-hero__left {
+  @apply flex flex-col justify-center
+         px-8 md:px-14 xl:px-20
+         pt-28 pb-16 lg:py-24;
+}
+
+.svc-hero__en-label {
+  @apply text-[10px] tracking-[0.25em] uppercase mb-6;
+  font-family: 'Work Sans', sans-serif;
+  color: var(--md-sys-color-secondary-fixed);
+}
+
+.svc-hero__headline {
+  @apply text-4xl md:text-5xl xl:text-6xl font-light leading-tight mb-6;
+  font-family: 'Noto Serif TC', serif;
+  color: var(--md-sys-color-on-primary);
+}
+
+.svc-hero__sub {
+  @apply text-sm leading-relaxed mb-10 max-w-xs;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.svc-hero__cta {
+  @apply self-start px-8 py-3 text-xs tracking-widest transition-opacity hover:opacity-80;
+  font-family: 'Work Sans', sans-serif;
+  background-color: var(--md-sys-color-secondary-fixed);
+  color: var(--md-sys-color-on-secondary-fixed);
+}
+
+.svc-hero__right {
+  @apply relative flex items-center justify-center
+         px-8 md:px-14 py-16 lg:py-0;
+  background-color: color-mix(in srgb, var(--md-sys-color-primary) 80%, black);
+}
+
+.svc-hero__photo-wrap {
+  @apply relative w-full max-w-md;
+}
+
+.svc-hero__photo {
+  @apply w-full h-auto object-cover;
+  aspect-ratio: 3 / 4;
+}
+
+// Gold corner frames
+.corner {
+  @apply absolute w-10 h-10 pointer-events-none;
+  border-color: var(--md-sys-color-secondary-fixed);
+
+  &--tl {
+    @apply top-0 left-0;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+  &--br {
+    @apply bottom-0 right-0;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+  }
+}
+
+// ─── SERVICE SECTIONS ─────────────────────────────────────────────────────────
+.svc-section {
+  @apply grid grid-cols-1 lg:grid-cols-2
+         max-w-7xl mx-auto
+         px-6 md:px-10 xl:px-16
+         py-16 md:py-24
+         gap-12 lg:gap-20
+         items-center;
+
+  &--img-right .svc-section__photo-col {
+    @apply lg:order-2;
+  }
+  &--img-right .svc-section__text-col {
+    @apply lg:order-1;
+  }
+}
+
+.svc-section__photo-wrap {
+  @apply relative overflow-hidden;
+}
+
+.svc-section__photo {
+  @apply w-full h-auto object-cover;
+  aspect-ratio: 4 / 3;
+}
+
+.svc-section__text-col {
+  @apply flex flex-col;
+}
+
+.svc-section__vertical-label {
+  @apply text-[9px] tracking-[0.3em] uppercase mb-4;
+  font-family: 'Work Sans', sans-serif;
+  color: var(--md-sys-color-secondary);
+}
+
+.svc-section__title {
+  @apply text-3xl md:text-4xl font-light mb-5;
+  font-family: 'Noto Serif TC', serif;
+  color: var(--md-sys-color-primary);
+}
+
+.svc-section__desc {
+  @apply text-sm leading-relaxed mb-6;
+  color: color-mix(in srgb, var(--md-sys-color-on-surface) 60%, transparent);
+}
+
+.svc-section__checklist {
+  @apply space-y-2 mb-6;
+
+  li {
+    @apply flex items-center gap-2 text-sm;
+    color: color-mix(in srgb, var(--md-sys-color-on-surface) 75%, transparent);
+
+    &::before {
+      content: '';
+      @apply inline-block w-4 h-px shrink-0;
+      background-color: var(--md-sys-color-secondary);
+    }
+  }
+}
+
+.svc-section__tags {
+  @apply flex flex-wrap gap-2;
+}
+
+.svc-tag {
+  @apply text-[10px] tracking-wider px-3 py-1;
+  font-family: 'Work Sans', sans-serif;
+  border: 1px solid color-mix(in srgb, var(--md-sys-color-secondary) 40%, transparent);
+  color: var(--md-sys-color-secondary);
+}
+
+// ─── CAR SECTION ──────────────────────────────────────────────────────────────
+.svc-car {
+  @apply grid grid-cols-1 lg:grid-cols-2
+         px-6 md:px-10 xl:px-16
+         py-16 md:py-24
+         gap-12 lg:gap-20
+         items-center;
+  background-color: var(--md-sys-color-primary);
+}
+
+.svc-car__left {
+  @apply flex flex-col
+         max-w-7xl mx-auto w-full
+         px-0 md:px-0 xl:px-4;
+}
+
+.svc-car__en-label {
+  @apply text-[10px] tracking-[0.25em] uppercase mb-4;
+  font-family: 'Work Sans', sans-serif;
+  color: var(--md-sys-color-secondary-fixed);
+}
+
+.svc-car__title {
+  @apply text-3xl md:text-4xl font-light mb-5;
+  font-family: 'Noto Serif TC', serif;
+  color: var(--md-sys-color-on-primary);
+}
+
+.svc-car__desc {
+  @apply text-sm leading-relaxed mb-8;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.svc-car__features {
+  @apply grid grid-cols-1 sm:grid-cols-3 gap-4;
+}
+
+.svc-car__feature-card {
+  @apply p-5 flex flex-col gap-2;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  .material-symbols-outlined {
+    @apply text-2xl;
+    color: var(--md-sys-color-secondary-fixed);
+  }
+
+  h4 {
+    @apply text-sm font-medium;
+    color: var(--md-sys-color-on-primary);
+  }
+
+  p {
+    @apply text-xs leading-relaxed;
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.svc-car__right {
+  @apply flex items-center justify-center;
+}
+
+.svc-car__photo {
+  @apply w-full h-auto object-cover max-w-lg;
+  aspect-ratio: 4 / 3;
+}
+
+// ─── CONTACT ──────────────────────────────────────────────────────────────────
+.svc-contact {
+  @apply flex items-center justify-center
+         px-6 py-16 md:py-24;
+  background-color: var(--md-sys-color-surface-container-low);
+}
+
+.svc-contact__card {
+  @apply w-full max-w-lg text-center flex flex-col items-center;
+}
+
+.svc-contact__label {
+  @apply text-[10px] tracking-[0.3em] uppercase mb-4;
+  font-family: 'Work Sans', sans-serif;
+  color: var(--md-sys-color-secondary);
+}
+
+.svc-contact__title {
+  @apply text-3xl font-light mb-3;
+  font-family: 'Noto Serif TC', serif;
+  color: var(--md-sys-color-primary);
+}
+
+.svc-contact__sub {
+  @apply text-sm leading-relaxed mb-8;
+  color: color-mix(in srgb, var(--md-sys-color-on-surface) 60%, transparent);
+}
+
+.svc-contact__info {
+  @apply flex flex-col gap-3 mb-8 w-full items-center;
+}
+
+.svc-contact__info-item {
+  @apply flex items-center gap-3 text-sm;
+  color: color-mix(in srgb, var(--md-sys-color-on-surface) 75%, transparent);
+
+  .material-symbols-outlined {
+    @apply text-base;
+    color: var(--md-sys-color-secondary);
+  }
+}
+
+.svc-contact__btn {
+  @apply px-10 py-3 text-xs tracking-widest transition-opacity hover:opacity-80;
+  font-family: 'Work Sans', sans-serif;
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+}

@@ -1,61 +1,68 @@
-<footer>
-    <img src="assets/shared/img/logo/mark-white.png" alt="logo" class="w-36 h-36 object-contain mr-10 mb-4">
-    <section class="web-map">
-        <div class="flex flex-wrap">
-            <ul>
-                <li *ngIf="('PHONE' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as phone">
-                    <span class="label">phone</span>
-                    <p>{{ phone }}</p>
-                </li>
-                <li *ngIf="('FAX' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as fax">
-                    <span class="label">fax</span>
-                    <p>{{ fax }}</p>
-                </li>
-                <li *ngIf="('OPENING HOURS' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as opening">
-                    <span class="label">opening hours</span>
-                    <p>{{ opening }}</p>
-                </li>
-            </ul>
-            <ul>
-                <li *ngIf="('MAIL' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as mail">
-                    <span class="label">mail</span>
-                    <p>{{ mail }}</p>
-                </li>
-                <li *ngIf="('LOCATION(中文地址)' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as chtAddr">
-                    <span class="label">location</span>
-                    <p>
-                        <span class="inline-block">{{ chtAddr }}</span>
-                        <span class="inline-block text-sm"
-                          *ngIf="('LOCATION(英文地址)' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as enAddr">
-                          {{ enAddr }}
-                        </span>
-                    </p>
-                </li>
-            </ul>
-            <div class="social-links">
-                <a target="_blank" [attr.href]="fbUrl" rel="noopener noreferrer"
-                  *ngIf="('Facebook' | aryFindValue: (response?.socialMedia || []): 'name': 'url') as fbUrl">
-                  <img src="assets/image/icon/fb.webp" alt="facebook">
-                </a>
-                <a target="_blank" [attr.href]="igUrl"
-                  *ngIf="('Instagram' | aryFindValue: (response?.socialMedia || []): 'name': 'url') as igUrl">
-                   <img src="assets/image/icon/ig.webp" alt="instagram">
-                </a>
-                <a target="_blank" [attr.href]="ytUrl"
-                  *ngIf="('Youtube' | aryFindValue: (response?.socialMedia || []): 'name': 'url') as ytUrl">
-                  <img src="assets/image/icon/yt.webp" alt="youtube">
-                </a>
-            </div>
-        </div>
-    </section>
+<footer class="footer-root">
 
-    <section class="copy-right">
-        <p class="pr-1">蘊和堂 <span>&copy; {{ currYear }} All rights reserved.</span></p>
-        <p class="flex"><a routerLink="/about/terms">服務條款</a>．<a routerLink="/about/privacy">隱私權</a></p>
-    </section>
+  <!-- ── 主體三欄 ──────────────────────────────────────────────────────── -->
+  <div class="footer-body">
 
-    <div *ngIf="false">
-        <img src="assets/image/logo/newebpay.png" alt="logo" class="w-60 h-auto mb-2">
-        <p class="opacity-60 tracking-wider -ml-1">本網站採用藍新金流，提供您安全、便利的交易環境。</p>
+    <!-- 品牌欄 -->
+    <div class="footer-brand">
+      <img src="assets/image/logo/landscape.svg" alt="蘊和堂"
+           class="h-10 w-auto object-contain brightness-0 invert mb-5" />
+      <p class="text-sm text-on-primary/60 leading-relaxed max-w-xs">
+        蘊天地之和，藏歲月之美。我們致力於將傳統養生智慧，融入現代精緻生活。
+      </p>
     </div>
+
+    <!-- 關於我們 -->
+    <div>
+      <h5 class="footer-heading">關於我們</h5>
+      <ul class="footer-links">
+        <li><a routerLink="/service">清潔服務</a></li>
+        <li><a routerLink="/product">老菜脯滴雞精</a></li>
+      </ul>
+    </div>
+
+    <!-- 聯絡資訊 -->
+    <div>
+      <h5 class="footer-heading">Contact</h5>
+      <address class="not-italic text-sm text-on-primary/60 leading-loose mb-5">
+        <ng-container *ngIf="('LOCATION(中文地址)' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as addr; else defaultAddr">
+          {{ addr }}
+        </ng-container>
+        <ng-template #defaultAddr>
+          台北市信義區智慧路123號
+        </ng-template>
+        <br/>
+        <ng-container *ngIf="('PHONE' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as phone; else defaultPhone">
+          {{ phone }}
+        </ng-container>
+        <ng-template #defaultPhone>
+          +886 (02) 2345 6789
+        </ng-template>
+      </address>
+
+      <!-- 社群 -->
+      <div class="flex gap-3">
+        <a class="footer-social-btn"
+           [attr.href]="('Facebook' | aryFindValue: (response?.socialMedia || []): 'name': 'url') || '#'"
+           target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <span class="material-symbols-outlined text-base">share</span>
+        </a>
+        <a class="footer-social-btn"
+           [attr.href]="('MAIL' | aryFindValue: (response?.contactDetails || []): 'name': 'value') ? 'mailto:' + ('MAIL' | aryFindValue: (response?.contactDetails || []): 'name': 'value') : '#'"
+           aria-label="Email">
+          <span class="material-symbols-outlined text-base">mail</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Copyright ──────────────────────────────────────────────────────── -->
+  <div class="footer-copyright">
+    <span>© {{ currYear }} Yun Ho Tang. Wisdom of the Sages, Care of the Mother.</span>
+    <div class="flex gap-6 mt-2 md:mt-0">
+      <span>All rights reserved.</span>
+      <span>Designed with BonBonDi.</span>
+    </div>
+  </div>
+
 </footer>

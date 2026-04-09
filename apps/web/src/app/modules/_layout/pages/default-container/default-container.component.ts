@@ -34,20 +34,12 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
 
   navList = [
     {
-      label: '關於本會',
-      children: [
-        { label: '組織章程', link: '/about/charter' },
-        { label: '理監事名單', link: '/about/supervisor' },
-        { label: '委員會組織', link: '/about/committee' },
-      ]
+      label: '老菜脯滴雞精',
+      link: '/product'
     },
     {
-      label: '最新消息',
-      link: '/news/list'
-    },
-    {
-      label: '學術活動',
-      link: '/campaign/list'
+      label: '清潔服務',
+      link: '/service'
     }
   ];
 

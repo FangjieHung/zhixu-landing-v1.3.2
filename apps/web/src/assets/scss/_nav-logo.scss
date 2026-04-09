@@ -1,38 +1,21 @@
-[id="logoImg"] {
-    @apply relative max-w-screen-3xl;
-
-    a {
-        @apply w-fit;
-    }
-
-    img[src*="mark"] {
-        @apply w-24 mr-3 duration-700 transform transition-all ease-in-out;
-        animation: fadeIn;
-    }
+// Nav logo — 蘊和堂 brand
+// 固定尺寸，不再需要 scroll 放大效果
+.nav-logo img {
+  @apply h-9 w-auto object-contain;
+  transition: opacity 0.3s ease;
 }
 
+// 保留 class 避免 TS 綁定報錯，但視覺不做縮放
+[id="logoImg"],
 [id="logoImg"].img-scaleLarge {
-    @apply absolute w-full inset-x-0 mx-auto left-4;
+  @apply flex items-center;
 
-    img[src*="mark"] {
-        @apply w-32 xs:w-40 lg:w-52 lg:m-4;
-    }
-}
+  a {
+    @apply w-fit;
+  }
 
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    40% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-.fade-in-left-element {
-  
+  img {
+    @apply h-9 w-auto;
+    transition: opacity 0.3s ease;
+  }
 }

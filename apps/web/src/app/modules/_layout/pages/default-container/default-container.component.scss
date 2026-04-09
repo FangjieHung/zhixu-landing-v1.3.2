@@ -1,105 +1,95 @@
+// ─── NAV BAR ─────────────────────────────────────────────────────────────────
 .nav-bar {
-    @apply flex items-start justify-between p-4 w-full fixed z-10;
+  @apply fixed top-0 left-0 right-0 z-50
+         flex items-center gap-4
+         px-6 md:px-10 xl:px-16 h-16;
+  background-color: var(--md-sys-color-surface);
+  border-bottom: 1px solid rgba(115, 121, 112, 0.2); // outline-variant/30
 }
 
+// Logo
+.nav-logo {
+  @apply flex items-center;
+
+  img {
+    @apply h-9 w-auto object-contain;
+    transition: opacity 0.3s;
+  }
+
+  &:hover img {
+    @apply opacity-80;
+  }
+}
+
+// Desktop nav link
 .nav-link {
-    @apply flex items-center px-4 py-2 rounded-full;
+  @apply relative flex items-center px-4 py-2 text-sm tracking-wide;
+  font-family: 'Work Sans', sans-serif;
+  color: color-mix(in srgb, var(--md-sys-color-primary) 70%, transparent);
+  transition: color 0.2s;
 
-    .material-symbols-rounded {
-        @apply text-xl;
+  &:hover {
+    color: var(--md-sys-color-primary);
+  }
+
+  // Active underline via routerLinkActive="active"
+  &.active {
+    color: var(--md-sys-color-secondary);
+
+    &::after {
+      content: '';
+      @apply absolute bottom-0 h-px;
+      left: 1rem;
+      right: 1rem;
+      background-color: var(--md-sys-color-secondary);
     }
+  }
 }
 
-.avatar-btn {
-    @apply flex items-center min-w-fit cursor-pointer;
-
-    .user {
-        @apply rounded-full min-w-8 w-9 h-9 bg-sky-200 text-sky-600 flex items-center justify-center font-bold;
-        font-size: 0.875rem;
-    }
-}
-
+// ─── MAIN CONTAINER ───────────────────────────────────────────────────────────
 .main-container {
-    @apply pt-32 pb-5 relative;
+  @apply relative;
 
-    @media screen and (min-width: 1024px) {
-        min-height: calc(100svh - 20.8rem);
-    }
+  // Pages without .hero get top-padding for the fixed nav
+  &:not(:has(.hero)) {
+    @apply pt-16;
+  }
 
-    &:has(.hero) {
-        @apply pt-0;
-    }
+  @media screen and (min-width: 1024px) {
+    min-height: calc(100svh - var(--footer-desktop-h, 20.5rem));
+  }
 }
 
-.mat-sidenav {
-    @apply bg-stone-50;
-    min-width: 15rem;
+// ─── MAT SIDENAV ─────────────────────────────────────────────────────────────
+mat-sidenav-container {
+  @apply flex-auto;
 }
 
 .mat-drawer:not(.mat-drawer-side) {
-    @apply shadow-none;
-}
-
-.menu-button .material-symbols-rounded {
-    @apply opacity-100 w-6;
-    transition: all 0.3s ease;
-
-    &.hide {
-        @apply opacity-0 w-0;
-    }
-}
-
-mat-sidenav-container {
-    @apply flex-auto;
-
-    &:has(.mat-drawer-opened) {
-        height: 100svh;
-        overflow: auto;
-    }
-}
-
-.sidemenu-inner {
-    @apply mt-32 divide-y divide-black/30 xs:mt-40;
-
-    .btn-stroke-white {
-        @apply w-full max-w-sm mr-auto;
-    }
-}
-
-.menu-button .material-symbols-rounded {
-    @apply opacity-100 w-6;
-    transition: all 0.3s ease;
-
-    &.hide {
-        @apply opacity-0 w-0;
-    }
+  @apply shadow-xl;
 }
 
 .sidenav-container {
-    @apply bg-sky-50/30 backdrop-blur-xl w-full px-8 py-4;
+  @apply w-72 py-0;
+  background-color: var(--md-sys-color-surface) !important;
 }
 
-.social-icon-wrap {
-    @apply flex items-center justify-start space-x-2 mt-5 w-full md:max-w-96;
-
-    .divider {
-        @apply border-t border-white/50 flex-auto;
-    }
-
-    > a {
-        @apply w-11 h-11 p-2 flex items-center;
-    }
+.sidemenu-inner {
+  @apply flex flex-col h-full;
 }
 
 .sidenav-list {
-    @apply py-3;
+  @apply py-2;
 
-    a,
-    button {
-        @apply text-base px-1 py-3 block;
+  a {
+    @apply block px-6 py-3 text-sm;
+    font-family: 'Work Sans', sans-serif;
+    color: color-mix(in srgb, var(--md-sys-color-primary) 80%, transparent);
+    transition: color 0.15s, background-color 0.15s;
+
+    &:hover {
+      color: var(--md-sys-color-secondary);
+      background-color: var(--md-sys-color-surface-container-low);
     }
-}
-
-.web-map {
-    @apply mt-5 space-y-3;
+  }
 }

@@ -1,84 +1,650 @@
-<div class="default-container">
-  <header class="hero">
-    <video autoplay muted playsinline loop class="hero-video" #heroVideo>
-      <source src="/assets/video/hero-landscape.webm" media="(min-width: 1024px)" type="video/webm">
-      <source src="/assets/video/hero-landscape-720.mp4" media="(min-width: 1024px)" type="video/mp4">
-      <source src="/assets/video/hero-portrait.webm" type="video/webm">
-      <source src="/assets/video/hero-portrait-720.mp4" type="video/mp4">
-    </video>
+<div class="default-container font-body text-on-surface bg-surface">
 
-    <div class="content max-w-container">
-      <h1 class="display d-white">
-        Innovating for Smarter Diagnostics
-      </h1>
-      <h1 class="headline"><span>智慧檢驗，</span><span>守護健康的<br>第一道防線</span></h1>
-      <p class="text-xl tracking-wide">歡迎加入智慧檢驗醫學學會，共同推動檢驗醫學的創新與發展。</p>
+  <!-- ①  HERO ── 左產品圖 + 右深綠文字 ──────────────────────────────────── -->
+  <header class="min-h-screen grid grid-cols-1 md:grid-cols-2">
+
+    <!-- 左：產品視覺 + 角框 -->
+    <div class="relative bg-surface-container-low flex flex-col items-center justify-center px-8 py-16 md:py-0">
+      <!-- 角框裝飾 -->
+      <div class="relative w-full max-w-md mx-auto">
+        <div class="absolute -top-4 -left-4 w-14 h-14 border-t-2 border-l-2 border-secondary/40"></div>
+        <div class="absolute -bottom-4 -right-4 w-14 h-14 border-b-2 border-r-2 border-secondary/40"></div>
+        <img
+          src="assets/image/photo/product-chicken-essence.png"
+          alt="蘊和堂 老菜脯滴雞精"
+          loading="eager"
+          width="600" height="800"
+          class="w-full h-auto object-contain"
+        />
+      </div>
+      <p class="mt-8 font-label text-[10px] tracking-[0.35em] text-secondary/70 uppercase text-center">
+        Premium Aged Radish Essence
+      </p>
+    </div>
+
+    <!-- 右：深綠底 + 標題 + CTA -->
+    <div class="relative bg-primary text-on-primary flex flex-col justify-center px-8 md:px-16 xl:px-20 py-20">
+      <!-- 內角框裝飾 -->
+      <div class="absolute top-8 left-8 right-8 bottom-8 border border-on-primary/10 pointer-events-none"></div>
+
+      <div class="relative z-10">
+        <span class="font-label text-secondary-fixed tracking-[0.3em] uppercase text-xs block mb-6">
+          The Wisdom of Patience
+        </span>
+
+        <h1 class="font-headline font-bold leading-tight
+                    text-3xl sm:text-4xl md:text-5xl xl:text-6xl mb-8">
+          二十年的等待，<br/>只為這一口清潤
+        </h1>
+
+        <p class="text-base md:text-lg max-w-md mb-10 text-on-primary-container leading-relaxed">
+          如同母親親手熬煮的湯頭，蘊和堂將時光的精華與草本的溫度，封存在每一滴黑金萃取中。
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <button class="bg-secondary-fixed text-on-secondary-fixed px-8 py-4 font-label tracking-widest text-sm
+                         hover:opacity-90 transition-opacity">
+            立即選購
+          </button>
+          <button class="border border-on-primary/40 text-on-primary px-8 py-4 font-label tracking-widest text-sm
+                         hover:border-on-primary/80 transition-colors">
+            洽談加盟
+          </button>
+        </div>
+      </div>
+
+      <!-- 右側直排裝飾文字 -->
+      <div class="hidden xl:block absolute right-10 top-1/2 -translate-y-1/2">
+        <div class="[writing-mode:vertical-rl] text-on-primary/20 font-headline text-xl
+                    tracking-[0.5em] select-none">
+          歲月沉澱 · 匠心入味
+        </div>
+      </div>
     </div>
   </header>
 
-  <div class="space-y-20 py-20 xl:space-y-32 xl:py-32">
-    <section class="max-w-container">
-      <div class="px-5">
-        <h2 class="display d-black">Knowledge Exchange</h2>
-        <div class="relative pb-24 lg:pb-0" *ngIf="!(ads | isEmpty)">
-          <swiper [config]="bannerSwipe" class="relative w-full mt-8 slide-1-fade">
-            <ng-template swiperSlide *ngFor="let item of ads">
-              <div class="flex flex-col items-start justify-between lg:flex-row-reverse">
-                <!-- src="/assets/image/demo/002.jpg" -->
-                <img [src]="combineCdnUrl(item.coverFullPath || '')" [alt]="item.title"
-                  class="rounded-lg aspect-video object-cover w-full lg:w-2/3 lg:mt-4">
-                <div class="w-full mt-5 lg:w-1/3 lg:mt-0">
-                  <h3 class="headline font-bold">{{ item.title }}</h3>
-                  <p class="text-xl"> {{ item.desc }}</p>
-                </div>
-              </div>
-            </ng-template>
-          </swiper>
-          <div class="swipe-btn-wrap-b">
-            <button class="btn-primary swiper-btn-banner prev"><span class="material-symbols-rounded">
-                arrow_back_ios
-              </span></button>
-            <button class="btn-primary swiper-btn-banner next"><span class="material-symbols-rounded">
-                arrow_forward_ios
-              </span></button>
-          </div>
-        </div>
-        <web-result-empty *ngIf="ads | isEmpty" class="block my-5"></web-result-empty>
+  <!-- ②  BRAND STORY ── 左老菜脯圖 + 直排 + 右文字 ──────────────────────── -->
+  <section class="py-24 xl:py-32 bg-surface-container-low overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-8 xl:gap-16 items-center">
+
+      <!-- 左：老菜脯圖 -->
+      <div class="md:col-span-4">
+        <img
+          src="assets/image/photo/ingredient-aged-radish.png"
+          alt="二十年陳年老菜脯"
+          loading="lazy"
+          width="600" height="600"
+          class="w-full object-cover"
+        />
       </div>
-    </section>
 
+      <!-- 中：直排 TIMELESS WISDOM -->
+      <div class="hidden md:flex md:col-span-1 justify-center">
+        <div class="[writing-mode:vertical-rl] text-on-surface/15 font-headline text-lg
+                    tracking-[0.4em] select-none whitespace-nowrap">
+          Timeless Wisdom
+        </div>
+      </div>
 
-
-    <section class="max-w-container">
-      <div class="flex items-start flex-col lg:flex-row-reverse">
-        <h2 class="lg:text-right min-w-fit">
-          <span class="display d-black">Latest News</span>
-          <p class="headline">最新消息</p>
+      <!-- 右：文字 + stats -->
+      <div class="md:col-span-7 flex flex-col gap-6">
+        <span class="font-label text-secondary tracking-[0.25em] text-xs uppercase">
+          The "Black Gold" Story
+        </span>
+        <h2 class="font-headline font-bold text-primary text-3xl md:text-4xl leading-snug">
+          二十年陳年老菜脯：<br/>傳承一甲子的黑金奇蹟
         </h2>
 
-        <div class="news-list" *ngIf="!(newsMsgs | isEmpty)">
-          <a *ngFor="let item of newsMsgs" [routerLink]="['/news/detail/', item.uniqueId]">
-            <div class="info-wrap">
-              <p class="pin" *ngIf="item.stickyAt"><span class="material-symbols-rounded pr-1">pinboard</span>置頂</p>
-              <p>{{ '學會公告' }} &#8739;</p>
-              <p> {{ item.startAt | dateFormatter: 'yyyy.MM.dd': '' }}</p>
-            </div>
-            <h3> {{ item.title }}</h3>
-          </a>
+        <div class="space-y-4 text-on-surface-variant leading-relaxed">
+          <p>
+            被譽為「台灣黑松露」的老菜脯，是經過時光、食鹽與微生物長時間共同交織出的生命結晶。在蘊和堂，我們堅持選用無毒契作白蘿蔔，封存在陶甕中，埋入地底深處。
+          </p>
+          <p>
+            經過光陰轉化，蘿蔔由白轉褐，終至透黑發亮。這不只是發酵，更是大自然賦予的溫潤補給，含有豐富多酚、礦物質與天然酵素，是照護全家人呼吸道與元氣的首選。
+          </p>
         </div>
 
-        <web-result-empty *ngIf="newsMsgs | isEmpty" class="flex-auto w-full my-5"></web-result-empty>
+        <!-- Stats -->
+        <div class="flex gap-0 mt-4 border-t border-outline-variant/40 pt-6">
+          <div class="flex-1 text-center border-r border-outline-variant/40 last:border-r-0">
+            <p class="font-headline font-black text-2xl md:text-3xl text-primary">20<span class="text-base">+</span></p>
+            <p class="font-label text-[9px] tracking-widest text-secondary uppercase mt-1">Years Aged</p>
+          </div>
+          <div class="flex-1 text-center border-r border-outline-variant/40 last:border-r-0">
+            <p class="font-headline font-black text-2xl md:text-3xl text-primary">100<span class="text-base">%</span></p>
+            <p class="font-label text-[9px] tracking-widest text-secondary uppercase mt-1">Natural</p>
+          </div>
+          <div class="flex-1 text-center">
+            <p class="font-headline font-black text-2xl md:text-3xl text-primary">0<span class="text-base">%</span></p>
+            <p class="font-label text-[9px] tracking-widest text-secondary uppercase mt-1">Additives</p>
+          </div>
+        </div>
       </div>
-      <a class="link-underline ml-auto lg:mt-5" target="_blank" routerLink="/news/list">
-        <span>看更多消息</span><span class="material-symbols-rounded">arrow_right_alt</span>
-      </a>
-    </section>
+    </div>
+  </section>
 
-    <section class="flex flex-col">
-      <h2 class="text-center">
-        <span class="display d-black">Corporate Sponsors</span>
-      </h2>
-      <app-partner-logos></app-partner-logos>
-    </section>
+  <!-- ③  品牌初心 ── 全幅深綠底，左文字 + 右職人圖 ───────────────────────── -->
+  <section class="bg-primary text-on-primary">
+    <div class="grid grid-cols-1 md:grid-cols-2 min-h-[600px]">
+
+      <!-- 左：文字 -->
+      <div class="flex flex-col justify-center px-8 md:px-16 xl:px-20 py-20">
+        <span class="font-label text-secondary-fixed tracking-widest text-xs block mb-4 uppercase">
+          The Secret of Black Gold
+        </span>
+        <h2 class="font-headline font-bold text-3xl md:text-4xl mb-10 leading-snug">
+          臺灣首創老菜脯滴雞精
+        </h2>
+
+        <div class="space-y-6 text-on-primary-container leading-relaxed text-sm md:text-base">
+          <p>
+            蘊和堂的誕生，不是因為看見商機，<br/>
+            而是因為看見許多人的身體，正在悄悄被消耗。
+          </p>
+          <p>
+            創辦人用一個簡單的初心出發：<br/>
+            能不能做一款真正純粹、什麼都不加的滴雞精，<br/>
+            讓每一個需要補充的人，都能安心喝下去？
+          </p>
+          <p>
+            於是我們找到了老菜脯。<br/>
+            那是時間釀造的味道——<br/>
+            二十年以上的歲月，凝縮在一小片深棕色的蘿蔔裡，<br/>
+            清熱潤肺，健脾養胃，是老一輩人早就知道的事。
+          </p>
+        </div>
+      </div>
+
+      <!-- 右：職人圖 -->
+      <div class="relative overflow-hidden">
+        <img
+          src="assets/image/photo/hero-craftsman.png"
+          alt="蘊和堂職人細心調製草本配方"
+          loading="lazy"
+          width="960" height="600"
+          class="w-full h-full object-cover object-center"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ④  適用族群 ── 喝一包，身體知道 ───────────────────────────────────── -->
+  <section class="py-24 xl:py-32 bg-surface">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+
+      <!-- 標題 -->
+      <div class="mb-16">
+        <span class="text-secondary text-sm mb-2 block">不是噱頭，是真的相信食物有它的道理</span>
+        <h2 class="font-headline font-bold text-primary text-3xl md:text-4xl">
+          喝一包，身體知道
+        </h2>
+      </div>
+
+      <!-- 左右交錯：圖 + 文 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+
+        <!-- 左側：4 張 persona 圖（交錯排列） -->
+        <div class="grid grid-cols-2 gap-3">
+          <div class="col-span-1 row-span-1">
+            <img
+              src="assets/image/photo/persona-elderly-woman.png"
+              alt="銀髮女性咳嗽困擾"
+              loading="lazy" width="400" height="400"
+              class="w-full aspect-[4/3] object-cover object-top"
+            />
+          </div>
+          <div class="col-span-1 row-span-1 mt-8">
+            <img
+              src="assets/image/photo/persona-elderly-man.png"
+              alt="長者腸胃不適"
+              loading="lazy" width="400" height="400"
+              class="w-full aspect-[4/3] object-cover object-top"
+            />
+          </div>
+          <div class="col-span-1 row-span-1 -mt-4">
+            <img
+              src="assets/image/photo/persona-pregnant.png"
+              alt="孕期媽媽需要溫和調補"
+              loading="lazy" width="400" height="400"
+              class="w-full aspect-[4/3] object-cover object-top"
+            />
+          </div>
+          <div class="col-span-1 row-span-1 mt-4">
+            <img
+              src="assets/image/photo/persona-office-worker.png"
+              alt="疲憊上班族需要元氣補充"
+              loading="lazy" width="400" height="400"
+              class="w-full aspect-[4/3] object-cover object-top"
+            />
+          </div>
+        </div>
+
+        <!-- 右側：4 段情境文案 -->
+        <div class="flex flex-col justify-center gap-10">
+          <div>
+            <h4 class="font-headline font-bold text-primary text-lg mb-2">空汙、換季，呼吸需要被照顧</h4>
+            <p class="text-on-surface-variant text-sm leading-relaxed">
+              老菜脯的潤肺清熱功效，幫助現代人應對空氣品質下降、
+              季節交替時的呼吸道不適。每天一包，溫潤從內而外。
+            </p>
+          </div>
+
+          <div>
+            <h4 class="font-headline font-bold text-primary text-lg mb-2">胃不好的人，特別需要被好好對待</h4>
+            <p class="text-on-surface-variant text-sm leading-relaxed">
+              老菜脯入膳的健脾養胃配方，溫和調理腸胃機能，
+              不刺激、不躁熱，適合長期每天飲用的體質調養。
+            </p>
+          </div>
+
+          <div>
+            <h4 class="font-headline font-bold text-primary text-lg mb-2">熬過這一關，身體也需要補回來</h4>
+            <p class="text-on-surface-variant text-sm leading-relaxed">
+              蘊和堂含高含量支鏈胺基酸（BCAA），幫助肌肉修復與合成，加速疲勞代謝。
+              熬夜、手術後、長期高壓——這是身體最需要被補充的時候。
+            </p>
+          </div>
+
+          <div>
+            <h4 class="font-headline font-bold text-primary text-lg mb-2">給自己，也給孩子</h4>
+            <p class="text-on-surface-variant text-sm leading-relaxed">
+              零防腐劑、零人工香料、完全去油——對懷孕、坐月子
+              或備孕中的妳來說，這是最不需要猶豫的那一包。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤  功效 Bento Grid ── 深綠底 ─────────────────────────────────────── -->
+  <section class="py-24 xl:py-32 bg-primary text-on-primary">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+
+      <!-- 標題列 -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-6">
+        <div>
+          <span class="font-label text-secondary-fixed tracking-widest text-xs block mb-3 uppercase">
+            The Secret of Black Gold
+          </span>
+          <h2 class="font-headline font-bold text-3xl md:text-4xl">
+            清肺熱、化痰涎、消積食
+          </h2>
+        </div>
+        <p class="max-w-sm text-on-primary-container text-sm leading-relaxed">
+          選用在地優質白蘿蔔，經由傳統古法醃漬，在黑暗的甕中與時間對話，
+          成就如黑金般的珍貴精華。
+        </p>
+      </div>
+
+      <!-- Bento Grid：4 欄 × 2 列 -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[240px]">
+
+        <!-- 主視覺 col×2 row×2：萃取分子 -->
+        <div class="md:col-span-2 md:row-span-2 bg-primary-container relative group overflow-hidden">
+          <img
+            src="assets/image/photo/ingredient-extract-molecules.png"
+            alt="黑金萃取分子結構"
+            loading="lazy" width="600" height="480"
+            class="absolute inset-0 w-full h-full object-cover opacity-60
+                   group-hover:scale-105 transition-transform duration-700"
+          />
+          <div class="absolute inset-0 flex flex-col justify-end p-8 md:p-10">
+            <h3 class="font-headline text-xl font-bold mb-2">高含量 BCAA</h3>
+            <p class="text-on-primary-container text-sm">支鏈胺基酸，幫助修復</p>
+          </div>
+        </div>
+
+        <!-- 20 年老菜脯 -->
+        <div class="md:col-span-1 bg-tertiary-container p-8 flex flex-col items-center justify-center text-center">
+          <h4 class="font-headline text-lg font-bold mb-3">20 年老菜脯</h4>
+          <div class="w-8 h-px bg-on-primary/20 mb-3"></div>
+          <p class="text-sm text-on-primary-container/70">七千個日夜的低溫發酵。</p>
+        </div>
+
+        <!-- 多元礦物質與抗氧化 -->
+        <div class="md:col-span-1 md:row-span-2 border border-on-primary/10 p-8 flex flex-col justify-between">
+          <div>
+            <span class="font-label text-secondary-fixed text-[10px] tracking-widest block mb-2 uppercase">
+              Nutrients
+            </span>
+            <h4 class="font-headline text-xl font-bold mb-4">多元礦物質與抗氧化</h4>
+          </div>
+          <div class="flex flex-col items-center">
+            <img
+              src="assets/image/photo/icon-herb-leaf.png"
+              alt=""
+              aria-hidden="true"
+              loading="lazy" width="120" height="120"
+              class="w-24 h-24 object-contain opacity-40 mb-4"
+            />
+            <p class="text-sm text-on-primary-container/60 text-center">高純度精華保留率</p>
+          </div>
+        </div>
+
+        <!-- 零添加 -->
+        <div class="md:col-span-1 bg-secondary/80 p-8 flex flex-col items-center justify-center text-center">
+          <h4 class="font-headline text-lg text-on-secondary font-bold mb-3">零添加</h4>
+          <div class="w-8 h-px bg-on-secondary/30 mb-3"></div>
+          <p class="text-xs text-on-secondary/70 tracking-widest">防腐劑、人工香料、色素</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑥  CERTIFICATIONS ── 不只說安心，我們有憑證 ──────────────────────── -->
+  <section class="py-24 xl:py-32 bg-surface-container-low">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+
+      <div class="text-center mb-14">
+        <h2 class="font-headline font-bold text-primary text-2xl md:text-3xl mb-4">
+          不只說「安心」，我們有憑證。
+        </h2>
+        <p class="text-on-surface-variant text-sm max-w-md mx-auto leading-relaxed">
+          從原料到成品，每個環節都經得起檢驗。<br/>
+          因為喝的人信任我們，所以我們對自己更嚴格。
+        </p>
+      </div>
+
+      <!-- 三張認證卡 -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="flex flex-col items-center text-center">
+          <!-- 證書佔位 -->
+          <div class="w-full aspect-[3/4] bg-surface border-2 border-secondary/15
+                      flex items-center justify-center mb-6 relative overflow-hidden">
+            <div class="absolute top-3 left-3 w-8 h-8 bg-primary flex items-center justify-center">
+              <span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed text-sm">verified</span>
+            </div>
+            <div class="absolute top-3 right-3 w-8 h-8 bg-secondary flex items-center justify-center">
+              <span aria-hidden="true" class="material-symbols-outlined text-on-secondary text-sm">workspace_premium</span>
+            </div>
+            <div class="text-center px-6">
+              <p class="font-headline text-3xl italic text-primary/20 mb-2">Certificate</p>
+              <p class="text-xs text-on-surface-variant/40 italic">of Appreciation</p>
+              <div class="w-12 h-px bg-secondary/30 my-4 mx-auto"></div>
+              <p class="font-headline text-lg text-primary/30 italic">Name Surname</p>
+            </div>
+          </div>
+          <h4 class="font-headline font-bold text-primary text-lg mb-1">ISO 22000</h4>
+          <p class="text-on-surface-variant text-sm">食品安全管理國際認證</p>
+        </div>
+
+        <div class="flex flex-col items-center text-center">
+          <div class="w-full aspect-[3/4] bg-surface border-2 border-secondary/15
+                      flex items-center justify-center mb-6 relative overflow-hidden">
+            <div class="absolute top-3 left-3 w-8 h-8 bg-primary flex items-center justify-center">
+              <span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed text-sm">verified</span>
+            </div>
+            <div class="absolute top-3 right-3 w-8 h-8 bg-secondary flex items-center justify-center">
+              <span aria-hidden="true" class="material-symbols-outlined text-on-secondary text-sm">workspace_premium</span>
+            </div>
+            <div class="text-center px-6">
+              <p class="font-headline text-3xl italic text-primary/20 mb-2">Certificate</p>
+              <p class="text-xs text-on-surface-variant/40 italic">of Appreciation</p>
+              <div class="w-12 h-px bg-secondary/30 my-4 mx-auto"></div>
+              <p class="font-headline text-lg text-primary/30 italic">Name Surname</p>
+            </div>
+          </div>
+          <h4 class="font-headline font-bold text-primary text-lg mb-1">HACCP</h4>
+          <p class="text-on-surface-variant text-sm">危害分析重要管制點認證</p>
+        </div>
+
+        <div class="flex flex-col items-center text-center">
+          <div class="w-full aspect-[3/4] bg-surface border-2 border-secondary/15
+                      flex items-center justify-center mb-6 relative overflow-hidden">
+            <div class="absolute top-3 left-3 w-8 h-8 bg-primary flex items-center justify-center">
+              <span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed text-sm">verified</span>
+            </div>
+            <div class="absolute top-3 right-3 w-8 h-8 bg-secondary flex items-center justify-center">
+              <span aria-hidden="true" class="material-symbols-outlined text-on-secondary text-sm">workspace_premium</span>
+            </div>
+            <div class="text-center px-6">
+              <p class="font-headline text-3xl italic text-primary/20 mb-2">Certificate</p>
+              <p class="text-xs text-on-surface-variant/40 italic">of Appreciation</p>
+              <div class="w-12 h-px bg-secondary/30 my-4 mx-auto"></div>
+              <p class="font-headline text-lg text-primary/30 italic">Name Surname</p>
+            </div>
+          </div>
+          <h4 class="font-headline font-bold text-primary text-lg mb-1">食品 GMP</h4>
+          <p class="text-on-surface-variant text-sm">優良製造規範認證</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑦  PRODUCTS ── 歲月的獻禮 ──────────────────────────────────────── -->
+  <section class="py-24 xl:py-32 bg-surface">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+
+      <div class="text-center mb-16">
+        <span class="font-label text-secondary tracking-widest text-xs block mb-3 uppercase">
+          Our Collection
+        </span>
+        <h2 class="font-headline font-bold text-primary text-3xl md:text-4xl">
+          歲月的獻禮
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- 商品 1：黑金萃取禮盒 -->
+        <div class="bg-surface-container-low border border-secondary/10
+                    hover:border-secondary/30 transition-all duration-500
+                    p-8 md:p-10 flex flex-col sm:flex-row gap-6 items-center">
+          <div class="w-full sm:w-2/5 flex-shrink-0">
+            <img
+              src="assets/image/photo/product-chicken-essence.png"
+              alt="蘊和堂 黑金萃取禮盒"
+              loading="lazy" width="360" height="360"
+              class="w-full h-auto object-contain"
+            />
+          </div>
+          <div class="w-full sm:w-3/5">
+            <h3 class="font-headline font-bold text-primary text-xl mb-1">黑金萃取禮盒</h3>
+            <p class="text-secondary font-label text-sm mb-4">Black Gold Extract</p>
+            <p class="text-sm text-on-surface-variant leading-relaxed mb-6">
+              濃縮二十年精華，每日一包，為繁忙生活注入時光的穩定力量。
+            </p>
+            <div class="font-headline text-primary text-2xl font-bold mb-5">
+              NT$&nbsp;2,580
+            </div>
+            <button class="btn-outline w-full py-3 font-label tracking-widest text-sm">
+              立即購買
+            </button>
+          </div>
+        </div>
+
+        <!-- 商品 2：老菜脯雞湯精粹 -->
+        <div class="bg-surface-container-low border border-secondary/10
+                    hover:border-secondary/30 transition-all duration-500
+                    p-8 md:p-10 flex flex-col sm:flex-row gap-6 items-center">
+          <div class="w-full sm:w-2/5 flex-shrink-0">
+            <!-- 佔位（等第二張商品圖） -->
+            <div class="w-full aspect-square bg-surface-container flex items-center justify-center">
+              <span aria-hidden="true" class="material-symbols-outlined text-5xl text-outline/30">
+                ramen_dining
+              </span>
+            </div>
+          </div>
+          <div class="w-full sm:w-3/5">
+            <h3 class="font-headline font-bold text-primary text-xl mb-1">老菜脯雞湯精粹</h3>
+            <p class="text-secondary font-label text-sm mb-4">Aged Radish Soup Base</p>
+            <p class="text-sm text-on-surface-variant leading-relaxed mb-6">
+              如同母親的手藝，簡單加熱，即可享有一碗溫潤脾胃的傳承好湯。
+            </p>
+            <div class="font-headline text-primary text-2xl font-bold mb-5">
+              NT$&nbsp;1,280
+            </div>
+            <button class="btn-outline w-full py-3 font-label tracking-widest text-sm">
+              立即購買
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑧  BRAND PARTNERS ── 深綠底 ──────────────────────────────────────── -->
+  <div class="bg-primary text-on-primary py-16">
+    <div class="max-w-5xl mx-auto px-6 md:px-12">
+      <h3 class="font-headline font-bold text-center text-xl md:text-2xl mb-10">
+        品牌夥伴 · 攜手推廣健康生活
+      </h3>
+      <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16">
+        <div class="flex items-center gap-2 text-on-primary/70">
+          <span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed">eco</span>
+          <span class="font-label text-sm">綠野市集</span>
+        </div>
+        <div class="flex items-center gap-2 text-on-primary/70">
+          <span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed">store</span>
+          <span class="font-label text-sm">和豐選物</span>
+        </div>
+        <div class="flex items-center gap-2 text-on-primary/70">
+          <span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed">biotech</span>
+          <span class="font-label text-sm">康健生機</span>
+        </div>
+        <div class="flex items-center gap-2 text-on-primary/70">
+          <span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed">spa</span>
+          <span class="font-label text-sm">清心草本</span>
+        </div>
+        <div class="flex items-center gap-2 text-on-primary/70">
+          <span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed">storefront</span>
+          <span class="font-label text-sm">蒔光藥舖</span>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- ⑨  FRANCHISE / CONTACT ── 成為蘊和堂的一員 ──────────────────────── -->
+  <section class="py-24 xl:py-32 bg-surface">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-16 xl:gap-24 items-start">
+
+      <!-- 左：說明 -->
+      <div class="flex flex-col justify-center">
+        <h2 class="font-headline font-bold text-primary text-3xl md:text-4xl leading-snug mb-8">
+          成為蘊和堂的一員
+        </h2>
+        <p class="text-on-surface-variant leading-relaxed mb-10">
+          我們正在尋找志同道合的夥伴，一同傳遞這份時光的禮物。
+          提供完善的專業教育訓練與穩定的供應鏈體系，讓創業成為一種溫暖的實踐。
+        </p>
+        <div class="grid grid-cols-2 gap-x-8 gap-y-5">
+          <div class="flex items-start gap-3">
+            <span aria-hidden="true" class="material-symbols-outlined text-secondary mt-0.5">verified</span>
+            <span class="text-sm">品牌授權使用</span>
+          </div>
+          <div class="flex items-start gap-3">
+            <span aria-hidden="true" class="material-symbols-outlined text-secondary mt-0.5">support_agent</span>
+            <span class="text-sm">營運技術指導</span>
+          </div>
+          <div class="flex items-start gap-3">
+            <span aria-hidden="true" class="material-symbols-outlined text-secondary mt-0.5">inventory</span>
+            <span class="text-sm">物料統一供應</span>
+          </div>
+          <div class="flex items-start gap-3">
+            <span aria-hidden="true" class="material-symbols-outlined text-secondary mt-0.5">campaign</span>
+            <span class="text-sm">行銷資源共享</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右：聯絡資訊卡 -->
+      <div class="bg-surface-container-high p-8 md:p-10 flex flex-col gap-8">
+        <h3 class="font-headline font-bold text-primary text-xl pb-4 border-b border-secondary/20">
+          聯絡資訊 Contact Info
+        </h3>
+
+        <div class="flex items-center gap-5 group">
+          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center shrink-0
+                      group-hover:scale-110 transition-transform">
+            <span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed">call</span>
+          </div>
+          <div>
+            <p class="font-label text-[10px] tracking-widest text-secondary uppercase mb-0.5">Phone</p>
+            <p class="font-headline text-primary text-lg">+886 (02) 2345&nbsp;6789</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-5 group">
+          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center shrink-0
+                      group-hover:scale-110 transition-transform">
+            <span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed">mail</span>
+          </div>
+          <div>
+            <p class="font-label text-[10px] tracking-widest text-secondary uppercase mb-0.5">Email</p>
+            <p class="font-headline text-primary text-lg">service&#64;yunhetang.com.tw</p>
+          </div>
+        </div>
+
+        <!-- LINE QR -->
+        <div class="flex flex-col gap-3 pt-2">
+          <p class="font-label text-[10px] tracking-widest text-secondary uppercase">Line</p>
+          <div class="p-4 bg-white border border-secondary/10 w-fit">
+            <div class="w-28 h-28 bg-surface-container flex flex-col items-center justify-center text-outline/40">
+              <span aria-hidden="true" class="material-symbols-outlined text-4xl mb-1">qr_code_2</span>
+              <span class="text-[9px] tracking-tighter uppercase">Line QR Code</span>
+            </div>
+          </div>
+          <p class="text-xs text-on-surface-variant/60 italic">掃描上方 QR Code 立即在線諮詢</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑩  FOOTER ── 深綠底 ─────────────────────────────────────────────── -->
+  <footer class="bg-primary text-on-primary">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
+
+      <!-- 品牌 -->
+      <div>
+        <div class="text-xl font-bold text-secondary-fixed font-headline mb-4">蘊和堂</div>
+        <p class="text-sm text-on-primary-container/60 leading-relaxed max-w-xs">
+          蘊天地之和，藏歲月之美。我們致力於將傳統養生智慧，融入現代精緻生活。
+        </p>
+      </div>
+
+      <!-- 導航 -->
+      <div>
+        <h5 class="font-label text-xs tracking-widest text-secondary-fixed mb-6 uppercase">關於我們</h5>
+        <ul class="space-y-3">
+          <li><a class="text-sm text-on-primary/60 hover:text-secondary-fixed transition-colors" href="#">清潔服務</a></li>
+          <li><a class="text-sm text-on-primary/60 hover:text-secondary-fixed transition-colors" href="#">老菜脯滴雞精</a></li>
+        </ul>
+      </div>
+
+      <!-- 聯絡 -->
+      <div>
+        <h5 class="font-label text-xs tracking-widest text-secondary-fixed mb-6 uppercase">Contact</h5>
+        <p class="text-sm text-on-primary/60 leading-relaxed mb-4">
+          台北市信義區智慧路123號<br/>
+          +886 (02) 2345 6789
+        </p>
+        <div class="flex gap-3">
+          <a class="w-9 h-9 border border-on-primary/10 flex items-center justify-center
+                    hover:border-secondary-fixed hover:text-secondary-fixed transition-all"
+             href="#" aria-label="分享">
+            <span class="material-symbols-outlined text-base">share</span>
+          </a>
+          <a class="w-9 h-9 border border-on-primary/10 flex items-center justify-center
+                    hover:border-secondary-fixed hover:text-secondary-fixed transition-all"
+             href="#" aria-label="寄送郵件">
+            <span class="material-symbols-outlined text-base">mail</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="border-t border-on-primary/10">
+      <div class="max-w-7xl mx-auto px-6 md:px-12 py-6 flex flex-col md:flex-row justify-between items-center text-[11px] text-on-primary/30">
+        <span>&copy; 2024 Yun He Tang. Wisdom of the Sages, Care of the Mother.</span>
+        <div class="mt-2 md:mt-0 flex gap-6">
+          <span>All rights reserved.</span>
+          <span>Designed with BonBonDi.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 </div>
