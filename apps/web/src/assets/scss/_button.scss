@@ -1,108 +1,6 @@
+// ─── Angular Material toggle reset ───────────────────────────────────────────
 .mat-button-toggle-group.mat-button-toggle-group-appearance-standard {
   --mat-standard-button-toggle-shape: 0px;
-}
-
-// ─── Animated underline link ──────────────────────────────────────────────────
-.link-underline {
-  @apply flex items-center relative w-fit cursor-pointer;
-
-  &::before,
-  &::after {
-    @apply absolute w-full h-px bg-current top-full left-0;
-    content: "";
-  }
-
-  &::before {
-    transform-origin: 0% 50%;
-    transform: scale3d(0, 1, 1);
-    transition: transform 0.3s;
-  }
-
-  &::after {
-    top: calc(100% + 4px);
-    transition: transform 0.3s;
-    transform-origin: 100% 50%;
-  }
-
-  &:hover::before {
-    transform: scale3d(1, 1, 1);
-  }
-
-  &:hover::after {
-    transform: scale3d(0, 1, 1);
-  }
-
-  // icon 在右
-  span ~ .material-symbols-outlined,
-  span ~ .material-symbols-rounded {
-    @apply pl-2 -mr-0.5;
-  }
-
-  // icon 在左
-  .material-symbols-outlined ~ span,
-  .material-symbols-rounded ~ span {
-    @apply pr-1 -ml-0.5;
-  }
-}
-
-// ─── Brand buttons ────────────────────────────────────────────────────────────
-
-// Solid primary — dark forest green bg, white text
-.btn-primary {
-  @apply bg-[var(--md-sys-color-primary)] text-[var(--md-sys-color-on-primary)]
-         border-2 border-[var(--md-sys-color-primary)]
-         shadow-sm hover:shadow-none
-         hover:bg-[var(--md-sys-color-primary-container)]
-         hover:border-[var(--md-sys-color-primary-container)];
-}
-
-// Outline primary — transparent bg, green border + text, fills on hover
-.btn-outline {
-  @apply bg-transparent text-[var(--md-sys-color-primary)]
-         border border-[var(--md-sys-color-primary)]
-         hover:bg-[var(--md-sys-color-primary)]
-         hover:text-[var(--md-sys-color-on-primary)];
-}
-
-// Solid secondary — golden brown bg, white text
-.btn-secondary {
-  @apply bg-[var(--md-sys-color-secondary)] text-[var(--md-sys-color-on-secondary)]
-         border-2 border-[var(--md-sys-color-secondary)]
-         hover:opacity-90;
-}
-
-// Outline secondary — transparent bg, golden border
-.btn-outline-secondary {
-  @apply bg-transparent text-[var(--md-sys-color-secondary)]
-         border border-[var(--md-sys-color-secondary)]
-         hover:bg-[var(--md-sys-color-secondary-container)];
-}
-
-// Ghost — subtle surface fill, low contrast
-.btn-ghost {
-  @apply cursor-pointer
-         border border-[var(--md-sys-color-outline-variant)]
-         text-[var(--md-sys-color-on-surface)]
-         bg-transparent
-         hover:bg-[var(--md-sys-color-surface-container)];
-}
-
-// ─── Size modifiers ───────────────────────────────────────────────────────────
-.btn-lg {
-  @apply w-full px-10 py-5 min-h-14;
-}
-
-// ─── Shared state ─────────────────────────────────────────────────────────────
-[class*="btn-"] {
-  @apply opacity-100 transition-all ease-in-out duration-300;
-
-  &.disabled {
-    @apply shadow-none grayscale opacity-60 pointer-events-none;
-  }
-
-  &.disabled-hide {
-    @apply w-0 p-0 border-none overflow-hidden opacity-0;
-  }
 }
 
 // ─── Global MDC / anchor reset ────────────────────────────────────────────────
@@ -124,6 +22,90 @@ a {
   --mdc-text-button-container-shape: 0px;
 }
 
+// ─── M3 Button Base ───────────────────────────────────────────────────────────
+[class*="btn-"] {
+  @apply tracking-widest text-sm transition-all ease-in-out duration-300;
+}
+
+// ─── M3 Filled button ─────────────────────────────────────────────────────────
+// High emphasis — primary action on light background
+.btn-filled,
+.btn-primary {
+  @apply px-8 py-4;
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  &:hover { opacity: 0.9; }
+}
+
+// ─── M3 Filled Tonal button ───────────────────────────────────────────────────
+// Medium-high emphasis — warm golden accent, typically on dark background
+.btn-tonal {
+  @apply px-8 py-4;
+  background-color: var(--md-sys-color-secondary-fixed);
+  color: var(--md-sys-color-on-secondary-fixed);
+  &:hover { opacity: 0.9; }
+}
+
+// ─── M3 Outlined button ───────────────────────────────────────────────────────
+// Medium emphasis — on light/surface background
+.btn-outlined,
+.btn-outline {
+  @apply border bg-transparent;
+  border-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-primary);
+  &:hover {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+  }
+}
+
+// ─── M3 Outlined Inverse ──────────────────────────────────────────────────────
+// Medium emphasis — on dark / primary-color background
+.btn-outlined-inverse,
+.btn-outline-inverse {
+@apply px-8 py-4 border flex items-center justify-center transition-all;
+  border-color: color-mix(in srgb, var(--md-sys-color-on-primary) 10%, transparent);
+  &:hover {
+    border-color: var(--md-sys-color-secondary-fixed);
+    color: var(--md-sys-color-secondary-fixed);
+  }
+}
+
+// ─── M3 Secondary filled ──────────────────────────────────────────────────────
+.btn-secondary {
+  @apply px-8 py-4;
+  background-color: var(--md-sys-color-secondary);
+  color: var(--md-sys-color-on-secondary);
+  &:hover { opacity: 0.9; }
+}
+
+// ─── M3 Text button ───────────────────────────────────────────────────────────
+// Low emphasis — subtle action
+.btn-text,
+.btn-ghost {
+  @apply bg-transparent;
+  color: var(--md-sys-color-primary);
+  &:hover { background-color: var(--md-sys-color-surface-container); }
+}
+
+// ─── M3 Elevated button ───────────────────────────────────────────────────────
+.btn-elevated {
+  @apply px-8 py-4 shadow-md;
+  background-color: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-primary);
+  &:hover { @apply shadow-lg; }
+}
+
+// ─── Size modifiers ───────────────────────────────────────────────────────────
+.btn-sm { @apply px-4 py-2 text-xs; }
+.btn-lg { @apply px-10 py-5 min-h-14; }
+
+// ─── Shared state ─────────────────────────────────────────────────────────────
+[class*="btn-"].disabled,
+[class*="btn-"]:disabled {
+  @apply shadow-none grayscale opacity-60 pointer-events-none;
+}
+
 // ─── Dropdown menu ────────────────────────────────────────────────────────────
 .menu-wrap {
   @apply relative;
@@ -133,14 +115,10 @@ a {
   }
 
   &:hover .menu-list,
-  .menu-list.show {
-    @apply block;
-  }
+  .menu-list.show { @apply block; }
 
   .menu-list a,
-  .menu-list button {
-    @apply flex items-center;
-  }
+  .menu-list button { @apply flex items-center; }
 }
 
 .mdc-checkbox .mdc-checkbox__native-control:enabled ~ .mdc-checkbox__background .mdc-checkbox__checkmark {
@@ -159,19 +137,9 @@ a {
            rounded-none;
   }
 
-  p {
-    @apply font-medium text-base;
-  }
+  p { @apply font-medium text-base; }
 
-  .uploaded-img {
-    @apply relative overflow-hidden;
-  }
-
-  .uploaded-img img {
-    @apply object-cover w-full h-full;
-  }
-
-  .uploaded-img .btn-ghost {
-    @apply absolute bottom-0 right-0;
-  }
+  .uploaded-img { @apply relative overflow-hidden; }
+  .uploaded-img img { @apply object-cover w-full h-full; }
+  .uploaded-img .btn-ghost { @apply absolute bottom-0 right-0; }
 }

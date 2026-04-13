@@ -2,10 +2,6 @@
 .footer-root {
   background-color: var(--md-sys-color-primary);
   color: var(--md-sys-color-on-primary);
-
-  p, li, address {
-    color: rgba(255, 255, 255, 0.6);
-  }
 }
 
 // ─── 主體三欄 ─────────────────────────────────────────────────────────────────
@@ -26,6 +22,11 @@
   @apply text-[10px] tracking-widest uppercase mb-5;
   font-family: 'Work Sans', sans-serif;
   color: var(--md-sys-color-secondary-fixed);
+}
+
+.footer-brand-desc {
+  @apply text-sm leading-relaxed max-w-xs;
+  color: color-mix(in srgb, var(--md-sys-color-on-primary-container) 60%, transparent);
 }
 
 // ─── 連結清單 ─────────────────────────────────────────────────────────────────

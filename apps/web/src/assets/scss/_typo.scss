@@ -1,0 +1,84 @@
+// ─── Font Family Roles ────────────────────────────────────────────────────────
+// Maps to Material 3 typeface roles
+
+// Display / Headline — Noto Serif TC（品牌書法字，用於大標、英文裝飾）
+.font-display,
+.font-headline {
+  font-family: "Noto Serif TC", serif;
+  font-optical-sizing: auto;
+  @apply font-bold not-italic;
+}
+
+// ─── M3 Typescale ─────────────────────────────────────────────────────────────
+// Based on Material Design 3 type scale spec (rem = 16px base)
+
+// Display
+.display-large {
+  @apply text-6xl font-normal;
+}
+
+.display-medium {
+  @apply text-5xl font-normal tracking-normal;
+}
+
+.display-small {
+  @apply text-4xl font-normal tracking-normal;
+}
+
+// Headline
+.headline-large {
+  @apply text-3xl font-normal tracking-normal;
+}
+
+.headline-medium {
+  @apply text-2xl font-normal tracking-normal;
+}
+
+.headline-small {
+  @apply text-2xl leading-8 font-normal tracking-normal;
+}
+
+// Title
+.title-large {
+  @apply text-xl font-normal tracking-normal;
+}
+
+.title-medium {
+  @apply text-base leading-6 font-medium;
+}
+
+.title-small {
+  @apply text-sm leading-5 font-medium;
+}
+
+// Body
+.body-large {
+  // 16px / 24px
+  @apply text-base leading-6 font-normal;
+}
+
+.body-medium {
+  // 14px / 20px
+  @apply text-sm leading-5 font-normal;
+}
+
+.body-small {
+  // 12px / 16px
+  @apply text-xs leading-4 font-normal;
+}
+
+// Label
+.label-large {
+  // 14px / 20px
+  @apply text-sm leading-5 font-medium;
+}
+
+.label-medium {
+  // 12px / 16px
+  @apply text-xs leading-4 font-medium;
+}
+
+.label-small {
+  // 11px / 16px
+  @apply text-xs font-medium;
+}

@@ -3,20 +3,32 @@
   @apply relative overflow-x-hidden;
   background-color: var(--md-sys-color-surface);
   color: var(--md-sys-color-on-surface);
+
+  > section:not(.section-filled) {
+    @apply px-4;
+  }
+
+  > section {
+    min-height: 80svh;
+  }
 }
 
 /* ── ① Hero ────────────────────────────────────────────────────────────── */
 .hero-grid {
-  @apply min-h-screen grid grid-cols-1 md:grid-cols-2;
+  @apply min-h-screen grid grid-cols-1 lg:grid-cols-2;
 }
 
 .hero-visual-panel {
-  @apply relative flex flex-col items-center justify-center px-8 py-16 md:py-0;
+  @apply relative flex flex-col items-center p-8 md:pt-8;
   background-color: var(--md-sys-color-surface-container-low);
 }
 
 .hero-corner-frame {
-  @apply relative w-full max-w-md mx-auto;
+  @apply relative w-full mx-auto flex-1;
+
+  img {
+    @apply w-full h-full object-cover;
+  }
 }
 
 .hero-corner-tl {
@@ -30,7 +42,7 @@
 }
 
 .hero-product-label {
-  @apply mt-8 uppercase text-center;
+  @apply text-sm tracking-widest mt-8 uppercase text-center;
   color: color-mix(in srgb, var(--md-sys-color-secondary) 70%, transparent);
 }
 
@@ -41,7 +53,7 @@
 }
 
 .hero-inner-border {
-  @apply absolute top-8 left-8 right-8 bottom-8 border pointer-events-none;
+  @apply absolute inset-4 md:inset-8 border pointer-events-none;
   border-color: color-mix(in srgb, var(--md-sys-color-on-primary) 10%, transparent);
 }
 
@@ -52,7 +64,7 @@
 }
 
 .hero-heading {
-  @apply font-bold leading-tight text-3xl sm:text-4xl md:text-5xl xl:text-6xl mb-8;
+  @apply font-bold text-3xl sm:text-4xl md:text-5xl xl:text-6xl mb-8;
 }
 
 .hero-desc {
@@ -62,22 +74,6 @@
 
 .hero-cta-group {
   @apply flex flex-wrap gap-4;
-}
-
-.btn-hero-primary {
-  @apply px-8 py-4 tracking-widest text-sm transition-opacity;
-  background-color: var(--md-sys-color-secondary-fixed);
-  color: var(--md-sys-color-on-secondary-fixed);
-  &:hover { opacity: 0.9; }
-}
-
-.btn-hero-outline {
-  @apply border px-8 py-4 tracking-widest text-sm transition-colors;
-  border-color: color-mix(in srgb, var(--md-sys-color-on-primary) 40%, transparent);
-  color: var(--md-sys-color-on-primary);
-  &:hover {
-    border-color: color-mix(in srgb, var(--md-sys-color-on-primary) 80%, transparent);
-  }
 }
 
 .hero-vertical-deco {
@@ -98,7 +94,7 @@
 }
 
 .brand-story-inner {
-  @apply max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-8 xl:gap-16 items-center;
+  @apply max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 xl:gap-16 items-center;
 }
 
 .brand-vertical-deco {
@@ -150,18 +146,18 @@
 }
 
 /* ── ③ Brand Mission ────────────────────────────────────────────────────── */
-.mission-section {
+.mission-section { 
+  @apply relative grid gap-4 lg:grid-cols-2;
   background-color: var(--md-sys-color-primary);
   color: var(--md-sys-color-on-primary);
 }
 
-.mission-grid {
-  @apply grid grid-cols-1 md:grid-cols-2;
-  min-height: 600px;
+.mission-img {
+  @apply w-full h-full object-cover object-center lg:col-start-2;
 }
 
 .mission-content {
-  @apply flex flex-col justify-center px-8 md:px-16 xl:px-20 py-20;
+  @apply w-full max-w-7xl mx-auto p-4 flex flex-col justify-center lg:absolute inset-0;
 }
 
 .mission-eyebrow {
@@ -456,7 +452,7 @@
 }
 
 .partners-inner {
-  @apply max-w-5xl mx-auto px-6 md:px-12;
+  @apply max-w-5xl mx-auto;
 }
 
 .partners-heading {
@@ -482,7 +478,7 @@
 }
 
 .franchise-inner {
-  @apply max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-16 xl:gap-24 items-start;
+  @apply max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 xl:gap-24 items-start;
 }
 
 .franchise-heading {
@@ -565,72 +561,4 @@
 .contact-qr-hint {
   @apply text-xs italic;
   color: color-mix(in srgb, var(--md-sys-color-on-surface-variant) 60%, transparent);
-}
-
-/* ── ⑩ Footer ───────────────────────────────────────────────────────────── */
-.site-footer {
-  background-color: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary);
-}
-
-.footer-inner {
-  @apply max-w-7xl mx-auto px-6 md:px-12 py-16 grid grid-cols-1 md:grid-cols-3 gap-12;
-}
-
-.footer-brand-name {
-  @apply text-xl font-bold mb-4;
-  color: var(--md-sys-color-secondary-fixed);
-}
-
-.footer-brand-desc {
-  @apply text-sm leading-relaxed max-w-xs;
-  color: color-mix(in srgb, var(--md-sys-color-on-primary-container) 60%, transparent);
-}
-
-.footer-nav-heading {
-  @apply text-xs tracking-widest mb-6 uppercase;
-  color: var(--md-sys-color-secondary-fixed);
-}
-
-.footer-nav-list {
-  @apply space-y-3;
-}
-
-.footer-nav-link {
-  @apply text-sm transition-colors;
-  color: color-mix(in srgb, var(--md-sys-color-on-primary) 60%, transparent);
-  &:hover { color: var(--md-sys-color-secondary-fixed); }
-}
-
-.footer-contact-text {
-  @apply text-sm leading-relaxed mb-4;
-  color: color-mix(in srgb, var(--md-sys-color-on-primary) 60%, transparent);
-}
-
-.footer-social-group {
-  @apply flex gap-3;
-}
-
-.social-icon-btn {
-  @apply w-9 h-9 border flex items-center justify-center transition-all;
-  border-color: color-mix(in srgb, var(--md-sys-color-on-primary) 10%, transparent);
-  &:hover {
-    border-color: var(--md-sys-color-secondary-fixed);
-    color: var(--md-sys-color-secondary-fixed);
-  }
-}
-
-.footer-copyright {
-  @apply border-t;
-  border-color: color-mix(in srgb, var(--md-sys-color-on-primary) 10%, transparent);
-}
-
-.footer-copyright-inner {
-  @apply max-w-7xl mx-auto px-6 md:px-12 py-6 flex flex-col md:flex-row justify-between items-center;
-  font-size: 11px;
-  color: color-mix(in srgb, var(--md-sys-color-on-primary) 30%, transparent);
-}
-
-.footer-copyright-links {
-  @apply mt-2 md:mt-0 flex gap-6;
 }

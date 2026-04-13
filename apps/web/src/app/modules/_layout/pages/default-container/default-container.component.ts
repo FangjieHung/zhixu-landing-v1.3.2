@@ -34,19 +34,17 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
 
   navList = [
     {
-      label: '老菜脯滴雞精',
-      link: '/product'
+      label: '安心憑證',
+      link: '/'
     },
     {
-      label: '清潔服務',
-      link: '/service'
+      label: '關於我們',
+      link: '/'
+    },
+    {
+      label: '加入我們',
+      link: '/'
     }
-  ];
-
-  accountMenu = [
-    // { label: '我的課程', link: '/' },
-    { label: '個人資料', link: '/account/profile' },
-    { label: '重設密碼', link: '/account/password' }
   ];
 
   constructor(
@@ -61,7 +59,7 @@ export class DefaultContainerComponent extends BBDBaseComponent implements OnIni
     if (this.appAuthApiServ.hasAccessToken) {
       this.storeServ.getCurrAuthUserCache();
     }
-    
+
     this._seoServ.updateMetaTags();
     this._router.events
       .pipe(filter(e => e instanceof NavigationEnd))
