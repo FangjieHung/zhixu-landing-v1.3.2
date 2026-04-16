@@ -236,42 +236,20 @@
       </div>
 
       <!-- Bento Grid：4 欄 × 3 列（視覺權重排序）-->
-      <div class="bento-grid">
-
-        <!-- ① 試喝專家心得 col×2 row×2（最大格） -->
-        <div class="bento-review-cell">
+      <ol class="bento-grid">
+        <li class="bento-review-cell">
           <div>
             <span class="bento-nutrients-eyebrow">Expert Review</span>
             <h3 class="font-headline text-xl font-bold mb-4">試喝專家心得</h3>
             <div class="bento-cell-divider"></div>
           </div>
           <blockquote class="mt-4 space-y-3">
-            <p>「整體來說非常好喝，沒有腥味，走的是<strong>清香養生</strong>的風格。無腥味且沒有多餘油脂，但口感依舊<strong>飽滿有厚度</strong>（濃縮程度應該很高），鮮味也很適中，非常耐喝。</p>
-            <p>不過老菜脯的風味表現較為內斂，如果沒有事先預告，菜脯的風味較難被察覺。整體而言是<strong>非常成熟的產品</strong>。」</p>
-          </blockquote>
-        </div>
-
-        <!-- ② 多元礦物質與抗氧化 col×2（+abts 圖表） -->
-        <div class="bento-nutrients-wide-cell">
-          <div class="bento-nutrients-wide-text">
-            <span class="bento-nutrients-eyebrow">Nutrients</span>
-            <h4 class="font-headline text-xl font-bold mb-3">多元礦物質與抗氧化</h4>
-            <div class="bento-cell-divider"></div>
-            <p class="text-sm leading-relaxed mt-3"
-               style="color: var(--md-sys-color-on-primary-container)">
-              高純度精華保留率，ABTS 抗氧化能力實測數據。
+            <p>「整體來說非常好喝，沒有腥味，走的是<strong>清香養生</strong>的風格。無腥味且沒有多餘油脂，但口感依舊<strong>飽滿有厚度</strong>（濃縮程度應該很高），鮮味也很適中，非常耐喝。
             </p>
-          </div>
-          <img
-            src="assets/image/radish-chart/abts.jpg"
-            alt="ABTS 抗氧化能力圖表"
-            loading="lazy"
-            class="bento-nutrients-wide-img"
-          />
-        </div>
-
-        <!-- ③ 一口清潤，只有 6 大卡 col×2 -->
-        <div class="bento-low-cal-cell">
+            <p>老菜脯的風味表現較為內斂，如果沒有事先預告，菜脯的風味較難被察覺。整體而言是<strong>非常成熟的產品</strong>。」</p>
+          </blockquote>
+        </li>
+        <li class="bento-low-cal-cell">
           <span class="bento-nutrients-eyebrow">Low Calories</span>
           <h4 class="font-headline text-xl font-bold mb-3">一口清潤，只有 6 大卡</h4>
           <div class="bento-cell-divider"></div>
@@ -290,27 +268,48 @@
               <span class="bento-cal-label">市售同類</span>
             </div>
           </div>
+        </li>
+        <li class="bento-nutrients-wide-cell">
+          <div class="bento-nutrients-wide-text">
+            <span class="bento-nutrients-eyebrow">Nutrients</span>
+            <h4 class="font-headline text-xl font-bold mb-3">多元礦物質與抗氧化</h4>
+            <div class="bento-cell-divider"></div>
+            <p class="text-sm leading-relaxed mt-3" style="color: var(--md-sys-color-on-primary-container)">
+              高純度精華保留率，ABTS 抗氧化能力實測數據。
+            </p>
+          </div>
+          <img src="assets/image/radish-chart/abts.jpg" alt="ABTS 抗氧化能力圖表" loading="lazy"
+            class="bento-nutrients-wide-img" />
+        </li>
+        <li class="bento-nutrients-wide-cell">
+          <div class="bento-nutrients-wide-text">
+            <span class="bento-nutrients-eyebrow">GABA</span>
+            <h4 class="font-headline text-xl font-bold mb-3">高含量 GABA</h4>
+            <div class="bento-cell-divider"></div>
+            <p class="text-sm leading-relaxed mt-3" style="color: var(--md-sys-color-on-primary-container)">
+              黑金萃取中蘊含的神經訊號營養素。<br />
+              支撐身心穩定狀態的關鍵成分。
+            </p>
+          </div>
+          <img src="assets/image/radish-chart/gaba.jpg" alt="GABA 含量圖表" loading="lazy"
+            class="bento-nutrients-wide-img" />
+        </li>
+
+        <!-- ⑤ 高含量益生菌 + 圖表 col×2 -->
+        <div class="bento-nutrients-wide-cell">
+          <div class="bento-nutrients-wide-text">
+            <span class="bento-nutrients-eyebrow">Probiotics</span>
+            <h4 class="font-headline text-xl font-bold mb-3">高含量益生菌</h4>
+            <div class="bento-cell-divider"></div>
+            <p class="text-sm leading-relaxed mt-3" style="color: var(--md-sys-color-on-primary-container)">
+              滴雞精的天然益生菌夥伴。<br />
+              幫助消化系統輕鬆運作。
+            </p>
+          </div>
+          <img src="assets/image/radish-chart/pm.jpg" alt="益生菌含量圖表" loading="lazy" class="bento-nutrients-wide-img" />
         </div>
 
-        <!-- ④ GABA 圖表 col×2 -->
-        <div class="bento-chart-cell">
-          <img
-            src="assets/image/radish-chart/gaba.jpg"
-            alt="GABA 含量圖表"
-            loading="lazy"
-          />
-        </div>
-
-        <!-- ⑤ PM 圖表 col×2 -->
-        <div class="bento-chart-cell">
-          <img
-            src="assets/image/radish-chart/pm.jpg"
-            alt="PM 相關數據圖表"
-            loading="lazy"
-          />
-        </div>
-
-      </div>
+      </ol>
     </div>
   </section>
 
@@ -331,27 +330,24 @@
       <!-- 三張認證卡 -->
       <div class="cert-grid">
         <div class="cert-card">
-          <div class="cert-frame aspect-[4/3]">
-            <img src="assets/image/photo/certificate-iso22000-blur.jpg" alt="ISO 22000 食品安全管理國際認證" loading="lazy"
-              class="w-full h-full object-cover" />
+          <div class="cert-frame">
+            <img src="assets/image/photo/certificate-iso22000-blur.jpg" alt="ISO 22000 食品安全管理國際認證" loading="lazy" />
           </div>
           <h4 class="cert-name font-headline">ISO 22000</h4>
           <p class="cert-label">食品安全管理國際認證</p>
         </div>
 
         <div class="cert-card">
-          <div class="cert-frame aspect-[4/3]">
-            <img src="assets/image/photo/certificate-haccp-blur.jpg" alt="HACCP 危害分析重要管制點認證" loading="lazy"
-              class="w-full h-full object-cover" />
+          <div class="cert-frame">
+            <img src="assets/image/photo/certificate-haccp-blur.jpg" alt="HACCP 危害分析重要管制點認證" loading="lazy" />
           </div>
           <h4 class="cert-name font-headline">HACCP</h4>
           <p class="cert-label">危害分析重要管制點認證</p>
         </div>
 
         <div class="cert-card">
-          <div class="cert-frame  aspect-[3/4]">
-            <img src="assets/image/photo/certificate-sgs-blur.png" alt="SGS 國際檢驗認證" loading="lazy"
-              class="w-full h-full object-cover" />
+          <div class="cert-frame">
+            <img src="assets/image/photo/certificate-sgs-blur.png" alt="SGS 國際檢驗認證" loading="lazy" />
           </div>
           <h4 class="cert-name font-headline">SGS</h4>
           <p class="cert-label">國際第三方檢驗認證</p>
@@ -446,48 +442,54 @@
         </h2>
       </div>
 
-      <div class="products-grid">
-
-        <!-- 商品 1：黑金萃取禮盒 -->
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <img src="assets/image/photo/product-chicken-essence.png" alt="蘊和堂 黑金萃取禮盒" loading="lazy" width="360"
-              height="360" class="w-full h-auto object-contain" />
-          </div>
-          <div class="product-info">
-            <h3 class="product-name font-headline">黑金萃取禮盒</h3>
-            <p class="product-subtitle ">Black Gold Extract</p>
-            <p class="product-desc">
-              濃縮三十年精華，每日一包，為繁忙生活注入時光的穩定力量。
-            </p>
-            <div class="product-price font-headline">
-              NT$&nbsp;2,580
+      <div >
+        <swiper
+          class="w-full arrow-horizontal"
+          [navigation]="true"
+          [spaceBetween]="24"
+          [breakpoints]="{ '640': { slidesPerView: 1 }, '768': { slidesPerView: 2 }, '1024': { slidesPerView: 2 } }"
+        >
+          <ng-template swiperSlide>
+            <div class="product-card">
+              <div class="product-img-wrap">
+                <img src="assets/image/photo/product-chicken-essence.png" alt="蘊和堂 黑金萃取禮盒" loading="lazy" width="360"
+                  height="360" class="w-full h-auto object-contain" />
+              </div>
+              <div class="product-info">
+                <h3 class="product-name font-headline">黑金萃取禮盒</h3>
+                <p class="product-subtitle ">Black Gold Extract</p>
+                <p class="product-desc">
+                  濃縮三十年精華，每日一包，為繁忙生活注入時光的穩定力量。
+                </p>
+                <div class="product-price font-headline">
+                  NT$&nbsp;2,580
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </ng-template>
 
-        <!-- 商品 2：老菜脯雞湯精粹 -->
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <!-- 佔位（等第二張商品圖） -->
-            <div class="product-placeholder">
-              <span aria-hidden="true" class="material-symbols-outlined text-5xl">
-                ramen_dining
-              </span>
+          <ng-template swiperSlide>
+            <div class="product-card">
+              <div class="product-img-wrap">
+                <div class="product-placeholder">
+                  <span aria-hidden="true" class="material-symbols-outlined text-5xl">
+                    ramen_dining
+                  </span>
+                </div>
+              </div>
+              <div class="product-info">
+                <h3 class="product-name font-headline">老菜脯雞湯精粹</h3>
+                <p class="product-subtitle ">Aged Radish Soup Base</p>
+                <p class="product-desc">
+                  如同母親的手藝，簡單加熱，即可享有一碗溫潤脾胃的傳承好湯。
+                </p>
+                <div class="product-price font-headline">
+                  NT$&nbsp;1,280
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="product-info">
-            <h3 class="product-name font-headline">老菜脯雞湯精粹</h3>
-            <p class="product-subtitle ">Aged Radish Soup Base</p>
-            <p class="product-desc">
-              如同母親的手藝，簡單加熱，即可享有一碗溫潤脾胃的傳承好湯。
-            </p>
-            <div class="product-price font-headline">
-              NT$&nbsp;1,280
-            </div>
-          </div>
-        </div>
-
+          </ng-template>
+        </swiper>
       </div>
     </div>
   </section>
@@ -550,7 +552,7 @@
       <div class="supplier-block">
         <div class="supplier-img-wrap">
           <img src="assets/image/process/supplier-zizai-forest-farm.png" alt="自在森林養殖 雞蛋農場" loading="lazy"
-            class="w-full h-full object-cover" />
+            class="w-full h-full object-contain object-center" />
         </div>
         <div class="supplier-content">
           <span class="supplier-eyebrow">Egg Supplier</span>
@@ -579,200 +581,150 @@
   </section>
 
   <!-- Organizational Structure Section -->
-  <section class="py-32 bg-surface">
-    <div class="max-w-7xl mx-auto px-12 text-center mb-24">
-      <span class="font-label text-secondary tracking-widest block mb-4 uppercase">Governance &amp; Structure</span>
-      <h2 class="text-4xl font-headline font-bold text-primary mb-6">築泓健康科技 組織架構</h2>
-      <p class="max-w-2xl mx-auto text-on-surface-variant font-light italic">"Structure defines purpose, synergy drives
-        excellence."</p>
+  <section class="org-section">
+    <div class="org-header">
+      <span class="org-header-eyebrow">Governance &amp; Structure</span>
+      <h2 class="org-header-title">築泓健康科技 組織架構</h2>
+      <p class="org-header-subtitle">"Structure defines purpose, synergy drives excellence."</p>
     </div>
-    <div class="max-w-6xl mx-auto px-4 overflow-x-auto">
-      <div class="min-w-[1000px] flex flex-col items-center py-8 relative">
+    <div class="org-chart-wrapper">
+      <div class="org-chart">
         <!-- GM Level -->
-        <div class="mb-16 relative z-10">
-          <div class="bg-moss-green text-surface-bright px-12 py-4 shadow-xl border border-secondary-fixed/20">
-            <h3 class="font-headline text-xl font-bold tracking-widest">總經理</h3>
-            <p class="text-[10px] font-label opacity-60 uppercase tracking-tighter mt-1">General Manager</p>
-          </div>
-        </div>
-        <!-- Vertical Line from GM -->
-        <div class="org-chart-line w-px h-12 -mt-16"></div>
+        <ol class="org-chart-gm">
+          <li class="org-chart-gm-box org-chart-section-box">
+            <h3>總經理</h3>
+            <p>General Manager</p>
+          </li>
+        </ol>
+
         <!-- Main Layout Grid -->
-        <div class="grid grid-cols-12 w-full gap-0 relative">
-          <!-- Horizontal connector: spans col-span-8 centre (33%) → col-span-4 centre (83%) -->
-          <div class="org-chart-line absolute top-0 left-[33%] right-[17%] h-px"></div>
+        <div class="relative">
+          <div class="org-chart-divider"></div>
+          <!-- Connectors -->
           <!-- Left Column: Operations -->
-          <div class="col-span-8 flex flex-col items-center">
-            <div class="org-chart-line w-px h-8"></div>
-            <div class="grid grid-cols-2 w-full gap-12 mt-8">
-              <!-- Black Gold Chicken Essence -->
-              <div class="flex flex-col items-center">
-                <div
-                  class="bg-primary text-secondary-fixed px-8 py-4 w-56 text-center shadow-lg border border-secondary/20 relative">
-                  <span class="font-headline font-bold block">黑金-滴雞精</span>
-                  <span class="text-[9px] font-label uppercase opacity-70">Black Gold Essence</span>
-                  <div class="absolute -top-4 left-1/2 -translate-x-1/2 text-secondary opacity-50"><span
-                      class="material-symbols-outlined text-sm">star</span></div>
-                </div>
-                <div class="org-chart-line w-px h-8"></div>
-                <div class="flex gap-4 w-full justify-center">
-                  <div class="org-chart-line h-px w-24"></div>
-                </div>
-                <div class="grid grid-cols-2 gap-4 mt-4">
-                  <div
-                    class="border border-outline/30 px-6 py-2 bg-surface-container text-sm font-medium text-primary text-center">
-                    倉管課</div>
-                  <div
-                    class="border border-outline/30 px-6 py-2 bg-surface-container text-sm font-medium text-primary text-center">
-                    業務課</div>
-                </div>
+          <ul class="org-chart-main-grid">
+            <!-- Black Gold Chicken Essence -->
+            <li class="org-chart-section">
+              <div class="org-chart-section-box org-chart-section-box-secondary">
+                <span>黑金-滴雞精</span>
+                <span>Black Gold Essence</span>
               </div>
-              <!-- Cleaning Division -->
-              <div class="flex flex-col items-center">
-                <div
-                  class="bg-secondary text-surface-bright px-8 py-4 w-56 text-center shadow-lg border border-primary/10">
-                  <span class="font-headline font-bold block">清潔事業部</span>
-                  <span class="text-[9px] font-label uppercase opacity-70">Cleaning Division</span>
-                </div>
-                <div class="org-chart-line w-px h-8"></div>
-                <div class="flex flex-col items-center gap-4 mt-4">
-                  <div
-                    class="border border-outline/30 px-10 py-2 bg-surface-container text-sm font-medium text-primary text-center">
-                    課長</div>
-                  <div class="org-chart-line w-px h-4 -my-4"></div>
-                  <div
-                    class="border border-outline/30 px-10 py-2 bg-surface-container text-sm font-medium text-primary text-center">
-                    專員</div>
-                </div>
+              <div class="org-chart-line w-px h-8"></div>
+              <div class="org-chart-section-items">
+                <div class="org-chart-section-item">倉管課</div>
+                <div class="org-chart-section-item">業務課</div>
               </div>
-            </div>
-          </div>
-          <!-- Right Column: General Affairs & Support -->
-          <div class="col-span-4 flex flex-col items-center">
-            <div class="org-chart-line w-px h-8"></div>
-            <div class="bg-on-tertiary-fixed-variant text-surface-bright px-8 py-4 w-48 text-center shadow-lg mt-8">
-              <span class="font-headline font-bold block">總務課</span>
-              <span class="text-[9px] font-label uppercase opacity-70">General Affairs</span>
-            </div>
-            <div class="org-chart-line w-px h-8"></div>
-            <div class="flex flex-col gap-3 mt-4 w-full items-end pr-12">
-              <div class="flex items-center gap-4 w-full justify-end">
-                <span class="text-xs font-label uppercase text-secondary/70 tracking-wider">Financial &amp; Admin</span>
-                <div class="border border-outline/20 px-4 py-2 bg-surface-container-high text-xs w-32 text-center">
-                  財務&amp;行政</div>
+            </li>
+            <!-- Cleaning Division -->
+            <li class="org-chart-section">
+              <div class="org-chart-section-box org-chart-section-box-secondary">
+                <span>清潔事業部</span>
+                <span>Cleaning Division</span>
               </div>
-              <div class="flex items-center gap-4 w-full justify-end">
-                <span class="text-xs font-label uppercase text-secondary/70 tracking-wider">IT Systems</span>
-                <div class="border border-outline/20 px-4 py-2 bg-surface-container-high text-xs w-32 text-center">資訊
-                </div>
+              <div class="org-chart-line w-px h-8"></div>
+              <ol class="org-chart-section-items org-chart-section-items-vertical">
+                <li class="org-chart-section-item">課長</li>
+                <li class="org-chart-section-item">專員</li>
+              </ol>
+            </li>
+            <!-- Right Column: General Affairs & Support -->
+            <li class="org-chart-right-column">
+              <div class="org-chart-section-box org-chart-section-box-secondary">
+                <span>總務課</span>
+                <span>General Affairs</span>
               </div>
-              <div class="flex items-center gap-4 w-full justify-end">
-                <span class="text-xs font-label uppercase text-secondary/70 tracking-wider">Marketing</span>
-                <div class="border border-outline/20 px-4 py-2 bg-surface-container-high text-xs w-32 text-center">行銷
-                </div>
-              </div>
-              <div class="flex items-center gap-4 w-full justify-end">
-                <span
-                  class="text-xs font-label uppercase text-secondary/70 tracking-wider text-right leading-tight">Human
-                  Resources<br /><small class="opacity-50">(Marketing focus)</small></span>
-                <div
-                  class="border border-outline/20 px-4 py-2 bg-surface-container-high text-xs w-32 text-center flex flex-col">
-                  <span>人資</span>
-                  <span class="text-[9px] opacity-60">(行銷兼做)</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Reference Visual Decoration -->
-        <div class="mt-20 opacity-10 grayscale hover:opacity-100 transition-opacity duration-1000 max-w-sm mx-auto">
-          <img alt="Source Chart Reference" class="w-full h-auto"
-            src="https://lh3.googleusercontent.com/aida/ADBb0uioojgK2UShcmeMoNF01tKFPpjEIeS7j4AWv5T4ubEL1zpL-iU676hm6fdA_3HGhsGFki0h99-Wdh5zIKXoO2OE7nqF_cuUM_xB3y3WYR_rS4rD0He4CErhS0RrDRSL0XlxKsLNAGNq5R4RX4GhTrviqH2DnVpqmND1y2InIGcQ1GM8DBE6r6OtPYtNbRoX0h8UKuulunMFXxrj7FuCxMprF6WMt7cUCCzkQryATWd29RGwFQpXrdjgVj-Uaf1EkhKnc-HTnCBE" />
+              <div class="org-chart-line w-px h-8"></div>
+
+              <ol class="org-chart-section-items org-chart-section-items-vertical">
+                <li class="org-chart-section-item">財務&amp;行政</li>
+                <li class="org-chart-section-item">資訊</li>
+                <li class="org-chart-section-item">行銷</li>
+                <li class="org-chart-section-item">人資/兼行銷</li>
+              </ol>
+            </li>
+          </ul>
+
         </div>
       </div>
     </div>
   </section>
   <!-- Parent Company Section -->
-  <section class="py-32 bg-surface-container-low">
-    <div class="max-w-7xl mx-auto px-12">
-      <div class="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
-        <div class="lg:col-span-2">
-          <div class="mb-12">
-            <span class="font-label text-secondary tracking-widest block mb-4 uppercase text-sm">Parent Company</span>
-            <h2 class="text-4xl font-headline font-bold text-primary mb-6 leading-tight">築泓健康科技<br />母公司介紹</h2>
-            <div class="w-16 h-1 bg-secondary mb-8"></div>
-            <p class="text-xl text-on-surface font-light leading-relaxed mb-6">
+  <section class="parent-section">
+    <div class="parent-container">
+      <div class="parent-grid">
+        <div class="parent-content">
+          <div class="parent-content-header">
+            <span class="parent-content-eyebrow">Parent Company</span>
+            <h2 class="parent-content-title">築泓健康科技<br />母公司介紹</h2>
+            <div class="parent-content-divider"></div>
+            <p class="parent-content-motto">
               用善（膳）來築夢
             </p>
-            <p class="text-base text-on-surface-variant leading-relaxed mb-4">
+            <p class="parent-content-body">
               健康，是每個人都值得擁有的日常。
             </p>
-            <p class="text-base text-on-surface-variant leading-relaxed mb-4">
+            <p class="parent-content-body">
               築泓健康科技，以「善膳養生」為核心，致力讓每個世代的人——從孩子到長者，都能輕鬆接受天然的營養補充。
             </p>
-            <p class="text-base text-on-surface-variant leading-relaxed">
+            <p class="parent-content-body">
               我們以老菜脯結合滴雞精，解決長久以來補品「難以入口」的困境，讓無腥味成為橋樑，讓補養真正發生在每一個家庭的餐桌上。充分的營養，是健康的起點。我們用每一包產品，築起這個夢。
             </p>
           </div>
-          <div class="space-y-6">
-            <div class="flex items-center gap-4 group">
-              <div
-                class="w-12 h-12 bg-primary text-secondary-fixed flex items-center justify-center transition-transform group-hover:scale-110">
+          <div class="parent-content-features">
+            <div class="parent-content-feature">
+              <div class="parent-content-feature-icon">
                 <span class="material-symbols-outlined">corporate_fare</span>
               </div>
-              <span class="font-headline font-bold text-primary">現代化企業運營</span>
+              <span>現代化企業運營</span>
             </div>
-            <div class="flex items-center gap-4 group">
-              <div
-                class="w-12 h-12 bg-primary text-secondary-fixed flex items-center justify-center transition-transform group-hover:scale-110">
+            <div class="parent-content-feature">
+              <div class="parent-content-feature-icon">
                 <span class="material-symbols-outlined">science</span>
               </div>
-              <span class="font-headline font-bold text-primary">科技驅動健康</span>
+              <span>科技驅動健康</span>
             </div>
           </div>
         </div>
-        <div class="lg:col-span-3 relative">
-          <div class="absolute -top-6 -right-6 w-32 h-32 border-t border-r border-secondary/20"></div>
-          <div class="absolute -bottom-6 -left-6 w-32 h-32 border-b border-l border-secondary/20"></div>
-          <div class="relative overflow-hidden group shadow-2xl">
-            <swiper
-              class="w-full h-[500px] transition-transform duration-1000"
-              [slidesPerView]="1"
-              [loop]="true"
-              [autoplay]="{ delay: 4000, disableOnInteraction: false }"
-              
-              [pagination]="{ clickable: true }"
-            >
+        <div class="parent-carousel-wrapper">
+          <div class="parent-carousel-corner parent-carousel-corner-top"></div>
+          <div class="parent-carousel-corner parent-carousel-corner-bottom"></div>
+          <div class="parent-carousel-frame">
+            <swiper class="parent-carousel" [slidesPerView]="1" [loop]="true"
+              [autoplay]="{ delay: 4000, disableOnInteraction: false }" [pagination]="{ clickable: true }">
               <ng-template swiperSlide>
-                <img src="assets/image/office/S__89260117_0.jpg" alt="Company Office 1" class="w-full h-full object-cover" />
+                <img src="assets/image/office/S__89260117_0.jpg" alt="Company Office 1"
+                  class="w-full h-full object-cover" />
               </ng-template>
               <ng-template swiperSlide>
-                <img src="assets/image/office/S__89260118_0.jpg" alt="Company Office 2" class="w-full h-full object-cover" />
+                <img src="assets/image/office/S__89260118_0.jpg" alt="Company Office 2"
+                  class="w-full h-full object-cover" />
               </ng-template>
               <ng-template swiperSlide>
-                <img src="assets/image/office/S__89260119_0.jpg" alt="Company Office 3" class="w-full h-full object-cover" />
+                <img src="assets/image/office/S__89260119_0.jpg" alt="Company Office 3"
+                  class="w-full h-full object-cover" />
               </ng-template>
               <ng-template swiperSlide>
-                <img src="assets/image/office/S__89260120_0.jpg" alt="Company Office 4" class="w-full h-full object-cover" />
+                <img src="assets/image/office/S__89260120_0.jpg" alt="Company Office 4"
+                  class="w-full h-full object-cover" />
               </ng-template>
               <ng-template swiperSlide>
-                <img src="assets/image/office/S__89260121_0.jpg" alt="Company Office 5" class="w-full h-full object-cover" />
+                <img src="assets/image/office/S__89260121_0.jpg" alt="Company Office 5"
+                  class="w-full h-full object-cover" />
               </ng-template>
               <ng-template swiperSlide>
-                <img src="assets/image/office/S__89260122_0.jpg" alt="Company Office 6" class="w-full h-full object-cover" />
+                <img src="assets/image/office/S__89260122_0.jpg" alt="Company Office 6"
+                  class="w-full h-full object-cover" />
               </ng-template>
             </swiper>
           </div>
-          <div class="mt-8 flex justify-end gap-12 text-center">
-            <div>
-              <span class="block text-3xl font-headline font-bold text-secondary">20+</span>
-              <span class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Years
-                Experience</span>
+          <div class="parent-stats">
+            <div class="parent-stat-item">
+              <span class="parent-stat-num">20+</span>
+              <span class="parent-stat-label">Years Experience</span>
             </div>
-            <div>
-              <span class="block text-3xl font-headline font-bold text-secondary">100%</span>
-              <span class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Quality
-                Control</span>
+            <div class="parent-stat-item">
+              <span class="parent-stat-num">100%</span>
+              <span class="parent-stat-label">Quality Control</span>
             </div>
           </div>
         </div>
@@ -787,7 +739,7 @@
       </h3>
       <div class="partners-list">
         <div class="partner-item">
-          <img src="assets/image/partner/春生LOGO-01.png" alt="春生" loading="lazy" class="partner-logo-img" />
+          <img src="assets/image/partner/春生LOGO-03.png" alt="春生" loading="lazy" class="partner-logo-img" />
         </div>
         <div class="partner-item">
           <img src="assets/image/partner/alic-logo.png" alt="alic" loading="lazy" class="partner-logo-img" />

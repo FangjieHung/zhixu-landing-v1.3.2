@@ -146,7 +146,7 @@
 }
 
 /* ── ③ Brand Mission ────────────────────────────────────────────────────── */
-.mission-section { 
+.mission-section {
   @apply relative grid gap-4 lg:grid-cols-2;
   background-color: var(--md-sys-color-primary);
   color: var(--md-sys-color-on-primary);
@@ -238,7 +238,7 @@
 }
 
 .bento-grid {
-  @apply grid grid-cols-1 md:grid-cols-4 gap-4;
+  @apply grid grid-cols-1 md:grid-cols-6 gap-4;
   grid-auto-rows: minmax(220px, auto);
 }
 
@@ -262,10 +262,8 @@
   }
 }
 
-/* 多元礦物質 ── col×2, 圖片橫排 */
 .bento-nutrients-wide-cell {
-  @apply md:col-span-2 p-8 flex flex-row items-center gap-6;
-  background-color: color-mix(in srgb, var(--md-sys-color-surface-container) 80%, transparent);
+  @apply border border-white/20 md:col-span-2 p-8 items-center;
 }
 
 .bento-nutrients-wide-text {
@@ -273,13 +271,13 @@
 }
 
 .bento-nutrients-wide-img {
-  @apply w-36 h-auto object-contain shrink-0;
+  @apply w-full h-auto object-contain mt-6;
 }
 
 /* GABA / PM chart cells ── col×2 */
 .bento-chart-cell {
   @apply md:col-span-2 overflow-hidden flex items-center justify-center;
-  background-color: var(--md-sys-color-surface-container-low);
+  background-color: var(--md-sys-color-tertiary-container);
   min-height: 220px;
 
   img {
@@ -333,13 +331,8 @@
 }
 
 .bento-low-cal-cell {
-  @apply md:col-span-2 p-8 flex flex-col justify-center;
-  background-color: var(--md-sys-color-primary-container);
-}
-
-.bento-no-smell-cell {
-  @apply md:col-span-2 p-8 flex flex-col justify-center;
-  background-color: color-mix(in srgb, var(--md-sys-color-tertiary-container) 80%, transparent);
+  @apply md:col-span-2 p-8 flex flex-col justify-between;
+  background-color: var(--md-sys-color-secondary);
 }
 
 .bento-cal-compare {
@@ -352,27 +345,26 @@
 
 .bento-cal-num {
   @apply text-3xl font-bold;
-  color: var(--md-sys-color-on-primary-container);
+  color: var(--md-sys-color-on-secondary);
 }
 
 .bento-cal-unit {
-  @apply text-xs tracking-widest uppercase;
-  color: color-mix(in srgb, var(--md-sys-color-on-primary-container) 60%, transparent);
+  @apply tracking-widest uppercase;
+  color: color-mix(in srgb, var(--md-sys-color-on-secondary) 60%, transparent);
 }
 
 .bento-cal-label {
-  @apply text-xs mt-1;
-  color: color-mix(in srgb, var(--md-sys-color-on-primary-container) 50%, transparent);
+  @apply mt-1;
+  color: color-mix(in srgb, var(--md-sys-color-on-secondary) 50%, transparent);
 }
 
 .bento-cal-muted .bento-cal-num {
-  @apply text-2xl;
-  color: color-mix(in srgb, var(--md-sys-color-on-primary-container) 40%, transparent);
+  color: color-mix(in srgb, var(--md-sys-color-on-secondary) 40%, transparent);
 }
 
 .bento-cal-divider-v {
   @apply w-px h-10 self-center;
-  background-color: color-mix(in srgb, var(--md-sys-color-on-primary-container) 20%, transparent);
+  background-color: color-mix(in srgb, var(--md-sys-color-on-secondary) 20%, transparent);
 }
 
 /* ── ⑥ Certifications ───────────────────────────────────────────────────── */
@@ -404,9 +396,14 @@
 }
 
 .cert-frame {
-  @apply w-full flex items-center justify-center mb-6 relative overflow-hidden border-2;
+  @apply w-full aspect-[3/4] flex items-center justify-center mb-6 relative overflow-hidden border-2;
   background-color: var(--md-sys-color-surface);
   border-color: color-mix(in srgb, var(--md-sys-color-secondary) 15%, transparent);
+  filter: contrast(1.2);
+
+  img {
+    @apply bg-white w-full h-full object-contain;
+  }
 }
 
 .cert-badge-primary {
@@ -564,10 +561,6 @@
   color: var(--md-sys-color-primary);
 }
 
-.products-grid {
-  @apply grid grid-cols-1 md:grid-cols-2 gap-8;
-}
-
 .product-card {
   @apply border p-8 md:p-10 flex flex-col sm:flex-row gap-6 items-center transition-all duration-500;
   background-color: var(--md-sys-color-surface-container-low);
@@ -713,9 +706,262 @@
   }
 }
 
-/* ── Org Chart ───────────────────────────────────────────────────────────── */
-.org-chart-line {
-  background-color: color-mix(in srgb, var(--md-sys-color-secondary) 35%, transparent);
+/* ── ⑩ Organizational Structure ──────────────────────────────────────────── */
+.org-section {
+  @apply py-32;
+  background-color: var(--md-sys-color-surface);
+}
+
+.org-header {
+  @apply max-w-7xl mx-auto px-12 text-center mb-24;
+}
+
+.org-header-eyebrow {
+  @apply tracking-widest block mb-4 uppercase text-sm;
+  color: var(--md-sys-color-secondary);
+}
+
+.org-header-title {
+  @apply text-4xl font-bold mb-6;
+  color: var(--md-sys-color-primary);
+}
+
+.org-header-subtitle {
+  @apply max-w-2xl mx-auto font-light italic;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.org-chart-wrapper {
+  @apply max-w-6xl mx-auto px-4 overflow-x-auto;
+}
+
+.org-chart {
+  @apply flex flex-col items-center py-8 relative min-w-fit;
+}
+
+.org-chart-gm {
+  @apply mb-12 relative z-10;
+}
+
+.org-chart-gm-box {
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  border-color: color-mix(in srgb, var(--md-sys-color-secondary-fixed) 20%, transparent);
+
+  h3 {
+    @apply font-bold text-xl tracking-widest;
+  }
+
+  p {
+    font-size: 10px;
+    @apply uppercase opacity-60 tracking-tighter mt-1;
+  }
+}
+
+.org-chart-main-grid {
+  @apply grid grid-cols-3 w-full gap-0 relative mt-8;
+}
+
+.org-chart-divider {
+  @apply absolute top-0 inset-x-0 mx-auto w-2/3 h-px;
+  background-color: color-mix(in srgb, var(--md-sys-color-secondary) 30%, transparent);
+}
+
+.org-chart-section {
+  @apply flex flex-col items-center;
+}
+
+.org-chart-section-box {
+  @apply text-sm p-1 md:text-base md:px-8 md:py-4 text-center shadow-lg border relative;
+
+  &::after {
+    @apply absolute w-px h-12 inset-x-0 -bottom-12 m-auto;
+    content: '';
+    background-color: color-mix(in srgb, var(--md-sys-color-secondary) 35%, transparent);
+  }
+
+  span:first-child {
+    @apply font-bold block;
+  }
+
+  span:last-child {
+    @apply text-sm uppercase opacity-70;
+  }
+}
+
+.org-chart-section-box-secondary {
+  background-color: var(--md-sys-color-secondary);
+  color: var(--md-sys-color-on-secondary);
+  border-color: color-mix(in srgb, var(--md-sys-color-primary) 10%, transparent);
+
+    &::before {
+    @apply absolute w-px h-12 inset-x-0 -top-12 m-auto mt-4;
+    content: '';
+    background-color: color-mix(in srgb, var(--md-sys-color-secondary) 35%, transparent);
+  }
+}
+
+.org-chart-section-connector {
+  @apply flex gap-4 w-full justify-center;
+
+  .org-chart-line {
+    @apply h-px w-24;
+  }
+}
+
+.org-chart-section-items {
+  @apply grid grid-cols-2 gap-4 mt-4;
+}
+
+.org-chart-section-items-vertical {
+  @apply flex flex-col items-center gap-4 mt-4;
+}
+
+.org-chart-section-item {
+  @apply border px-6 py-2 text-sm font-medium text-center;
+  border-color: color-mix(in srgb, var(--md-sys-color-outline) 30%, transparent);
+  background-color: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-primary);
+}
+
+.org-chart-right-column {
+  @apply flex flex-col items-center;
+}
+
+.org-chart-right-label {
+  font-size: 12px;
+  @apply uppercase tracking-wider;
+  color: color-mix(in srgb, var(--md-sys-color-secondary) 70%, transparent);
+}
+
+.org-chart-right-label-hr {
+  @apply text-right leading-tight;
+
+  small {
+    @apply opacity-50;
+  }
+}
+
+.org-chart-source-visual {
+  @apply mt-20 opacity-10 grayscale hover:opacity-100 transition-opacity duration-1000 max-w-sm mx-auto;
+
+  img {
+    @apply w-full h-auto;
+  }
+}
+
+/* ── ⑪ Parent Company ────────────────────────────────────────────────────── */
+.parent-section {
+  @apply py-32;
+  background-color: var(--md-sys-color-surface-container-low);
+}
+
+.parent-container {
+  @apply max-w-7xl mx-auto px-12;
+}
+
+.parent-grid {
+  @apply grid grid-cols-1 lg:grid-cols-5 gap-16 items-start;
+}
+
+.parent-content {
+  @apply lg:col-span-2;
+}
+
+.parent-content-header {
+  @apply mb-12;
+}
+
+.parent-content-eyebrow {
+  @apply tracking-widest block mb-4 uppercase text-sm;
+  color: var(--md-sys-color-secondary);
+}
+
+.parent-content-title {
+  @apply text-4xl font-bold mb-6 leading-tight;
+  color: var(--md-sys-color-primary);
+}
+
+.parent-content-divider {
+  @apply w-16 h-1 mb-8;
+  background-color: var(--md-sys-color-secondary);
+}
+
+.parent-content-motto {
+  @apply text-xl font-light leading-relaxed mb-6;
+  color: var(--md-sys-color-on-surface);
+}
+
+.parent-content-body {
+  @apply text-base leading-relaxed mb-4;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.parent-content-features {
+  @apply flex flex-col gap-6;
+}
+
+.parent-content-feature {
+  @apply flex items-center gap-4;
+
+  &:hover .parent-content-feature-icon {
+    @apply scale-110;
+  }
+}
+
+.parent-content-feature-icon {
+  @apply w-12 h-12 flex items-center justify-center transition-transform;
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-secondary-fixed);
+
+  .material-symbols-outlined {
+    @apply text-xl;
+  }
+}
+
+.parent-carousel-wrapper {
+  @apply lg:col-span-3 relative;
+}
+
+.parent-carousel-corner {
+  @apply absolute w-32 h-32;
+  border-color: color-mix(in srgb, var(--md-sys-color-secondary) 20%, transparent);
+}
+
+.parent-carousel-corner-top {
+  @apply -top-6 -right-6 border-t border-r;
+}
+
+.parent-carousel-corner-bottom {
+  @apply -bottom-6 -left-6 border-b border-l;
+}
+
+.parent-carousel-frame {
+  @apply relative overflow-hidden shadow-2xl;
+}
+
+.parent-carousel {
+  @apply w-full transition-transform duration-1000;
+  height: 500px;
+}
+
+.parent-stats {
+  @apply mt-8 flex justify-end gap-12 text-center;
+}
+
+.parent-stat-item {
+  @apply flex flex-col;
+}
+
+.parent-stat-num {
+  @apply block text-3xl font-bold;
+  color: var(--md-sys-color-secondary);
+}
+
+.parent-stat-label {
+  font-size: 10px;
+  @apply uppercase tracking-widest;
+  color: var(--md-sys-color-on-surface-variant);
 }
 
 /* ── ⑧ Partners ─────────────────────────────────────────────────────────── */
@@ -742,7 +988,7 @@
 }
 
 .partner-logo-img {
-  @apply max-h-14 w-auto object-contain;
+  @apply w-full max-w-52 object-center object-contain;
   filter: brightness(0) invert(1);
   opacity: 0.75;
   transition: opacity 0.3s ease;

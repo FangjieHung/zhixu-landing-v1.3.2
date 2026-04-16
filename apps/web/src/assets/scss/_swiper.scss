@@ -1,0 +1,8 @@
+.swiper-button-prev,
+.swiper-button-next { 
+    color: var(--md-sys-color-primary);
+}
+
+.swiper.arrow-horizontal {
+    @apply px-20;
+}
