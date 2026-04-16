@@ -9,7 +9,7 @@
   @apply max-w-7xl mx-auto
          px-6 md:px-10 xl:px-16
          py-14 md:py-16
-         grid grid-cols-1 md:grid-cols-2 gap-12;
+         grid grid-cols-1 md:grid-cols-3 gap-12;
 }
 
 // ─── 品牌欄 ───────────────────────────────────────────────────────────────────
@@ -31,29 +31,10 @@
 
 // ─── 連結清單 ─────────────────────────────────────────────────────────────────
 .footer-links {
-  @apply space-y-3;
+  @apply not-italic text-sm leading-loose mb-5;
 
   a {
-    @apply text-sm block;
-    transition: color 0.2s;
-    color: rgba(255, 255, 255, 0.6);
-
-    &:hover {
-      color: var(--md-sys-color-secondary-fixed);
-    }
-  }
-}
-
-// ─── 社群按鈕 ─────────────────────────────────────────────────────────────────
-.footer-social-btn {
-  @apply w-9 h-9 flex items-center justify-center;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.6);
-  transition: border-color 0.2s, color 0.2s;
-
-  &:hover {
-    border-color: var(--md-sys-color-secondary-fixed);
-    color: var(--md-sys-color-secondary-fixed);
+    @apply w-fit hover:opacity-70;
   }
 }
 

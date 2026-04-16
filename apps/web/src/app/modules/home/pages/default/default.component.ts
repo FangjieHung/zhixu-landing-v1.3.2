@@ -38,6 +38,10 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit {
     this.getCaches();
   }
 
+  scrollTo(id: string): void {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  }
+
   getCaches(): void {
     this.spinnerServ.show();
     forkJoin([

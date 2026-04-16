@@ -1,51 +1,54 @@
 <footer class="footer-root">
 
   <!-- ── 主體三欄 ──────────────────────────────────────────────────────── -->
-  <div class="footer-body">
+  <ol class="footer-body">
 
     <!-- 品牌欄 -->
-    <div class="footer-brand">
+    <li class="footer-brand">
       <img src="assets/image/logo/landscape.svg" alt="蘊和堂"
            class="h-10 w-auto object-contain object-left brightness-0 invert mb-5" />
       <p class="footer-brand-desc">
         蘊天地之和，藏歲月之美。我們致力於將傳統養生智慧，融入現代精緻生活。
       </p>
-    </div>
+    </li>
 
     <!-- 聯絡資訊 -->
-    <div>
+    <li>
       <h5 class="footer-heading">Contact</h5>
-      <address class="not-italic text-sm text-on-primary/60 leading-loose mb-5">
+      <address class="footer-links">
         <ng-container *ngIf="('LOCATION(中文地址)' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as addr; else defaultAddr">
           {{ addr }}
         </ng-container>
         <ng-template #defaultAddr>
-          台北市信義區智慧路123號
+          臺中市太平區永平路三段 168 巷 3 號
         </ng-template>
         <br/>
         <ng-container *ngIf="('PHONE' | aryFindValue: (response?.contactDetails || []): 'name': 'value') as phone; else defaultPhone">
           {{ phone }}
         </ng-container>
         <ng-template #defaultPhone>
-          +886 (02) 2345 6789
+          +886 (04) 2275 6696
         </ng-template>
       </address>
+    </li>
 
+    <li>
       <!-- 社群 -->
-      <div class="flex gap-3">
-        <a class="footer-social-btn"
+      <h5 class="footer-heading">Social Media</h5>
+      <div class="footer-links">
+        <a
            [attr.href]="('Facebook' | aryFindValue: (response?.socialMedia || []): 'name': 'url') || '#'"
            target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-          <span class="material-symbols-outlined text-base">share</span>
+          Facebook
         </a>
-        <a class="footer-social-btn"
-           [attr.href]="('MAIL' | aryFindValue: (response?.contactDetails || []): 'name': 'value') ? 'mailto:' + ('MAIL' | aryFindValue: (response?.contactDetails || []): 'name': 'value') : '#'"
-           aria-label="Email">
-          <span class="material-symbols-outlined text-base">mail</span>
+        <a
+           [attr.href]="('Instagram' | aryFindValue: (response?.socialMedia || []): 'name': 'url') || '#'"
+           target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          Instagram
         </a>
       </div>
-    </div>
-  </div>
+      </li>
+  </ol>
 
   <!-- ── Copyright ──────────────────────────────────────────────────────── -->
   <div class="footer-copyright">

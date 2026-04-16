@@ -203,17 +203,13 @@
 }
 
 .persona-content-list {
-  @apply flex flex-col justify-center gap-10;
-}
-
-.persona-item-heading {
-  @apply font-bold text-xl mb-2;   // title-large (typo.scss)
+  @apply flex flex-col justify-center gap-14;
   color: var(--md-sys-color-primary);
-}
 
-.persona-item-body {
-  @apply text-base leading-6;      // body-large (typo.scss)
-  color: var(--md-sys-color-on-surface-variant);
+  .body-large {
+    @apply mt-2 opacity-70;
+    color: var(--md-sys-color-on-surface-variant);
+  }
 }
 
 /* ── ⑤ Benefits Bento ───────────────────────────────────────────────────── */
@@ -369,7 +365,6 @@
 
 .cert-frame {
   @apply w-full flex items-center justify-center mb-6 relative overflow-hidden border-2;
-  aspect-ratio: 4 / 3;
   background-color: var(--md-sys-color-surface);
   border-color: color-mix(in srgb, var(--md-sys-color-secondary) 15%, transparent);
 }

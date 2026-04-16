@@ -27,11 +27,11 @@
 
 // Headline
 .headline-large {
-  @apply text-3xl font-normal tracking-normal;
+  @apply text-3xl font-bold tracking-normal;
 }
 
 .headline-medium {
-  @apply text-2xl font-normal tracking-normal;
+  @apply text-2xl font-medium tracking-normal;
 }
 
 .headline-small {

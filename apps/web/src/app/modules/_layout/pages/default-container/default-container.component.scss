@@ -29,19 +29,6 @@
   &:hover {
     color: var(--md-sys-color-primary);
   }
-
-  // Active underline via routerLinkActive="active"
-  &.active {
-    color: var(--md-sys-color-secondary);
-
-    &::after {
-      content: '';
-      @apply absolute bottom-0 h-px;
-      left: 1rem;
-      right: 1rem;
-      background-color: var(--md-sys-color-secondary);
-    }
-  }
 }
 
 // ─── MAIN CONTAINER ───────────────────────────────────────────────────────────
