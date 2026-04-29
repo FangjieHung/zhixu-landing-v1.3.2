@@ -9,7 +9,15 @@
       <div class="hero-corner-frame">
         <div class="hero-corner-tl"></div>
         <div class="hero-corner-br"></div>
-        <img src="assets/image/photo/product-chicken-essence.png" alt="蘊和堂 老菜脯滴雞精" loading="eager" />
+        <!-- LCP 主視覺：fetchpriority="high" 讓瀏覽器立即優先下載此圖，不等其他資源 -->
+        <!-- <picture> 提供 WebP（114KB）作為首選，PNG（5.8MB）作為舊瀏覽器備援 -->
+        <picture>
+          <source srcset="assets/image/photo/product-chicken-essence.webp" type="image/webp" />
+          <img src="assets/image/photo/product-chicken-essence.png"
+               alt="蘊和堂 老菜脯滴雞精"
+               fetchpriority="high"
+               width="1200" height="896" />
+        </picture>
       </div>
       <p class="hero-product-label">
         Premium Aged Radish Essence
@@ -59,8 +67,15 @@
 
       <!-- 左：老菜脯圖 -->
       <div class="md:col-span-4">
-        <img src="assets/image/photo/ingredient-aged-radish.png" alt="三十年陳年老菜脯" loading="lazy"
-          class="w-full object-cover" />
+        <!-- WebP 80KB，原始 1.6MB PNG，節省 95% -->
+        <picture>
+          <source srcset="assets/image/photo/ingredient-aged-radish.webp" type="image/webp" />
+          <img src="assets/image/photo/ingredient-aged-radish.png"
+               alt="三十年陳年老菜脯"
+               loading="lazy"
+               width="1113" height="1392"
+               class="w-full object-cover" />
+        </picture>
       </div>
 
       <!-- 中：直排 TIMELESS WISDOM -->
@@ -146,7 +161,15 @@
     </div>
 
     <!-- 右：職人圖 -->
-    <img src="assets/image/photo/hero-handtohand.png" alt="蘊和堂職人細心調製草本配方" loading="lazy" class="mission-img" />
+    <!-- WebP 60KB，原始 2MB PNG，節省 97% -->
+    <picture>
+      <source srcset="assets/image/photo/hero-handtohand.webp" type="image/webp" />
+      <img src="assets/image/photo/hero-handtohand.png"
+           alt="蘊和堂職人細心調製草本配方"
+           loading="lazy"
+           width="1536" height="1024"
+           class="mission-img" />
+    </picture>
 
   </section>
 
@@ -167,21 +190,39 @@
 
         <!-- 左側：4 張 persona 圖（交錯排列） -->
         <ul class="persona-mosaic">
+          <!-- persona 圖 — WebP 約 23–58KB，原始 PNG 6–23MB，節省 99%+ -->
+          <!-- width/height 以 4:3 顯示比例設定，防止載入前版面跳動（CLS） -->
           <li class="col-span-1 row-span-1">
-            <img src="assets/image/photo/persona-elderly-woman.png" alt="銀髮女性咳嗽困擾" loading="lazy" width="400"
-              height="400" class="w-full aspect-[4/3] object-cover object-top" />
+            <picture>
+              <source srcset="assets/image/photo/persona-elderly-woman.webp" type="image/webp" />
+              <img src="assets/image/photo/persona-elderly-woman.png" alt="銀髮女性咳嗽困擾"
+                   loading="lazy" width="400" height="300"
+                   class="w-full aspect-[4/3] object-cover object-top" />
+            </picture>
           </li>
           <li class="col-span-1 row-span-1 mt-8">
-            <img src="assets/image/photo/persona-elderly-man.png" alt="長者腸胃不適" loading="lazy" width="400" height="400"
-              class="w-full aspect-[4/3] object-cover object-top" />
+            <picture>
+              <source srcset="assets/image/photo/persona-elderly-man.webp" type="image/webp" />
+              <img src="assets/image/photo/persona-elderly-man.png" alt="長者腸胃不適"
+                   loading="lazy" width="400" height="300"
+                   class="w-full aspect-[4/3] object-cover object-top" />
+            </picture>
           </li>
           <li class="col-span-1 row-span-1 -mt-4">
-            <img src="assets/image/photo/persona-pregnant.png" alt="孕期媽麻需要溫和調補" loading="lazy" width="400" height="400"
-              class="w-full aspect-[4/3] object-cover object-top" />
+            <picture>
+              <source srcset="assets/image/photo/persona-pregnant.webp" type="image/webp" />
+              <img src="assets/image/photo/persona-pregnant.png" alt="孕期媽麻需要溫和調補"
+                   loading="lazy" width="400" height="300"
+                   class="w-full aspect-[4/3] object-cover object-top" />
+            </picture>
           </li>
           <li class="col-span-1 row-span-1 mt-4">
-            <img src="assets/image/photo/persona-office-worker.png" alt="疲憊上班族需要元氣補充" loading="lazy" width="400"
-              height="400" class="w-full aspect-[4/3] object-cover object-top" />
+            <picture>
+              <source srcset="assets/image/photo/persona-office-worker.webp" type="image/webp" />
+              <img src="assets/image/photo/persona-office-worker.png" alt="疲憊上班族需要元氣補充"
+                   loading="lazy" width="400" height="300"
+                   class="w-full aspect-[4/3] object-cover object-top" />
+            </picture>
           </li>
         </ul>
 
@@ -484,8 +525,13 @@
       <div class="process-steps">
         <div class="process-step">
           <div class="process-step-img-wrap">
-            <img src="assets/image/process/process-step-01.png" alt="製程步驟一" loading="lazy"
-              class="w-full h-full object-cover" />
+            <!-- WebP 23KB，原始 1.2MB PNG，節省 98% -->
+            <picture>
+              <source srcset="assets/image/process/process-step-01.webp" type="image/webp" />
+              <img src="assets/image/process/process-step-01.png" alt="製程步驟一"
+                   loading="lazy" width="846" height="847"
+                   class="w-full h-full object-cover" />
+            </picture>
           </div>
           <div class="process-step-num font-headline">01</div>
           <h4 class="process-step-title text-primary font-headline">原料篩選</h4>
@@ -498,8 +544,13 @@
 
         <div class="process-step">
           <div class="process-step-img-wrap">
-            <img src="assets/image/process/process-step-02.png" alt="製程步驟二" loading="lazy"
-              class="w-full h-full object-cover" />
+            <!-- WebP 19KB，原始 1.2MB PNG，節省 98% -->
+            <picture>
+              <source srcset="assets/image/process/process-step-02.webp" type="image/webp" />
+              <img src="assets/image/process/process-step-02.png" alt="製程步驟二"
+                   loading="lazy" width="1125" height="744"
+                   class="w-full h-full object-cover" />
+            </picture>
           </div>
           <div class="process-step-num font-headline">02</div>
           <h4 class="process-step-title text-primary font-headline">低溫慢萃</h4>
@@ -512,8 +563,13 @@
 
         <div class="process-step">
           <div class="process-step-img-wrap">
-            <img src="assets/image/process/process-step-03.png" alt="製程步驟三" loading="lazy"
-              class="w-full h-full object-cover" />
+            <!-- WebP 21KB，原始 1.6MB PNG，節省 99% -->
+            <picture>
+              <source srcset="assets/image/process/process-step-03.webp" type="image/webp" />
+              <img src="assets/image/process/process-step-03.png" alt="製程步驟三"
+                   loading="lazy" width="1244" height="828"
+                   class="w-full h-full object-cover" />
+            </picture>
           </div>
           <div class="process-step-num font-headline">03</div>
           <h4 class="process-step-title text-primary font-headline">無菌充填</h4>

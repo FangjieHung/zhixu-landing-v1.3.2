@@ -139,13 +139,14 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit, AfterV
   };
 
   // 母公司照片
+  // 使用 WebP 格式：office 照片由 6.3MB JPG 縮減至 89–260KB，節省 63–96%
   parentSlides: { src: string; alt: string }[] = [
-    { src: 'assets/image/office/S__89260117_0.jpg', alt: 'Company Office 1' },
-    { src: 'assets/image/office/S__89260118_0.jpg', alt: 'Company Office 2' },
-    { src: 'assets/image/office/S__89260119_0.jpg', alt: 'Company Office 3' },
-    { src: 'assets/image/office/S__89260120_0.jpg', alt: 'Company Office 4' },
-    { src: 'assets/image/office/S__89260121_0.jpg', alt: 'Company Office 5' },
-    { src: 'assets/image/office/S__89260122_0.jpg', alt: 'Company Office 6' },
+    { src: 'assets/image/office/S__89260117_0.webp', alt: 'Company Office 1' },
+    { src: 'assets/image/office/S__89260118_0.webp', alt: 'Company Office 2' },
+    { src: 'assets/image/office/S__89260119_0.webp', alt: 'Company Office 3' },
+    { src: 'assets/image/office/S__89260120_0.webp', alt: 'Company Office 4' },
+    { src: 'assets/image/office/S__89260121_0.webp', alt: 'Company Office 5' },
+    { src: 'assets/image/office/S__89260122_0.webp', alt: 'Company Office 6' },
   ];
 
   parentCarouselConfig: SwiperOptions = {

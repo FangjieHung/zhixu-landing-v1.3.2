@@ -7,6 +7,15 @@
   <base href="/" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <!--
+    rel="preload" 讓瀏覽器在解析 HTML 時就立刻排入 LCP 圖片下載，
+    不用等到 CSS/JS 執行後才發現這張圖的存在，可顯著縮短 LCP 時間。
+    as="image" + type="image/webp" → 告知瀏覽器資源類型，只有支援 WebP 的瀏覽器才下載。
+  -->
+  <link rel="preload"
+        href="assets/image/photo/product-chicken-essence.webp"
+        as="image"
+        type="image/webp" />
   <!-- fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
