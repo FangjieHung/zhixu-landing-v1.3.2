@@ -10,9 +10,9 @@ const routes: Routes = [
     path: '',
     component: DefaultComponent,
     data: {
-      title: `${env.siteName}`,
-      decscription: `${env.siteName}`,
-      url: `${env.siteServer}`,
+      title: `${env.siteName}｜老菜脯滴雞精．職人手藝傳承`,
+      description: '蘊和堂｜傳承職人手藝的老菜脯滴雞精，無毒契作白蘿蔔、陶甕地下窖藏。',
+      url: `${env.siteServer}/`,
       image: `${env.siteServer}/assets/image/og/chuhung-og.png`
     }
   }

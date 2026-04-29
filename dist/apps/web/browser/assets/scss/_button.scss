@@ -1,0 +1,145 @@
+// ─── Angular Material toggle reset ───────────────────────────────────────────
+.mat-button-toggle-group.mat-button-toggle-group-appearance-standard {
+  --mat-standard-button-toggle-shape: 0px;
+}
+
+// ─── Global MDC / anchor reset ────────────────────────────────────────────────
+a.mdc-button,
+a.mdc-icon-button,
+a.mdc-stroked-button,
+a.mdc-flat-button,
+a.mdc-menu-trigger,
+button.mdc-button,
+button.mdc-icon-button,
+button.mdc-stroked-button,
+button.mdc-flat-button,
+button.mdc-menu-trigger,
+button[class^="btn-"],
+a[class^="btn-"],
+button,
+a {
+  @apply transition-all ease-in-out duration-300 flex items-center justify-center;
+  --mdc-text-button-container-shape: 0px;
+}
+
+// ─── M3 Button Base ───────────────────────────────────────────────────────────
+[class*="btn-"] {
+  @apply tracking-widest text-sm transition-all ease-in-out duration-300;
+}
+
+// ─── M3 Filled button ─────────────────────────────────────────────────────────
+// High emphasis — primary action on light background
+.btn-filled,
+.btn-primary {
+  @apply px-8 py-4;
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  &:hover { opacity: 0.9; }
+}
+
+// ─── M3 Filled Tonal button ───────────────────────────────────────────────────
+// Medium-high emphasis — warm golden accent, typically on dark background
+.btn-tonal {
+  @apply px-8 py-4;
+  background-color: var(--md-sys-color-secondary-fixed);
+  color: var(--md-sys-color-on-secondary-fixed);
+  &:hover { opacity: 0.9; }
+}
+
+// ─── M3 Outlined button ───────────────────────────────────────────────────────
+// Medium emphasis — on light/surface background
+.btn-outlined,
+.btn-outline {
+  @apply border bg-transparent;
+  border-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-primary);
+  &:hover {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+  }
+}
+
+// ─── M3 Outlined Inverse ──────────────────────────────────────────────────────
+// Medium emphasis — on dark / primary-color background
+.btn-outlined-inverse,
+.btn-outline-inverse {
+@apply px-8 py-4 border flex items-center justify-center transition-all;
+  border-color: color-mix(in srgb, var(--md-sys-color-on-primary) 10%, transparent);
+  &:hover {
+    border-color: var(--md-sys-color-secondary-fixed);
+    color: var(--md-sys-color-secondary-fixed);
+  }
+}
+
+// ─── M3 Secondary filled ──────────────────────────────────────────────────────
+.btn-secondary {
+  @apply px-8 py-4;
+  background-color: var(--md-sys-color-secondary);
+  color: var(--md-sys-color-on-secondary);
+  &:hover { opacity: 0.9; }
+}
+
+// ─── M3 Text button ───────────────────────────────────────────────────────────
+// Low emphasis — subtle action
+.btn-text,
+.btn-ghost {
+  @apply bg-transparent;
+  color: var(--md-sys-color-primary);
+  &:hover { background-color: var(--md-sys-color-surface-container); }
+}
+
+// ─── M3 Elevated button ───────────────────────────────────────────────────────
+.btn-elevated {
+  @apply px-8 py-4 shadow-md;
+  background-color: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-primary);
+  &:hover { @apply shadow-lg; }
+}
+
+// ─── Size modifiers ───────────────────────────────────────────────────────────
+.btn-sm { @apply px-4 py-2 text-xs; }
+.btn-lg { @apply px-10 py-5 min-h-14; }
+
+// ─── Shared state ─────────────────────────────────────────────────────────────
+[class*="btn-"].disabled,
+[class*="btn-"]:disabled {
+  @apply shadow-none grayscale opacity-60 pointer-events-none;
+}
+
+// ─── Dropdown menu ────────────────────────────────────────────────────────────
+.menu-wrap {
+  @apply relative;
+
+  .menu-list {
+    @apply hidden absolute top-0 right-0 pt-16 min-w-max;
+  }
+
+  &:hover .menu-list,
+  .menu-list.show { @apply block; }
+
+  .menu-list a,
+  .menu-list button { @apply flex items-center; }
+}
+
+.mdc-checkbox .mdc-checkbox__native-control:enabled ~ .mdc-checkbox__background .mdc-checkbox__checkmark {
+  --mdc-checkbox-selected-checkmark-color: white;
+}
+
+// ─── Image upload label ───────────────────────────────────────────────────────
+.upload-img-label {
+  @apply w-full block ease-in-out cursor-pointer;
+
+  .dash-hint {
+    @apply flex items-center flex-col justify-center w-full h-full
+           border-2 border-dashed border-[var(--md-sys-color-outline-variant)]
+           py-6 text-[var(--md-sys-color-on-surface-variant)]
+           hover:bg-[var(--md-sys-color-surface-container-low)]
+           rounded-none;
+  }
+
+  p { @apply font-medium text-base; }
+
+  .uploaded-img { @apply relative overflow-hidden; }
+  .uploaded-img img { @apply object-cover w-full h-full; }
+  .uploaded-img .btn-ghost { @apply absolute bottom-0 right-0; }
+}
