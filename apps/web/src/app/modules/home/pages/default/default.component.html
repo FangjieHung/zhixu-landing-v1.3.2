@@ -228,8 +228,9 @@
 
         <!-- 右側：4 段情境文案 -->
         <ol class="persona-content-list">
+          <!-- h3：persona-heading（h2）的直屬子標題，h4 會跳層違反 WCAG 無障礙規範 -->
           <li>
-            <h4 class="headline-medium font-headline">空汙、換季，呼吸需要被照顧</h4>
+            <h3 class="headline-medium font-headline">空汙、換季，呼吸需要被照顧</h3>
             <p class="body-large">
               老菜脯的潤肺清熱功效，幫助現代人應對空氣品質下降、
               季節交替時的呼吸道不適。每天一包，溫潤從內而外。
@@ -237,7 +238,7 @@
           </li>
 
           <li>
-            <h4 class="headline-medium font-headline">胃不好的人，特別需要被好好對待</h4>
+            <h3 class="headline-medium font-headline">胃不好的人，特別需要被好好對待</h3>
             <p class="body-large">
               老菜脯入膳的健脾養胃配方，溫和調理腸胃機能，
               不刺激、不躁熱，適合長期每天飲用的體質調養。
@@ -245,7 +246,7 @@
           </li>
 
           <li>
-            <h4 class="headline-medium font-headline">熬了整年，補回來，但不想因此胖一圈</h4>
+            <h3 class="headline-medium font-headline">熬了整年，補回來，但不想因此胖一圈</h3>
             <p class="body-large">
               高含量支鏈胺基酸（BCAA）幫助修復、加速代謝，卻不多給一克脂肪。
               無腥味、不長肉，即使在控制體態的階段，也能安心每天補。
@@ -253,7 +254,7 @@
           </li>
 
           <li>
-            <h4 class="headline-medium font-headline">給自己，也給孩子</h4>
+            <h3 class="headline-medium font-headline">給自己，也給孩子</h3>
             <p class="body-large">
               去油去腥、零防腐劑、零人工香料——不怕胖、喝得下去，
               對懷孕、坐月子或備孕中的妳來說，這是最不需要猶豫的那一包。
@@ -300,7 +301,8 @@
         </li>
         <li class="bento-low-cal-cell">
           <span class="bento-nutrients-eyebrow label-eyebrow text-accent-fixed">Low Calories</span>
-          <h4 class="font-headline text-xl font-bold mb-3">一口清潤，只有 6 大卡</h4>
+          <!-- h3：bento-heading（h2）下的同級子標題，與食品技師 h3 保持一致 -->
+          <h3 class="font-headline text-xl font-bold mb-3">一口清潤，只有 6 大卡</h3>
           <div class="bento-cell-divider"></div>
           <p class="text-sm text-on-primary-container/70 mb-3">真正的養生，不是堆砌熱量<br>每天喝，身體輕盈地接受</p>
           <div class="bento-cal-compare mt-auto">
@@ -320,7 +322,7 @@
         <li class="bento-nutrients-wide-cell">
           <div class="bento-nutrients-wide-text">
             <span class="bento-nutrients-eyebrow label-eyebrow text-accent-fixed">Nutrients</span>
-            <h4 class="font-headline text-xl font-bold mb-3">多元礦物質與抗氧化</h4>
+            <h3 class="font-headline text-xl font-bold mb-3">多元礦物質與抗氧化</h3>
             <div class="bento-cell-divider"></div>
             <p class="text-sm leading-relaxed mt-3" style="color: var(--md-sys-color-on-primary-container)">
               高純度精華保留率，ABTS 抗氧化能力實測數據。
@@ -333,7 +335,7 @@
         <li class="bento-nutrients-wide-cell">
           <div class="bento-nutrients-wide-text">
             <span class="bento-nutrients-eyebrow label-eyebrow text-accent-fixed">GABA</span>
-            <h4 class="font-headline text-xl font-bold mb-3">高含量 GABA</h4>
+            <h3 class="font-headline text-xl font-bold mb-3">高含量 GABA</h3>
             <div class="bento-cell-divider"></div>
             <p class="text-sm leading-relaxed mt-3" style="color: var(--md-sys-color-on-primary-container)">
               黑金萃取中蘊含的神經訊號營養素。<br />
@@ -345,11 +347,11 @@
           <p class="source">資料來源：嘉義大學</p>
         </li>
 
-        <!-- ⑤ 高含量益生菌 + 圖表 col×2 -->
-        <div class="bento-nutrients-wide-cell">
+        <!-- ⑤ 高含量益生菌：原為 <div>，<ol> 直屬子元素只能是 <li>，已修正 -->
+        <li class="bento-nutrients-wide-cell">
           <div class="bento-nutrients-wide-text">
             <span class="bento-nutrients-eyebrow label-eyebrow text-accent-fixed">Probiotics</span>
-            <h4 class="font-headline text-xl font-bold mb-3">高含量益生菌</h4>
+            <h3 class="font-headline text-xl font-bold mb-3">高含量益生菌</h3>
             <div class="bento-cell-divider"></div>
             <p class="text-sm leading-relaxed mt-3" style="color: var(--md-sys-color-on-primary-container)">
               滴雞精的天然益生菌夥伴。<br />
@@ -358,7 +360,7 @@
           </div>
           <img src="assets/image/radish-chart/pm.jpg" alt="益生菌含量圖表" loading="lazy" class="bento-nutrients-wide-img" />
           <p class="source">資料來源：嘉義大學</p>
-        </div>
+        </li>
 
       </ol>
     </div>
@@ -385,7 +387,8 @@
             <div class="cert-frame">
               <img [src]="cert.image" [alt]="cert.alt" loading="lazy" />
             </div>
-            <h4 class="cert-name text-primary font-headline">{{ cert.name }}</h4>
+            <!-- h3：cert-heading（h2）的直屬子標題 -->
+            <h3 class="cert-name text-primary font-headline">{{ cert.name }}</h3>
             <p class="cert-label text-muted">{{ cert.label }}</p>
           </div>
         </ng-template>
@@ -409,28 +412,32 @@
           <div class="safety-icon-wrap">
             <span aria-hidden="true" class="material-symbols-outlined">block</span>
           </div>
-          <h4 class="safety-item-heading title-xs text-primary font-headline">零添加</h4>
+          <!-- h3：safety-heading（h2）的直屬子標題，避免 h2→h4 跳層 -->
+          <h3 class="safety-item-heading title-xs text-primary font-headline">零添加</h3>
           <p class="safety-item-body body-medium text-muted">零防腐劑、零人工香料、零色素<br>純淨配方從不妥協。</p>
         </div>
         <div class="safety-item">
           <div class="safety-icon-wrap">
             <span aria-hidden="true" class="material-symbols-outlined">coronavirus</span>
           </div>
-          <h4 class="safety-item-heading title-xs text-primary font-headline">無橘黴素</h4>
+          <!-- h3：safety-heading（h2）的直屬子標題，避免 h2→h4 跳層 -->
+          <h3 class="safety-item-heading title-xs text-primary font-headline">無橘黴素</h3>
           <p class="safety-item-body body-medium text-muted">嚴選食材來源，全程冷鏈管控<br>從源頭杜絕黴菌污染。</p>
         </div>
         <div class="safety-item">
           <div class="safety-icon-wrap">
             <span aria-hidden="true" class="material-symbols-outlined">science</span>
           </div>
-          <h4 class="safety-item-heading title-xs text-primary font-headline">無防腐劑</h4>
+          <!-- h3：safety-heading（h2）的直屬子標題，避免 h2→h4 跳層 -->
+          <h3 class="safety-item-heading title-xs text-primary font-headline">無防腐劑</h3>
           <p class="safety-item-body body-medium text-muted">純天然萃取，不添加任何防腐成分<br>保質全靠工藝本身。</p>
         </div>
         <div class="safety-item">
           <div class="safety-icon-wrap">
             <span aria-hidden="true" class="material-symbols-outlined">water_drop</span>
           </div>
-          <h4 class="safety-item-heading title-xs text-primary font-headline">無重金屬</h4>
+          <!-- h3：safety-heading（h2）的直屬子標題，避免 h2→h4 跳層 -->
+          <h3 class="safety-item-heading title-xs text-primary font-headline">無重金屬</h3>
           <p class="safety-item-body body-medium text-muted">SGS 第三方檢驗把關<br>重金屬含量均低於食品安全標準。</p>
         </div>
       </div>
@@ -534,7 +541,8 @@
             </picture>
           </div>
           <div class="process-step-num font-headline">01</div>
-          <h4 class="process-step-title text-primary font-headline">原料篩選</h4>
+          <!-- h3：process-heading（h2）的直屬子標題 -->
+          <h3 class="process-step-title text-primary font-headline">原料篩選</h3>
           <p class="process-step-desc body-medium text-muted">嚴格挑選來源可追溯的優質雞隻與三十年老菜脯，把關第一道品質。</p>
         </div>
 
@@ -553,7 +561,8 @@
             </picture>
           </div>
           <div class="process-step-num font-headline">02</div>
-          <h4 class="process-step-title text-primary font-headline">低溫慢萃</h4>
+          <!-- h3：process-heading（h2）的直屬子標題 -->
+          <h3 class="process-step-title text-primary font-headline">低溫慢萃</h3>
           <p class="process-step-desc body-medium text-muted">以密封低溫工藝萃取，油脂自然分離、無腥無膻，喝了不長肉，最大程度保留胺基酸與活性成分。</p>
         </div>
 
@@ -572,7 +581,8 @@
             </picture>
           </div>
           <div class="process-step-num font-headline">03</div>
-          <h4 class="process-step-title text-primary font-headline">無菌充填</h4>
+          <!-- h3：process-heading（h2）的直屬子標題 -->
+          <h3 class="process-step-title text-primary font-headline">無菌充填</h3>
           <p class="process-step-desc body-medium text-muted">ISO 22000 認證廠房內完成充填與封裝，出廠前經 SGS 全項目抽驗。</p>
         </div>
       </div>
