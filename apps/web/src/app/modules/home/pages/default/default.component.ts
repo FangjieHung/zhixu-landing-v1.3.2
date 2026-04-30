@@ -12,10 +12,6 @@ SwiperCore.use([Autoplay, Navigation]);
 
 // Custom packages
 import { BBDBaseComponent } from '@core/shared';
-import {
-  AppNewsMsgView, BannerAdView
-} from '@core/models';
-import { AppMsgApiServ } from '@core/services';
 
 @Component({
   selector: 'app-default',
@@ -23,10 +19,6 @@ import { AppMsgApiServ } from '@core/services';
   styleUrls: ['./default.component.scss'],
 })
 export class DefaultComponent extends BBDBaseComponent implements OnInit {
-  private _appMsgApiServ = inject(AppMsgApiServ);
-  ads: BannerAdView[] = [];
-  newsMsgs: AppNewsMsgView[] = [];
-
   products = [
     {
       name: '尊享滋養體驗包',
@@ -97,14 +89,13 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit {
     },
   ];
 
-  // Partner logos centralized here so multiple components can reuse the same data
   private _partnerLogosBase = [
     { src: 'assets/image/partner/春生LOGO-03.png', alt: '春生' },
     { src: 'assets/image/partner/alic-logo.png', alt: 'alic' },
     { src: 'assets/image/partner/city-parking.png', alt: 'city-parking' },
     // { src: 'assets/image/partner/環景logo.png', alt: '環景' },
   ];
-  // Repeat to ensure enough slides for Swiper v8 loop mode (needs slidesPerView * 2 minimum)
+  
   partnerLogos = [...this._partnerLogosBase, ...this._partnerLogosBase];
 
   certSwiperConfig: SwiperOptions = {
@@ -132,7 +123,6 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit {
   };
 
   // 母公司照片
-  // 使用 WebP 格式：office 照片由 6.3MB JPG 縮減至 89–260KB，節省 63–96%
   parentSlides: { src: string; alt: string }[] = [
     { src: 'assets/image/office/S__89260117_0.webp', alt: 'Company Office 1' },
     { src: 'assets/image/office/S__89260118_0.webp', alt: 'Company Office 2' },
@@ -161,22 +151,12 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit {
   @ViewChild('parentCarousel') parentCarousel?: SwiperComponent;
 
   ngOnInit(): void {
-    this.getCaches();
-    console.log('DefaultComponent initialized');
+    console.log();
   }
 
   scrollTo(id: string): void {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   }
 
-  getCaches(): void {
-    this.spinnerServ.show();
-    forkJoin([
-      this._appMsgApiServ.getAppNewsMsgViews(),
-      this._appMsgApiServ.getBannerAdViews()
-    ]).subscribe(([news, ads]) => {
-      this.newsMsgs = news;
-      this.ads = ads;
-    }).add(() => this.spinnerServ.hide());
-  }
+  // getCaches(): void { }
 }

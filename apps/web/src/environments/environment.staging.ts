@@ -4,8 +4,8 @@ export const environment = {
   storageTokenName: 'chuhungWebStageToken',
   storageAuthUserName: 'chuhungWebStageAuthUser',
   siteName: '蘊和堂',
-  siteServer: 'https://tslmai.bonbondi.com',
-  apiServer: 'https://stageapiv1.tslmai.starxfuture.com/Portal',
-  cdnServer: 'https://stageapiv1.tslmai.starxfuture.com',
+  siteServer: 'https://zhuhong.bonbondi.com',
+  apiServer: 'https://stageapiv1.zhuhong.bonbondi.com/Portal',
+  cdnServer: 'https://stageapiv1.zhuhong.bonbondi.com',
   downloadUrl: '/AppAttach/DownloadAppFileAtt'
 };

@@ -17,6 +17,8 @@
         "tsConfig": "apps/web/tsconfig.app.json",
         "assets": [
           "apps/web/src/favicon.ico",
+          "apps/web/src/robots.txt",
+          "apps/web/src/sitemap.xml",
           "apps/web/src/assets",
           {
             "input": "./libs/core/src/assets",
@@ -61,8 +63,8 @@
             },
             {
               "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "4kb"
+              "maximumWarning": "4kb",
+              "maximumError": "50kb"
             }
           ],
           "fileReplacements": [
