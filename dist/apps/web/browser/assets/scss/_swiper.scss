@@ -1,10 +1,10 @@
 .swiper-button-prev,
-.swiper-button-next { 
-    color: var(--md-sys-color-primary);
+.swiper-button-next {
+  color: var(--md-sys-color-primary);
 }
 
 .swiper.arrow-horizontal {
-    @apply px-20;
+  @apply px-10 lg:px-20;
 }
 
 .partners-section {
@@ -13,16 +13,16 @@
   color: var(--md-sys-color-on-primary);
 }
 
-.partners-swiper .swiper-wrapper {
-  align-items: center;
-}
-
 .partners-heading {
   @apply font-bold text-center text-xl md:text-2xl mb-10;
 }
 
 .partners-list {
   @apply flex flex-wrap justify-center items-center gap-10 md:gap-16;
+
+  .swiper-wrapper {
+    align-items: center;
+  }
 }
 
 .partner-item {

@@ -67,16 +67,9 @@
 }
 
 // ━━━ BODY ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//
-//  large   16 px / lh-6        primary running text, section descriptions
-//  medium  14 px / lh-relaxed  supporting text, card copy, captions
-
-.body-large {
-  @apply text-base leading-6 font-normal;
-}
 
 .body-medium {
-  @apply text-sm leading-relaxed;
+  @apply text-base font-normal;
 }
 
 // ━━━ LABEL ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
