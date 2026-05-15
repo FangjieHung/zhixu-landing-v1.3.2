@@ -520,7 +520,7 @@
 }
 
 .products-legal-disclaimer {
-  @apply mt-5 text-xs text-center;
+  @apply mt-5 text-xs;
   color: color-mix(in srgb, var(--md-sys-color-on-surface-variant) 65%, transparent);
 }
 
