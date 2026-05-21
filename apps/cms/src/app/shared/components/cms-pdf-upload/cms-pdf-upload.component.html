@@ -1,0 +1,22 @@
+<ul class="image-list">
+  <li matRipple class="upload-img card card_lower" *ngIf="!_attId">
+    <input id="upload-file" type="file" accept=".pdf" (change)="onUploadFile($event.target)" class="hidden" />
+    <label matRipple for="upload-file"
+      class="flex items-center flex-col justify-center w-full text-center border-4 border-dashed border-gray-300 rounded-lg py-6 my-2 text-stone-400">
+      <i class="material-icons-outlined w-36 text-6xl">cloud_upload</i>
+      <p class="font-medium text-lg">請選擇PDF檔案</p>
+    </label>
+  </li>
+  <li class="card-basic mb-6" *ngIf="_attId">
+    <article tabindex="0"
+      class="group w-full h-full rounded-md focus:outline-none focus:shadow-outline elative shadow-sm">
+      <a [href]="combineDownloadAttUrl(_attId)" target="_blank"
+        class="material-icons-outlined h-24 text-8xl">
+        picture_as_pdf
+      </a>
+      <a (click)="onDelAppFileAtt()" class="absolute bottom-0 right-0">
+        <span class="material-icons-outlined pr-2 text-2xl">delete</span>
+      </a>
+    </article>
+  </li>
+</ul>

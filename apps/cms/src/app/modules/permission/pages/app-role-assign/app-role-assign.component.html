@@ -1,0 +1,131 @@
+<div>
+  <cms-page-header></cms-page-header>
+
+  <div class="grid gap-3 grid-cols-9 mx-4">
+    <nz-card class="p-4 border border-slate-200 rounded-md col-span-3">
+      <div class="inline-flex items-center justify-center mb-6 w-full">
+        <hr class="w-64 h-1  bg-gray-200 border-0 rounded">
+        <div class="absolute px-4 -translate-x-1/2 bg-white left-1/2">
+          <div class="text-base">管理員清單</div>
+        </div>
+      </div>
+      <form [formGroup]="valForm">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>查詢管理者(查更多請輸入關鍵字)</mat-label>
+          <input matInput type="text" formControlName="searchText" placeholder="帳號或名稱查詢..." />
+        </mat-form-field>
+      </form>
+
+      <nz-table class="overflow-x-auto" #listTable [nzFrontPagination]="false" [nzShowPagination]="false"
+        [nzData]="(searchOptions$ | async) || []" [nzLoading]="dataLoading" [nzSize]="'small'">
+        <thead>
+          <tr>
+            <th>名稱</th>
+            <th>狀態</th>
+            <th nzRight [nzWidth]="'60px'"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of listTable.data">
+            <td>{{ data.name }}</td>
+            <td>
+              <nz-tag class="mr-0 font-semibold"
+                [nzColor]="(data.appUserStatus| aryFindValue: (appUserApiServ.getAppUserStatusInfos() | async): 'value': 'style') ?? 'default'">
+                {{ data.appUserStatus | aryFindValue: appUserApiServ.appUserStatusOpts :'value':'name' }}
+              </nz-tag>
+            </td>
+            <td nzRight>
+              <button nz-button nzType="text" class="w-11 rounded-full px-0" (click)="doEmpSelected(data)">
+                <span class="material-icons-outlined align-middle">admin_panel_settings</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </nz-card>
+    <nz-card class="p-4 border border-slate-200 rounded-md col-span-6">
+      <div class="inline-flex items-center justify-center mb-6 w-full">
+        <hr class="w-64 h-1  bg-gray-200 border-0 rounded">
+        <div class="absolute px-4 -translate-x-1/2 bg-white left-1/2">
+          <div class="text-base">角色授權</div>
+        </div>
+      </div>
+      <nz-empty [nzNotFoundContent]="contentTpl" *ngIf="!selected.emp">
+        <ng-template #contentTpl>
+          <span>請先選擇管理帳號</span>
+        </ng-template>
+      </nz-empty>
+      <div class="" *ngIf="selected.emp">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <table class="w-full text-base text-left text-gray-500">
+            <tbody>
+              <tr class="desc-border">
+                <!-- <td class="desc-title">
+                  代碼
+                </td>
+                <td class="desc-content">
+                  {{ selected.emp?.code }}
+                </td> -->
+                <td class="desc-title">
+                  名稱
+                </td>
+                <td class="desc-content">
+                  {{ selected.emp?.name }}
+                </td>
+                <!-- <td class="desc-title">
+                  到職日
+                </td>
+                <td class="desc-content">
+                  {{ selected.emp?.startAt | dateFormatter: 'yyyy-MM-dd' }}
+                </td>
+                <td class="desc-title">
+                  離職日
+                </td>
+                <td class="desc-content text-right">
+                  {{ selected.emp?.endAt | dateFormatter: 'yyyy-MM-dd': '-' }}
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="min-h-lg mt-4 p-2 bg-white rounded-2xl shadow-md border-2 border-gray-100" *ngIf="selected.emp">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="col-span-1 w-full overflow-y-auto">
+            <ul class="w-full">
+              <li
+                [ngClass]="{'parent-li-selected': selectedPfm === pfm.value, 'parent-li-default': selectedPfm !== pfm.value}"
+                *ngFor="let pfm of appPfms$ | async" (click)="selectedPfm = pfm.value;">
+                <div class="inline-flex items-center justify-between w-full">
+                  <label>{{ pfm.value }}</label>
+                  <mat-icon *ngIf="selectedPfm === pfm.value">navigate_next</mat-icon>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-span-1 w-full overflow-y-auto">
+            <nz-empty [nzNotFoundContent]="'請點選左方授權平台'" *ngIf="selectedPfm === ''">
+            </nz-empty>
+            <ul class="w-full">
+              <li class="child-li-toggle"
+                *ngFor="let role of (listRoleChecked ?? []) | aryFilter: { fieldName: 'appPfm', fieldValue: selectedPfm }">
+                <mat-slide-toggle [(ngModel)]="role.checked" (change)="onToggleChange(role, $event.checked)">{{
+                  role.name }}</mat-slide-toggle>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      <div class="flex justify-end mt-4" *ngIf="selected.emp">
+        <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="isAdmin">
+          <span class="material-icons-outlined pr-2 text-lg">cloud_done</span>
+          <span>確認變更</span>
+        </button>
+      </div>
+
+    </nz-card>
+  </div>
+
+</div>

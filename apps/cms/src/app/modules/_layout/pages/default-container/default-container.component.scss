@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ant-layout-sider-collapsed {
+  h1 {
+    @apply opacity-0 transition-opacity duration-300;
+  }
+}
+
+nz-slider[ng-reflect-nz-collapsed="false"] + nz-layout > nz-header {
+  left: 256px;
+}

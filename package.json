@@ -13,7 +13,10 @@
     "build:web": "nx build web --prod --build-optimizer",
     "build:web-ssr": "nx build web --prod && nx run web:server:production",
     "build-stage:web": "nx build web --configuration=staging --build-optimizer --output-path=dist-stage/apps/web",
-    "build-stage:web-ssr": "nx build webapp --configuration=staging --output-path=dist-stage/apps/web && nx run web:server-stage:staging"
+    "build-stage:web-ssr": "nx build webapp --configuration=staging --output-path=dist-stage/apps/web && nx run web:server-stage:staging",
+    "start:cms": "nx serve cms --open",
+    "clean-start:cms": "nx serve cms --open --port=0",
+    "build:cms": "nx build cms --prod --build-optimizer"
   },
   "private": true,
   "dependencies": {

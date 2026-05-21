@@ -1,0 +1,50 @@
+/* Button */
+.btn-primary {
+    @apply bg-sky-500 text-white rounded hover:bg-sky-600 transition-all ease-in-out;
+}
+
+.btn-lg {
+    @apply p-2 text-lg font-bold;
+}
+
+/* Filter */
+cms-search-bar {
+    @apply w-full;
+}
+
+.search-bar-wrap {
+    @apply flex flex-col pt-2 md:flex-row flex-wrap md:gap-x-2 items-start;
+
+    .inner-group {
+        @apply flex flex-wrap items-center gap-2 w-full 2xl:w-2/3;
+    }
+
+    mat-form-field {
+        @apply w-full min-w-44 md:w-auto md:-mb-2;
+    }
+
+    .selector {
+        @apply w-full md:w-48 flex-1 lg:max-w-44;
+    }
+
+    .text-input {
+        @apply w-full flex-2 lg:max-w-96;
+    }
+
+    .clear-btn {
+        @apply rounded-full bg-slate-200 bg-opacity-60 w-8 h-8 float-left hover:bg-opacity-100 transition-all;
+    }
+}
+
+/* Print Modal */
+.ant-modal-body:has(.print-mock) {
+    @apply p-0;
+}
+
+.print-mock {
+    @apply bg-gray-200 p-8 flex justify-center items-center print:hidden;
+}
+
+.print-actions {
+    @apply p-4 flex justify-end gap-2 print:hidden;
+}

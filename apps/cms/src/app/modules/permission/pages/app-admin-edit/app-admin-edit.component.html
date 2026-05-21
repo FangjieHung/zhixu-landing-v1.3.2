@@ -1,0 +1,146 @@
+<div class="">
+  <form [formGroup]="valForm">
+    <div class="grid grid-cols-12 gap-x-4">
+      <div class="col-span-12 my-5 flex items-center gap-4 before:h-px before:flex-1 before:bg-gray-300  before:content-[''] after:h-px after:flex-1 after:bg-gray-300  after:content-['']">
+        <span class="text-base">基本資料</span>
+      </div>
+      <mat-form-field appearance="outline" class="w-full col-span-full sm:col-span-6">
+        <mat-label>中文名稱</mat-label>
+        <input matInput type="text" formControlName="name" [required]="f['name'] | ctrlHasRequired">
+        <mat-error class="text-xs" *ngIf="f['name'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['name'].errors, '中文名稱')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full col-span-full sm:col-span-6">
+        <mat-label>英文名稱</mat-label>
+        <input matInput type="text" formControlName="nameEn" [required]="f['nameEn'] | ctrlHasRequired">
+        <mat-error class="text-xs" *ngIf="f['nameEn'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['nameEn'].errors, '英文名稱')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full col-span-full sm:col-span-6">
+        <mat-label>行動電話</mat-label>
+        <input matInput type="text" formControlName="mobile" [required]="f['mobile'] | ctrlHasRequired">
+        <mat-error class="text-xs" *ngIf="f['mobile'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['mobile'].errors, '行動電話')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full col-span-full sm:col-span-6">
+        <mat-label>電子信箱</mat-label>
+        <input matInput type="text" formControlName="email" [required]="f['email'] | ctrlHasRequired">
+        <mat-error class="text-xs" *ngIf="f['email'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['email'].errors, '電子信箱')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="col-span-12 my-5 flex items-center gap-4 before:h-px before:flex-1 before:bg-gray-300  before:content-[''] after:h-px after:flex-1 after:bg-gray-300  after:content-['']">
+        <span class="text-base">帳號設定</span>
+      </div>
+      <mat-form-field appearance="outline" class="w-full col-span-full"
+        [ngClass]="{'sm:col-span-6': _id !== 1}">
+        <mat-label>帳號</mat-label>
+        <input matInput type="text" formControlName="account" [required]="f['account'] | ctrlHasRequired">
+        <mat-error class="text-xs" *ngIf="f['account'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['account'].errors, '帳號')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="_id !== 1" appearance="outline" class="w-full col-span-full sm:col-span-6">
+        <mat-label>帳號狀態</mat-label>
+        <mat-select formControlName="appUserStatus" [required]="f['appUserStatus'] | ctrlHasRequired">
+          <ng-container *ngFor="let opt of appUserApiServ.appUserStatusOpts">
+            <mat-option [value]="+opt.value">{{ opt.name }}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error class="text-xs" *ngIf="f['appUserStatus'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['appUserStatus'].errors, '帳號狀態')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="_id !== 1" appearance="outline" class="w-full col-span-6 sm:col-span-6">
+        <mat-label>啟用時間</mat-label>
+        <input matInput [matDatepicker]="appUserStartAtDatepicker" formControlName="appUserStartAt"
+          [required]="f['appUserStartAt'] | ctrlHasRequired">
+        <mat-datepicker-toggle [for]="appUserStartAtDatepicker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #appUserStartAtDatepicker></mat-datepicker>
+        <mat-error class="text-xs" *ngIf="f['appUserStartAt'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['appUserStartAt'].errors, '啟用時間')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="_id !== 1" appearance="outline" class="w-full col-span-6 sm:col-span-6">
+        <mat-label>停用時間</mat-label>
+        <input matInput [matDatepicker]="appUserEndAtDatepicker" formControlName="appUserEndAt"
+          [required]="f['appUserEndAt'] | ctrlHasRequired">
+        <mat-datepicker-toggle [for]="appUserEndAtDatepicker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #appUserEndAtDatepicker></mat-datepicker>
+        <mat-error class="text-xs" *ngIf="f['appUserEndAt'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['appUserEndAt'].errors, '停用時間', '啟用時間')">{{ msg }}
+          </div>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full col-span-6 sm:col-span-6">
+        <mat-label>密碼</mat-label>
+        <input matInput [type]="passwordHide ? 'password' : 'text'" formControlName="password"
+          [required]="f['password'] | ctrlHasRequired">
+        <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'不顯示密碼'"
+          [attr.aria-pressed]="passwordHide">
+          <mat-icon class="min-w-8">{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error class="text-xs" *ngIf="f['password'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['password'].errors, '密碼')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full col-span-6 sm:col-span-6">
+        <mat-label>確認密碼</mat-label>
+        <input matInput [type]="passwordHide ? 'password' : 'text'" formControlName="confirmPassword"
+          [required]="f['confirmPassword'] | ctrlHasRequired">
+        <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'不顯示密碼'"
+          [attr.aria-pressed]="passwordHide">
+          <mat-icon class="min-w-8">{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error class="text-xs" *ngIf="f['confirmPassword'].errors">
+          <div *ngFor="let msg of formHelper.errorMsgs(f['confirmPassword'].errors, '密碼', '確認密碼')">
+            {{ msg }}
+          </div>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+
+<div *nzModalFooter>
+  <button nz-button nzType="default" (click)="doCancel()">取消</button>
+  <button nz-button nzType="primary" (click)="onSubmit()">確認</button>
+</div>
+
+<ng-template #timePickerCancel>
+  <div class="mr-4">
+    <a class="font-bold text-base h-10">取消</a>
+  </div>
+</ng-template>
+<ng-template #timePickerConfirm>
+  <div>
+    <a class="font-bold text-base h-10">確定</a>
+  </div>
+</ng-template>
+
+<nz-dropdown-menu #menuEdit="nzDropdownMenu">
+  <ul nz-menu>
+    <ng-container>
+      <li nz-menu-item>
+        <div
+          class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-semibold me-2 px-2.5 py-0.5 rounded-sm border border-blue-400 inline-flex items-center justify-center">
+          操作
+        </div>
+      </li>
+      <!-- <li nz-menu-item>
+        <button nz-button nzType="text" (click)="onEnableCustCat(editDto.id)" class="w-full text-left"
+          [disabled]="!(editDto.status !== customerApiServ.custCatStatuses['啟用'])">啟用狀態</button>
+      </li> -->
+      <!-- <li nz-menu-item>
+        <button nz-button nzType="text" (click)="onDisableCustCat(editDto.id)" class="w-full text-left"
+          [disabled]="!(editDto.status !== customerApiServ.custCatStatuses['停用'])">停用狀態</button>
+      </li> -->
+    </ng-container>
+  </ul>
+</nz-dropdown-menu>

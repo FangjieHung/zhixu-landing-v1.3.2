@@ -1,0 +1,75 @@
+<div class="bg-white relative h-16 shadow-lg flex justify-between items-center">
+  <span class="h-16 px-5 py-4 text-lg leading-6 cursor-pointer group" (click)="onSidebarCollapse()">
+    <i class="transition-colors duration-300 group-hover:text-blue-500" nz-icon
+      [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+  </span>
+
+  <div class="flex-auto flex items-center justify-end space-x-4" >
+    <!-- Notification -->
+    <nz-badge (click)="onOpenNotifybar()" [nzCount]="2" [nzOverflowCount]="9" class="pointer scale-90" *ngIf="false">
+      <i nz-icon nzType="bell" class="scale-125 text-lg mb-2"></i>
+    </nz-badge>
+
+    <nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzVisible]="visible" nzTitle="通知" (nzOnClose)="onCloseNotifybar()" >
+      <ng-container *nzDrawerContent>
+        <nz-tabset class="-mt-4">
+          <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate">
+            <ng-template #titleTemplate>
+              <div class="flex items-center space-x-1">
+                <span>{{ tab.name }}</span>
+                <nz-badge nzStandalone [nzCount]="tab.count" [nzOverflowCount]="99"
+                  [nzStyle]="{ backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset' }">
+                </nz-badge>
+              </div>
+            </ng-template>
+            <!-- 通知內容清單 -->
+            <div>
+              <a class="block py-3">
+                <i
+                  class="material-icons-outlined rounded-full w-10 h-10 p-2 text-white bg-blue-400 mr-2">local_shipping</i>
+                <div class="inline-block w-5/6 align-top">
+                  <p class="truncate leading-tight">待出貨 海燕餐廳</p>
+                  <p>訂單 1234567</p>
+                  <p class="opacity-70 text-xs">2023 / 11 / 23 15:00</p>
+                </div>
+              </a>
+              <a class="block py-3">
+                <i class="material-icons-outlined rounded-full w-10 h-10 p-2 text-white bg-red-400 mr-2">warehouse</i>
+                <div class="inline-block w-5/6 align-top">
+                  <p class="truncate leading-tight">需叫貨 真空袋</p>
+                  <p>庫存量 1</p>
+                  <p class="opacity-70 text-xs">2023 / 11 / 23 15:00</p>
+                </div>
+              </a>
+              <a class="block py-3">
+                <i class="material-icons-outlined rounded-full w-10 h-10 p-2 text-white bg-green-400 mr-2">warehouse</i>
+                <div class="inline-block w-5/6 align-top">
+                  <p class="truncate leading-tight">已進貨 真空袋</p>
+                  <p>庫存量 100</p>
+                  <p class="opacity-70 text-xs">2023 / 11 / 23 15:00</p>
+                </div>
+              </a>
+            </div>
+          </nz-tab>
+        </nz-tabset>
+      </ng-container>
+    </nz-drawer>
+
+
+    <!-- Account -->
+    <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+      <div class="flex items-center pr-6 ">
+        <nz-avatar [nzText]="(currUserInfo?.name | slice:0:1) || '' " nzSize="large" nzSrc="" class="mr-1"></nz-avatar>
+        <span class="pl-1 leading-4 text-sm ">
+          <p class="font-medium max-w-24 truncate">{{ currUserInfo?.account }}</p>
+          <span class="text-xs opacity-70">{{ currUserInfo?.name }}</span>
+        </span>
+      </div>
+      <nz-dropdown-menu #menu="nzDropdownMenu" class="">
+        <ul nz-menu>
+          <li nz-menu-item (click)="onSignout()">登出</li>
+        </ul>
+      </nz-dropdown-menu>
+    </a>
+  </div>
+</div>

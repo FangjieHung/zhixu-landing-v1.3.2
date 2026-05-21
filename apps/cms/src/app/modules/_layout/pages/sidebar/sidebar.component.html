@@ -1,0 +1,83 @@
+
+<a routerLink="/" class="bg-white h-24 flex items-center p-2 pl-4">
+  <img src="assets/shared/img/logo/mark.png" alt="logo" class="h-full" />
+  <h1 class="flex-1 pl-3 font-bold text-lg">蘊和堂</h1>
+</a>
+
+<ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed" class="pt-2"
+  *ngIf="appAuthApiServ?.currUser?.authUserRoutes as roleRoutes">
+  <li nz-menu-item nzMatchRouter>
+    <i class="material-symbols-rounded mr-2">monitoring</i><a routerLink="/dashboard">總覽概況</a>
+  </li>
+  <li nz-submenu [nzTitle]="menuTitle"  *ngFor="let parent of roleRoutes | aryFilter: { fieldName: 'parentId', fieldValue: 0 } | arySort:'asc'">
+    <ng-template #menuTitle class="flex items-center"><i class="material-symbols-rounded mr-2">{{ parent.icon }}</i><span>{{
+        parent.name }}</span></ng-template>
+    <ul>
+      <li nz-menu-item nzMatchRouter *ngFor="
+          let child of roleRoutes || []
+            | aryFilter: { fieldName: 'parentId', fieldValue: parent.id } | arySort:'asc'
+        ">
+        <a [routerLink]="child.path" class="pl-2">{{ child.name }}</a>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<!-- 靜態使用 -->
+<ul nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed" class="pt-2" *ngIf="false">
+  <li nz-menu-item nzMatchRouter>
+    <i class="material-symbols-rounded mr-2">monitoring</i>
+    <a routerLink="/dashboard">總覽概況</a>
+  </li>
+  <li nz-submenu>
+    <span title class="flex items-center"><i
+        class="material-symbols-rounded mr-2">handshake</i><span>內容行銷</span></span>
+    <ul>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/consult/consult-rec/list">聯絡我們</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/post/news-msg/list">最新消息</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/post/news-cat/list">最新消息類別管理</a>
+      </li>
+    </ul>
+  </li>
+  <li nz-submenu>
+    <span title class="flex items-center"><i class="material-symbols-rounded mr-2">web</i><span>頁面管理</span></span>
+    <ul>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/page-mgt/website-setting/edit">網站設定</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/page-mgt/home/edit">首頁設定</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/page-mgt/about/edit">關於我們</a>
+      </li>
+      <li nz-submenu nzTitle="服務項目">
+        <ul>
+          <li nz-menu-item routerLink="/page-mgt/serv-warehouse/edit">倉儲</li>
+          <li nz-menu-item routerLink="/page-mgt/serv-logistics/edit">物流</li>
+          <li nz-menu-item routerLink="/page-mgt/serv-advertise/edit">3D廣告</li>
+          <li nz-submenu nzTitle="共享空間">
+            <ul>
+              <li nz-menu-item routerLink="/page-mgt/serv-space-share-office/edit">辦公室出租</li>
+              <li nz-menu-item routerLink="/page-mgt/serv-space-virtual-office/edit">虛擬辦公室</li>
+              <li nz-menu-item routerLink="/page-mgt/serv-space-meeting-room/edit">會議室租借</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li nz-submenu>
+    <span title class="flex items-center"><i class="material-symbols-rounded mr-2">settings</i><span>系統管理</span></span>
+    <ul>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/user/list">使用者資料</a>
+      </li>
+    </ul>
+  </li>
+</ul>

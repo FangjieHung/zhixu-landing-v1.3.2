@@ -1,0 +1,26 @@
+<nz-page-header>
+  <nz-page-header-title>
+    <h1 class="text-2xl tracking-wide">
+      {{
+        lastBreadcrumbName.isUndefinedOrNullOrEmpty()
+          ? lastRouteName
+          : lastBreadcrumbName
+      }}
+    </h1>
+    <nz-breadcrumb class="flex items-center flex-wrap mt-1">
+      <nz-breadcrumb-item>
+        <i nz-icon nzType="home" class="align-text-bottom mb-px"></i>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item *ngFor="let data of breadcrumbs">{{
+        data
+      }}</nz-breadcrumb-item>
+      <nz-breadcrumb-item *ngFor="let data of appRoutes">{{
+        data.name
+      }}</nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </nz-page-header-title>
+
+  <nz-page-header-extra class="w-full md:w-auto">
+    <ng-content></ng-content>
+  </nz-page-header-extra>
+</nz-page-header>

@@ -1,0 +1,21 @@
+<nz-layout class="h-screen-full">
+
+  <nz-sider class="relative z-10 h-screen shadow overflow-y-auto" nzCollapsible nzWidth="256px" nzBreakpoint="xl"
+    [(nzCollapsed)]="isCollapsed" [nzTrigger]="null" [nzCollapsedWidth]="0">
+    <cms-sidebar [isCollapsed]="isCollapsed"></cms-sidebar>
+  </nz-sider>
+
+  <nz-layout>
+    <!-- Navigation -->
+    <nz-header class="p-0 relative z-1">
+      <cms-header [isCollapsed]="isCollapsed" (doSidebarCollapse)="onSidebarCollapse()"></cms-header>
+    </nz-header>
+
+    <!-- Container -->
+    <nz-content class="h-fullContainer overflow-y-auto relative z-0">
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

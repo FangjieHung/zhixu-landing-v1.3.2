@@ -1,0 +1,13 @@
+<quill-editor [(ngModel)]="content" [styles]="{ flex: '1 1 auto', 'min-height': '300px' }" class="col-span-1 w-full"
+  [modules]="quillConfig" (onEditorCreated)="editorCreated($event)" trackChanges="all">
+</quill-editor>
+
+<!-- debug -->
+<!-- <div class="ql-container ql-snow" style="border-width: 0;">
+  <div class="ql-editor" [innerHTML]="content">
+  </div>
+</div> -->
+
+<!-- debug -->
+<!-- <quill-view [content]="content" format="html" theme="snow"></quill-view> -->
+

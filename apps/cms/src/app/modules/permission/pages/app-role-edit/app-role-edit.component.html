@@ -1,0 +1,68 @@
+<div class="p-4">
+  <form [formGroup]="valForm">
+    <div class="grid grid-cols-6 gap-x-4">
+      <mat-form-field appearance="outline" class="w-full col-span-3">
+        <mat-label>平台</mat-label>
+        <mat-select formControlName="appPfm" [disabled]="profileDto.id > 0" [required]="f['appPfm'] | ctrlHasRequired">
+            <mat-option *ngFor="let item of sharedDataServ.appPfmOpts" [value]="item.value">{{ item.name }}</mat-option>
+        </mat-select>
+        <mat-error class="text-xs" *ngIf="f['appPfm'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['appPfm'].errors, '平台')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full col-span-3">
+        <mat-label>狀態</mat-label>
+        <mat-select formControlName="status" [required]="f['status'] | ctrlHasRequired">
+            <mat-option *ngFor="let item of appRoleApiServ.appRoleStatusOpts" [value]="item.value">{{ item.name }}</mat-option>
+        </mat-select>
+        <mat-error class="text-xs" *ngIf="f['status'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['status'].errors, '狀態')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full col-span-6">
+        <mat-label>名稱</mat-label>
+        <input matInput type="text" formControlName="name" [required]="f['name'] | ctrlHasRequired">
+        <mat-error class="text-xs" *ngIf="f['name'].errors">
+            <div *ngFor="let msg of formHelper.errorMsgs(f['name'].errors, '名稱')">{{ msg }}</div>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+
+  <div class="h-auto p-2 bg-white rounded-2xl shadow-md border-2 border-gray-100" *ngIf="f['appPfm'].value">
+      <div class="grid grid-cols-2 gap-4 h-72">
+        <div class="col-span-1 w-full overflow-y-auto">
+          <ul class="w-full">
+            <li [ngClass]="{'route-selected': selectedParentId === parent.id, 'route-default': selectedParentId !== parent.id}"
+              *ngFor="let parent of (listRouteChecked ?? []) | aryFilter: [{ fieldName: 'appPfm', fieldValue: (f['appPfm']?.value ?? '') }, { fieldName: 'parentId', fieldValue: 0 }]"
+              (click)="selectedParentId = parent.id;">
+              <div class="inline-flex items-center justify-between w-full">
+                <label>{{ parent.name }}
+                  <span class="inline-flex items-center justify-center w-6 h-6 ml-2 text-sm font-semibold text-red-400 bg-red-100 rounded-full"
+                    *ngIf="parent.checkedCount">{{ parent.checkedCount | number }}</span>
+                </label>
+                <mat-icon *ngIf="selectedParentId === parent.id">navigate_next</mat-icon>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="col-span-1 w-full overflow-y-auto">
+          <nz-empty [nzNotFoundContent]="'請點選左方權限分類'" *ngIf="selectedParentId === 0">
+          </nz-empty>
+          <ul class="w-full">
+            <li class="route-toggle"
+              *ngFor="let child of (listRouteChecked ?? []) | aryFilter: { fieldName: 'parentId', fieldValue: (selectedParentId > 0 ? selectedParentId : -1) }">
+              <mat-slide-toggle [(ngModel)]="child.checked" (change)="onToggleChange(child, $event.checked)">{{ child.name }}</mat-slide-toggle>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </div>
+
+</div>
+
+<div *nzModalFooter>
+    <button nz-button nzType="default" (click)="doCancel()">取消</button>
+    <button nz-button nzType="primary" (click)="onSubmit()">確認</button>
+</div>

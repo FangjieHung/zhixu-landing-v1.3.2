@@ -1,0 +1,20 @@
+<div class="search-bar-wrap">
+  <ng-content select="[slot=start]"></ng-content>
+
+  <mat-form-field appearance="outline" class="text-input" *ngIf="!hideTextInput">
+    <mat-label>關鍵字查詢</mat-label>
+    <input matInput type="search" [(ngModel)]="queryRequest.queryString" (keyup.enter)="onSearch()" />
+    <div matSuffix class="w-11">
+      <button *ngIf="queryRequest.queryString" (click)="queryRequest.queryString = null;  onSearch();" aria-label="Clear"
+        class="clear-btn">
+        <span class="material-symbols-outlined mx-auto transform scale-75 opacity-80">close</span>
+      </button>
+    </div>
+  </mat-form-field>
+
+  <ng-content select="[slot=end]"></ng-content>
+
+  <button nz-button nzType="primary" (click)="onSearch()" class="h-14 rounded-md text-base font-medium w-full md:w-40">搜尋</button>
+
+  <ng-content select="[slot=actions]"></ng-content>
+</div>

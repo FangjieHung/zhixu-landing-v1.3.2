@@ -1,0 +1,112 @@
+<div>
+  <cms-page-header>
+    <div class="flex gap-x-2">
+      <button mat-raised-button color="primary" (click)="doEdit()">
+        <span class="material-icons-outlined pr-2 text-lg">library_add</span>
+        <span>新增{{actionName}}</span>
+      </button>
+    </div>
+  </cms-page-header>
+
+  <nz-card class="mx-4 mb-4 border border-slate-200 rounded-md">
+    <section class="relative">
+      <nz-collapse nzGhost>
+        <nz-collapse-panel [nzHeader]="panelHeader" [nzShowArrow]="false" [nzActive]="true" #panel
+          class="collapse-fit mx-4 mb-3 md:mb-0">
+          <ng-template #panelHeader>
+            <p class="flex items-center text-base min-w-max">
+              <span class="material-icons-outlined text-2xl -ml-3 mb-0.5">manage_search</span>
+              <span class="font-medium pl-1">篩選查詢</span>
+              <span nz-icon nzType="right" class="ant-collapse-arrow px-2" [nzRotate]="panel.nzActive ? 90 : 0"></span>
+            </p>
+          </ng-template>
+
+          <cms-search-bar [queryRequest]="request.queryRequest" (doSearch)="onSearch()">
+            <mat-form-field appearance="outline" class="selector" slot="start">
+              <mat-label>狀態</mat-label>
+              <mat-select [(ngModel)]="request.queryRequest.appUserStatus">
+                <mat-option [value]="0">全部</mat-option>
+                <mat-option *ngFor="let opt of appUserApiServ.appUserStatusOpts" [value]="+opt.value">{{opt.name
+                  }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </cms-search-bar>
+        </nz-collapse-panel>
+      </nz-collapse>
+    </section>
+
+    <div>
+      <nz-empty [nzNotFoundContent]="contentTpl" class="py-10" *ngIf="false">
+        <ng-template #contentTpl>
+          <span>目前尚無資料</span>
+        </ng-template>
+      </nz-empty>
+
+      <nz-table class="overflow-x-auto m-4" #listTable [nzFrontPagination]="false" [nzShowPagination]="false"
+        [nzData]="dataSource" [nzLoading]="dataLoading" [nzSize]="'small'">
+        <thead>
+          <tr>
+            <th *ngFor="let item of dispCols">{{item}}</th>
+            <th nzRight [nzWidth]="'150px'">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of listTable.data">
+            <td>
+              <nz-tag class="mr-0 font-semibold"
+                [nzColor]="(data.appUserStatus| aryFindValue: (appUserApiServ.getAppUserStatusInfos() | async): 'value': 'style') ?? 'default'">
+                {{ data.appUserStatus | aryFindValue: appUserApiServ.appUserStatusOpts :'value':'name'
+                }}
+              </nz-tag>
+            </td>
+            <td>{{ data.account }}</td>
+            <td>{{ data.name }}</td>
+            <td>{{ data.appUserStartAt | dateFormatter: 'yyyy / MM / dd': '-' }}</td>
+            <td>{{ data.appUserEndAt | dateFormatter: 'yyyy / MM / dd': '-' }}</td>
+            <td>{{ data.mobile | emptyFormatter:'-' }}</td>
+            <td>{{ data.email | emptyFormatter:'-' }}</td>
+            <td nzRight>
+              <button nz-button nzType="text" class="w-11 rounded-full px-0" (click)="onDisable(data.appUserId)" [disabled]="+data.appUserStatus !== appUserApiServ.appUserStatuses['啟用']">
+                <span class="material-icons-outlined align-middle text-red-600"
+                  [ngClass]="{'text-red-600': +data.appUserStatus === appUserApiServ.appUserStatuses['啟用'], 'text-gray-400': +data.appUserStatus !== appUserApiServ.appUserStatuses['啟用']}">
+                  lock
+                </span>
+              </button>
+              <button nz-button nzType="text" class="w-11 rounded-full px-0" (click)="onEnable(data.appUserId)" [disabled]="+data.appUserStatus !== appUserApiServ.appUserStatuses['停用']">
+                <span class="material-icons-outlined align-middle"
+                  [ngClass]="{'text-green-600': +data.appUserStatus === appUserApiServ.appUserStatuses['停用'], 'text-gray-400': +data.appUserStatus !== appUserApiServ.appUserStatuses['停用']}">
+                  lock_open
+                </span>
+              </button>
+              <button nz-button nz-dropdown nzType="text" [nzDropdownMenu]="menuEdit" class="w-11 rounded-full px-0">
+                <span class="material-icons-outlined align-middle">more_vert</span>
+              </button>
+              <nz-dropdown-menu #menuEdit="nzDropdownMenu">
+                <ul nz-menu>
+                  <li nz-menu-item>
+                    <button nz-button nzType="text" (click)="doEdit(data.id)" class="w-full text-left">編輯</button>
+                  </li>
+
+                  <ng-container *ngIf="false">
+                    <li nz-menu-item>
+                      <div
+                        class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-semibold me-2 px-2.5 py-0.5 rounded-sm border border-blue-400 inline-flex items-center justify-center">
+                        操作
+                      </div>
+                    </li>
+                  </ng-container>
+                </ul>
+              </nz-dropdown-menu>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+
+      <section>
+        <nz-pagination class="flex justify-end mt-3 mb-4 px-4 lg:px-6" [nzPageIndex]="response?.pageIndex"
+          [nzPageSize]="response?.pageSize" [nzTotal]="response?.totalCount" (nzPageIndexChange)="onSearch($event);">
+        </nz-pagination>
+      </section>
+    </div>
+  </nz-card>
+</div>
