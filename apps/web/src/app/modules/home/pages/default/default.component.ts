@@ -93,6 +93,7 @@ export class DefaultComponent extends BBDBaseComponent implements OnInit {
     { src: 'assets/image/partner/春生LOGO-03.png', alt: '春生' },
     { src: 'assets/image/partner/alic-logo.png', alt: 'alic' },
     { src: 'assets/image/partner/city-parking.png', alt: 'city-parking' },
+    { src: 'assets/image/partner/coupanglogo.png', alt: 'coupang' },
     // { src: 'assets/image/partner/環景logo.png', alt: '環景' },
   ];
 
