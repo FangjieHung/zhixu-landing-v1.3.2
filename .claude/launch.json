@@ -4,25 +4,25 @@
     {
       "name": "web-dev",
       "runtimeExecutable": "/Users/fangjiemini/.nvm/versions/node/v22.14.0/bin/node",
-      "runtimeArgs": ["/Users/fangjiemini/bbd-projects/chuhung/chuhung-angular16-apps/node_modules/.bin/nx", "serve", "web"],
+      "runtimeArgs": ["/Users/fangjiemini/bbd-projects/zhi-xu/zhixu-angular16-apps/node_modules/.bin/nx", "serve", "web"],
       "port": 4200
     },
     {
       "name": "web-dev-p3000",
       "runtimeExecutable": "/Users/fangjiemini/.nvm/versions/node/v22.14.0/bin/node",
-      "runtimeArgs": ["/Users/fangjiemini/bbd-projects/chuhung/chuhung-angular16-apps/node_modules/.bin/nx", "serve", "web", "--port=3000"],
+      "runtimeArgs": ["/Users/fangjiemini/bbd-projects/zhi-xu/zhixu-angular16-apps/node_modules/.bin/nx", "serve", "web", "--port=3000"],
       "port": 3000
     },
     {
       "name": "web-staging",
       "runtimeExecutable": "/Users/fangjiemini/.nvm/versions/node/v22.14.0/bin/node",
-      "runtimeArgs": ["/Users/fangjiemini/bbd-projects/chuhung/chuhung-angular16-apps/node_modules/.bin/nx", "serve", "web", "--configuration=staging"],
+      "runtimeArgs": ["/Users/fangjiemini/bbd-projects/zhi-xu/zhixu-angular16-apps/node_modules/.bin/nx", "serve", "web", "--configuration=staging"],
       "port": 4200
     },
     {
       "name": "web-ssr",
       "runtimeExecutable": "/Users/fangjiemini/.nvm/versions/node/v22.14.0/bin/node",
-      "runtimeArgs": ["/Users/fangjiemini/bbd-projects/chuhung/chuhung-angular16-apps/node_modules/.bin/nx", "serve-ssr", "web"],
+      "runtimeArgs": ["/Users/fangjiemini/bbd-projects/zhi-xu/zhixu-angular16-apps/node_modules/.bin/nx", "serve-ssr", "web"],
       "port": 4200
     }
   ]

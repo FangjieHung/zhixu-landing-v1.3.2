@@ -1,0 +1,585 @@
+<!-- Sticky topbar -->
+<div class="topbar" [class.shown]="scrolled">
+  <div class="mark">之序<span class="en">ZHI XU</span></div>
+  <nav class="ghost">
+    <a *ngFor="let item of navItems"
+       (click)="scrollToId(item.id)"
+       [style.color]="active === item.id ? 'var(--accent)' : null">{{ item.label }}</a>
+  </nav>
+  <div class="cta-row">
+    <a (click)="scrollToId('contact')">預約參觀</a>
+  </div>
+</div>
+
+<!-- Floating CTA -->
+<div class="cta-dock" [class.shown]="scrolled">
+  <button class="primary" (click)="scrollToId('contact')">預約參觀 · BOOK</button>
+  <button class="secondary" style="border-left: 2px solid #00b900; padding-left: 12px">
+    LINE 諮詢 · &#64;zhixu-taichung
+  </button>
+</div>
+
+<!-- 01 · Hero -->
+<section class="hero dark" id="hero">
+  <header class="hero-header">
+    <div class="mark">
+      之序<span class="en">ZHI XU · CROSSING THE NEW DIVIDE</span>
+    </div>
+    <nav class="top-nav">
+      <a (click)="scrollToId('trust')">建商</a>
+      <a (click)="scrollToId('whynow')">建設與生活</a>
+      <a (click)="scrollToId('spec')">建案規格</a>
+      <a (click)="scrollToId('design')">設計者</a>
+      <a (click)="scrollToId('contact')">預約參觀</a>
+    </nav>
+    <div class="top-right">水湳 · 台中 · 2026</div>
+  </header>
+
+  <div class="hero-body">
+    <div class="hero-text">
+      <div class="stack">
+        <div class="bar-motif" aria-hidden="true">
+          <span *ngFor="let v of heroBars; trackBy: trackByIndex"
+                [style.height]="barHeight(v, 58)"
+                [style.background]="'var(--accent)'"></span>
+        </div>
+        <div class="eyebrow" style="color:#b8ad9e">富華創新 · 之序 · 水湳特區</div>
+        <h1 class="zh">
+          回家，<br />
+          是一場航向中央公園，<br />
+          泊岸生活的<span class="accent">儀式</span>。
+        </h1>
+        <p class="lede" style="font-size:16px">
+          四面臨路・綠海星嶼，186 戶輕奢寓所，靜候識者。
+          <br />
+          <span style="display:inline-block;margin-top:0.5rem;color:var(--fg-2)">富華創新 · 之序</span>
+          <br /><br />
+          <em>Crossing the new divide — before it is named.</em>
+        </p>
+        <div style="display:flex;gap:2rem;margin-top:0.5rem">
+          <button class="tl" (click)="scrollToId('contact')">預約參觀</button>
+          <button class="tl" (click)="scrollToId('whynow')">了解水湳</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-img">
+      <div class="ph canopy">
+        <img class="ph-img tinted" [src]="img.hero" alt="之序 · 建築外觀" />
+        <div class="overlay-en">A green sea, an island taking shape.</div>
+        <div class="overlay-tag">CENTRAL PARK · 綠海星嶼<br />SHUI-NAN · TAICHUNG</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-footer">
+    <div class="yearmark" style="color:#b8ad9e">2026 · 之序 · 水湳 · 綠海星嶼</div>
+    <div class="scroll-cue">向下 · SCROLL</div>
+    <div class="yearmark" style="color:#b8ad9e;text-align:right">EDITION · 186 / 之序<br />2027 · 完工交屋</div>
+  </div>
+</section>
+
+<!-- 02 · Trust -->
+<section class="trust" id="trust">
+  <div class="trust-head">
+    <div class="eyebrow"><span class="num">02</span><span>THE MAKER · 富華創新 + 總太營造</span></div>
+    <div class="right">下滑之前，你會想知道——這棟樓背後的人是誰，誰把它蓋起來，靠得住嗎。</div>
+  </div>
+
+  <div class="trust-grid">
+    <div class="cell">
+      <div class="label-sm">建商沿革 · DEVELOPER</div>
+      <div class="big zh">富華創新<br />2020</div>
+      <div class="sub">承繼總太地產三十年耕耘，以新名義做同一件事。</div>
+    </div>
+
+    <div class="cell accent-cell">
+      <div class="label-sm" style="color:var(--accent)">營造團隊 · BUILDER</div>
+      <div class="big zh">總太營造<br />
+        <span style="font-size:0.55em;letter-spacing:0.18em;color:#b8ad9e;text-transform:uppercase">甲級 · since 1976</span>
+      </div>
+      <div class="sub">富華創新集團 100% 自有甲級營造廠。代表作：東方帝國、心之所向。</div>
+      <button class="tl" (click)="scrollToId('builder-deep', 40)" style="margin-top:auto;align-self:flex-start">細看營造</button>
+    </div>
+
+    <div class="cell">
+      <div class="label-sm">建築設計 · ARCHITECT</div>
+      <div class="big zh">吳六合</div>
+      <div class="sub">郵輪式圓弧語言，操刀台中多件指標性高層住宅。</div>
+      <button class="tl" (click)="scrollToId('design')" style="margin-top:auto;align-self:flex-start">查看設計者</button>
+    </div>
+
+    <div class="cell">
+      <div class="label-sm">物業管理 · MANAGEMENT</div>
+      <div class="big zh">飯店式管家</div>
+      <div class="sub">入住後管家服務，合作物業公司確認中——預約時可詳閱合約樣本。</div>
+    </div>
+  </div>
+
+  <div class="lineage">
+    <div class="eyebrow" style="color:#8e827a">關於品牌轉型 · ON THE NAME CHANGE</div>
+    <div class="quote">
+      富華創新承繼總太地產三十年耕耘，<br />
+      以新名義，<span class="lighter">做同一件事——</span><br />
+      蓋一棟值得等待的房子。
+    </div>
+  </div>
+
+  <div class="builder-deep" id="builder-deep">
+    <div class="anchor-q">
+      誰把它蓋起來，<br />
+      比誰畫它，<br />
+      <span class="lighter">更決定它能住多久。</span>
+    </div>
+
+    <div class="builder-body">
+      <div class="bd-left">
+        <div class="eyebrow"><span class="num">02 / B</span><span>THE BUILDER · 總太營造</span></div>
+        <div style="height:1.5rem"></div>
+        <p class="bd-essay">
+          富華創新有一件事，跟大多數建設公司不一樣：<br />
+          <span class="strong">自己有甲級營造廠。</span>
+        </p>
+        <p class="bd-essay">
+          總太營造——前身高章營造，1976 年創立，
+          現為富華創新集團旗下自有甲級營造廠。
+          同一集團，從設計到施工，對每一道牆負責到底。
+        </p>
+        <p class="bd-essay">
+          沒有中間轉包，沒有利益分叉——<br />
+          因為蓋的就是自己的作品。
+        </p>
+      </div>
+
+      <div class="bd-right">
+        <div class="bd-stat">
+          <div class="bd-stat-num">甲級</div>
+          <div class="bd-stat-k">營造商等級</div>
+          <div class="bd-stat-v">台灣最高 · 富華創新 100% 持股</div>
+        </div>
+        <div class="bd-stat">
+          <div class="bd-stat-num">1976</div>
+          <div class="bd-stat-k">創立年份</div>
+          <div class="bd-stat-v">前身高章營造 · 半世紀工地紀律</div>
+        </div>
+        <div class="bd-stat">
+          <div class="bd-stat-num">2009</div>
+          <div class="bd-stat-k">無酒精工地</div>
+          <div class="bd-stat-v">業界首家推行 · 並導入 24h 火警監控</div>
+        </div>
+        <div class="bd-stat">
+          <div class="bd-stat-num">BIM</div>
+          <div class="bd-stat-k">三維預建模</div>
+          <div class="bd-stat-v">施工白皮書 SOP · 材料進場全面抽驗</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bd-works">
+      <div class="bd-works-head">
+        <div class="eyebrow"><span class="num">02 / C</span><span>承作記錄 · DELIVERED BY 總太</span></div>
+        <div class="bd-works-cap">同一組人，同樣的標準，現在正在蓋之序。</div>
+      </div>
+      <div class="bd-works-grid">
+        <div class="bd-work">
+          <div class="ph dark bd-img">
+            <img class="ph-img" [src]="img.work1" alt="心之所向" />
+            <div class="caption-fade">心之所向 · DELIVERED 2024</div>
+          </div>
+          <div class="bd-work-meta">
+            <div class="bd-work-name">心之所向<span class="bd-work-en">Heart's Destination</span></div>
+            <div class="bd-work-award">2025 · 國家卓越建設獎 · 最佳施工品質類 · 卓越獎</div>
+            <div class="bd-work-note">富華創新與總太營造前一案 · 對之序最直接的信任轉移。</div>
+          </div>
+        </div>
+        <div class="bd-work">
+          <div class="ph walnut bd-img">
+            <img class="ph-img" [src]="img.work2" alt="東方帝國" />
+            <div class="caption-fade">東方帝國 · DELIVERED 2011</div>
+          </div>
+          <div class="bd-work-meta">
+            <div class="bd-work-name">東方帝國<span class="bd-work-en">Eastern Empire</span></div>
+            <div class="bd-work-award">2011 · 國家卓越建設獎 · 最佳施工品質類 · 卓越獎</div>
+            <div class="bd-work-note">台中七期超高豪宅 · 全台罕見 SS+PC 純鋼骨工法。</div>
+          </div>
+        </div>
+        <div class="bd-work">
+          <div class="ph linen bd-img">
+            <img class="ph-img" [src]="img.work3" alt="聚作 / 拾光 / 織築" />
+            <div class="caption-fade">聚作 · 拾光 · 織築</div>
+          </div>
+          <div class="bd-work-meta">
+            <div class="bd-work-name">聚作 · 拾光 · 織築<span class="bd-work-en">Other Works</span></div>
+            <div class="bd-work-award">2023 聚作金質獎 · 2017 拾光金質獎 · 2020 國家優良營造商</div>
+            <div class="bd-work-note">連續金質獎與優良營造商認證 · 紀錄不是一次。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bd-final">
+      設計讓人看見它，<br />
+      <span class="accent-em">營造讓人住得進去。</span>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · Why Now -->
+<section class="frame" id="whynow">
+  <div class="inner">
+    <div class="col-narrow">
+      <div class="eyebrow"><span class="num">03</span><span>WHY NOW · 時間紅利</span></div>
+      <div style="height:1rem"></div>
+      <div class="yearmark">水湳特區 · 台中 · 2025</div>
+      <div style="margin-top:4rem">
+        <div class="bar-motif" aria-hidden="true">
+          <span *ngFor="let v of whyNowBars; trackBy: trackByIndex"
+                [style.height]="barHeight(v, 48)"
+                [style.background]="'var(--accent)'"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-wide">
+      <h2 class="pull-zh xl" style="margin-bottom:2.5rem">
+        水湳，<br />在你的步行距離裡<br />成形。
+      </h2>
+
+      <p class="body zh lg" style="max-width:46ch;margin-bottom:3rem">
+        中央公園已成形，綠美圖已開幕，會展中心已試營運。
+        你等的那個「水湳」，其實已經在了。<br />
+        <strong style="font-weight:500">2027 年之序完工那一天，你的鄰居是一個已成熟的國際特區。</strong>
+        <span class="muted">先到的人，只是提前認識了它。</span>
+      </p>
+
+      <div class="timeline">
+        <div *ngFor="let m of milestones; trackBy: trackByIndex"
+             class="ti"
+             [class.done]="m.status === 'done'"
+             [class.now]="m.status === 'now'">
+          <div class="marker"></div>
+          <div class="status">{{ m.label }}</div>
+          <div class="name">{{ m.name }}</div>
+          <div class="when">{{ m.when }}</div>
+        </div>
+      </div>
+
+      <div class="walk">
+        <div class="left">
+          <div class="eyebrow"><span class="num">03 / B</span><span>日常生活圈 · DAILY RADIUS</span></div>
+          <h3 class="pull-zh">不只是特區，<br />也是你真正<br />要住進去的地方。</h3>
+          <p class="body zh">
+            你每天要用到的，比你想的都近。<br />
+            全聯、學校、診所——生活的基本半徑，<span style="color:var(--accent)">之序都在圈內。</span>
+          </p>
+          <div class="foot" style="margin-top:0.5rem">距離全部以分鐘計，數字待現場最終丈量校正。</div>
+        </div>
+        <div class="list">
+          <div *ngFor="let w of walks; trackBy: trackByIndex" class="row">
+            <div class="place">{{ w.p }}</div>
+            <div class="mode">{{ w.m }}</div>
+            <div class="min">{{ w.n }}<span class="u">分</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:4rem;display:flex;justify-content:flex-end">
+        <button class="tl" (click)="scrollToId('contact')">索取最新戶別狀態圖</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 · Spec Sheet -->
+<section class="spec" id="spec">
+  <div class="head">
+    <div>
+      <div class="eyebrow"><span class="num">04</span><span>THE SPEC · 建案座標</span></div>
+      <div style="height:2rem"></div>
+      <h2 class="pull" style="color:var(--color-text-on-dark);font-size:clamp(2.8rem,5vw,4rem)">
+        SPEC<br />SHEET
+      </h2>
+    </div>
+    <div class="lead">數字之外，<br />是一個決定。</div>
+  </div>
+
+  <div class="grid">
+    <div class="cell" *ngFor="let c of specCells; trackBy: trackByIndex">
+      <div class="k">{{ c.k }}</div>
+      <div class="v">
+        <ng-container *ngFor="let part of splitSpecValue(c.v); let last = last; let i = index; trackBy: trackByIndex">
+          <span>{{ part }}<span class="small" *ngIf="!last"> / </span></span>
+        </ng-container>
+      </div>
+      <div class="vsub">{{ c.sub }}</div>
+    </div>
+  </div>
+
+  <div class="pull-wrap">
+    <div class="eyebrow" style="color:#b8ad9e">SCALE · 規模語意</div>
+    <div class="pull">
+      186 戶——<span class="quiet">不多也不少，</span><br />
+      剛好是讓一棟樓有溫度，<br />
+      卻不失去安靜的數字。
+    </div>
+  </div>
+
+  <div class="layouts">
+    <div class="lt">
+      <div class="label-sm">LAYOUT A · 精準的選擇</div>
+      <div class="tt">47 PING<span class="zh">三房 · 兩衛 · 大陽台</span></div>
+      <div class="desc">精品自住首選——方正格局、雙衛皆開窗、光線直進不折。</div>
+      <button class="tl" (click)="scrollToId('contact')" style="align-self:flex-start;color:var(--color-text-on-dark)">47 坪 · 索取型錄</button>
+    </div>
+    <div class="lt">
+      <div class="label-sm">LAYOUT B · 多一點的餘裕</div>
+      <div class="tt">52 PING<span class="zh">三房 · 雙主臥 · 寬景陽台</span></div>
+      <div class="desc">給自己更多餘裕——大主臥、寬景陽台、讓四季進得來的空間尺度。</div>
+      <button class="tl" (click)="scrollToId('contact')" style="align-self:flex-start;color:var(--color-text-on-dark)">52 坪 · 索取型錄</button>
+    </div>
+  </div>
+
+  <div class="footnote foot">
+    坪數採建坪計算 · 售價恕不在網頁揭露 · 完整型錄請於預約時索取
+  </div>
+
+  <div style="margin-top:4rem;display:flex;justify-content:flex-end">
+    <button class="tl" (click)="scrollToId('contact')" style="color:var(--color-text-on-dark)">索取電子型錄</button>
+  </div>
+</section>
+
+<!-- 05 · The Circle -->
+<section class="frame circle" id="circle">
+  <div class="inner">
+    <div class="col-narrow">
+      <div class="eyebrow"><span class="num">05</span><span>THE CIRCLE · 圈層信號</span></div>
+      <div style="height:4rem"></div>
+      <div class="yearmark">2026 · 之序<br />靜候識者</div>
+    </div>
+
+    <div class="col-wide">
+      <h2 class="pull-zh xl" style="margin-bottom:3rem">你的鄰居，<br />已經先到了。</h2>
+
+      <div class="quote-zh" style="max-width:42ch">
+        在這裡，<br />已經有人<strong>找到了位置</strong>。
+      </div>
+
+      <div class="stat-row" style="display:block">
+        <div class="text" style="max-width:52ch">
+          有人在台灣最密集的科技廊道工作，<br />
+          有人把家族的第二個家，交到了這裡的手上，<br />
+          也有人從七期過來——<span class="muted">因為有些設計，讓你甘願重新選擇一次。</span>
+        </div>
+      </div>
+
+      <div class="ph linen group-img">
+        <img class="ph-img" [src]="img.circle" alt="樣品屋客廳" />
+        <div class="caption-fade">LIVING ROOM · SHOW UNIT INTERIOR</div>
+      </div>
+
+      <div class="press">
+        <div>
+          <div class="eyebrow"><span class="num">05 / B</span><span>PRESS · 媒體紀錄</span></div>
+          <div class="clip">
+            「水湳的天際線，正在被一棟<br />沒有銳角的建築重新定義。」<br />
+            <span class="foot" style="display:block;margin-top:8px">—— 地產天下 · 2025</span>
+          </div>
+        </div>
+        <div class="logos">
+          <div class="lg">商業周刊<em>Business Weekly</em></div>
+          <div class="lg">天下雜誌<em>CommonWealth</em></div>
+          <div class="lg">經濟日報<em>Economic Daily</em></div>
+          <div class="lg">地產天下<em>Property Daily</em></div>
+        </div>
+      </div>
+
+      <div style="margin-top:5rem;display:flex;justify-content:flex-end">
+        <button class="tl" (click)="scrollToId('contact')">想知道你的鄰居是誰？預約參觀</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 · The Design -->
+<section class="frame design" id="design">
+  <div class="inner">
+    <div class="col-narrow">
+      <div class="eyebrow"><span class="num">06</span><span>THE DESIGN · 設計者</span></div>
+      <div style="height:4rem"></div>
+      <div class="yearmark">建築 · 吳六合<br />景觀 · 許富居</div>
+    </div>
+
+    <div class="col-wide">
+      <div class="ph tower building-shot">
+        <img class="ph-img tinted" [src]="img.tower" alt="之序 · 建築外觀夜景" />
+        <div class="quote-overlay">
+          <p class="q">它的輪廓，<br />本身就是整座<br />城市的仰望。</p>
+        </div>
+        <div class="caption-fade">ARCHITECTURAL EXTERIOR</div>
+      </div>
+      <div class="cap" style="display:flex;justify-content:space-between">
+        <span>美 · 在流線</span>
+        <span>強 · 在光影</span>
+      </div>
+
+      <div class="arc-essay">
+        <div class="left">
+          <div class="eyebrow"><span class="num">06 / A</span><span>THE ARC · 圓弧語言</span></div>
+          <div style="height:1.5rem"></div>
+          <h3 class="pull-zh">在直線構成的<br />水湳天際線裡，<br />之序的圓弧<br />悄悄出現。</h3>
+        </div>
+        <div class="right">
+          <p class="body zh">
+            那個靈感，來自一艘<span style="color:var(--accent)">泊岸的船</span>——
+            流線沒有銳角，回家不需要稜角。
+          </p>
+          <p class="body zh">
+            光線進來的方式不一樣。<br />
+            你住進來，自然就會知道。
+          </p>
+          <div class="echo">圓弧曲線，是對這塊地段最誠實的回應。</div>
+        </div>
+      </div>
+
+      <div class="design-credits">
+        <div class="dc-row">
+          <div class="dc-role">建築設計 · ARCHITECT</div>
+          <div class="dc-name">吳六合<span class="dc-en">Wu Liu-He</span></div>
+        </div>
+        <div class="dc-row">
+          <div class="dc-role">景觀設計 · LANDSCAPE</div>
+          <div class="dc-name">許富居<span class="dc-en">Hsu Fu-Chu</span></div>
+          <div class="dc-meta">2,000 坪 · 四季庭園</div>
+        </div>
+      </div>
+
+      <div class="clubhouse-anchor">
+        <div class="eyebrow"><span class="num">06 / B</span><span>THE CLUBHOUSE · 獨棟會館</span></div>
+        <h3 class="pull-zh xl" style="margin-top:2rem;max-width:20ch">
+          獨棟公設，<br />是讓你的家，<br /><span style="color:var(--accent)">只是你的家。</span>
+        </h3>
+        <p class="body zh lg" style="margin-top:2rem;max-width:40ch;color:var(--fg-2)">
+          一條動線屬於生活，一條動線屬於招待——細節，請於現場親見。
+        </p>
+      </div>
+
+      <div style="margin-top:5rem;display:flex;justify-content:flex-end">
+        <button class="tl" (click)="scrollToId('contact')">預約入內 · 從建材看到公設</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 · Contact -->
+<section class="contact" id="contact">
+  <div class="pre">
+    <div>
+      <div class="eyebrow"><span class="num">07</span><span>PRIVATE VIEWING · 預約參觀</span></div>
+      <div style="height:2rem"></div>
+      <div class="bar-motif" aria-hidden="true">
+        <span *ngFor="let h of contactBars; trackBy: trackByIndex"
+              [style.height]="h + 'px'"
+              [style.background]="'var(--accent)'"></span>
+      </div>
+    </div>
+    <div class="invite">
+      你現在預約的，<br />
+      是<span class="lighter">一次從容的看屋。</span><br />
+      我們不問決定，<br />
+      只帶你把這裡的每個細節，都看清楚。
+    </div>
+  </div>
+
+  <div class="body-grid">
+    <form class="form" (submit)="submit($event)">
+      <ng-container *ngIf="!submitted; else thanks">
+        <div class="field">
+          <label>姓名 · NAME</label>
+          <input type="text" placeholder="您的稱呼" required />
+        </div>
+        <div class="field">
+          <label>手機 · MOBILE</label>
+          <input type="tel" placeholder="09XX XXX XXX" required pattern="[0-9 \-]+" />
+        </div>
+        <div class="field">
+          <label>偏好格局 · LAYOUT</label>
+          <div class="radios">
+            <div *ngFor="let opt of layoutOptions; trackBy: trackByIndex"
+                 class="r" [class.on]="layout === opt.v"
+                 (click)="layout = opt.v">{{ opt.l }}</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>需求 · INTENT</label>
+          <div class="radios">
+            <div *ngFor="let opt of purposeOptions; trackBy: trackByIndex"
+                 class="r" [class.on]="purpose === opt.v"
+                 (click)="purpose = opt.v">{{ opt.l }}</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>希望預約時段 · WHEN</label>
+          <select>
+            <option value="" disabled selected>— 請選擇 —</option>
+            <option>平日上午 · 10:00 — 12:00</option>
+            <option>平日下午 · 14:00 — 17:00</option>
+            <option>週末上午 · 10:00 — 12:00</option>
+            <option>週末下午 · 14:00 — 17:00</option>
+          </select>
+        </div>
+        <button type="submit" class="submit">預約參觀 · BOOK A VIEWING</button>
+      </ng-container>
+
+      <ng-template #thanks>
+        <div style="padding:4rem 0">
+          <div class="eyebrow"><span class="num">✓</span><span>THANK YOU · 已收到預約</span></div>
+          <div style="height:1.5rem"></div>
+          <div class="pull-zh" style="color:var(--color-text-on-dark);font-size:clamp(1.6rem,2.4vw,2.2rem)">
+            我們會在 24 小時內<br />以電話跟您確認時段。
+          </div>
+          <p class="body zh" style="color:#b8ad9e;margin-top:1.5rem">
+            若您希望先收到電子型錄，請註明在備註欄；或直接在 LINE 留言。
+          </p>
+        </div>
+      </ng-template>
+    </form>
+
+    <div class="info">
+      <div class="blk">
+        <div class="label">接待中心 · SALES GALLERY</div>
+        <div class="value">
+          台中市西屯區<br />中央公園北路 ___ 號<br />
+          <span class="en">Central Park N. Rd., Xitun · Taichung</span>
+        </div>
+      </div>
+      <div class="blk">
+        <div class="label">營業時間 · HOURS</div>
+        <div class="value">每日 10:00 — 19:00<br />不休 · 預約優先</div>
+      </div>
+      <div class="blk">
+        <div class="label">電話 · TELEPHONE</div>
+        <div class="value">04 · 2255 · 1860</div>
+      </div>
+      <div class="blk">
+        <div class="label">LINE 諮詢 · QR</div>
+        <div style="display:flex;gap:1.5rem;align-items:flex-end;margin-top:0.5rem">
+          <div class="qr" aria-hidden="true"></div>
+          <div class="value" style="font-size:13px;max-width:20ch">
+            &#64;zhixu-taichung<br />
+            <span class="en" style="margin-top:0">SCAN · or add by ID</span>
+          </div>
+        </div>
+      </div>
+      <div class="ph linen map">
+        <img class="ph-img" [src]="img.map" alt="接待中心位置圖" />
+        <div class="caption-fade">MAP · CENTRAL PARK 北側</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div>2026 · 之序 · 富華創新 · ALL RIGHTS RESERVED</div>
+    <div>建造執照 · 待補 · 銷售許可 · 待補</div>
+    <div>CROSSING · THE · NEW · DIVIDE</div>
+  </div>
+</section>
