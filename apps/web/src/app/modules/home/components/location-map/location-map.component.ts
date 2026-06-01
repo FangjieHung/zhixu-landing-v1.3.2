@@ -103,18 +103,18 @@ export class LocationMapComponent
    * min 為非尖峰時段車程估算，待使用者用 Google Maps 路線確認。
    */
   readonly pois: Poi[] = [
-    { x: 755,  y: 592, min: 3,  name: '中央公園 · 主入口', reveal: 0.22, anchor: 'end',   vAnchor: 'above' },
-    { x: 776,  y: 363, min: 5,  name: '台中綠美圖',        reveal: 0.25, anchor: 'end',   vAnchor: 'above' },
-    { x: 710,  y: 248, min: 8,  name: '水湳轉運中心',      reveal: 0.28, anchor: 'end',   vAnchor: 'above' },
-    { x: 268,  y: 290, min: 7,  name: '台中國際會展中心',  reveal: 0.31, anchor: 'start', vAnchor: 'above' },
-    { x: 598,  y: 835, min: 2,  name: '台中超巨蛋',        reveal: 0.34, anchor: 'end',   vAnchor: 'below' },
-    { x: 853,  y: 770, min: 2,  name: '台中流行影音中心',  reveal: 0.37, anchor: 'start', vAnchor: 'below' },
-    { x: 855,  y: 697, min: 2,  name: '水湳經貿園區站',    reveal: 0.40, anchor: 'start', vAnchor: 'above' },
-    { x: 861,  y: 935, min: 5,  name: '捷運文華高中站',    reveal: 0.43, anchor: 'end',   vAnchor: 'below' },
-    { x: 858,  y: 370, min: 4,  name: '迪卡儂',           reveal: 0.46, anchor: 'start', vAnchor: 'above' },
-    { x: 1477, y: 188, min: 12, name: '臺中洲際棒球場',   reveal: 0.49, anchor: 'end',   vAnchor: 'above' },
-    { x: 1024, y: 184, min: 6,  name: '中清商圈',         reveal: 0.52, anchor: 'end',   vAnchor: 'above' },
-    { x: 554,  y: 189, min: 8,  name: '逢甲商圈',         reveal: 0.55, anchor: 'end',   vAnchor: 'above' },
+    { x: 755,  y: 592, min: 5,  name: '中央公園 · 主入口', reveal: 0.22, anchor: 'end',   vAnchor: 'above' },
+    { x: 776,  y: 363, min: 8,  name: '台中綠美圖',        reveal: 0.25, anchor: 'end',   vAnchor: 'above' },
+    { x: 710,  y: 248, min: 10,  name: '水湳轉運中心',      reveal: 0.28, anchor: 'end',   vAnchor: 'above' },
+    { x: 268,  y: 290, min: 10,  name: '台中國際會展中心',  reveal: 0.31, anchor: 'start', vAnchor: 'above' },
+    { x: 598,  y: 835, min: 10,  name: '台中超巨蛋',        reveal: 0.34, anchor: 'end',   vAnchor: 'below' },
+    { x: 853,  y: 770, min: 8,  name: '台中流行影音中心',  reveal: 0.37, anchor: 'start', vAnchor: 'below' },
+    { x: 855,  y: 697, min: 6,  name: '水湳經貿園區站',    reveal: 0.40, anchor: 'start', vAnchor: 'above' },
+    { x: 861,  y: 935, min: 25,  name: '捷運文華高中站',    reveal: 0.43, anchor: 'end',   vAnchor: 'below' },
+    { x: 858,  y: 370, min: 15,  name: '迪卡儂',           reveal: 0.46, anchor: 'start', vAnchor: 'above' },
+    { x: 1477, y: 188, min: 30, name: '臺中洲際棒球場',   reveal: 0.49, anchor: 'end',   vAnchor: 'above' },
+    { x: 1024, y: 184, min: 15,  name: '中清商圈',         reveal: 0.52, anchor: 'end',   vAnchor: 'above' },
+    { x: 554,  y: 189, min: 30,  name: '逢甲商圈',         reveal: 0.55, anchor: 'end',   vAnchor: 'above' },
   ];
 
   /**
@@ -122,9 +122,9 @@ export class LocationMapComponent
    * 視覺上只露出右側 1/4 ~ 1/2 的弧，作為「往該方向 X 分鐘」的方向標。
    */
   readonly edgeMarkers: EdgeMarker[] = [
-    { x: 0,   y: 122, r: 90, min: 8,  name: '中部科學園區', reveal: 0.77 },
+    { x: 0,   y: 122, r: 90, min: 15,  name: '中部科學園區', reveal: 0.77 },
     { x: 0,   y: 952, r: 90, min: 10, name: '台中七期',     reveal: 0.81 },
-    { x: -99, y: 651, r: 90, min: 12, name: '台中工業區',   reveal: 0.85 },
+    { x: -99, y: 651, r: 90, min: 15, name: '台中工業區',   reveal: 0.85 },
   ];
 
   /**
@@ -137,8 +137,8 @@ export class LocationMapComponent
       stroke: '#1d8e62',
       width: 4,
       label: '國道 1 號',
-      labelX: 1962,
-      labelY: 639,
+      labelX: 400,
+      labelY: 311,
       labelAnchor: 'middle',
       reveal: 0.62,
       duration: 0.04,
@@ -157,9 +157,9 @@ export class LocationMapComponent
       id: 'freeway-74',
       stroke: '#b04a3a',
       width: 4.5,
-      label: '國道 74 快速道路',
-      labelX: 418,
-      labelY: 476,
+      label: '74 快速道路',
+      labelX: 442,
+      labelY: 554,
       labelAnchor: 'middle',
       reveal: 0.64,
       duration: 0.04,
@@ -187,8 +187,8 @@ export class LocationMapComponent
       stroke: '#d97a3a',
       width: 3.6,
       label: '捷運橘線',
-      labelX: 870,
-      labelY: 637,
+      labelX: 926,
+      labelY: 716,
       labelAnchor: 'middle',
       reveal: 0.66,
       duration: 0.04,
@@ -209,7 +209,7 @@ export class LocationMapComponent
     },
     {
       id: 'mrt-green',
-      stroke: '#99cb98',
+      stroke: '#679466',
       width: 3.6,
       label: '捷運綠線',
       labelX: 1430,
@@ -232,11 +232,11 @@ export class LocationMapComponent
     },
     {
       id: 'highway-1',
-      stroke: '#c9a771',
+      stroke: '#97753f',
       width: 3.4,
       label: '台 1 線',
-      labelX: 1125,
-      labelY: 803,
+      labelX: 1209,
+      labelY: 953,
       labelAnchor: 'middle',
       reveal: 0.70,
       duration: 0.04,
@@ -258,8 +258,8 @@ export class LocationMapComponent
       stroke: '#c3002f',
       width: 4,
       label: '台灣高鐵',
-      labelX: 230,
-      labelY: 940,
+      labelX: 280,
+      labelY: 215,
       labelAnchor: 'middle',
       reveal: 0.72,
       duration: 0.04,
@@ -404,6 +404,9 @@ export class LocationMapComponent
           invalidateOnRefresh: true,
         },
       });
+      // DEBUG: expose for browser inspection
+      (window as unknown as { __lmST?: unknown }).__lmST = tl.scrollTrigger;
+      (window as unknown as { __lmSection?: unknown }).__lmSection = section;
 
       // ── Phase 1（0 ~ 0.59）─────────────────────────────────────
       tl.to(svg, { scale: ZOOM_PHASE1_END, duration: 0.59 }, 0);

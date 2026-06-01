@@ -28,17 +28,16 @@ export class DefaultComponent extends BBDBaseComponent implements AfterViewInit,
   purpose: 'self' | 'asset' | 'tbd' = 'self';
   submitted = false;
 
-  readonly assetBase = 'assets/image/refers';
-
+  readonly assetBase = 'assets/image';
   readonly img = {
-    hero: `${this.assetBase}/外觀/62.jpg`,
-    work1: `${this.assetBase}/外觀/102.jpg`,
-    work2: `${this.assetBase}/外觀/104.jpg`,
-    work3: `${this.assetBase}/外觀/105.jpg`,
-    circle: `${this.assetBase}/公設-內部/164.jpg`,
-    tower: `${this.assetBase}/外觀/108.jpg`,
+    hero: `${this.assetBase}/photo/hero-bg.webp`,
+    work1: `${this.assetBase}/refers/外觀/102.jpg`,
+    work2: `${this.assetBase}/refers/外觀/104.jpg`,
+    work3: `${this.assetBase}/refers/外觀/105.jpg`,
+    circle: `${this.assetBase}/refers/公設-內部/164.jpg`,
+    tower: `${this.assetBase}/refers/外觀/108.jpg`,
     map: `${this.assetBase}/機能地圖/500.svg`,
-    craftHero: `${this.assetBase}/外觀/158.jpg`,
+    craftHero: `${this.assetBase}/refers/外觀/158.jpg`,
   };
 
   /**
@@ -264,11 +263,22 @@ export class DefaultComponent extends BBDBaseComponent implements AfterViewInit,
           if (diHeadline) {
             diTl.to(diHeadline, { opacity: 1, yPercent: 0, duration: 0.3 }, 0.25);
           }
-          // ── Outro：pin 末段（0.7 → 1.0）淡入深藍 veil + headline 上移微出 ──
-          diTl.to('.district-intro .di-exit-veil', { opacity: 1, duration: 0.3, ease: 'power1.in' }, 0.7);
+
+          // ── Outro：pin 末段（0.65 → 1.0）做 parallax 退場 ──
+          // 整塊 canvas 上推 + 圖片 zoom out 淡出 + 標題向上飄走 + 深藍 veil 同步覆蓋
+          // 模擬截圖中「上一節 parallax 退場」感
+          diTl.to(diCanvas, { yPercent: -22, ease: 'power2.in', duration: 0.35 }, 0.65);
+          diTl.to(diImgs, {
+            scale: 1.18,
+            opacity: 0,
+            ease: 'power2.in',
+            duration: 0.3,
+            stagger: 0.03,
+          }, 0.65);
           if (diHeadline) {
-            diTl.to(diHeadline, { opacity: 0.2, yPercent: -8, duration: 0.25 }, 0.75);
+            diTl.to(diHeadline, { opacity: 0, yPercent: -45, ease: 'power2.in', duration: 0.3 }, 0.7);
           }
+          diTl.to('.district-intro .di-exit-veil', { opacity: 1, ease: 'power1.in', duration: 0.35 }, 0.65);
         } else {
           // Mobile：簡單淡入，不做 pin
           if (diHeadline) gsap.set(diHeadline, { opacity: 0, y: 24 });
@@ -386,6 +396,36 @@ export class DefaultComponent extends BBDBaseComponent implements AfterViewInit,
           });
         }
       }
+
+      // ───── Section entry parallax — opacity scrub composes with CSS bg bridges ─────
+      // 每個 section 進場時，主內容 opacity 由 0.25 漸入至 1，
+      // 跟 SCSS 頂部 gradient bridge 一起作用，提供 parallax 切換感。
+      // 只動 opacity 不動 transform，避免影響 .col-narrow 的 sticky 行為。
+      const sectionEntries: Array<[string, string]> = [
+        ['.trust', '.trust .builder-deep'],
+        ['#whynow', '#whynow .inner'],
+        ['.spec', '.spec .head'],
+        ['.design', '.design .inner'],
+        ['.contact', '.contact .pre'],
+      ];
+      sectionEntries.forEach(([trigger, target]) => {
+        const el = root.querySelector<HTMLElement>(target);
+        if (!el) return;
+        gsap.fromTo(
+          el,
+          { opacity: 0.25 },
+          {
+            opacity: 1,
+            ease: 'none',
+            scrollTrigger: {
+              trigger,
+              start: 'top 90%',
+              end: 'top 50%',
+              scrub: 0.7,
+            },
+          },
+        );
+      });
 
       // ───── Generic section reveal ─────
       const revealSelectors = [

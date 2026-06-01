@@ -1,8 +1,12 @@
 <!-- Sticky topbar -->
 <div class="topbar" [class.shown]="scrolled">
   <a class="mark" routerLink="/">
-      <img src="assets/image/logo/type-main.svg" alt="之序" class="w-24" />
-    </a>
+    <img src="assets/image/logo/type-main.svg" alt="之序" />
+    <div class="en">
+      <p>Crossing the</p>
+      <p>New Divide</p>
+    </div>
+  </a>
   <nav class="ghost">
     <a
       *ngFor="let item of navItems"
@@ -11,11 +15,6 @@
       >{{ item.label }}</a
     >
   </nav>
-  <div class="cta-row">
-    <button class="btn-stroked" (click)="scrollToId('contact')">
-      預約鑒賞
-    </button>
-  </div>
 </div>
 
 <!-- Floating CTA -->
@@ -37,16 +36,21 @@
   <div class="hero-vignette"></div>
 
   <div class="hero-content">
-    <h1 class="hero-title">
-      回家，<br />
-      是航向中央公園，<br />
-      泊岸生活的<span class="accent">儀式</span>。
-    </h1>
+    <div class="hero-title">
+      <h1>
+        航向中央公園，<br />
+        泊岸理想生活。
+      </h1>
+
+      <button class="btn-stroked" (click)="scrollToId('contact')">
+        預約鑒賞
+      </button>
+    </div>
 
     <div class="hero-foot">
       <div class="hero-lede">
         <p class="hero-sub">四面臨路 · 國際新奢寓所</p>
-        <p class="hero-yearmark">CENTRAL PARK · SHUI-NAN · TAICHUNG</p>
+        <p class="hero-yearmark">CENTRAL PARK · SHUI-NAN · 渲染示意圖</p>
       </div>
 
       <div class="scroll-cue">向下 · SCROLL</div>
@@ -88,10 +92,11 @@
         在你的步行距離裡成形。
       </p>
     </div>
-
-    <!-- exit veil：pin 末段淡入，銜接下一節深色 location-map -->
-    <div class="di-exit-veil" aria-hidden="true"></div>
   </div>
+
+  <!-- exit veil：pin 末段淡入，銜接下一節深色 location-map
+       注意必須在 .di-canvas 外，否則會跟 canvas 一起上推、暴露 section 米色底 -->
+  <div class="di-exit-veil" aria-hidden="true"></div>
 </section>
 
 <!-- The Location · scroll-driven map -->
