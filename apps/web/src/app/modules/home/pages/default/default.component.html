@@ -101,260 +101,6 @@
 
 <!-- The Location · scroll-driven map -->
 <app-location-map></app-location-map>
-<!-- Trust -->
-<section class="trust" id="trust">
-  <div class="builder-deep" id="builder-deep">
-    <div class="anchor-q">
-      富華創新承繼總太三十年耕耘，<br />
-      以新名義做同一件事 &#8212; <br />
-      <span class="lighter">蓋一棟值得等待的房子。</span>
-    </div>
-
-    <div class="builder-body">
-      <div class="bd-left">
-        <div class="eyebrow">
-          <span>THE BUILDER ·總太營造</span>
-        </div>
-        <div style="height: 1.5rem"></div>
-        <p class="bd-essay">
-          我們不只蓋一座房子，更是以國家級公共工程、超高層摩天大樓的嚴苛標準，淬鍊一座足以傳承世代的世代傳家行館
-        </p>
-        <p class="bd-essay">
-          外在，是震撼城市的永恆立面；<br />
-          內在，是安放您與家人、財富最優雅的避風港。
-        </p>
-        <p class="bd-essay">
-          <span class="strong">頂級的安全感，從來不需喧嘩。</span>
-        </p>
-      </div>
-
-      <div class="bd-right">
-        <div class="bd-stat">
-          <div class="bd-stat-num">甲級</div>
-          <div class="bd-stat-k">營造商</div>
-          <div class="bd-stat-v">國家最高殿堂認證，承載建築的凌空雄心</div>
-        </div>
-        <div class="bd-stat">
-          <div class="bd-stat-num">1976</div>
-          <div class="bd-stat-k">創立</div>
-          <div class="bd-stat-v">前身高章營造 · 半世紀工地紀律</div>
-        </div>
-        <div class="bd-stat">
-          <div class="bd-stat-num">2009</div>
-          <div class="bd-stat-k">無酒精工地</div>
-          <div class="bd-stat-v">業界首家推行 · 並導入 24h 火警監控</div>
-        </div>
-        <div class="bd-stat">
-          <div class="bd-stat-num">BIM</div>
-          <div class="bd-stat-k">三維預建模</div>
-          <div class="bd-stat-v">施工白皮書 SOP · 材料進場全面抽驗</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 02 / D · THE CRAFT — 甲級營造的 VVIP 語氣 -->
-  <div class="craft" id="craft">
-    <div class="craft-anchor">
-      <div class="eyebrow">
-        <span class="num">02 / D</span><span>THE CRAFT · 匠之系譜</span>
-      </div>
-      <h3 class="craft-title">
-        衡量地標的，<br />
-        不是高度。<br />
-        <span class="craft-accent">而是刻在基石上的名字。</span>
-      </h3>
-    </div>
-
-    <div class="craft-hero">
-      <img [src]="img.craftHero" alt="之序 · 建築立面" />
-      <div class="craft-hero-caption">CRAFTED FOR A CENTURY · 為傳世而砌</div>
-    </div>
-
-    <div class="craft-coda">
-      <span>頂級的安全感，從來不需喧嘩。</span>
-      <span class="dot">·</span>
-      <span>大匠之風，靜候識者。</span>
-    </div>
-  </div>
-</section>
-
-<!-- 03 · Why Now -->
-<section class="frame" id="whynow">
-  <div class="inner">
-    <div class="col-narrow">
-      <div class="eyebrow">
-        <span class="num">03</span><span>WHY NOW · 時間紅利</span>
-      </div>
-      <div style="height: 1rem"></div>
-      <div class="yearmark">水湳特區 · 台中 · 2025</div>
-    </div>
-
-    <div class="col-wide">
-      <div class="walk">
-        <div class="left">
-          <div class="eyebrow">
-            <span class="num">03 / B</span
-            ><span>日常生活圈 · DAILY RADIUS</span>
-          </div>
-          <h3 class="pull-zh">
-            不只是特區，<br />也是你真正<br />要住進去的地方。
-          </h3>
-          <p class="body zh">
-            你每天要用到的，比你想的都近。<br />
-            全聯、學校、診所——生活的基本半徑，<span style="color: var(--accent)"
-              >之序都在圈內。</span
-            >
-          </p>
-          <div class="foot" style="margin-top: 0.5rem">
-            距離全部以分鐘計，數字待現場最終丈量校正。
-          </div>
-        </div>
-        <div class="list">
-          <div *ngFor="let w of walks; trackBy: trackByIndex" class="row">
-            <div class="place">{{ w.p }}</div>
-            <div class="mode">{{ w.m }}</div>
-            <div class="min">{{ w.n }}<span class="u">分</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-top: 4rem; display: flex; justify-content: flex-end">
-        <button class="tl" (click)="scrollToId('contact')">
-          索取最新戶別狀態圖
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 04 · Spec Sheet -->
-<section class="spec" id="spec">
-  <div class="head">
-    <div>
-      <div class="eyebrow">
-        <span class="num">04</span><span>THE SPEC · 建案座標</span>
-      </div>
-      <div style="height: 2rem"></div>
-      <h2
-        class="pull"
-        style="
-          color: var(--color-text-on-dark);
-          font-size: clamp(2.8rem, 5vw, 4rem);
-        "
-      >
-        SPEC<br />SHEET
-      </h2>
-    </div>
-    <div class="lead">數字之外，<br />是一個決定。</div>
-  </div>
-
-  <div class="grid">
-    <div class="cell" *ngFor="let c of specCells; trackBy: trackByIndex">
-      <div class="k">{{ c.k }}</div>
-      <div class="v">
-        <ng-container
-          *ngFor="
-            let part of splitSpecValue(c.v);
-            let last = last;
-            let i = index;
-            trackBy: trackByIndex
-          "
-        >
-          <span>{{ part }}<span class="small" *ngIf="!last"> / </span></span>
-        </ng-container>
-      </div>
-      <div class="vsub">{{ c.sub }}</div>
-    </div>
-  </div>
-
-  <div class="pull-wrap">
-    <div class="eyebrow">SCALE · 規模語意</div>
-    <div class="pull">
-      186 戶——<span class="quiet">不多也不少，</span><br />
-      剛好是讓一棟樓有溫度，<br />
-      卻不失去安靜的數字。
-    </div>
-  </div>
-
-  <div class="layouts">
-    <div class="lt">
-      <div class="label-sm">LAYOUT A · 精準的選擇</div>
-      <div class="tt">47 PING<span class="zh">三房 · 兩衛 · 大陽台</span></div>
-      <div class="desc">精品自住首選——方正格局、雙衛皆開窗、光線直進不折。</div>
-      <button
-        class="tl"
-        (click)="scrollToId('contact')"
-        style="align-self: flex-start; color: var(--color-text-on-dark)"
-      >
-        47 坪 · 索取型錄
-      </button>
-    </div>
-    <div class="lt">
-      <div class="label-sm">LAYOUT B · 多一點的餘裕</div>
-      <div class="tt">
-        52 PING<span class="zh">三房 · 雙主臥 · 寬景陽台</span>
-      </div>
-      <div class="desc">
-        給自己更多餘裕——大主臥、寬景陽台、讓四季進得來的空間尺度。
-      </div>
-      <button
-        class="tl"
-        (click)="scrollToId('contact')"
-        style="align-self: flex-start; color: var(--color-text-on-dark)"
-      >
-        52 坪 · 索取型錄
-      </button>
-    </div>
-  </div>
-
-  <div class="footnote foot">
-    坪數採建坪計算 · 售價恕不在網頁揭露 · 完整型錄請於預約時索取
-  </div>
-
-  <div style="margin-top: 4rem; display: flex; justify-content: flex-end">
-    <button
-      class="tl"
-      (click)="scrollToId('contact')"
-      style="color: var(--color-text-on-dark)"
-    >
-      索取電子型錄
-    </button>
-  </div>
-</section>
-
-<!-- SPRINGS BAYS · sticky-stacking 半屏雙欄敘事 -->
-<section class="springs-bays" id="springs-bays">
-  <article
-    *ngFor="let bay of springsBays; let i = index; trackBy: trackByIndex"
-    class="sb-bay"
-    [attr.id]="bay.id"
-    [attr.data-theme]="bay.theme"
-    [style.z-index]="i + 1"
-  >
-    <div class="sb-frame">
-      <div class="sb-image">
-        <img [src]="bay.src" [alt]="bay.title" />
-        <div class="sb-headline">
-          <h2 class="sb-title">{{ bay.title }}</h2>
-          <div class="sb-tag">{{ bay.tag }}</div>
-        </div>
-      </div>
-
-      <aside class="sb-panel">
-        <div class="sb-panel-inner">
-          <p class="sb-lede">{{ bay.lede }}</p>
-
-          <ul class="sb-stats">
-            <li *ngFor="let s of bay.stats; trackBy: trackByIndex">
-              <span class="sb-stat">{{ s }}</span>
-            </li>
-          </ul>
-        </div>
-      </aside>
-    </div>
-  </article>
-</section>
 
 <!-- 06 · The Design -->
 <section class="frame design" id="design">
@@ -411,6 +157,260 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+<!-- Trust -->
+<section class="trust" id="trust">
+  <div class="builder-deep" id="builder-deep">
+    <div class="anchor-q">
+      富華創新承繼總太三十年耕耘，<br />
+      以新名義做同一件事 &#8212; <br />
+      <span class="lighter">蓋一棟值得等待的房子。</span>
+    </div>
+
+    <div class="builder-body">
+      <div class="bd-left">
+        <div class="eyebrow">
+          <span>THE BUILDER ·總太營造</span>
+        </div>
+        <div style="height: 1.5rem"></div>
+        <p class="bd-essay">
+          我們不只蓋一座房子，更是以國家級公共工程、超高層摩天大樓的嚴苛標準，淬鍊一座足以傳承世代的世代傳家行館
+        </p>
+        <p class="bd-essay">
+          外在，是震撼城市的永恆立面；<br />
+          內在，是安放您與家人、財富最優雅的避風港。
+        </p>
+        <p class="bd-essay">
+          <span class="strong">頂級的安全感，從來不需喧嘩。</span>
+        </p>
+      </div>
+
+      <div class="bd-right">
+        <div class="bd-stat">
+          <div class="bd-stat-num">甲級</div>
+          <div class="bd-stat-k">營造商</div>
+          <div class="bd-stat-v">國家最高殿堂認證，承載建築的凌空雄心</div>
+        </div>
+        <div class="bd-stat">
+          <div class="bd-stat-num">1976</div>
+          <div class="bd-stat-k">創立</div>
+          <div class="bd-stat-v">前身高章營造 · 半世紀工地紀律</div>
+        </div>
+        <div class="bd-stat">
+          <div class="bd-stat-num">2009</div>
+          <div class="bd-stat-k">無酒精工地</div>
+          <div class="bd-stat-v">業界首家推行 · 並導入 24h 火警監控</div>
+        </div>
+        <div class="bd-stat">
+          <div class="bd-stat-num">BIM</div>
+          <div class="bd-stat-k">三維預建模</div>
+          <div class="bd-stat-v">施工白皮書 SOP · 材料進場全面抽驗</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 / D · THE CRAFT — 甲級營造的 VVIP 語氣
+  <div class="craft" id="craft">
+    <div class="craft-anchor">
+      <div class="eyebrow">
+        <span class="num">02 / D</span><span>THE CRAFT · 匠之系譜</span>
+      </div>
+      <h3 class="craft-title">
+        衡量地標的，<br />
+        不是高度。<br />
+        <span class="craft-accent">而是刻在基石上的名字。</span>
+      </h3>
+    </div>
+
+    <div class="craft-hero">
+      <img [src]="img.craftHero" alt="之序 · 建築立面" />
+      <div class="craft-hero-caption">CRAFTED FOR A CENTURY · 為傳世而砌</div>
+    </div>
+
+    <div class="craft-coda">
+      <span>頂級的安全感，從來不需喧嘩。</span>
+      <span class="dot">·</span>
+      <span>大匠之風，靜候識者。</span>
+    </div>
+  </div>
+   -->
+</section>
+<!-- SPRINGS BAYS · sticky-stacking 半屏雙欄敘事 -->
+<section class="springs-bays" id="springs-bays">
+  <article
+    *ngFor="let bay of springsBays; let i = index; trackBy: trackByIndex"
+    class="sb-bay"
+    [attr.id]="bay.id"
+    [attr.data-theme]="bay.theme"
+    [style.z-index]="i + 1"
+  >
+    <div class="sb-frame">
+      <div class="sb-image">
+        <img [src]="bay.src" [alt]="bay.title" />
+        <div class="sb-headline">
+          <h2 class="sb-title">{{ bay.title }}</h2>
+          <div class="sb-tag">{{ bay.tag }}</div>
+        </div>
+      </div>
+
+      <aside class="sb-panel">
+        <div class="sb-panel-inner">
+          <p class="sb-lede">{{ bay.lede }}</p>
+
+          <ul class="sb-stats">
+            <li *ngFor="let s of bay.stats; trackBy: trackByIndex">
+              <span class="sb-stat">{{ s }}</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </article>
+</section>
+
+<!-- 03 · Why Now
+<section class="frame" id="whynow">
+  <div class="inner">
+    <div class="col-narrow">
+      <div class="eyebrow">
+        <span class="num">03</span><span>WHY NOW · 時間紅利</span>
+      </div>
+      <div style="height: 1rem"></div>
+      <div class="yearmark">水湳特區 · 台中 · 2025</div>
+    </div>
+
+    <div class="col-wide">
+      <div class="walk">
+        <div class="left">
+          <div class="eyebrow">
+            <span class="num">03 / B</span
+            ><span>日常生活圈 · DAILY RADIUS</span>
+          </div>
+          <h3 class="pull-zh">
+            不只是特區，<br />也是你真正<br />要住進去的地方。
+          </h3>
+          <p class="body zh">
+            你每天要用到的，比你想的都近。<br />
+            全聯、學校、診所——生活的基本半徑，<span style="color: var(--accent)"
+              >之序都在圈內。</span
+            >
+          </p>
+          <div class="foot" style="margin-top: 0.5rem">
+            距離全部以分鐘計，數字待現場最終丈量校正。
+          </div>
+        </div>
+        <div class="list">
+          <div *ngFor="let w of walks; trackBy: trackByIndex" class="row">
+            <div class="place">{{ w.p }}</div>
+            <div class="mode">{{ w.m }}</div>
+            <div class="min">{{ w.n }}<span class="u">分</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 4rem; display: flex; justify-content: flex-end">
+        <button class="tl" (click)="scrollToId('contact')">
+          索取最新戶別狀態圖
+        </button>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- 04 · Spec Sheet -->
+<section class="spec" id="spec">
+  <div class="head">
+    <div>
+      <div class="eyebrow">
+        <span class="num">The Foundation</span>
+      </div>
+      <div style="height: 2rem"></div>
+      <h2
+        class="pull"
+        style="
+          color: var(--color-text-on-dark);
+          font-size: clamp(2.8rem, 5vw, 4rem);
+        "
+      >
+        Built<br /> Beyond Standard
+      </h2>
+    </div>
+    <div class="lead">從地底向上，<br />每一道工序都超越標準</div>
+  </div>
+
+  <div class="grid">
+    <div class="cell" *ngFor="let c of specCells; trackBy: trackByIndex">
+      <div class="k">{{ c.k }}</div>
+      <div class="v">
+        <ng-container
+          *ngFor="
+            let part of splitSpecValue(c.v);
+            let last = last;
+            let i = index;
+            trackBy: trackByIndex
+          "
+        >
+          <span>{{ part }}<span class="small" *ngIf="!last"> / </span></span>
+        </ng-container>
+      </div>
+      <div class="vsub">{{ c.sub }}</div>
+    </div>
+  </div>
+
+  <div class="pull-wrap">
+    <div class="eyebrow">SCALE · 規模語意</div>
+    <div class="pull">
+      186 戶——<span class="quiet">不多也不少，</span><br />
+      剛好是讓一棟樓有溫度，<br />
+      卻不失去安靜的數字。
+    </div>
+  </div>
+
+  <div class="layouts">
+    <div class="lt">
+      <div class="label-sm">LAYOUT A · 精準的選擇</div>
+      <div class="tt">47 坪<span class="zh">三房 · 兩衛 · 大陽台</span></div>
+      <div class="desc">精品自住首選——方正格局、雙衛皆開窗、光線直進不折。</div>
+      <button
+        class="tl"
+        (click)="scrollToId('contact')"
+        style="align-self: flex-start; color: var(--color-text-on-dark)"
+      >
+        47 坪 · 索取型錄
+      </button>
+    </div>
+    <div class="lt">
+      <div class="label-sm">LAYOUT B · 多一點的餘裕</div>
+      <div class="tt">
+        52 坪<span class="zh">三房 · 雙主臥 · 寬景陽台</span>
+      </div>
+      <div class="desc">
+        給自己更多餘裕——大主臥、寬景陽台、讓四季進得來的空間尺度。
+      </div>
+      <button
+        class="tl"
+        (click)="scrollToId('contact')"
+        style="align-self: flex-start; color: var(--color-text-on-dark)"
+      >
+        52 坪 · 索取型錄
+      </button>
+    </div>
+  </div>
+
+  <div class="footnote foot">
+    坪數採建坪計算 · 售價恕不在網頁揭露 · 完整型錄請於預約時索取
+  </div>
+
+  <div style="margin-top: 4rem; display: flex; justify-content: flex-end">
+    <button
+      class="tl"
+      (click)="scrollToId('contact')"
+      style="color: var(--color-text-on-dark)"
+    >
+      索取電子型錄
+    </button>
   </div>
 </section>
 

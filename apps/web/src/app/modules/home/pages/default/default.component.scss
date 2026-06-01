@@ -266,6 +266,23 @@ ul {
   }
 }
 
+/* Mobile：CTA dock 縮小、藏掉 secondary LINE 文字，避免擋內容 */
+@media (max-width: 768px) {
+  .cta-dock {
+    right: 12px;
+    bottom: 12px;
+    gap: 6px;
+    .primary {
+      font-size: 0.8125rem;
+      letter-spacing: 0.18em;
+      padding: 12px 18px;
+    }
+    .secondary {
+      display: none;
+    }
+  }
+}
+
 /* Section frame */
 section.frame {
   padding: 8rem 3rem;
@@ -290,7 +307,6 @@ section.frame {
 /* Frame bridges — fade from previous dark section into cream */
 section.frame#whynow,
 section.frame.design {
-  background-image: linear-gradient(180deg, var(--bg-2) 0%, transparent 100%);
   background-size: 100% 16vh;
   background-repeat: no-repeat;
   background-position: top;
@@ -309,6 +325,10 @@ section.frame.design {
 }
 
 .eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+  align-items: center;
   font-family: var(--font-sans);
   font-size: 0.875rem;
   font-weight: 600;
@@ -541,9 +561,16 @@ p.body {
     .hero-content {
       padding: clamp(80px, 12vh, 120px) 20px 32px;
     }
+    .hero-title {
+      gap: 1.5rem;
+    }
     .hero-title h1 {
       font-size: clamp(2rem, 9vw, 3.6rem);
       max-width: 14ch;
+    }
+    .hero-title .btn-stroked {
+      padding: 12px 22px;
+      font-size: 0.8125rem;
     }
     .hero-foot {
       grid-template-columns: 1fr;
@@ -669,36 +696,42 @@ p.body {
       height: 100svh;
     }
 
+    /* 重排為「上兩下兩」的對稱矩陣，避免互疊、讓 headline 居中可讀 */
     .di-img--tl {
-      width: 28vw;
-      top: 4%;
-      left: 2%;
+      width: 42vw;
+      aspect-ratio: 3 / 4;
+      top: 6%;
+      left: 4%;
     }
 
     .di-img--tr {
-      width: 46vw;
-      top: 0;
-      right: 0;
+      width: 42vw;
+      aspect-ratio: 4 / 3;
+      top: 8%;
+      right: 4%;
     }
 
     .di-img--bl {
-      width: 40vw;
-      bottom: 0;
-      left: 2%;
+      width: 42vw;
+      aspect-ratio: 4 / 5;
+      bottom: 6%;
+      left: 4%;
     }
 
     .di-img--br {
-      width: 38vw;
-      bottom: 4%;
-      right: 2%;
+      width: 42vw;
+      aspect-ratio: 1 / 1;
+      bottom: 8%;
+      right: 4%;
     }
 
     .di-headline {
-      width: 80vw;
+      width: 90vw;
     }
 
     .di-title {
-      font-size: clamp(1.4rem, 4.8vw, 2rem);
+      font-size: clamp(1.3rem, 4.4vw, 1.8rem);
+      line-height: 1.6;
     }
   }
 }
@@ -706,7 +739,6 @@ p.body {
 /* Trust */
 .trust {
   background-color: var(--bg-2);
-  background-image: linear-gradient(180deg, #212a36 0%, transparent 100%);
   background-size: 100% 16vh;
   background-repeat: no-repeat;
   background-position: top;
@@ -1080,6 +1112,13 @@ p.body {
     .craft-hero {
       margin: 0 -1.25rem 3rem;
       height: 40vh;
+      .craft-hero-caption {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        font-size: 0.6875rem;
+        letter-spacing: 0.18em;
+      }
     }
     .craft-coda {
       flex-direction: column;

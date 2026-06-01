@@ -36,7 +36,7 @@ export class DefaultComponent extends BBDBaseComponent implements AfterViewInit,
     work3: `${this.assetBase}/refers/外觀/105.jpg`,
     circle: `${this.assetBase}/refers/公設-內部/164.jpg`,
     tower: `${this.assetBase}/refers/外觀/108.jpg`,
-    map: `${this.assetBase}/機能地圖/500.svg`,
+    map: `${this.assetBase}/refers/機能地圖/500.svg`,
     craftHero: `${this.assetBase}/refers/外觀/158.jpg`,
   };
 
@@ -56,7 +56,7 @@ export class DefaultComponent extends BBDBaseComponent implements AfterViewInit,
       id: 'bay-lobby',
       title: 'Lobby',
       tag: 'A RITUAL OF ARRIVAL',
-      src: `${this.assetBase}/公設-內部/164.jpg`,
+      src: `${this.assetBase}/refers/公設-內部/164.jpg`,
       lede:
         '迎賓大廳是日常的第一句問候。從車道到玄關，動線被細細編排——一條屬於生活，一條屬於招待。當門在身後闔上，城市的喧囂便留在了外面。',
       stats: [
@@ -71,7 +71,7 @@ export class DefaultComponent extends BBDBaseComponent implements AfterViewInit,
       id: 'bay-wellness',
       title: 'Wellness',
       tag: 'BODY AS A HOME',
-      src: `${this.assetBase}/公設-內部/254.jpg`,
+      src: `${this.assetBase}/refers/公設-內部/254.jpg`,
       lede:
         '不必出門，就能在日光裡開始一天。健身、瑜珈、烤箱、SPA——身體的每一處需要，都被理解成住家的一部分。挑高採光的室內泳池，水波折射出整面天光。',
       stats: [
@@ -86,7 +86,7 @@ export class DefaultComponent extends BBDBaseComponent implements AfterViewInit,
       id: 'bay-equipment',
       title: 'Equipment',
       tag: 'STANDARD, UNSPOKEN',
-      src: `${this.assetBase}/公設-內部/176.jpg`,
+      src: `${this.assetBase}/refers/公設-內部/176.jpg`,
       lede:
         '德意原裝廚電、日德並陳衛浴、全屋恆境空調、智慧家居中控。四大系譜，皆為住家而設，不為展示而堆——真正的奢侈，是看不見的標準。',
       stats: [
@@ -116,13 +116,13 @@ export class DefaultComponent extends BBDBaseComponent implements AfterViewInit,
   ];
 
   readonly specCells: SpecCell[] = [
-    { k: 'GROUND FLOORS · 地上層數', v: '29', sub: '層' },
-    { k: 'BELOW GROUND · 地下層數', v: '03', sub: '地下三層 · 車位 248' },
-    { k: 'TOTAL UNITS · 總戶數', v: '186', sub: '戶 · 不多不少' },
-    { k: 'AREA RANGE · 坪數範圍', v: '47 / 52', sub: '坪 · 建坪計' },
-    { k: 'LAYOUT · 格局', v: '三房', sub: '兩款；雙衛皆開窗' },
-    { k: 'HANDOVER · 預計交屋', v: '2027', sub: '預計交屋年' },
-  ];
+  { k: 'SEISMIC RESISTANCE · 耐震係數', v: '0.34g', sub: '六級耐震設計' },
+  { k: 'FOUNDATION DEPTH · 地樑深度', v: '3M', sub: '筏式基礎 · 深根入地' },
+  { k: 'EXCAVATION DEPTH · 開挖深度', v: '14.3M', sub: '地下室開挖深度' },
+  { k: 'REBAR STRENGTH · 鋼筋抗拉', v: '4,200', sub: 'kg/cm² · 樓版鋼筋強度' },
+  { k: 'SLAB THICKNESS · 樓板厚度', v: '15CM', sub: '雙層配筋 · 符合 CNS560' },
+  { k: 'CONNECTOR GRADE · 續接器等級', v: 'SA級', sub: '最高等級鋼筋續接工法' },
+];
 
   readonly layoutOptions: Array<{ v: '47' | '52' | 'any'; l: string }> = [
     { v: '47', l: '47 坪 · 精準' },
