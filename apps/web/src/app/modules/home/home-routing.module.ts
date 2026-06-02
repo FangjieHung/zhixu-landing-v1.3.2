@@ -10,8 +10,8 @@ const routes: Routes = [
     path: '',
     component: DefaultComponent,
     data: {
-      title: `${env.siteName}｜老菜脯滴雞精．職人手藝傳承`,
-      description: '之序｜水湳 · 綠海星嶼｜傳承職人手藝的老菜脯滴雞精，無毒契作白蘿蔔、陶甕地下窖藏。',
+      title: `${env.siteName}｜中科 4 房｜水湳高樓層高級住宅`,
+      description: '台中水湳重劃區的高端純自住建案，中科菁英與工程師隱富聚落。',
       url: `${env.siteServer}/`,
       image: `${env.siteServer}/assets/image/og/chuhung-og.png`
     }

@@ -100,6 +100,16 @@ ul {
   pointer-events: none;
   z-index: 2;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+
+  .caption-disclaimer {
+    display: block;
+    font-size: 0.625rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: none;
+    opacity: 0.6;
+    margin-top: 3px;
+  }
 }
 
 /* Topbar */
@@ -307,14 +317,14 @@ section.frame {
 /* Frame bridges — section 頂部 16vh 漸層銜接上一節色調 */
 /* design 接在 lm-stage (#212a36 深藍) 之後 → 米色 design 頂部 fade from 深藍 */
 section.frame.design {
-  background-image: linear-gradient(180deg, #212a36 0%, transparent 100%);
+  
   background-size: 100% 16vh;
   background-repeat: no-repeat;
   background-position: top;
 }
 /* whynow 接在 springs-bays (var(--bg-2) 深咖) 之後 → 米色 whynow 頂部 fade from 深咖 */
 section.frame#whynow {
-  background-image: linear-gradient(180deg, var(--bg-2) 0%, transparent 100%);
+  
   background-size: 100% 16vh;
   background-repeat: no-repeat;
   background-position: top;
@@ -358,22 +368,19 @@ section.frame#whynow {
   font-weight: 400;
   line-height: 1.05;
   letter-spacing: 0.01em;
-  color: var(--fg-1);
+  
   font-size: clamp(2rem, 4.2vw, 3.4rem);
   margin: 0;
 }
 .pull-zh {
+  @apply font-serif font-bold;
   font-family: "Noto Serif SC", serif;
   font-weight: 500;
   line-height: 1.25;
   letter-spacing: 0.04em;
-  color: var(--fg-1);
+  color: var(--color-accent-warm);
   font-size: clamp(1.6rem, 3vw, 2.6rem);
   margin: 0;
-  &.xl {
-    font-size: clamp(3rem, 6vw, 5.2rem);
-    line-height: 1.18;
-  }
 }
 p.body {
   font-family: var(--font-sans);
@@ -673,10 +680,10 @@ p.body {
   }
 
   .di-title {
-    font-family: var(--font-serif);
+    @apply font-serif;
     font-size: clamp(1.8rem, 3.6vw, 3.4rem);
     line-height: 1.65;
-    color: #1f1a14;
+    color: var(--color-text-on-light);
     font-weight: 400;
     letter-spacing: 0.02em;
   }
@@ -762,7 +769,7 @@ p.body {
 .trust {
   background-color: var(--bg-2);
   /* trust 接在 design (米色) 之後 → 深咖 trust 頂部 fade from 米色 */
-  background-image: linear-gradient(180deg, var(--bg-1) 0%, transparent 100%);
+  
   background-size: 100% 16vh;
   background-repeat: no-repeat;
   background-position: top;
@@ -1274,7 +1281,7 @@ p.body {
         }
         .sb-stat {
           font-family: "Cormorant Garamond", "Noto Serif SC", serif;
-          font-size: clamp(1.75rem, 2.6vw, 2.4rem);
+          font-size: clamp(1.5rem, 2vw, 2rem);
           line-height: 1.15;
           letter-spacing: 0.02em;
           font-weight: 400;
@@ -1410,7 +1417,7 @@ p.body {
 /* Spec */
 .spec {
   background-color: var(--bg-2);
-  background-image: linear-gradient(180deg, var(--bg-1) 0%, transparent 100%);
+  
   background-size: 100% 16vh;
   background-repeat: no-repeat;
   background-position: top;
@@ -1684,7 +1691,7 @@ p.body {
     }
     .invite {
       font-family: "Noto Serif SC", serif;
-      font-size: clamp(2rem, 3.6vw, 3.2rem);
+      font-size: clamp(2.25rem, 4vw, 3.6rem);
       line-height: 1.4;
       letter-spacing: 0.04em;
       color: var(--color-text-on-dark);
@@ -1710,20 +1717,21 @@ p.body {
       gap: 0.5rem;
       label {
         font-family: var(--font-sans);
-        font-size: 0.875rem;
+        font-size: 1rem;
         font-weight: 600;
         letter-spacing: 0.26em;
         text-transform: uppercase;
         color: #8e827a;
       }
       input,
-      select {
+      select,
+      textarea {
         background: transparent;
         border: 0;
         border-bottom: 1px solid #3a3128;
         color: var(--color-text-on-dark);
         font-family: "Noto Sans TC", var(--font-sans);
-        font-size: 0.875rem;
+        font-size: 1rem;
         letter-spacing: 0.04em;
         padding: 10px 0 12px;
         outline: none;
@@ -1764,7 +1772,7 @@ p.body {
     .submit {
       margin-top: 1rem;
       font-family: var(--font-sans);
-      font-size: 1rem;
+      font-size: 1.125rem;
       font-weight: 600;
       letter-spacing: 0.28em;
       text-transform: uppercase;
@@ -1793,7 +1801,7 @@ p.body {
       gap: 0.5rem;
       .label {
         font-family: var(--font-sans);
-        font-size: 0.875rem;
+        font-size: 1rem;
         font-weight: 600;
         letter-spacing: 0.28em;
         text-transform: uppercase;
@@ -1801,13 +1809,13 @@ p.body {
       }
       .value {
         font-family: "Noto Serif SC", serif;
-        font-size: 1rem;
+        font-size: 1.125rem;
         line-height: 1.8;
         color: var(--color-text-on-dark);
         letter-spacing: 0.04em;
         .en {
           font-family: var(--font-sans);
-          font-size: 0.875rem;
+          font-size: 1rem;
           letter-spacing: 0.22em;
           text-transform: uppercase;
           color: #b8ad9e;
@@ -1840,7 +1848,7 @@ p.body {
     flex-wrap: wrap;
     gap: 1rem;
     font-family: var(--font-sans);
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;

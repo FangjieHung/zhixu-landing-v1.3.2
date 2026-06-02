@@ -47,7 +47,7 @@ export class DefaultComponent
     work3: `${this.assetBase}/refers/外觀/105.jpg`,
     circle: `${this.assetBase}/refers/公設-內部/164.jpg`,
     tower: `${this.assetBase}/refers/外觀/108.jpg`,
-    map: `${this.assetBase}/refers/機能地圖/500.svg`,
+    map: `${this.assetBase}/map/contact-map.webp`,
     craftHero: `${this.assetBase}/refers/外觀/158.jpg`,
   };
 
@@ -67,7 +67,7 @@ export class DefaultComponent
       id: 'bay-sanctuary',
       title: 'Sanctuary',
       tag: 'A DAILY RETURN TO SELF',
-      src: `${this.assetBase}/refers/衛浴/toto-main.jpg`,
+      src: `${this.assetBase}/rephoto衛浴/toto-main.jpg`,
       lede: '以 TOTO 全系列精工衛浴，重新定義沐浴的儀式感。智能馬桶、豪華浴缸、四合一暖風機，每一件配備皆源自對生活品質的嚴謹堅持——洗浴不再只是日常清潔，而是每日可以期待的私人療癒時光。',
       stats: [
         'TOTO 全自動智能馬桶 · 一體成型免縫設計',
@@ -82,22 +82,23 @@ export class DefaultComponent
       id: 'bay-kitchen',
       title: 'Kitchen',
       tag: 'WHERE CRAFT BECOMES RITUAL',
-      src: `${this.assetBase}/refers/廚房/stosa-main.jpg`,
+      src: `${this.assetBase}/photo/stosa-main.jpg`,
       lede: '引進義大利 STOSA 頂級廚具，搭配 BOSCH、SAKURA 旗艦廚電，SILESTONE 賽麗石無縫延伸料理台面。從動線規劃到收納美學，每個細節都為真正懂廚房的人而生——讓烹飪成為一種日常的儀式感。',
       stats: [
         'STOSA 義大利廚具 · 創立逾 164 年歐洲頂級品牌',
-        'SILESTONE 賽麗石檯面 · 超硬度抗刮耐熱終身保障',
+        'SILESTONE 賽麗石檯面 · 超硬度抗刮耐熱',
         'BOSCH IH 感應爐 · CHOTT 陶瓷面板智慧滾沸偵測',
         'BOSCH 全嵌式洗碗機 · 70°C 高溫殺菌 AquaStop 防漏',
         'SAKURA 近吸式排油煙機 · 專為台灣料理習慣設計',
       ],
       theme: 'umber',
     },
+    /*
     {
       id: 'bay-amenities',
       title: 'Amenities',
       tag: 'LIFE ELEVATED BEYOND THE UNIT',
-      src: `${this.assetBase}/refers/公設/skylounge-main.jpg`,
+      src: `${this.assetBase}/photo/skylounge-main.jpg`,
       lede: '走出家門，生活仍在延伸。從幾何光影門廳到頂樓 Sky Lounge，從無邊際泳池到私人影院，每一處公共空間都以飯店規格設計——讓日常成為度假，讓棟內即是目的地。',
       stats: [
         'Sky Lounge 頂樓天空酒廊 · 金色弧形吧台環繞城市天際線',
@@ -108,6 +109,23 @@ export class DefaultComponent
       ],
       theme: 'forest',
     },
+    */
+   {
+  id: 'bay-residence',
+  title: 'Residence',
+  tag: 'EVERY DETAIL, CONSIDERED',
+  src: `${this.assetBase}/photo/vaf-living.jpg`,
+  lede:
+    '從踏入門的那一刻起，每個選材都在說話。德國太格木地板、日本三協氣密窗、VAF 智慧淨氣、Yale 無感門鎖——全戶標配不為炫耀，而是對真正居住品質的基本堅持。',
+  stats: [
+    'VAF 智慧浮流系統 · 過濾 PM2.5、黴菌、甲醛',
+    '德國太格木地板 · 台灣認證健康材，不含苯、甲醛',
+    '日本三協氣密窗 · 橫拉窗整體把手設計，隔音隔熱氣密性卓越',
+    'ORLANT 電動曬衣架 · 智慧控制升降',
+    'Yale 抗菌電子鎖 · 手機感應解鎖，無實體鑰匙零接觸進門',
+  ],
+  theme: 'cream',
+},
   ];
 
   readonly navItems: Array<{ id: string; label: string }> = [

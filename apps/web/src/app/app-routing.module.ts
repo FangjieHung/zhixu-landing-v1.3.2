@@ -18,13 +18,6 @@ const routes: Routes = [
               import('./modules/home/home.module').then((m) => m.HomeModule),
           },
           {
-            path: '',
-            loadChildren: () =>
-              import('./modules/map-story/map-story.module').then(
-                (m) => m.MapStoryModule
-              ),
-          },
-          {
             path: 'service',
             loadChildren: () =>
               import('./modules/service/service.module').then(

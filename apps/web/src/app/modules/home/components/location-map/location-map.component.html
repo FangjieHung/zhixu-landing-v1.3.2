@@ -162,7 +162,7 @@
     </svg>
 
     <!-- TEMP: 路徑收集 debug 浮層 — 取得所有路線座標後刪除 -->
-    <div class="lm-debug-panel">
+    <div *ngIf="false" class="lm-debug-panel">
       <div class="lm-debug-hover">{{ debugHover }}</div>
       <div class="lm-debug-points" *ngIf="debugPoints.length">
         <div class="lm-debug-row" *ngFor="let p of debugPoints; let i = index">
