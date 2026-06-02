@@ -1648,6 +1648,7 @@ p.body {
     }
 
     .vg-card--side {
+      grid-column: auto;
       height: 40vw;
     }
   }
