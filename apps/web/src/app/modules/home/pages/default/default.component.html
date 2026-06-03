@@ -8,12 +8,14 @@
     </div>
   </a>
   <nav class="ghost">
-    <a
-      *ngFor="let item of navItems"
-      (click)="scrollToId(item.id)"
-      [style.color]="active === item.id ? 'var(--accent)' : null"
-      >{{ item.label }}</a
-    >
+    <ng-container *ngFor="let item of navItems">
+      <a
+        *ngIf="!isMobileView() || !mobileHidden(item.id)"
+        (click)="scrollToId(item.id)"
+        [style.color]="active === item.id ? 'var(--accent)' : null"
+        >{{ navLabel(item) }}</a
+      >
+    </ng-container>
   </nav>
 </div>
 

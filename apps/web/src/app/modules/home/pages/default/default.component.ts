@@ -131,6 +131,33 @@ export class DefaultComponent
     { id: 'contact', label: '預約鑒賞' },
   ];
 
+  readonly mobileLabels: Record<string, string> = {
+    'district-intro': '社區',
+    trust: '甲級',
+    spec: '規格',
+    'springs-bays': '樣貌',
+    design: '生活',
+    contact: '預約',
+  };
+
+  mobileHiddenIds = ['district-intro'];
+
+  isMobileView(): boolean {
+    return (
+      typeof window !== 'undefined' &&
+      window.matchMedia &&
+      window.matchMedia('(max-width: 640px)').matches
+    );
+  }
+
+  navLabel(item: { id: string; label: string }): string {
+    return this.isMobileView() ? this.mobileLabels[item.id] ?? item.label : item.label;
+  }
+
+  mobileHidden(id: string): boolean {
+    return this.isMobileView() && this.mobileHiddenIds.includes(id);
+  }
+
   readonly walks: Walk[] = [
     { p: '中央公園 · 主入口', m: '步行', n: '03' },
     { p: '全聯福利中心', m: '步行', n: '06' },
