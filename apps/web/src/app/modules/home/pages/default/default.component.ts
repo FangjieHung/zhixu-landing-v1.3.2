@@ -123,7 +123,7 @@ export class DefaultComponent
   ];
 
   readonly navItems: Array<{ id: string; label: string }> = [
-    { id: 'district-intro', label: '水湳特區' },
+    { id: 'location-map', label: '水湳特區' },
     { id: 'trust', label: '甲級精工' },
     { id: 'spec', label: '精工格局' },
     { id: 'springs-bays', label: '生活樣貌' },
@@ -132,7 +132,7 @@ export class DefaultComponent
   ];
 
   readonly mobileLabels: Record<string, string> = {
-    'district-intro': '社區',
+    'location-map': '社區',
     trust: '甲級',
     spec: '規格',
     'springs-bays': '樣貌',
@@ -140,7 +140,7 @@ export class DefaultComponent
     contact: '預約',
   };
 
-  mobileHiddenIds = ['district-intro'];
+  mobileHiddenIds = ['location-map', 'trust', 'design'];
 
   isMobileView(): boolean {
     return (
