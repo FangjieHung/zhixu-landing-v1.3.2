@@ -617,7 +617,7 @@ p.body {
 
   // 左上 · 小直版 (387)
   .di-img--tl {
-    width: clamp(140px, 15vw, 220px);
+    width: clamp(140px, 15vw, 330px);
     aspect-ratio: 3 / 4;
     top: 8%;
     left: 4%;
@@ -625,7 +625,7 @@ p.body {
 
   // 右上 · 寬景 (396) — 右側貼邊
   .di-img--tr {
-    width: clamp(260px, 32vw, 460px);
+    width: clamp(260px, 32vw, 690px);
     aspect-ratio: 16 / 10;
     top: 4%;
     right: 0;
@@ -633,7 +633,7 @@ p.body {
 
   // 左下 · 大直版 (364)
   .di-img--bl {
-    width: clamp(220px, 26vw, 380px);
+    width: clamp(220px, 26vw, 570px);
     aspect-ratio: 3 / 4;
     bottom: 0;
     left: 8%;
@@ -641,15 +641,15 @@ p.body {
 
   // 右下 · 方版 (437)
   .di-img--br {
-    width: clamp(200px, 22vw, 320px);
+    width: clamp(200px, 22vw, 480px);
     aspect-ratio: 4 / 3;
-    bottom: 6%;
+    bottom: 50%;
     right: 4%;
   }
 
   // 上中 · 橫版 (409) — 頂部居中略偏左
   .di-img--tc {
-    width: clamp(160px, 18vw, 260px);
+    width: clamp(160px, 18vw, 390px);
     aspect-ratio: 16 / 9;
     top: 0;
     left: calc(50% - 9vw);
@@ -657,7 +657,7 @@ p.body {
 
   // 中左 · 直版 (428) — 左邊緣居中
   .di-img--ml {
-    width: clamp(90px, 10vw, 150px);
+    width: clamp(90px, 10vw, 225px);
     aspect-ratio: 3 / 4;
     top: 30%;
     left: 0;
@@ -665,7 +665,7 @@ p.body {
 
   // 中右 · 橫版 (479) — 右邊緣居中偏下
   .di-img--mr {
-    width: clamp(90px, 10vw, 150px);
+    width: clamp(90px, 10vw, 225px);
     aspect-ratio: 4 / 3;
     bottom: 22%;
     right: 0;
@@ -1530,14 +1530,26 @@ p.body {
       }
     }
   }
-  .layouts {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+  .layouts-hero {
+    position: relative;
     margin-top: 5rem;
+    margin-left: -3rem;
+    margin-right: -3rem;
+    overflow: hidden;
+    .layouts-bg {
+      @apply object-cover object-bottom aspect-video max-h-[80svh] min-w-full;
+    }
+
+    .layouts {
+      margin-top: 0;
+      padding: 5rem 3rem;
+    }
+  }
+  .layouts {
+    @apply flex flex-wrap gap-10;
+
     .lt {
-      display: flex;
-      flex-direction: column;
+      @apply flex flex-col flex-1 min-w-fit;
       gap: 1rem;
       padding-top: 2rem;
       border-top: 1px solid #3a3128;
@@ -1581,6 +1593,13 @@ p.body {
 @media (max-width: 900px) {
   .spec {
     padding: 4rem 1.25rem;
+    .layouts-hero {
+      margin-left: -1.25rem;
+      margin-right: -1.25rem;
+      .layouts {
+        padding: 3rem 1.25rem;
+      }
+    }
     .head,
     .pull-wrap,
     .layouts {
