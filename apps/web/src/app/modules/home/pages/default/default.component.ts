@@ -57,10 +57,26 @@ export class DefaultComponent
     stats: string[];
     theme: 'cream' | 'forest' | 'umber';
   }> = [
+       {
+  id: 'bay-residence',
+  title: '全屋',
+  tag: '細節成就完美',
+  src: `${this.assetBase}/photo/vaf-living.jpg`,
+  lede:
+    '從踏入門的那一刻起，每個選材都在說話。德國太格木地板、日本三協氣密窗、VAF 智慧淨氣、Yale 無感門鎖——全戶標配不為炫耀，而是對真正居住品質的基本堅持。',
+  stats: [
+    'VAF 智慧浮流系統 · 過濾 PM2.5、黴菌、甲醛',
+    '德國太格木地板 · 台灣認證健康材，不含苯、甲醛',
+    '日本三協氣密窗 · 橫拉窗整體把手設計，隔音隔熱氣密性卓越',
+    'ORLANT 電動曬衣架 · 智慧控制升降',
+    'Yale 抗菌電子鎖 · 手機感應解鎖，無實體鑰匙零接觸進門',
+  ],
+  theme: 'cream',
+},
     {
       id: 'bay-sanctuary',
-      title: 'Sanctuary',
-      tag: 'A DAILY RETURN TO SELF',
+      title: '浴室',
+      tag: '日常淨心儀式',
       src: `${this.assetBase}/photo/toto-main.jpg`,
       lede: '以 TOTO 全系列精工衛浴，重新定義沐浴的儀式感。智能馬桶、豪華浴缸、四合一暖風機，每一件配備皆源自對生活品質的嚴謹堅持——洗浴不再只是日常清潔，而是每日可以期待的私人療癒時光。',
       stats: [
@@ -74,8 +90,8 @@ export class DefaultComponent
     },
     {
       id: 'bay-kitchen',
-      title: 'Kitchen',
-      tag: 'WHERE CRAFT BECOMES RITUAL',
+      title: '廚房',
+      tag: '烹飪成為藝術',
       src: `${this.assetBase}/photo/stosa-main.jpg`,
       lede: '引進義大利 STOSA 頂級廚具，搭配 BOSCH、SAKURA 旗艦廚電，SILESTONE 賽麗石無縫延伸料理台面。從動線規劃到收納美學，每個細節都為真正懂廚房的人而生——讓烹飪成為一種日常的儀式感。',
       stats: [
@@ -104,22 +120,7 @@ export class DefaultComponent
       theme: 'forest',
     },
     */
-   {
-  id: 'bay-residence',
-  title: 'Residence',
-  tag: 'EVERY DETAIL, CONSIDERED',
-  src: `${this.assetBase}/photo/vaf-living.jpg`,
-  lede:
-    '從踏入門的那一刻起，每個選材都在說話。德國太格木地板、日本三協氣密窗、VAF 智慧淨氣、Yale 無感門鎖——全戶標配不為炫耀，而是對真正居住品質的基本堅持。',
-  stats: [
-    'VAF 智慧浮流系統 · 過濾 PM2.5、黴菌、甲醛',
-    '德國太格木地板 · 台灣認證健康材，不含苯、甲醛',
-    '日本三協氣密窗 · 橫拉窗整體把手設計，隔音隔熱氣密性卓越',
-    'ORLANT 電動曬衣架 · 智慧控制升降',
-    'Yale 抗菌電子鎖 · 手機感應解鎖，無實體鑰匙零接觸進門',
-  ],
-  theme: 'cream',
-},
+
   ];
 
   readonly navItems: Array<{ id: string; label: string }> = [
@@ -168,21 +169,21 @@ export class DefaultComponent
   ];
 
   readonly specCells: SpecCell[] = [
-    { k: 'SEISMIC RESISTANCE · 耐震係數', v: '0.34g', sub: '六級耐震設計' },
-    { k: 'FOUNDATION DEPTH · 地樑深度', v: '3M', sub: '筏式基礎 · 深根入地' },
-    { k: 'EXCAVATION DEPTH · 開挖深度', v: '14.3M', sub: '地下室開挖深度' },
+    { k: '耐震係數', v: '0.34g', sub: '六級耐震設計' },
+    { k: '地樑深度', v: '3M', sub: '筏式基礎 · 深根入地' },
+    { k: '開挖深度', v: '14.3M', sub: '地下室開挖深度' },
     {
-      k: 'REBAR STRENGTH · 鋼筋抗拉',
+      k: '鋼筋抗拉',
       v: '4,200',
       sub: 'kg/cm² · 樓版鋼筋強度',
     },
     {
-      k: 'SLAB THICKNESS · 樓板厚度',
+      k: '樓板厚度',
       v: '15CM',
       sub: '雙層配筋 · 符合 CNS560',
     },
     {
-      k: 'CONNECTOR GRADE · 續接器等級',
+      k: '續接器等級',
       v: 'SA級',
       sub: '最高等級鋼筋續接工法',
     },
@@ -334,14 +335,14 @@ export class DefaultComponent
             }
           );
 
-          // 建立 pinned timeline（拉長為 1.5× vh ≈ 150svh）
-          // 節奏：淡入(0→~0.55) + 全程 parallax 視差 → hold(0.64→0.80) → 退場(0.78→1.0)
+          // 建立 pinned timeline（拉長為 2.0× vh ≈ 200svh）
+          // 節奏：淡入(0→~0.44) + 全程 parallax 視差 → 定格 hold(0.45→0.72) → 緩慢退場(0.72→1.0)
           const diTl = gsap.timeline({
             defaults: { ease: 'power2.out' },
             scrollTrigger: {
               trigger: diSection,
               start: 'top top',
-              end: () => `+=${window.innerHeight * 1.5}`,
+              end: () => `+=${window.innerHeight * 2.0}`,
               pin: true,
               pinSpacing: true,
               scrub: 0.6,
@@ -352,12 +353,12 @@ export class DefaultComponent
 
           // 進場序列（對應草圖出現順序，diImgs 依 DOM 順序即 01→05 = 圖1→圖5）：
           // 圖1(右上) → 圖2(中上) →【中間文字第 3 個出現】→ 圖3(左中) → 圖4(右下) → 圖5(中下)
-          // entryStep × 最後一格(5) + duration = 0.64，剛好銜接後段 hold(0.64)
-          const entryStep = 0.08;
+          // entryStep × 最後一格(5) + duration ≈ 0.44，銜接後段 hold(0.45)
+          const entryStep = 0.05;
           const revealImg = (img: HTMLElement, slot: number) =>
             diTl.to(
               img,
-              { opacity: 1, y: 0, duration: 0.24, ease: 'power2.out' },
+              { opacity: 1, y: 0, duration: 0.19, ease: 'power2.out' },
               slot * entryStep
             );
 
@@ -367,7 +368,7 @@ export class DefaultComponent
             // 中間文字 · 第 3 個出現（夾在 圖2 與 圖3 之間）
             diTl.to(
               diHeadline,
-              { opacity: 1, yPercent: 0, duration: 0.2, ease: 'power2.out' },
+              { opacity: 1, yPercent: 0, duration: 0.16, ease: 'power2.out' },
               2 * entryStep
             );
           }
@@ -392,18 +393,19 @@ export class DefaultComponent
             diTl.to(img, { yPercent: depth, ease: 'none', duration: 1 }, 0);
           });
 
-          // ── 定格 hold（0.64 → 0.80）──
-          // 全部圖片與標題就位後，timeline 此段刻意留白，
-          // scrub 滑過時畫面完全凍結，給足「全員定格」的停留感，
-          // 再進入退場、銜接下一節 location-map（解決切換過快）
-          diTl.to({}, { duration: 0.16 }, 0.64);
+          // ── 定格 hold（0.45 → 0.72）──
+          // 全部圖片與標題就位後，timeline 此段刻意留白且加長，
+          // scrub 滑過時畫面完全凍結，給足更長的「全員定格」停留，
+          // 再進入退場、銜接下一節 location-map
+          diTl.to({}, { duration: 0.27 }, 0.45);
 
-          // ── Outro：pin 末段（0.78 → 1.0）做 parallax 退場 ──
+          // ── Outro：pin 末段（0.72 → 1.0）緩慢退場 ──
           // 整塊 canvas 上推 + 圖片 zoom out 淡出 + 標題向上飄走 + 深藍 veil 同步覆蓋
+          // 退場區段加長 → location-map（同深藍）覆蓋上來更慢、更從容
           diTl.to(
             diCanvas,
-            { yPercent: -22, ease: 'power2.in', duration: 0.22 },
-            0.78
+            { yPercent: -22, ease: 'power2.in', duration: 0.28 },
+            0.72
           );
           diTl.to(
             diImgs,
@@ -411,22 +413,22 @@ export class DefaultComponent
               scale: 1.18,
               opacity: 0,
               ease: 'power2.in',
-              duration: 0.2,
+              duration: 0.26,
               stagger: 0.02,
             },
-            0.78
+            0.72
           );
           if (diHeadline) {
             diTl.to(
               diHeadline,
-              { opacity: 0, yPercent: -45, ease: 'power2.in', duration: 0.2 },
-              0.8
+              { opacity: 0, yPercent: -45, ease: 'power2.in', duration: 0.26 },
+              0.74
             );
           }
           diTl.to(
             '.district-intro .di-exit-veil',
-            { opacity: 1, ease: 'power1.in', duration: 0.22 },
-            0.78
+            { opacity: 1, ease: 'power1.in', duration: 0.28 },
+            0.72
           );
         } else {
           // Mobile：簡單淡入，不做 pin
@@ -462,29 +464,62 @@ export class DefaultComponent
         }
       }
 
-      // ───── THE CRAFT (甲級營造) reveals ─────
-      gsap.from('.craft .craft-anchor', {
-        opacity: 0,
-        y: 36,
-        duration: 1.2,
-        ease,
-        scrollTrigger: {
-          trigger: '.craft .craft-anchor',
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      });
-      gsap.from('.craft .craft-hero img', {
-        scale: 1.12,
-        opacity: 0.4,
-        duration: 2,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.craft .craft-hero',
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      });
+      // ───── BUILDER-DEEP (甲級精工) — parallax bg + sticky 左文 + 卡片淡入 ─────
+      const bdSection = root.querySelector<HTMLElement>('.builder-deep');
+      if (bdSection) {
+        const bdBg = bdSection.querySelector<HTMLElement>('.bd-bg');
+        const bdLeft = bdSection.querySelector<HTMLElement>('.bd-left');
+        const bdStats = gsap.utils.toArray<HTMLElement>('.builder-deep .bd-stat');
+
+        // 背景 parallax：整段捲動期間背景緩慢位移（bg 層較容器高 → 不露邊）
+        if (bdBg) {
+          gsap.to(bdBg, {
+            yPercent: 10,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: bdSection,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+            },
+          });
+        }
+
+        // 左下文字：捲到此 section 約 1/3 才淡入（只 fade、不位移）
+        if (bdLeft) {
+          gsap.fromTo(
+            bdLeft,
+            { opacity: 0 },
+            {
+              opacity: 1,
+              duration: 1.1,
+              ease,
+              scrollTrigger: {
+                trigger: bdSection,
+                start: () => `top+=${bdSection.offsetHeight / 3} top`,
+                toggleActions: 'play none none reverse',
+                invalidateOnRefresh: true,
+              },
+            }
+          );
+        }
+
+        // 右側毛玻璃卡片：各自進場時輕輕淡入上滑
+        bdStats.forEach((card) => {
+          gsap.from(card, {
+            opacity: 0,
+            y: 36,
+            duration: 1,
+            ease,
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 88%',
+              toggleActions: 'play none none none',
+            },
+          });
+        });
+      }
+
 
       // ───── SPRINGS BAYS — pin container + vertical slide-up storytelling ─────
       // The whole .springs-bays container is pinned for 500vh of scroll.
@@ -586,12 +621,12 @@ export class DefaultComponent
 
             // Reveal sequence within the dwell slot
             if (title)
-              tl.to(title, { y: 0, opacity: 1, duration: 0.6 }, revealStart);
+              tl.to(title, { y: 0, opacity: 1, duration: 0.6 }, revealStart - 0.7 );
             if (lede)
               tl.to(
                 lede,
-                { opacity: 1, y: 0, duration: 0.5 },
-                revealStart + 0.15
+                { opacity: 1, y: 0, duration: 0.28 },
+                revealStart - 0.4
               );
             if (stats.length)
               tl.to(
@@ -611,8 +646,6 @@ export class DefaultComponent
       // 跟 SCSS 頂部 gradient bridge 一起作用，提供 parallax 切換感。
       // 只動 opacity 不動 transform，避免影響 .col-narrow 的 sticky 行為。
       const sectionEntries: Array<[string, string]> = [
-        ['.trust', '.trust .builder-deep'],
-        ['#whynow', '#whynow .inner'],
         ['.spec', '.spec .head'],
         ['#design', '#design .inner'],
         ['#design-b', '#design-b .inner'],
@@ -643,14 +676,9 @@ export class DefaultComponent
         '.trust .trust-grid > .cell',
         '.trust .lineage',
         '.builder-deep .anchor-q',
-        '.builder-deep .builder-body .bd-essay',
-        '.builder-deep .bd-right .bd-stat',
         '.builder-deep .bd-works-head',
         '.builder-deep .bd-work',
         '.builder-deep .bd-final',
-        '#whynow .col-narrow > *',
-        '.walk .left > *',
-        '.walk .list .row',
         '.spec .head > *',
         '.spec .grid .cell',
         '.spec .pull-wrap > *',
@@ -771,7 +799,6 @@ export class DefaultComponent
     const ids = [
       'hero',
       'trust',
-      'whynow',
       'spec',
       'springs-bays',
       'design',

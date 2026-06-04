@@ -22,10 +22,6 @@
   font-family: 'Material Symbols Outlined';
   font-display: optional;
 }
-@font-face {
-  font-family: 'Material Symbols Rounded';
-  font-display: optional;
-}
 
 @layer base {
     html,
@@ -41,6 +37,7 @@
         font-style: normal;
     }
 }
+
 
 web-default-container {
     @apply w-full overflow-x-hidden;

@@ -7,9 +7,10 @@ import { HomeRoutingModule } from './home-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { DefaultComponent } from './pages';
 import { LocationMapComponent } from './components/location-map/location-map.component';
+import { BookingThanksComponent } from './components/booking-thanks/booking-thanks.component';
 
 const CUSTOM_MODULES = [SharedModule];
-const CUSTOM_COMPONENTS = [DefaultComponent, LocationMapComponent];
+const CUSTOM_COMPONENTS = [DefaultComponent, LocationMapComponent, BookingThanksComponent];
 
 @NgModule({
   declarations: [...CUSTOM_COMPONENTS],

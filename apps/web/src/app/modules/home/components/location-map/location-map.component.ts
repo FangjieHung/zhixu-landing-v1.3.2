@@ -56,6 +56,14 @@ function pointsToPath(pts: Array<{ x: number; y: number }>): string {
   return d;
 }
 
+interface WalkRoute {
+  id: string;
+  /** 沿步行路線描的控制點（用 debug 浮層點出），轉成平滑曲線 */
+  points: Array<{ x: number; y: number }>;
+  /** phase-1 timeline 進場時機，通常對齊所連 POI 的 reveal */
+  reveal: number;
+}
+
 interface EdgeMarker {
   /** 圓心 x（通常 = 0，圓心在 viewBox 左邊外側，視覺上只看到 1/4 ~ 1/2 圓） */
   x: number;
@@ -118,13 +126,26 @@ export class LocationMapComponent
   ];
 
   /**
-   * Phase 2 邊界示意（中科、七期）— 圓心擺在 viewBox 左邊界 x=0，
-   * 視覺上只露出右側 1/4 ~ 1/2 的弧，作為「往該方向 X 分鐘」的方向標。
+   * Phase 1 步行路線 — 從之序到近端 POI 的步行動線。
+   * points 用 debug 浮層沿路描點（之序 → POI），pointsToPath() 轉平滑曲線。
+   * 樣式為金色虛線（footstep），reveal 對齊所連 POI。
+   */
+  readonly walkRoutes: WalkRoute[] = [
+    // 範例：之序 → 中央公園主入口（待用 debug 浮層校正座標）
+    // { id: 'walk-central-park', reveal: 0.22, points: [
+    //   { x: 895, y: 596 },
+    //   { x: 755, y: 592 },
+    // ] },
+  ];
+
+  /**
+   * Phase 2 邊界示意（中科、七期、工業區）— 完整圓，文字置中於圓內。
+   * 圓心內移到 x≈95，避免被 viewBox 左邊界裁切。
    */
   readonly edgeMarkers: EdgeMarker[] = [
-    { x: 0,   y: 122, r: 90, min: 15,  name: '中部科學園區', reveal: 0.77 },
-    { x: 0,   y: 952, r: 90, min: 10, name: '台中七期',     reveal: 0.81 },
-    { x: -99, y: 651, r: 90, min: 15, name: '台中工業區',   reveal: 0.85 },
+    { x: 95, y: 122, r: 90, min: 15, name: '中部科學園區', reveal: 0.77 },
+    { x: 95, y: 952, r: 90, min: 10, name: '台中七期',     reveal: 0.81 },
+    { x: 95, y: 651, r: 90, min: 15, name: '台中工業區',   reveal: 0.85 },
   ];
 
   /**
@@ -134,11 +155,11 @@ export class LocationMapComponent
   readonly routes: Route[] = [
     {
       id: 'freeway-1',
-      stroke: '#1d8e62',
+      stroke: '#3ad99c',
       width: 4,
       label: '國道 1 號',
-      labelX: 400,
-      labelY: 311,
+      labelX: 575,
+      labelY: 130,
       labelAnchor: 'middle',
       reveal: 0.62,
       duration: 0.04,
@@ -155,7 +176,7 @@ export class LocationMapComponent
     },
     {
       id: 'freeway-74',
-      stroke: '#b04a3a',
+      stroke: '#d94f3a',
       width: 4.5,
       label: '74 快速道路',
       labelX: 442,
@@ -180,6 +201,7 @@ export class LocationMapComponent
         { x: 1283, y: 168  },
         { x: 1395, y: 166  },
         { x: 1500, y: 168  },
+        { x: 1939, y: 163  },
       ],
     },
     {
@@ -187,8 +209,8 @@ export class LocationMapComponent
       stroke: '#d97a3a',
       width: 3.6,
       label: '捷運橘線',
-      labelX: 926,
-      labelY: 716,
+      labelX: 1032,
+      labelY: 961,
       labelAnchor: 'middle',
       reveal: 0.66,
       duration: 0.04,
@@ -209,7 +231,7 @@ export class LocationMapComponent
     },
     {
       id: 'mrt-green',
-      stroke: '#679466',
+      stroke: '#3dd93a',
       width: 3.6,
       label: '捷運綠線',
       labelX: 1430,
@@ -232,7 +254,7 @@ export class LocationMapComponent
     },
     {
       id: 'highway-1',
-      stroke: '#97753f',
+      stroke: '#d99c3a',
       width: 3.4,
       label: '台 1 線',
       labelX: 1209,
@@ -255,11 +277,11 @@ export class LocationMapComponent
     },
     {
       id: 'thsr',
-      stroke: '#c3002f',
+      stroke: '#d93a5f',
       width: 4,
       label: '台灣高鐵',
-      labelX: 280,
-      labelY: 215,
+      labelX: 427,
+      labelY: 116,
       labelAnchor: 'middle',
       reveal: 0.72,
       duration: 0.04,
@@ -280,6 +302,14 @@ export class LocationMapComponent
 
   routeD(route: Route): string {
     return pointsToPath(route.points);
+  }
+
+  walkRouteD(route: WalkRoute): string {
+    return pointsToPath(route.points);
+  }
+
+  walkRoutesTrack(_index: number, r: WalkRoute): string {
+    return r.id;
   }
 
   /** TEMP: 路徑收集 debug 浮層，收集完所有座標後刪除 */
@@ -374,6 +404,7 @@ export class LocationMapComponent
       // 初始狀態 — 鏡頭緊鎖在之序、其他元素隱藏
       gsap.set(svg, { scale: ZOOM_PHASE1_START, transformOrigin: ZOOM_ORIGIN });
       gsap.set('.lm-poi', { opacity: 0, scale: 0.6, transformOrigin: '50% 50%' });
+      gsap.set('.lm-walk-path', { opacity: 0 });
       gsap.set('.lm-edge-marker', { opacity: 0 });
       gsap.set('.lm-route-label', { opacity: 0 });
       gsap.set('.lm-caption-near', { opacity: 0, y: 24 });
@@ -383,6 +414,7 @@ export class LocationMapComponent
       if (prefersReduced) {
         gsap.set(svg, { scale: ZOOM_PHASE2_END });
         gsap.set('.lm-poi', { opacity: 0, scale: 1 });
+        gsap.set('.lm-walk-path', { opacity: 0.85 });
         gsap.set('.lm-edge-marker', { opacity: 1 });
         gsap.set('.lm-route-label', { opacity: 1 });
         gsap.set('.lm-caption-far', { opacity: 1, y: 0 });
@@ -416,12 +448,21 @@ export class LocationMapComponent
         );
       });
 
+      // 步行路線 — 與所連 POI 同時淡入
+      this.walkRoutes.forEach((w) => {
+        tl.to(
+          `.lm-walk-path[data-id="${w.id}"]`,
+          { opacity: 0.85, duration: 0.05, ease: 'power2.out' },
+          w.reveal,
+        );
+      });
+
       tl.to('.lm-caption-near', { opacity: 1, y: 0, duration: 0.06, ease: 'power2.out' }, 0.56);
 
       // ── Phase 2（0.59 ~ 1.0）───────────────────────────────────
       // 近端 POI 與 caption 淡出
-      tl.to('.lm-poi', { opacity: 0, duration: 0.05, ease: 'power1.in' }, 0.59);
-      tl.to('.lm-caption-near', { opacity: 0, duration: 0.05, ease: 'power1.in' }, 0.59);
+      tl.to('.lm-poi', { opacity: 0.7, duration: 0.05, ease: 'power1.in' }, 0.59);
+      tl.to('.lm-caption-near', { opacity: 0.7, duration: 0.05, ease: 'power1.in' }, 0.59);
 
       // 鏡頭再拉遠
       tl.to(svg, { scale: ZOOM_PHASE2_END, duration: 0.25 }, 0.60);
@@ -470,17 +511,21 @@ export class LocationMapComponent
     }, this.host.nativeElement);
   }
 
-  /** label 水平偏移：anchor=end 在標記左側、start 在右側 */
+  /** label 水平偏移：anchor=end 在標記左側、start 在右側（r=8 圓，留小間距貼齊） */
   poiLabelX(poi: Poi): number {
-    return poi.anchor === 'end' ? poi.x - 28 : poi.x + 28;
+    return poi.anchor === 'end' ? poi.x - 15 : poi.x + 15;
   }
 
-  /** label 垂直偏移：vAnchor=below 時放在標記下方 */
+  /**
+   * label 垂直偏移：
+   * - above：兩行文字（12 + 17）整體垂直置中於標記圓心
+   * - below：整塊文字置於標記下方，貼齊 r=8 圓的下緣
+   */
   poiLabelTopY(poi: Poi): number {
-    return poi.vAnchor === 'below' ? poi.y + 36 : poi.y - 14;
+    return poi.vAnchor === 'below' ? poi.y + 22 : poi.y - 8;
   }
   poiLabelBottomY(poi: Poi): number {
-    return poi.vAnchor === 'below' ? poi.y + 54 : poi.y + 4;
+    return poi.vAnchor === 'below' ? poi.y + 48 : poi.y + 14;
   }
 
   poisTrack(_index: number, p: Poi): number {

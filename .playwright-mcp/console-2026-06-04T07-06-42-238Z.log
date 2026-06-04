@@ -1,0 +1,54 @@
+[     215ms] [INFO] [webpack-dev-server] Server started: Hot Module Replacement disabled, Live Reloading enabled, Progress disabled, Overlay enabled. @ http://localhost:4200/polyfills.js:990
+[     269ms] [WARNING] Could not find Angular Material core theme. Most Material components may not work as expected. For more info refer to the theming guide: https://material.angular.io/guide/theming @ http://localhost:4200/vendor.js:113375
+[     285ms] [WARNING] Could not find Angular Material core theme. Most Material components may not work as expected. For more info refer to the theming guide: https://material.angular.io/guide/theming @ http://localhost:4200/vendor.js:113375
+[     295ms] [LOG] Angular is running in development mode. @ http://localhost:4200/vendor.js:91043
+[     363ms] [WARNING] GSAP target .lm-caption-near not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[     363ms] [WARNING] GSAP target .lm-caption-far not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[     367ms] [WARNING] GSAP target .lm-caption-near not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[     367ms] [WARNING] GSAP target .lm-caption-near not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[     367ms] [WARNING] GSAP target .lm-caption-far not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[     384ms] [WARNING] GSAP target .craft .craft-anchor not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[     384ms] [WARNING] GSAP target  not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[     385ms] [WARNING] Element not found: .craft .craft-anchor @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:1581
+[     385ms] [WARNING] GSAP target .craft .craft-hero img not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[     385ms] [WARNING] GSAP target  not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[     385ms] [WARNING] Element not found: .craft .craft-hero @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:1581
+[   94050ms] [INFO] [webpack-dev-server] App updated. Recompiling... @ http://localhost:4200/polyfills.js:990
+[   95951ms] [INFO] [webpack-dev-server] App updated. Reloading... @ http://localhost:4200/polyfills.js:990
+[   96219ms] [INFO] [webpack-dev-server] Server started: Hot Module Replacement disabled, Live Reloading enabled, Progress disabled, Overlay enabled. @ http://localhost:4200/polyfills.js:990
+[   96875ms] [WARNING] Could not find Angular Material core theme. Most Material components may not work as expected. For more info refer to the theming guide: https://material.angular.io/guide/theming @ http://localhost:4200/vendor.js:113375
+[   97481ms] [WARNING] Could not find Angular Material core theme. Most Material components may not work as expected. For more info refer to the theming guide: https://material.angular.io/guide/theming @ http://localhost:4200/vendor.js:113375
+[   97495ms] [LOG] Angular is running in development mode. @ http://localhost:4200/vendor.js:91043
+[   97771ms] [WARNING] GSAP target .lm-caption-near not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[   97772ms] [WARNING] GSAP target .lm-caption-far not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[   97790ms] [WARNING] GSAP target .lm-caption-near not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[   97790ms] [WARNING] GSAP target .lm-caption-near not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[   97791ms] [WARNING] GSAP target .lm-caption-far not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[   97834ms] [WARNING] GSAP target .craft .craft-anchor not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[   97834ms] [WARNING] GSAP target  not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[   97835ms] [WARNING] Element not found: .craft .craft-anchor @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:1581
+[   97835ms] [WARNING] GSAP target .craft .craft-hero img not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[   97835ms] [WARNING] GSAP target  not found. https://gsap.com @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:4595
+[   97835ms] [WARNING] Element not found: .craft .craft-hero @ http://localhost:4200/apps_web_src_app_modules_home_home_module_ts.js:1581
+[  105168ms] [INFO] [webpack-dev-server] Disconnected! @ http://localhost:4200/polyfills.js:990
+[  105168ms] [INFO] [webpack-dev-server] Trying to reconnect... @ http://localhost:4200/polyfills.js:990
+[  133369ms] [INFO] [webpack-dev-server] App updated. Recompiling... @ http://localhost:4200/polyfills.js:990
+[  136313ms] [ERROR] WebSocket connection to 'ws://localhost:4200/ng-cli-ws' failed:  @ http://localhost:4200/polyfills.js:57
+[  136315ms] [ERROR] [webpack-dev-server] Event @ http://localhost:4200/polyfills.js:998
+[  136316ms] [INFO] [webpack-dev-server] Disconnected! @ http://localhost:4200/polyfills.js:990
+[  136317ms] [INFO] [webpack-dev-server] Trying to reconnect... @ http://localhost:4200/polyfills.js:990
+[  137406ms] [ERROR] WebSocket connection to 'ws://localhost:4200/ng-cli-ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4200/polyfills.js:57
+[  137406ms] [ERROR] [webpack-dev-server] Event @ http://localhost:4200/polyfills.js:998
+[  137406ms] [INFO] [webpack-dev-server] Trying to reconnect... @ http://localhost:4200/polyfills.js:990
+[  139482ms] [ERROR] WebSocket connection to 'ws://localhost:4200/ng-cli-ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4200/polyfills.js:57
+[  139482ms] [ERROR] [webpack-dev-server] Event @ http://localhost:4200/polyfills.js:998
+[  139482ms] [INFO] [webpack-dev-server] Trying to reconnect... @ http://localhost:4200/polyfills.js:990
+[  143541ms] [ERROR] WebSocket connection to 'ws://localhost:4200/ng-cli-ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4200/polyfills.js:57
+[  143541ms] [ERROR] [webpack-dev-server] Event @ http://localhost:4200/polyfills.js:998
+[  143541ms] [INFO] [webpack-dev-server] Trying to reconnect... @ http://localhost:4200/polyfills.js:990
+[  151602ms] [ERROR] WebSocket connection to 'ws://localhost:4200/ng-cli-ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4200/polyfills.js:57
+[  151602ms] [ERROR] [webpack-dev-server] Event @ http://localhost:4200/polyfills.js:998
+[  151602ms] [INFO] [webpack-dev-server] Trying to reconnect... @ http://localhost:4200/polyfills.js:990
+[  167657ms] [ERROR] WebSocket connection to 'ws://localhost:4200/ng-cli-ws' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:4200/polyfills.js:57
+[  167657ms] [ERROR] [webpack-dev-server] Event @ http://localhost:4200/polyfills.js:998
+[  167658ms] [INFO] [webpack-dev-server] Trying to reconnect... @ http://localhost:4200/polyfills.js:990

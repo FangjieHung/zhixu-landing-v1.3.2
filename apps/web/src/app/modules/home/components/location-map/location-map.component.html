@@ -32,7 +32,6 @@
           fill="none"
           stroke-linecap="round"
           stroke-linejoin="round"
-          stroke-opacity="0.92"
         />
         <text
           *ngFor="let r of routes; trackBy: routesTrack"
@@ -58,31 +57,21 @@
           [attr.transform]="'translate(' + m.x + ',' + m.y + ')'"
         >
           <!-- 完整圓；父層 overflow:hidden 由使用者控制可視範圍 -->
-          <circle [attr.r]="m.r" fill="#2f3a26" />
+          <circle [attr.r]="m.r" fill="#64748936" />
           <text
             x="0"
-            y="0"
+            y="-6"
             text-anchor="middle"
-            dominant-baseline="central"
-            font-family="Playfair Display, serif"
-            font-size="24"
-            fill="#f0e6d0"
-            font-weight="500"
-          >{{ m.min }}</text>
-          <text
-            [attr.x]="m.r + 25"
-            y="-12"
-            text-anchor="start"
             font-family="Noto Sans TC, sans-serif"
-            font-size="16"
+            font-size="20"
             letter-spacing="2.4"
             fill="#c9b88a"
             font-weight="600"
-          >MINUTES BY CAR</text>
+          >開車 {{ m.min }} 分鐘</text>
           <text
-            [attr.x]="m.r + 25"
-            y="20"
-            text-anchor="start"
+            x="0"
+            y="26"
+            text-anchor="middle"
             font-family="Noto Serif TC, serif"
             font-size="24"
             fill="#ece4d3"
@@ -93,21 +82,28 @@
 
       <!-- ── Phase 1: near POI markers ────────────────────────────────── -->
       <g class="lm-pois">
+        <!-- 步行路線（金色虛線；畫在 POI 點下方） -->
+        <path
+          *ngFor="let w of walkRoutes; trackBy: walkRoutesTrack"
+          class="lm-walk-path"
+          [attr.data-id]="w.id"
+          [attr.d]="walkRouteD(w)"
+          fill="none"
+          stroke="#cfb286"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-dasharray="1 11"
+          stroke-opacity="0.85"
+        />
+
         <g
           *ngFor="let p of pois; let i = index; trackBy: poisTrack"
           class="lm-poi"
           [attr.data-i]="i"
           [attr.transform]="'translate(' + p.x + ',' + p.y + ')'"
         >
-          <circle r="22" fill="#2f3a26" />
-          <text
-            text-anchor="middle"
-            dominant-baseline="central"
-            font-family="Playfair Display, serif"
-            font-size="16"
-            fill="#f0e6d0"
-            font-weight="500"
-          >{{ p.min }}</text>
+          <circle r="8" fill="#cfb286" />
         </g>
 
         <g
@@ -120,11 +116,11 @@
             [attr.y]="poiLabelTopY(p)"
             [attr.text-anchor]="p.anchor === 'end' ? 'end' : 'start'"
             font-family="Noto Sans TC, sans-serif"
-            font-size="9"
+            font-size="12"
             letter-spacing="2.4"
             fill="#c9b88a"
             font-weight="600"
-          >MINUTES BY WALK</text>
+          >步行 {{ p.min }} 分鐘</text>
           <text
             [attr.x]="poiLabelX(p)"
             [attr.y]="poiLabelBottomY(p)"
@@ -139,10 +135,10 @@
 
       <!-- Center pin · 之序 -->
       <g class="lm-pin" [attr.transform]="'translate(' + centerPin.x + ',' + centerPin.y + ')'">
-        <circle class="pin-pulse" r="34" fill="#2f3a26" opacity="0.55" />
-        <circle r="34" fill="#2f3a26" />
+        <circle class="pin-pulse" r="34" fill="#cfb286" opacity="0.55" />
+        <circle r="34" fill="#cfb286" />
         <!-- Simple tower glyph -->
-        <g transform="translate(-9, -16)" fill="#f0e6d0">
+        <g transform="translate(-9, -16)" fill="#000">
           <rect x="6" y="0" width="6" height="22" rx="0.5" />
           <rect x="0" y="6" width="4" height="16" rx="0.5" />
           <rect x="14" y="6" width="4" height="16" rx="0.5" />
@@ -152,17 +148,17 @@
           x="0"
           y="22"
           text-anchor="middle"
-          font-family="Playfair Display, serif"
+          font-family="serif"
           font-style="italic"
-          font-size="11"
-          fill="#f0e6d0"
+          font-size="12"
+          fill="#000"
           letter-spacing="0.8"
         >之序</text>
       </g>
     </svg>
 
     <!-- TEMP: 路徑收集 debug 浮層 — 取得所有路線座標後刪除 -->
-    <div *ngIf="false" class="lm-debug-panel">
+    <div class="lm-debug-panel">
       <div class="lm-debug-hover">{{ debugHover }}</div>
       <div class="lm-debug-points" *ngIf="debugPoints.length">
         <div class="lm-debug-row" *ngFor="let p of debugPoints; let i = index">

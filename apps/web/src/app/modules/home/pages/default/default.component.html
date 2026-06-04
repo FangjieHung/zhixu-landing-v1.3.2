@@ -22,7 +22,7 @@
 <!-- Floating CTA -->
 <div class="cta-dock" [class.shown]="pastHero">
   <button class="primary" (click)="scrollToId('contact')">
-    預約鑒賞 · BOOK
+    預約鑒賞
   </button>
   <button
     class="secondary"
@@ -49,10 +49,10 @@
     <div class="hero-foot">
       <div class="hero-lede">
         <p class="hero-sub">四面臨路 · 國際新奢寓所</p>
-        <p class="hero-yearmark">CENTRAL PARK · 水湳 · 渲染合成示意圖</p>
+        <p class="hero-yearmark">水湳 · 渲染合成示意圖</p>
       </div>
 
-      <div class="scroll-cue">向下 · SCROLL</div>
+      <div class="scroll-cue">向下捲動</div>
     </div>
   </div>
 </section>
@@ -112,7 +112,7 @@
   <div class="inner">
     <div class="col-narrow">
       <div class="eyebrow">
-        <span class="num">THE AMENITIES· 航行綠海的甲板</span>
+        <span class="num">綠意漫步中庭・舒心戶外休憩區</span>
       </div>
       <div style="height: 4rem"></div>
       <h3 class="pull-zh">在中央公園的微風裡，泊岸一幅無邊際的風景。</h3>
@@ -122,15 +122,15 @@
       <div class="video-grid vg-left-wide">
         <div class="vg-card vg-card--main">
           <video muted playsinline preload="none" src="assets/video/garden-01.webm" poster="assets/video/garden-01.webp"></video>
-          <div class="caption-fade">OUTDOOR GROVE · 戶外林蔭<span class="caption-disclaimer">情境示意僅供參考</span></div>
+          <div class="caption-fade">戶外林蔭<span class="caption-disclaimer">情境示意僅供參考</span></div>
         </div>
         <div class="vg-card vg-card--side">
           <video muted playsinline preload="none" src="assets/video/garden-02.webm" poster="assets/video/garden-02.webp"></video>
-          <div class="caption-fade">GARDEN PATH · 花園弧形步道<span class="caption-disclaimer">情境示意僅供參考</span></div>
+          <div class="caption-fade">花園弧形步道<span class="caption-disclaimer">情境示意僅供參考</span></div>
         </div>
         <div class="vg-card vg-card--side">
           <video muted playsinline preload="none" src="assets/video/pool.webm" poster="assets/video/pool.webp"></video>
-          <div class="caption-fade">THE POOL · 游泳池<span class="caption-disclaimer">情境示意僅供參考</span></div>
+          <div class="caption-fade">游泳池<span class="caption-disclaimer">情境示意僅供參考</span></div>
         </div>
       </div>
     </div>
@@ -142,7 +142,7 @@
   <div class="inner">
     <div class="col-narrow">
       <div class="eyebrow">
-        <span class="num">THE CLUBHOUSE · 頂級郵艇的主人艙境</span>
+        <span class="num">奢華迎賓大廳・多功能交誼美學</span>
       </div>
       <div style="height: 4rem"></div>
       <h3 class="pull-zh">在洗鍊的奢華秩序裡，款待生活與最愛的人。</h3>
@@ -152,23 +152,23 @@
       <div class="video-grid vg-top-wide">
         <div class="vg-card vg-card--top">
           <video muted playsinline preload="none" src="assets/video/main-gate.webm" poster="assets/video/main-gate.webp"></video>
-          <div class="caption-fade">LOBBY · 門廳<span class="caption-disclaimer">情境示意僅供參考</span></div>
+          <div class="caption-fade">門廳<span class="caption-disclaimer">情境示意僅供參考</span></div>
         </div>
         <div class="vg-card vg-card--bot">
           <video muted playsinline preload="none" src="assets/video/restaurant.webm" poster="assets/video/restaurant.webp"></video>
-          <div class="caption-fade">DINING · 食憩<span class="caption-disclaimer">情境示意僅供參考</span></div>
+          <div class="caption-fade">食憩<span class="caption-disclaimer">情境示意僅供參考</span></div>
         </div>
         <div class="vg-card vg-card--bot">
           <video muted playsinline preload="none" src="assets/video/theater.webm" poster="assets/video/theater.webp"></video>
-          <div class="caption-fade">THEATER · 多功能視聽室<span class="caption-disclaimer">情境示意僅供參考</span></div>
+          <div class="caption-fade">多功能視聽室<span class="caption-disclaimer">情境示意僅供參考</span></div>
         </div>
         <div class="vg-card vg-card--bot">
           <video muted playsinline preload="none" src="assets/video/elevator.webm" poster="assets/video/elevator.webp"></video>
-          <div class="caption-fade">ELEVATOR HALL · 電梯廳<span class="caption-disclaimer">情境示意僅供參考</span></div>
+          <div class="caption-fade">電梯廳<span class="caption-disclaimer">情境示意僅供參考</span></div>
         </div>
         <div class="vg-card vg-card--bot">
           <video muted playsinline preload="none" src="assets/video/bar.webm" poster="assets/video/bar.webp"></video>
-          <div class="caption-fade">SKY LOUNGE · 星空酒吧<span class="caption-disclaimer">情境示意僅供參考</span></div>
+          <div class="caption-fade">星空酒吧<span class="caption-disclaimer">情境示意僅供參考</span></div>
         </div>
       </div>
     </div>
@@ -177,81 +177,55 @@
 <!-- Trust -->
 <section class="trust" id="trust">
   <div class="builder-deep" id="builder-deep">
+    <!-- 背景圖：完成後把 background-image 補在 .bd-bg（見 scss 註解）-->
+    <div class="bd-bg" aria-hidden="true"></div>
+    <div class="bd-overlay" aria-hidden="true"></div>
+
     <div class="anchor-q">
-      富華創新承繼總太三十年耕耘，<br />
-      以新名義做同一件事 &#8212; <br />
+      用三十年耕耘坐同一件事<br />
       <span class="lighter">蓋一棟值得等待的房子。</span>
     </div>
 
-    <div class="builder-body">
+    <div class="bd-grid">
       <div class="bd-left">
-        <div class="eyebrow">
-          <span>THE BUILDER ·總太營造</span>
-        </div>
-        <div style="height: 1.5rem"></div>
         <p class="bd-essay">
-          我們不只蓋一座房子，更是以國家級公共工程、超高層摩天大樓的嚴苛標準，淬鍊一座足以傳承世代的世代傳家行館
+          富華創新承襲總太三十年耕耘，我們不只蓋一座房子，更是以每一個住進的家庭思考、及嚴苛標準的工程標準，用心蓋出一座足以傳承世代傳家行館。
         </p>
         <p class="bd-essay">
           外在，是震撼城市的永恆立面；<br />
           內在，是安放您與家人、財富最優雅的避風港。
         </p>
         <p class="bd-essay">
-          <span class="strong">頂級的安全感，從來不需喧嘩。</span>
+          <span class="strong">頂級的奢飲，從不需喧嘩。</span>
         </p>
       </div>
 
       <div class="bd-right">
         <div class="bd-stat">
-          <div class="bd-stat-num">甲級</div>
           <div class="bd-stat-k">營造商</div>
+          <div class="bd-stat-num">甲級</div>
           <div class="bd-stat-v">國家最高殿堂認證，承載建築的凌空雄心</div>
         </div>
         <div class="bd-stat">
-          <div class="bd-stat-num">1976</div>
           <div class="bd-stat-k">創立</div>
+          <div class="bd-stat-num">1976</div>
           <div class="bd-stat-v">前身高章營造 · 半世紀工地紀律</div>
         </div>
         <div class="bd-stat">
-          <div class="bd-stat-num">2009</div>
           <div class="bd-stat-k">無酒精工地</div>
+          <div class="bd-stat-num">2009</div>
           <div class="bd-stat-v">業界首家推行 · 並導入 24h 火警監控</div>
         </div>
         <div class="bd-stat">
-          <div class="bd-stat-num">BIM</div>
-          <div class="bd-stat-k">三維預建模</div>
-          <div class="bd-stat-v">施工白皮書 SOP · 材料進場全面抽驗</div>
+          <div class="bd-stat-k">1:1 電腦模擬零誤差</div>
+          <div class="bd-stat-num">3D 虛擬蓋房</div>
+          <div class="bd-stat-v">嚴格工程標準書 ・ 建材進場全面抽驗</div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- 02 / D · THE CRAFT — 甲級營造的 VVIP 語氣
-  <div class="craft" id="craft">
-    <div class="craft-anchor">
-      <div class="eyebrow">
-        <span class="num">02 / D</span><span>THE CRAFT · 匠之系譜</span>
-      </div>
-      <h3 class="craft-title">
-        衡量地標的，<br />
-        不是高度。<br />
-        <span class="craft-accent">而是刻在基石上的名字。</span>
-      </h3>
-    </div>
-
-    <div class="craft-hero">
-      <img [src]="img.craftHero" alt="之序 · 建築立面" />
-      <div class="craft-hero-caption">CRAFTED FOR A CENTURY · 為傳世而砌</div>
-    </div>
-
-    <div class="craft-coda">
-      <span>頂級的安全感，從來不需喧嘩。</span>
-      <span class="dot">·</span>
-      <span>大匠之風，靜候識者。</span>
-    </div>
-  </div>
-   -->
 </section>
+
 <!-- SPRINGS BAYS · sticky-stacking 半屏雙欄敘事 -->
 <section class="springs-bays" id="springs-bays">
   <article
@@ -285,56 +259,7 @@
   </article>
 </section>
 
-<!-- 03 · Why Now
-<section class="frame" id="whynow">
-  <div class="inner">
-    <div class="col-narrow">
-      <div class="eyebrow">
-        <span class="num">03</span><span>WHY NOW · 時間紅利</span>
-      </div>
-      <div style="height: 1rem"></div>
-      <div class="yearmark">水湳特區 · 台中 · 2025</div>
-    </div>
-
-    <div class="col-wide">
-      <div class="walk">
-        <div class="left">
-          <div class="eyebrow">
-            <span class="num">03 / B</span
-            ><span>日常生活圈 · DAILY RADIUS</span>
-          </div>
-          <h3 class="pull-zh">
-            不只是特區，<br />也是你真正<br />要住進去的地方。
-          </h3>
-          <p class="body zh">
-            你每天要用到的，比你想的都近。<br />
-            全聯、學校、診所——生活的基本半徑，<span style="color: var(--accent)"
-              >之序都在圈內。</span
-            >
-          </p>
-          <div class="foot" style="margin-top: 0.5rem">
-            距離全部以分鐘計，數字待現場最終丈量校正。
-          </div>
-        </div>
-        <div class="list">
-          <div *ngFor="let w of walks; trackBy: trackByIndex" class="row">
-            <div class="place">{{ w.p }}</div>
-            <div class="mode">{{ w.m }}</div>
-            <div class="min">{{ w.n }}<span class="u">分</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-top: 4rem; display: flex; justify-content: flex-end">
-        <button class="tl" (click)="scrollToId('contact')">
-          索取最新戶別狀態圖
-        </button>
-      </div>
-    </div>
-  </div>
-</section> -->
-
-<!-- 04 · Spec Sheet -->
+<!-- Spec Sheet -->
 <section class="spec" id="spec">
   <div class="head">
     <div>
@@ -374,16 +299,6 @@
     </div>
   </div>
 
-  <!--
-  <div class="pull-wrap">
-    <div class="eyebrow">SCALE · 規模語意</div>
-    <div class="pull">
-      186 戶——<span class="quiet">不多也不少，</span><br />
-      剛好是讓一棟樓有溫度，<br />
-      卻不失去安靜的數字。
-    </div>
-  </div>
--->
   <div class="layouts-hero">
     <img
       class="layouts-bg"
@@ -426,21 +341,6 @@
     </div>
   </div>
 
-  <!--
-  <div class="footnote foot">
-    坪數採建坪計算 · 售價恕不在網頁揭露 · 完整型錄請於預約時索取
-  </div>
-
-  <div style="margin-top: 4rem; display: flex; justify-content: flex-end">
-    <button
-      class="tl"
-      (click)="scrollToId('contact')"
-      style="color: var(--color-text-on-dark)"
-    >
-      索取電子型錄
-    </button>
-  </div>
-  -->
 </section>
 
 <!-- Contact -->
@@ -448,7 +348,7 @@
   <div class="pre">
     <div>
       <div class="eyebrow">
-        <span class="num">PRIVATE VIEWING · 預約鑒賞</span>
+        <span class="num">預約鑒賞</span>
       </div>
     </div>
     <div class="invite">
@@ -461,11 +361,11 @@
     <form class="form" (submit)="submit($event)">
       <ng-container *ngIf="!submitted; else thanks">
         <div class="field">
-          <label>姓名 · NAME</label>
+          <label>姓名</label>
           <input type="text" placeholder="您的稱呼" required />
         </div>
         <div class="field">
-          <label>手機 · MOBILE</label>
+          <label>手機</label>
           <input
             type="tel"
             placeholder="09XX XXX XXX"
@@ -474,56 +374,39 @@
           />
         </div>
         <div class="field">
-          <label>電子郵件 · EMAIL</label>
+          <label>電子郵件</label>
           <input type="email" placeholder="your@email.com" required />
         </div>
         <div class="field">
-          <label>留言 · MESSAGE</label>
+          <label>留言</label>
           <textarea placeholder="請留下您預計賞屋時間，或方便聯繫時間" rows="4"></textarea>
         </div>
-        <button type="submit" class="submit">預約鑒賞 · BOOK A VIEWING</button>
+        <button type="submit" class="submit">預約鑒賞</button>
       </ng-container>
 
       <ng-template #thanks>
-        <div style="padding: 4rem 0">
-          <div class="eyebrow">
-            <span class="num">✓</span><span>THANK YOU · 已收到預約</span>
-          </div>
-          <div style="height: 1.5rem"></div>
-          <div
-            class="pull-zh"
-            style="
-              color: var(--color-text-on-dark);
-              font-size: clamp(1.6rem, 2.4vw, 2.2rem);
-            "
-          >
-            我們會在 24 小時內<br />以電話跟您確認時段。
-          </div>
-          <p class="body zh" style="color: #b8ad9e; margin-top: 1.5rem">
-            若您希望先收到電子型錄，請註明在備註欄；或直接在 LINE 留言。
-          </p>
-        </div>
+        <app-booking-thanks></app-booking-thanks>
       </ng-template>
     </form>
 
     <div class="info">
       <div class="blk">
-        <div class="label">接待中心 · SALES GALLERY</div>
+        <div class="label">接待中心</div>
         <div class="value">
           臺中市北屯區<br />敦化路二段 239 號<br />
           <span class="en">No. 239, Sec. 2, Dunhua Rd., Beitun Dist., Taichung</span>
         </div>
       </div>
       <div class="blk">
-        <div class="label">營業時間 · HOURS</div>
+        <div class="label">營業時間</div>
         <div class="value">每日 9:00 — 19:00<br />預約優先</div>
       </div>
       <div class="blk">
-        <div class="label">電話 · TELEPHONE</div>
+        <div class="label">電話</div>
         <div class="value">04 2297 7777</div>
       </div>
       <div class="blk">
-        <div class="label">LINE 諮詢 · QR</div>
+        <div class="label">LINE 諮詢</div>
         <div
           style="
             display: flex;

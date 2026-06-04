@@ -34,7 +34,9 @@ a {
   @apply px-8 py-4;
   background-color: var(--md-sys-color-primary);
   color: var(--md-sys-color-on-primary);
-  &:hover { opacity: 0.9; }
+  &:hover {
+    opacity: 0.9;
+  }
 }
 
 // ─── M3 Filled Tonal button ───────────────────────────────────────────────────
@@ -43,7 +45,9 @@ a {
   @apply px-8 py-4;
   background-color: var(--md-sys-color-secondary-fixed);
   color: var(--md-sys-color-on-secondary-fixed);
-  &:hover { opacity: 0.9; }
+  &:hover {
+    opacity: 0.9;
+  }
 }
 
 // ─── M3 Outlined button ───────────────────────────────────────────────────────
@@ -63,7 +67,7 @@ a {
 // Medium emphasis — on dark / primary-color background
 .btn-outlined-inverse,
 .btn-outline-inverse {
-@apply px-8 py-4 border flex items-center justify-center transition-all;
+  @apply px-8 py-4 border flex items-center justify-center transition-all;
   border-color: color-mix(in srgb, var(--md-sys-color-on-primary) 10%, transparent);
   &:hover {
     border-color: var(--md-sys-color-secondary-fixed);
@@ -76,7 +80,9 @@ a {
   @apply px-8 py-4;
   background-color: var(--md-sys-color-secondary);
   color: var(--md-sys-color-on-secondary);
-  &:hover { opacity: 0.9; }
+  &:hover {
+    opacity: 0.9;
+  }
 }
 
 // ─── M3 Text button ───────────────────────────────────────────────────────────
@@ -85,7 +91,9 @@ a {
 .btn-ghost {
   @apply bg-transparent;
   color: var(--md-sys-color-primary);
-  &:hover { background-color: var(--md-sys-color-surface-container); }
+  &:hover {
+    background-color: var(--md-sys-color-surface-container);
+  }
 }
 
 // ─── M3 Elevated button ───────────────────────────────────────────────────────
@@ -93,12 +101,18 @@ a {
   @apply px-8 py-4 shadow-md;
   background-color: var(--md-sys-color-surface-container-low);
   color: var(--md-sys-color-primary);
-  &:hover { @apply shadow-lg; }
+  &:hover {
+    @apply shadow-lg;
+  }
 }
 
 // ─── Size modifiers ───────────────────────────────────────────────────────────
-.btn-sm { @apply px-4 py-2 text-xs; }
-.btn-lg { @apply px-10 py-5 min-h-14; }
+.btn-sm {
+  @apply px-4 py-2 text-xs;
+}
+.btn-lg {
+  @apply px-10 py-5 min-h-14;
+}
 
 // ─── Shared state ─────────────────────────────────────────────────────────────
 [class*="btn-"].disabled,
@@ -115,10 +129,14 @@ a {
   }
 
   &:hover .menu-list,
-  .menu-list.show { @apply block; }
+  .menu-list.show {
+    @apply block;
+  }
 
   .menu-list a,
-  .menu-list button { @apply flex items-center; }
+  .menu-list button {
+    @apply flex items-center;
+  }
 }
 
 .mdc-checkbox .mdc-checkbox__native-control:enabled ~ .mdc-checkbox__background .mdc-checkbox__checkmark {
@@ -137,43 +155,93 @@ a {
            rounded-none;
   }
 
-  p { @apply font-medium text-base; }
+  p {
+    @apply font-medium text-base;
+  }
 
-  .uploaded-img { @apply relative overflow-hidden; }
-  .uploaded-img img { @apply object-cover w-full h-full; }
-  .uploaded-img .btn-ghost { @apply absolute bottom-0 right-0; }
+  .uploaded-img {
+    @apply relative overflow-hidden;
+  }
+  .uploaded-img img {
+    @apply object-cover w-full h-full;
+  }
+  .uploaded-img .btn-ghost {
+    @apply absolute bottom-0 right-0;
+  }
 }
-
 
 .btn-stroked {
   color: var(--fg-1);
   cursor: pointer;
   @apply flex flex-col;
-  font-size:16px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 45px;
-  
-  max-width: 160px; 
+
+  max-width: 160px;
   position: relative;
   text-decoration: none;
   text-transform: uppercase;
-  width: 100%; 
-  &:hover { text-decoration: none; }
+  width: 100%;
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .btn-stroked {
   border: 1px solid #00000000;
   box-shadow: inset 0 0 20px rgba(var(--fg-1), 0);
   outline: 1px solid;
-  outline-color: rgba(var(--fg-1), .5);
+  outline-color: rgba(var(--fg-1), 0.5);
   outline-offset: 0px;
   text-shadow: none;
   transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
-} 
+}
 
 .btn-stroked:hover {
   border: 1px solid;
-  box-shadow: inset 0 0 20px rgba(var(--fg-1), .5), 0 0 20px rgba(#000, .2);
+  box-shadow:
+    inset 0 0 20px rgba(var(--fg-1), 0.5),
+    0 0 20px rgba(#000, 0.2);
   outline-color: rgba(#000, 0);
   outline-offset: 15px;
+}
+
+button.submit {
+  @apply px-5 py-4;
+  margin-top: 1rem;
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--bg-2);
+  background: var(--color-text-on-dark);
+  border: 0;
+  cursor: pointer;
+  align-self: flex-start;
+  transition:
+    color var(--dur-base) var(--ease-editorial),
+    background var(--dur-base) var(--ease-editorial);
+  &:hover {
+    color: var(--accent);
+    background: var(--color-text-on-dark);
+  }
+}
+
+button.primary {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background-color: var(--accent);
+  color: #fff;
+  padding: 18px 26px;
+  border: 0;
+  cursor: pointer;
+  &:hover {
+    color: var(--color-text-on-dark);
+    background: var(--bg-2);
+  }
 }
