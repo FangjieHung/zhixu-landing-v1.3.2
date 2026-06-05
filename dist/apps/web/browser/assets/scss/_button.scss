@@ -235,12 +235,13 @@ button.primary {
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-text-on-dark);
-  background: var(--bg-2);
+  background-color: var(--accent);
+  color: #fff;
   padding: 18px 26px;
   border: 0;
   cursor: pointer;
   &:hover {
-    color: var(--accent);
+    color: var(--color-text-on-dark);
+    background: var(--bg-2);
   }
 }
