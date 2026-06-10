@@ -1,0 +1,108 @@
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  之序 Urban Oasis Estate — Brand Color Tokens
+//
+//  品牌色票（依 2026 主視覺色彩應用稿）
+//  ───────────────────────────────────
+//  #8c142d  酒紅   主品牌色（primary）
+//  #230000  深绛   最深底色 / 反轉面
+//  #b90a19  正紅   高彩度輔色（secondary）
+//  #e63c14  橘紅   點綴色（tertiary）
+//  #c89d55  金     固定暖金（secondary-fixed，深底上的裝飾）
+//  #ffffff  白     → 帶暖調的米白（不使用純白）
+//
+//  Layer 1（--token-*）持有原始數值；
+//  Layer 3（--md-sys-color-*）為 MD3 語意系統，僅引用 Layer 1。
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// ── Layer 1：原始 Token ──────────────────────────────────────────────────────
+:root {
+  --token-burgundy:            #8c142d; // 主酒紅
+  --token-maroon-black:        #230000; // 深绛黑
+  --token-crimson:             #b90a19; // 正紅
+  --token-vermilion:           #e63c14; // 橘紅
+  --token-gold:                #c89d55; // 暖金
+  --token-ivory:               #f8f0ec; // 暖米白（取代純白）
+  --token-ink:                 #2b0a0d; // 深绛墨（文字主色）
+
+  // ── 同色系明度階（tonal scale）──────────────────────────────────────────
+  // 同一色相、不同明度：深底用高明度，淺底用低明度，確保文字對比。
+  // 金階（hue ≈ 38°）
+  --token-gold-80:             #e6cb96; // 深底上的次要金（更亮）
+  --token-gold-70:             #d6b272; // 深底上的標準亮金
+  --token-gold-60:             #c89d55; // 基準金（= --token-gold）
+  --token-gold-40:             #94702e; // 淺底上的大標金（≥3:1 大字）
+  --token-gold-30:             #785a24; // 淺底上的內文金（≥4.5:1）
+  --token-gold-20:             #5c441a; // 淺底上的高對比金
+
+  // 酒紅階（hue ≈ 348°）
+  --token-burgundy-70:         #c4647c; // 深底上的玫瑰紅
+  --token-burgundy-50:         #a32643; // 亮酒紅（hover / 漸層）
+  --token-burgundy-40:         #8c142d; // 基準酒紅（= --token-burgundy）
+  --token-burgundy-20:         #4a0d1d; // 深酒紅面
+  --token-burgundy-10:         #320612; // 最深酒紅面
+
+  // 玫瑰灰階（弱化文字，hue ≈ 8°）
+  --token-rose-70:             #c1a49b; // 深底弱化文字（≈5.5:1）
+  --token-rose-60:             #a8908a; // 深底更弱層級（≈4.6:1）
+  --token-rose-40:             #7c5a55; // 淺底弱化文字（≈5:1）
+
+  // 衍生階調
+  --token-burgundy-tint:       #f3dde1; // primary 淡膚紅容器
+  --token-rose-muted:          #ecd1cb; // 深紅底上的柔霧玫瑰（次要文字）
+  --token-rose-pale:           #f5e9e2; // 淺玫瑰面
+  --token-taupe-warm:          #7c5a55; // 暖灰褐（弱化文字）
+  --token-outline:             #9c7a73;
+  --token-outline-variant:     #d9bfb8;
+  --token-inverse-primary:     #e0a3ae;
+}
+
+// ── Layer 3：MD3 語意色彩系統 ────────────────────────────────────────────────
+:root {
+  /* ===== Core Brand Colors ===== */
+  --md-sys-color-primary:                 var(--token-burgundy);
+  --md-sys-color-on-primary:              var(--token-ivory);
+  --md-sys-color-primary-container:       var(--token-burgundy-tint);
+  --md-sys-color-on-primary-container:    var(--token-rose-muted);
+  --md-sys-color-secondary:               var(--token-crimson);
+  --md-sys-color-on-secondary:            var(--token-ivory);
+  --md-sys-color-secondary-container:     #f8dcd6;
+  --md-sys-color-on-secondary-container:  #4a0d11;
+  --md-sys-color-secondary-fixed:         var(--token-gold);
+  --md-sys-color-on-secondary-fixed:      var(--token-ink);
+  --md-sys-color-tertiary:                var(--token-vermilion);
+  --md-sys-color-on-tertiary:             var(--token-ivory);
+  --md-sys-color-tertiary-container:      #fbded3;
+  --md-sys-color-on-tertiary-container:   #501405;
+
+  /* ===== Semantic States ===== */
+  --md-sys-color-error:                   #b3261e;
+  --md-sys-color-on-error:                var(--token-ivory);
+  --md-sys-color-error-container:         #f9dedc;
+  --md-sys-color-on-error-container:      #410e0b;
+
+  /* ===== Surface System ===== */
+  --md-sys-color-background:              var(--token-ivory);
+  --md-sys-color-on-background:           var(--token-ink);
+  --md-sys-color-surface:                 var(--token-ivory);
+  --md-sys-color-on-surface:              var(--token-ink);
+  --md-sys-color-surface-variant:         #f0e0da;
+  --md-sys-color-on-surface-variant:      var(--token-taupe-warm);
+  --md-sys-color-outline:                 var(--token-outline);
+  --md-sys-color-outline-variant:         var(--token-outline-variant);
+  --md-sys-color-shadow:                  var(--token-maroon-black);
+  --md-sys-color-scrim:                   var(--token-maroon-black);
+
+  /* ===== Inverse ===== */
+  --md-sys-color-inverse-surface:         var(--token-maroon-black);
+  --md-sys-color-inverse-on-surface:      var(--token-rose-pale);
+  --md-sys-color-inverse-primary:         var(--token-inverse-primary);
+
+  /* ===== Surface Containers ===== */
+  --md-sys-color-surface-dim:             #ead8d1;
+  --md-sys-color-surface-bright:          #fdf7f4;
+  --md-sys-color-surface-container-lowest: #fffbf9;
+  --md-sys-color-surface-container-low:   var(--token-rose-pale);
+  --md-sys-color-surface-container:       #f0dfd8;
+  --md-sys-color-surface-container-high:  #ead3cb;
+  --md-sys-color-surface-container-highest: #e4c8bf;
+}

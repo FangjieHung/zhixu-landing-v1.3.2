@@ -215,8 +215,8 @@ button.submit {
   font-weight: 600;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--bg-2);
-  background: var(--color-text-on-dark);
+  color: var(--md-sys-color-on-secondary-fixed);
+  background: var(--md-sys-color-secondary-fixed);
   border: 0;
   cursor: pointer;
   align-self: flex-start;
@@ -224,8 +224,8 @@ button.submit {
     color var(--dur-base) var(--ease-editorial),
     background var(--dur-base) var(--ease-editorial);
   &:hover {
-    color: var(--accent);
-    background: var(--color-text-on-dark);
+    color: var(--md-sys-color-secondary-fixed);
+    background: var(--md-sys-color-inverse-surface);
   }
 }
 
@@ -235,13 +235,13 @@ button.primary {
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  background-color: var(--accent);
-  color: #fff;
+  background-color: var(--md-sys-color-secondary-fixed);
+  color: var(--md-sys-color-on-secondary-fixed);
   padding: 18px 26px;
   border: 0;
   cursor: pointer;
   &:hover {
-    color: var(--color-text-on-dark);
-    background: var(--bg-2);
+    color: var(--md-sys-color-secondary-fixed);
+    background: var(--md-sys-color-inverse-surface);
   }
 }

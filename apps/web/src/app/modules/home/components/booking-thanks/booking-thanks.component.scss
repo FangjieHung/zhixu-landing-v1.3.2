@@ -15,7 +15,7 @@
 .thanks-sub {
   font-family: "Noto Sans TC", var(--font-sans);
   font-size: 1.05rem;
-  color: #b8ad9e;
+  color: #c1a49b;
   line-height: 1.8;
   letter-spacing: 0.04em;
   margin-top: 0.75rem;
@@ -24,14 +24,14 @@
 .circle-divider {
   width: 1px;
   height: 2.5rem;
-  background: #3a3128;
+  background: #4a1d1b;
   margin: 2rem 0;
 }
 
 .thanks-invite {
   font-family: "Noto Sans TC", var(--font-sans);
   font-size: 1rem;
-  color: #b8ad9e;
+  color: #c1a49b;
   line-height: 1.8;
   letter-spacing: 0.03em;
   margin-bottom: 1.5rem;
@@ -51,7 +51,7 @@
   flex-direction: column;
   gap: 0.2rem;
   padding-left: 1rem;
-  border-left: 2px solid #3a3128;
+  border-left: 2px solid #4a1d1b;
 
   .platform {
     font-family: var(--font-sans);
@@ -65,7 +65,7 @@
   .desc {
     font-family: "Noto Sans TC", var(--font-sans);
     font-size: 0.95rem;
-    color: #b8ad9e;
+    color: #c1a49b;
     line-height: 1.6;
     letter-spacing: 0.02em;
   }

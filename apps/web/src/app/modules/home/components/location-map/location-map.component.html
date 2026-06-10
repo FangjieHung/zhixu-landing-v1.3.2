@@ -65,7 +65,7 @@
             font-family="Noto Sans TC, sans-serif"
             font-size="20"
             letter-spacing="2.4"
-            fill="#c9b88a"
+            fill="#c89d55"
             font-weight="600"
           >開車 {{ m.min }} 分鐘</text>
           <text
@@ -74,7 +74,7 @@
             text-anchor="middle"
             font-family="Noto Serif TC, serif"
             font-size="24"
-            fill="#ece4d3"
+            fill="#f0ded4"
             font-weight="500"
           >{{ m.name }}</text>
         </g>
@@ -89,7 +89,7 @@
           [attr.data-id]="w.id"
           [attr.d]="walkRouteD(w)"
           fill="none"
-          stroke="#cfb286"
+          stroke="#c89d55"
           stroke-width="3"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -103,7 +103,7 @@
           [attr.data-i]="i"
           [attr.transform]="'translate(' + p.x + ',' + p.y + ')'"
         >
-          <circle r="8" fill="#cfb286" />
+          <circle r="8" fill="#c89d55" />
         </g>
 
         <g
@@ -118,7 +118,7 @@
             font-family="Noto Sans TC, sans-serif"
             font-size="12"
             letter-spacing="2.4"
-            fill="#c9b88a"
+            fill="#c89d55"
             font-weight="600"
           >步行 {{ p.min }} 分鐘</text>
           <text
@@ -127,7 +127,7 @@
             [attr.text-anchor]="p.anchor === 'end' ? 'end' : 'start'"
             font-family="Noto Serif TC, serif"
             font-size="17"
-            fill="#ece4d3"
+            fill="#f0ded4"
             font-weight="500"
           >{{ p.name }}</text>
         </g>
@@ -135,8 +135,8 @@
 
       <!-- Center pin · 之序 -->
       <g class="lm-pin" [attr.transform]="'translate(' + centerPin.x + ',' + centerPin.y + ')'">
-        <circle class="pin-pulse" r="34" fill="#cfb286" opacity="0.55" />
-        <circle r="34" fill="#cfb286" />
+        <circle class="pin-pulse" r="34" fill="#c89d55" opacity="0.55" />
+        <circle r="34" fill="#c89d55" />
         <!-- Simple tower glyph -->
         <g transform="translate(-9, -16)" fill="#000">
           <rect x="6" y="0" width="6" height="22" rx="0.5" />
