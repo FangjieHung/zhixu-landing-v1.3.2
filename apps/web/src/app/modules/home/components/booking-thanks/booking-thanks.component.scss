@@ -13,7 +13,7 @@
 }
 
 .thanks-sub {
-  font-family: "Noto Sans TC", var(--font-sans);
+  @apply font-sans;
   font-size: 1.05rem;
   color: #c1a49b;
   line-height: 1.8;
@@ -29,7 +29,7 @@
 }
 
 .thanks-invite {
-  font-family: "Noto Sans TC", var(--font-sans);
+  @apply font-sans;
   font-size: 1rem;
   color: #c1a49b;
   line-height: 1.8;
@@ -54,7 +54,7 @@
   border-left: 2px solid #4a1d1b;
 
   .platform {
-    font-family: var(--font-sans);
+    @apply font-sans;
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.22em;
@@ -63,7 +63,7 @@
   }
 
   .desc {
-    font-family: "Noto Sans TC", var(--font-sans);
+    @apply font-sans;
     font-size: 0.95rem;
     color: #c1a49b;
     line-height: 1.6;

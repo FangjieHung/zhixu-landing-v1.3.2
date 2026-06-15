@@ -29,6 +29,10 @@ module.exports = {
         'relaxed': '1.625',
         'loose': '2',
       },
+      fontFamily: {
+        'sans': ['"Noto Sans TC"', '"Inter"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
+        'serif': ['"Playfair Display"', '"Noto Serif TC"', 'serif']
+      },
     },
   },
   plugins: [],

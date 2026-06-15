@@ -1,5 +1,8 @@
 <!-- Sticky topbar -->
+ 
+
 <header class="topbar" [class.shown]="scrolled">
+  <div class="fixed top-0 w-full inset-x-0 text-white z-10">測試版本 v1.1.0</div>
   <a class="mark" routerLink="/">
     <img src="assets/image/logo/type-main.svg" alt="之序" />
     <div class="en">
@@ -43,8 +46,8 @@
     <div class="hero-content">
       <div class="hero-title">
         <h1>
-          航向中央公園，<br />
-          泊岸理想生活。
+          航向中央公園<br />
+          泊岸理想生活
         </h1>
         <button (click)="scrollToId('contact')" class="primary">
           預約鑒賞
@@ -73,41 +76,52 @@
   <!-- District Intro · 周邊國際特區 -->
   <section class="district-intro" id="district-intro">
     <div class="di-canvas">
-      <img
-        class="di-img di-img--01"
-        src="assets/image/infrastructure/387.webp"
-        alt="水湳中央公園空拍全景"
-        loading="lazy"
-      />
-      <img
-        class="di-img di-img--02"
-        src="assets/image/infrastructure/409.webp"
-        alt="水湳生醫園區開發現場"
-        loading="lazy"
-      />
-      <img
-        class="di-img di-img--03"
-        src="assets/image/infrastructure/396.webp"
-        alt="水湳國際會展中心周邊"
-        loading="lazy"
-      />
-      <img
-        class="di-img di-img--04"
-        src="assets/image/infrastructure/428.webp"
-        alt="水湳輕軌站點建設進度"
-        loading="lazy"
-      />
-      <img
-        class="di-img di-img--05"
-        src="assets/image/infrastructure/479.webp"
-        alt="水湳智慧城市基礎建設"
-        loading="lazy"
-      />
-
+      <ul class="di-img-list">
+        <li class="di-img di-img--01">
+          <img
+            src="assets/image/infrastructure/002-central-park.webp"
+            alt="中央公園空拍景觀"
+            loading="lazy"
+          />
+          <div class="caption-fade">中央公園</div>
+        </li>
+        <li class="di-img di-img--02">
+          <img
+            src="assets/image/infrastructure/001-central-science-park.png"
+            alt="中部科學園區空拍景觀"
+            loading="lazy"
+          />
+          <div class="caption-fade">中部科學園區</div>
+        </li>
+        <li class="di-img di-img--03">
+          <img
+            src="assets/image/infrastructure/003-exhibition-center.png"
+            alt="台中國際會展中心"
+            loading="lazy"
+          />
+          <div class="caption-fade">台中國際會展中心</div>
+        </li>
+        <li class="di-img di-img--04">
+          <img
+            src="assets/image/infrastructure/005-mrt-green-line.jpg"
+            alt="捷運綠線月台實景"
+            loading="lazy"
+          />
+          <div class="caption-fade">捷運綠線</div>
+        </li>
+        <li class="di-img di-img--05">
+          <img
+            src="assets/image/infrastructure/004-green-art-museum.webp"
+            alt="臺中綠美圖建築外觀"
+            loading="lazy"
+          />
+          <div class="caption-fade">臺中綠美圖</div>
+        </li>
+      </ul>
       <div class="di-headline">
         <h2 class="di-title">
-          水湳，<br />
-          在你的步行距離裡成形。
+          水湳<br/>
+          在你的步行距離裡成形
         </h2>
       </div>
     </div>

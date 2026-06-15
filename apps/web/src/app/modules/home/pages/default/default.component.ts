@@ -316,8 +316,8 @@ export class DefaultComponent
           });
           if (diHeadline) gsap.set(diHeadline, { opacity: 0, yPercent: 6 });
 
-          // ── Pre-pin entry parallax ──
-          // section 在 pin 啟動前先做整塊 yPercent 滑入 + 淡入，
+          // ── Pre-pin entry：section 進入視窗 1/4 (top 75%) 起算 ──
+          // 到 pin 啟動 (top top) 完成：整塊 canvas 滑入淡入，
           // 吃掉「米色 bg 已就位但內容還沒進場」的空白感
           gsap.fromTo(
             diCanvas,
@@ -328,21 +328,58 @@ export class DefaultComponent
               ease: 'none',
               scrollTrigger: {
                 trigger: diSection,
-                start: 'top bottom',
+                start: 'top 75%',
                 end: 'top top',
                 scrub: 0.6,
               },
             }
           );
 
+          // 進場序列（對應草圖出現順序，diImgs 依 DOM 順序即 01→05 = 圖1→圖5）：
+          // 圖1(右上) → 圖2(中上) →【中間文字第 3 個出現】→ 圖3(左中) → 圖4(右下) → 圖5(中下)
+          // 與上方 canvas 滑入同步，於 top 75% → top top 區間 scrub 完成，
+          // 避免內容在進場期間長時間維持 opacity:0 的空白
+          const entryStep = 0.05;
+          // 圖1 之後（圖2-5、標題）額外延遲一點點進場，與圖1錯開更明顯
+          const lateDelay = 0.04;
+          const entryTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: diSection,
+              start: 'top 75%',
+              end: 'top top',
+              scrub: 0.6,
+            },
+          });
+          const revealEntry = (img: HTMLElement, slot: number) =>
+            entryTl.to(
+              img,
+              { opacity: 1, y: 0, duration: 0.19, ease: 'power2.out' },
+              slot === 0 ? 0 : slot * entryStep + lateDelay
+            );
+
+          revealEntry(diImgs[0], 0); // 圖1 · 右上
+          revealEntry(diImgs[1], 1); // 圖2 · 中上
+          if (diHeadline) {
+            // 中間文字 · 第 3 個出現（夾在 圖2 與 圖3 之間）
+            entryTl.to(
+              diHeadline,
+              { opacity: 1, yPercent: 0, duration: 0.16, ease: 'power2.out' },
+              2 * entryStep + lateDelay
+            );
+          }
+          revealEntry(diImgs[2], 3); // 圖3 · 左中
+          revealEntry(diImgs[3], 4); // 圖4 · 右下
+          revealEntry(diImgs[4], 5); // 圖5 · 中下
+
           // 建立 pinned timeline（拉長為 2.0× vh ≈ 200svh）
-          // 節奏：淡入(0→~0.44) + 全程 parallax 視差 → 定格 hold(0.45→0.72) → 緩慢退場(0.72→1.0)
+          // 節奏：全程 parallax 視差 → 定格 hold(0.45→0.72) → 緩慢退場(0.72→1.0)
+          // （圖片/標題進場已於 pin 前的 entryTl 階段完成）
           const diTl = gsap.timeline({
             defaults: { ease: 'power2.out' },
             scrollTrigger: {
               trigger: diSection,
               start: 'top top',
-              end: () => `+=${window.innerHeight * 2.0}`,
+              end: () => `+=${window.innerHeight * 1.5}`,
               pin: true,
               pinSpacing: true,
               scrub: 0.6,
@@ -351,39 +388,14 @@ export class DefaultComponent
             },
           });
 
-          // 進場序列（對應草圖出現順序，diImgs 依 DOM 順序即 01→05 = 圖1→圖5）：
-          // 圖1(右上) → 圖2(中上) →【中間文字第 3 個出現】→ 圖3(左中) → 圖4(右下) → 圖5(中下)
-          // entryStep × 最後一格(5) + duration ≈ 0.44，銜接後段 hold(0.45)
-          const entryStep = 0.05;
-          const revealImg = (img: HTMLElement, slot: number) =>
-            diTl.to(
-              img,
-              { opacity: 1, y: 0, duration: 0.19, ease: 'power2.out' },
-              slot * entryStep
-            );
-
-          revealImg(diImgs[0], 0); // 圖1 · 右上
-          revealImg(diImgs[1], 1); // 圖2 · 中上
-          if (diHeadline) {
-            // 中間文字 · 第 3 個出現（夾在 圖2 與 圖3 之間）
-            diTl.to(
-              diHeadline,
-              { opacity: 1, yPercent: 0, duration: 0.16, ease: 'power2.out' },
-              2 * entryStep
-            );
-          }
-          revealImg(diImgs[2], 3); // 圖3 · 左中
-          revealImg(diImgs[3], 4); // 圖4 · 右下
-          revealImg(diImgs[4], 5); // 圖5 · 中下
-
           // Parallax：各圖以不同幅度持續上飄（用 yPercent，與進場的 y/opacity
           // 為獨立 transform 分量、互不覆蓋），全程隨 scrub 連動 → 景深視差
           const parallax: Record<string, number> = {
-            'di-img--01': -8,
-            'di-img--02': -5,
-            'di-img--03': -14,
-            'di-img--04': -10,
-            'di-img--05': -16,
+            'di-img--01': -4,
+            'di-img--02': -2,
+            'di-img--03': -7,
+            'di-img--04': -5,
+            'di-img--05': -8,
           };
           diImgs.forEach((img) => {
             const key = Object.keys(parallax).find((k) =>

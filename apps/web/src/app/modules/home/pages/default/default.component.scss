@@ -18,9 +18,6 @@
   --bg-2: var(--color-surface-dark);
   --accent: var(--color-accent-warm);
 
-  --font-display: "Playfair Display", "Noto Serif TC", serif;
-  --font-sans: "Noto Sans TC", "Inter", system-ui, sans-serif;
-
   --ease-editorial: cubic-bezier(0.25, 0.1, 0.25, 1);
   --dur-slow: 600ms;
   --dur-base: 400ms;
@@ -31,7 +28,7 @@
   display: block;
   background: var(--bg-1);
   color: var(--fg-1);
-  font-family: var(--font-sans);
+  @apply font-sans;
   font-size: 1rem;
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
@@ -94,7 +91,7 @@ ul {
 
 .caption-fade {
   @apply text-white text-lg absolute left-0 bottom-0 px-3.5 py-3;
-  font-family: var(--font-sans);
+  @apply font-sans;
 
   font-weight: 600;
   letter-spacing: 0.22em;
@@ -176,7 +173,7 @@ ul {
     gap: 28px;
     justify-content: center;
     a {
-      font-family: var(--font-sans);
+      @apply font-sans;
       font-size: 1rem;
       font-weight: 600;
       letter-spacing: 0.2em;
@@ -196,7 +193,7 @@ ul {
     justify-content: flex-end;
     gap: 28px;
     a {
-      font-family: var(--font-sans);
+      @apply font-sans;
       font-size: 1rem;
       font-weight: 600;
       letter-spacing: 0.2em;
@@ -248,7 +245,7 @@ ul {
   }
 
   .secondary {
-    font-family: var(--font-sans);
+    @apply font-sans;
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: 0.22em;
@@ -258,9 +255,6 @@ ul {
     border: 0;
     padding: 6px 8px;
     cursor: pointer;
-    &:hover {
-      color: var(--accent);
-    }
   }
 }
 
@@ -335,7 +329,7 @@ section.frame {
   flex-wrap: wrap;
   gap: 0.6em;
   align-items: center;
-  font-family: var(--font-sans);
+  @apply font-sans;
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.22em;
@@ -343,7 +337,7 @@ section.frame {
   color: var(--fg-2);
 }
 .yearmark {
-  font-family: var(--font-display);
+  @apply font-serif;
   font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.22em;
@@ -352,7 +346,7 @@ section.frame {
 }
 
 .pull {
-  font-family: var(--font-display);
+  @apply font-serif;
   font-weight: 400;
   line-height: 1.05;
   letter-spacing: 0.01em;
@@ -363,13 +357,12 @@ section.frame {
 }
 .pull-zh {
   @apply font-serif font-bold text-2xl 2xl:text-4xl;
-  font-family: "Noto Serif TC", serif;
   letter-spacing: 0.04em;
-  color: var(--fg-1-ink); // 淺底 → 降明度金
+  color: var(--color-text-on-light); // 淺底 → 降明度金
   margin: 0;
 }
 p.body {
-  font-family: var(--font-sans);
+  @apply font-sans;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.95;
@@ -377,7 +370,7 @@ p.body {
   color: var(--fg-1);
   margin: 0 0 1rem;
   &.zh {
-    font-family: "Noto Sans TC", var(--font-sans);
+    @apply font-sans;
     font-size: 1rem;
     line-height: 2.05;
     letter-spacing: 0.06em;
@@ -392,7 +385,7 @@ p.body {
 }
 
 .foot {
-  font-family: var(--font-sans);
+  @apply font-sans;
   font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.18em;
@@ -450,12 +443,8 @@ p.body {
   }
 
   .hero-title h1 {
-    @apply font-serif font-medium;
+    @apply font-serif font-bold text-white;
     align-self: center;
-    margin: 0;
-    color: var(--fg-1);
-    font-family: "Noto Serif TC", serif;
-    font-weight: 500;
     line-height: 1.25;
     letter-spacing: 0.06em;
     font-size: clamp(2.4rem, 6vw, 6rem);
@@ -483,7 +472,7 @@ p.body {
     }
     .hero-yearmark {
       @apply text-base leading-normal justify-center flex flex-wrap items-center lg:justify-start;
-      font-family: var(--font-display);
+      @apply font-serif;
       font-weight: 500;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -501,7 +490,7 @@ p.body {
     p {
       margin-top: 12px;
       margin-bottom: 0;
-      font-family: var(--font-sans);
+      @apply font-sans;
       font-size: 0.5625rem;
       font-weight: 600;
       letter-spacing: 0.28em;
@@ -804,54 +793,63 @@ p.body {
      不同螢幕都能維持鋸齒間距、不互相重疊 */
   .di-img {
     position: absolute;
-    object-fit: cover;
+    overflow: hidden;
     border-radius: 4px;
     will-change: transform, opacity;
+
+    img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
   }
 
   /* 進場順序對應草圖（由上而下）：
      01 右上 → 02 中上 →（中間文字第 3 個出現）→ 03 左中 → 04 右下 → 05 中下 */
   .di-img--01 {
-    width: 36vh;
+    width: 54vh;
     aspect-ratio: 16 / 10;
     top: 4%;
     right: 6%;
   }
 
   .di-img--02 {
-    width: 30vh;
+    width: 45vh;
     aspect-ratio: 16 / 9;
-    top: 17%;
-    left: 50%;
-    margin-left: -15vh; // 自身一半寬，水平置中（不用 transform，避讓 GSAP x/y）
+    top: 15%;
+    left: 20%;
+    margin-left: -22.5vh; // 自身一半寬，水平置中（不用 transform，避讓 GSAP x/y）
   }
 
   .di-img--03 {
-    width: 38vh;
+    width: 57vh;
     aspect-ratio: 4 / 3;
     top: 50%;
     left: 5%;
   }
 
   .di-img--04 {
-    width: 32vh;
+    width: 48vh;
     aspect-ratio: 4 / 3;
     top: 63%;
     right: 5%;
   }
 
   .di-img--05 {
-    width: 30vh;
-    aspect-ratio: 4 / 3;
-    top: 82%;
+    width: 45vh;
+    aspect-ratio: 16 / 9;
+    top: 70%;
     left: 50%;
-    margin-left: -15vh;
+    margin-left: -22.5vh;
   }
 
   /* ── 文字主體：置中浮在鋸齒中段空白 ── */
   .di-headline {
     position: absolute;
-    top: 40%;
+    top: 30%;
     left: 0;
     right: 0;
     z-index: 2;
@@ -871,18 +869,14 @@ p.body {
     pointer-events: none;
     opacity: 0;
     /* 整片實色深紅，由 GSAP 控 opacity 0→1，配合 di-canvas 上推形成「捲簾收尾」 */
-    background: #32070f;
+    background: var(--map-bg);
     will-change: opacity;
   }
 
   .di-title {
-    @apply font-serif;
-    max-width: 30rem; // 收窄置中，與左右兩欄圖片留出間距
+    @apply font-serif max-w-lg font-bold tracking-wider;
     font-size: clamp(1.8rem, 3.6vw, 3.4rem);
-    line-height: 1.65;
     color: var(--fg-1-ink); // 金米色底 → 降明度金
-    font-weight: 400;
-    letter-spacing: 0.02em;
   }
 }
 
@@ -890,7 +884,7 @@ p.body {
    原本繼承 host 米色 → pin 釋放後到 lm-stage pin 之間出現 1vh 米色斷層。
    染成 lm-stage 同色，銜接到 location-map 無縫接軌。 */
 :host ::ng-deep .pin-spacer:has(> #district-intro) {
-  background: #32070f;
+  background: var(--map-bg);
 }
 
 /* GSAP 包 .lm-stage 的 pin-spacer：pin 釋放後 padding 區會露出米色 lm-section bg，
@@ -898,7 +892,7 @@ p.body {
    染深紅跟 stage 同色 → pin 釋放後 padding 與 stage 顏色一致，無視覺斷層。
    注意：location-map 是 child component，需用 ::ng-deep 穿透 view encapsulation。 */
 :host ::ng-deep .pin-spacer:has(> .lm-stage) {
-  background: #32070f;
+  background: var(--map-bg);
 }
 
 /* 把 app-location-map 用負 margin 向上拉一個 viewport，
@@ -939,7 +933,7 @@ p.body {
       width: 40vw;
       aspect-ratio: 3 / 4;
       top: 20%;
-      left: 4%;
+      left: 20%;
       margin-left: 0;
     }
     .di-img--03 {
@@ -992,7 +986,7 @@ p.body {
     }
     .right {
       color: #c1a49b;
-      font-family: "Noto Sans TC", var(--font-sans);
+      @apply font-sans;
       font-size: 1rem;
       letter-spacing: 0.04em;
       max-width: 42ch;
@@ -1017,7 +1011,7 @@ p.body {
       border-right: 0;
     }
     .label-sm {
-      font-family: var(--font-sans);
+      @apply font-sans;
       font-size: 0.875rem;
       font-weight: 600;
       letter-spacing: 0.24em;
@@ -1025,7 +1019,7 @@ p.body {
       color: var(--fg-2-dim);
     }
     .big {
-      font-family: var(--font-display);
+      @apply font-serif;
       font-size: clamp(1.6rem, 2.4vw, 2.2rem);
       line-height: 1.1;
       font-weight: 400;
@@ -1038,7 +1032,7 @@ p.body {
       }
     }
     .sub {
-      font-family: "Noto Sans TC", var(--font-sans);
+      @apply font-sans;
       font-size: 1rem;
       line-height: 1.85;
       letter-spacing: 0.04em;
@@ -1132,15 +1126,14 @@ p.body {
   }
 
   .anchor-q {
-    @apply text-center text-3xl xl:text-5xl font-serif md:text-left;
+    @apply text-center font-semibold text-3xl xl:text-5xl font-serif md:text-left;
     line-height: 1.35;
     letter-spacing: 0.06em;
     color: var(--fg-1);
     margin-bottom: clamp(3rem, 12vh, 9rem);
     max-width: 32ch;
     .lighter {
-      @apply text-lg lg:text-xl xl:text-3xl;
-      color: var(--accent);
+      @apply text-lg lg:text-xl xl:text-3xl text-white;
     }
   }
 
@@ -1155,14 +1148,14 @@ p.body {
 
   .bd-essay {
     @apply text-lg max-w-lg;
-    font-family: "Noto Sans TC", var(--font-sans);
+    @apply font-sans;
     line-height: 2.1;
     letter-spacing: 0.06em;
     color: #ead4cb;
     margin: 0 0 1.4rem;
 
     .strong {
-      color: var(--accent);
+      color: var(--fg-1);
       font-weight: 500;
     }
   }
@@ -1192,13 +1185,13 @@ p.body {
 
     .bd-title {
       @apply mb-auto text-5xl;
-      font-family: var(--font-display);
+      @apply font-serif;
       color: var(--color-text-on-dark);
     }
 
     .bd-describe {
       @apply text-lg font-bold tracking-wide;
-      font-family: var(--font-sans);
+      @apply font-sans;
       color: #c9aba1;
     }
   }
@@ -1246,7 +1239,7 @@ p.body {
     letter-spacing: 0.04em;
     .bd-work-en {
       display: block;
-      font-family: var(--font-sans);
+      @apply font-sans;
       font-size: 0.875rem;
       font-weight: 600;
       letter-spacing: 0.24em;
@@ -1256,7 +1249,7 @@ p.body {
     }
   }
   .bd-work-award {
-    font-family: var(--font-sans);
+    @apply font-sans;
     font-size: 0.875rem;
     font-weight: 600;
     letter-spacing: 0.16em;
@@ -1267,7 +1260,7 @@ p.body {
     border-top: 1px solid #4a1d1b;
   }
   .bd-work-note {
-    font-family: "Noto Sans TC", var(--font-sans);
+    @apply font-sans;
     font-size: 1rem;
     line-height: 1.85;
     letter-spacing: 0.05em;
@@ -1400,7 +1393,7 @@ p.body {
     }
 
     .sb-lede {
-      font-family: "Noto Sans TC", var(--font-sans);
+      @apply font-sans;
       font-size: 1rem;
       line-height: 2;
       letter-spacing: 0.04em;
@@ -1531,7 +1524,7 @@ p.body {
         border-bottom: 0;
       }
       .k {
-        font-family: var(--font-sans);
+        @apply font-sans;
         font-size: 0.875rem;
         font-weight: 600;
         letter-spacing: 0.26em;
@@ -1539,7 +1532,7 @@ p.body {
         color: var(--fg-2-dim);
       }
       .v {
-        font-family: var(--font-display);
+        @apply font-serif;
         font-size: clamp(2.5rem, 5vw, 4.2rem);
         line-height: 1;
         font-weight: 400;
@@ -1547,7 +1540,7 @@ p.body {
         color: var(--color-text-on-dark);
         text-transform: uppercase;
         .small {
-          font-family: var(--font-display);
+          @apply font-serif;
           font-size: 0.4em;
           margin-left: 6px;
           color: #c1a49b;
@@ -1555,7 +1548,7 @@ p.body {
         }
       }
       .vsub {
-        font-family: "Noto Sans TC", var(--font-sans);
+        @apply font-sans;
         font-size: 1rem;
         letter-spacing: 0.06em;
         color: #c1a49b;
@@ -1605,7 +1598,7 @@ p.body {
       padding-top: 2rem;
       border-top: 1px solid #4a1d1b;
       .label-sm {
-        font-family: var(--font-sans);
+        @apply font-sans;
         font-size: 0.875rem;
         font-weight: 600;
         letter-spacing: 0.26em;
@@ -1613,7 +1606,7 @@ p.body {
         color: var(--fg-2-dim);
       }
       .tt {
-        font-family: var(--font-display);
+        @apply font-serif;
         font-size: clamp(1.6rem, 2.2vw, 2rem);
         line-height: 1.1;
         text-transform: uppercase;
@@ -1628,7 +1621,7 @@ p.body {
         }
       }
       .desc {
-        font-family: "Noto Sans TC", var(--font-sans);
+        @apply font-sans;
         font-size: 1rem;
         line-height: 1.95;
         letter-spacing: 0.06em;
@@ -1833,7 +1826,7 @@ p.body {
       .mat-mdc-floating-label,
       .mdc-floating-label {
         color: var(--fg-2-dim);
-        font-family: var(--font-sans);
+        @apply font-sans;
         font-weight: 600;
         letter-spacing: 0.14em;
         text-transform: uppercase;
@@ -1842,7 +1835,7 @@ p.body {
       // Input / textarea text + placeholder
       .mat-mdc-input-element {
         color: var(--color-text-on-dark);
-        font-family: "Noto Sans TC", var(--font-sans);
+        @apply font-sans;
         font-size: 1rem;
         letter-spacing: 0.04em;
         caret-color: var(--accent);
@@ -1883,7 +1876,7 @@ p.body {
       flex-wrap: wrap;
       padding-top: 4px;
       .r {
-        font-family: "Noto Sans TC", var(--font-sans);
+        @apply font-sans;
         font-size: 1rem;
         letter-spacing: 0.06em;
         padding: 8px 16px;
@@ -1907,7 +1900,7 @@ p.body {
       flex-direction: column;
       gap: 0.5rem;
       .label {
-        font-family: var(--font-sans);
+        @apply font-sans;
         font-size: 1rem;
         font-weight: 600;
         letter-spacing: 0.28em;
@@ -1920,7 +1913,7 @@ p.body {
         color: var(--color-text-on-dark);
         letter-spacing: 0.04em;
         .en {
-          font-family: var(--font-sans);
+          @apply font-sans;
           font-size: 1rem;
           letter-spacing: 0.22em;
           text-transform: uppercase;
@@ -1953,7 +1946,7 @@ p.body {
     align-items: baseline;
     flex-wrap: wrap;
     gap: 1rem;
-    font-family: var(--font-sans);
+    @apply font-sans;
     font-size: 1rem;
     font-weight: 500;
     letter-spacing: 0.22em;
