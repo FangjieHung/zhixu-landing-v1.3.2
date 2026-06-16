@@ -43,7 +43,7 @@ a {
 // Medium-high emphasis — warm golden accent, typically on dark background
 .btn-tonal {
   @apply px-8 py-4;
-  background-color: var(--md-sys-color-secondary-fixed);
+  background-color: var(--token-gold-70);
   color: var(--md-sys-color-on-secondary-fixed);
   &:hover {
     opacity: 0.9;
