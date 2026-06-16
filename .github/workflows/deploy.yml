@@ -8,25 +8,16 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 18
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build (SSR prerender)
-        run: npm run prerender:web
-
-      - name: Deploy to GitHub Pages
+      - name: Deploy pre-built dist to gh-pages
         run: |
+          touch dist/apps/web/browser/.nojekyll
           cd dist/apps/web/browser
           git init
           git config user.name "github-actions[bot]"
