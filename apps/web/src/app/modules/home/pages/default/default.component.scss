@@ -117,9 +117,18 @@ ul {
   }
 }
 
+// Demo
+.version-note {
+  @apply text-sm bg-black text-white w-full inset-x-0 top-0 h-10 py-3 z-10 text-center;
+
+  ~ .topbar {
+@apply top-10;
+  }
+}
+
 /* Topbar */
 .topbar {
-  @apply flex justify-between;
+  @apply flex justify-between flex-wrap;
   position: fixed;
   top: 0;
   left: 0;
@@ -140,10 +149,7 @@ ul {
     max-height var(--dur-slow) var(--ease-editorial);
   max-height: none;
   &.shown {
-    @apply bg-gradient-to-b from-black/30 to-black/10 py-0 border-b-0;
-    backdrop-filter: blur(18px) saturate(140%);
-    -webkit-backdrop-filter: blur(1rem) saturate(140%);
-    max-height: 4rem;
+    @apply bg-gradient-to-b from-black/30 to-black/0 py-1 border-b-0;
   }
 
   .nav-focused {
@@ -169,6 +175,8 @@ ul {
     }
   }
   &.shown {
+    top:0 !important;
+    // version demo
     .mark {
       transform: scale(0.5);
     }
@@ -316,19 +324,6 @@ section.frame.design {
   background-repeat: no-repeat;
   background-position: top;
 }
-
-/*
-section.frame {
-  padding: 4rem 1.25rem;
-  .inner {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  .col-narrow {
-    position: static;
-  }
-}
-  */
 
 .eyebrow {
   display: flex;
@@ -1473,7 +1468,7 @@ p.body {
   background: var(--brand-gradient) no-repeat;
   background-position: top;
   color: var(--color-text-on-dark);
-  padding: 8rem 3rem;
+  padding: 8rem 3rem 3rem;
   .head {
     display: grid;
     grid-template-columns: 5fr 7fr;
@@ -1569,31 +1564,24 @@ p.body {
   }
   .layouts {
     @apply flex flex-wrap gap-10;
+    background-color: var(--sb-panel-cream);
+    color: var(--color-text-on-light);
 
     .lt {
       @apply flex flex-col flex-1 min-w-fit;
       gap: 1rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--color-divider-on-tertiary);
       .label-sm {
-        @apply font-sans;
-        font-size: 0.875rem;
-        font-weight: 600;
-        letter-spacing: 0.26em;
-        text-transform: uppercase;
-        color: var(--fg-2-dim);
+        @apply text-sm opacity-60;
       }
       .tt {
-        @apply font-serif;
+        @apply font-serif font-semibold;
         font-size: clamp(1.6rem, 2.2vw, 2rem);
         line-height: 1.1;
-        text-transform: uppercase;
-        color: var(--color-text-on-dark);
+        
         .zh {
           font-family: "Noto Serif TC", serif;
           text-transform: none;
           margin-left: 12px;
-          color: var(--token-rose-70);
           font-size: 0.7em;
           letter-spacing: 0.06em;
         }
@@ -1603,7 +1591,6 @@ p.body {
         font-size: 1rem;
         line-height: 1.95;
         letter-spacing: 0.06em;
-        color: var(--token-rose-70);
       }
     }
   }

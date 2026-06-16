@@ -1,8 +1,8 @@
 <!-- Sticky topbar -->
- 
-
+<div class="version-note">
+    [v1.1.0] 測試版，僅供內部預覽使用。
+  </div>
 <header class="topbar" [class.shown]="scrolled">
-  
   <a class="mark" routerLink="/">
     <img src="assets/image/logo/type-main.svg" alt="之序" />
     <div class="en">
@@ -405,11 +405,10 @@
             精品自住首選——方正格局、雙衛皆開窗、光線直進不折。
           </div>
           <button
-            class="tl"
+            class="tl self-start"
             (click)="scrollToId('contact')"
-            style="align-self: flex-start; color: var(--color-text-on-dark)"
           >
-            47 坪 · 索取型錄
+            索取型錄
           </button>
         </div>
         <div class="lt">
@@ -421,11 +420,10 @@
             給自己更多餘裕——大主臥、寬景陽台、讓四季進得來的空間尺度。
           </div>
           <button
-            class="tl"
+            class="tl self-start"
             (click)="scrollToId('contact')"
-            style="align-self: flex-start; color: var(--color-text-on-dark)"
           >
-            52 坪 · 索取型錄
+            索取型錄
           </button>
         </div>
       </div>
