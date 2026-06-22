@@ -99,6 +99,7 @@ export class LocationMapComponent
 {
   @ViewChild('section', { static: true }) sectionRef!: ElementRef<HTMLElement>;
   @ViewChild('stage', { static: true }) stageRef!: ElementRef<HTMLElement>;
+  @ViewChild('zoom', { static: true }) zoomRef!: ElementRef<HTMLElement>;
   @ViewChild('map', { static: true }) mapRef!: ElementRef<SVGSVGElement>;
 
   private gsapCtx?: gsap.Context;
@@ -358,6 +359,9 @@ export class LocationMapComponent
       this.centerOnZhixuMobile();
       return;
     }
+    // 注意：此元件用 pinSpacing 的 ScrollTrigger pin（會插入約 3700px 的 pin-spacer），
+    // 必須在載入時就建立，spacer 高度才會從一開始就在 layout 裡；若延後到捲動才 init，
+    // pin-spacer 會在滑動中突然插入、把後面所有 section 的 trigger 位置擠錯位。
     this.initScrollAnimation();
   }
 
@@ -390,6 +394,8 @@ export class LocationMapComponent
       const section = this.sectionRef.nativeElement;
       const stage = this.stageRef.nativeElement;
       const svg = this.mapRef.nativeElement;
+      // 縮放套在 GPU 合成層（HTML div），而非 svg 本身
+      const zoom = this.zoomRef.nativeElement;
 
       // 預備：量測每條 route path 的長度，設定 dash 起始狀態
       const routePaths = Array.from(
@@ -402,7 +408,7 @@ export class LocationMapComponent
       });
 
       // 初始狀態 — 鏡頭緊鎖在之序、其他元素隱藏
-      gsap.set(svg, { scale: ZOOM_PHASE1_START, transformOrigin: ZOOM_ORIGIN });
+      gsap.set(zoom, { scale: ZOOM_PHASE1_START, transformOrigin: ZOOM_ORIGIN });
       gsap.set('.lm-poi', { opacity: 0, scale: 0.6, transformOrigin: '50% 50%' });
       gsap.set('.lm-walk-path', { opacity: 0 });
       gsap.set('.lm-edge-marker', { opacity: 0 });
@@ -412,7 +418,7 @@ export class LocationMapComponent
       gsap.set('.lm-pin .pin-pulse', { scale: 1, opacity: 0.55, transformOrigin: '50% 50%' });
 
       if (prefersReduced) {
-        gsap.set(svg, { scale: ZOOM_PHASE2_END });
+        gsap.set(zoom, { scale: ZOOM_PHASE2_END, transformOrigin: ZOOM_ORIGIN });
         gsap.set('.lm-poi', { opacity: 0, scale: 1 });
         gsap.set('.lm-walk-path', { opacity: 0.85 });
         gsap.set('.lm-edge-marker', { opacity: 1 });
@@ -438,7 +444,7 @@ export class LocationMapComponent
       });
 
       // ── Phase 1（0 ~ 0.59）─────────────────────────────────────
-      tl.to(svg, { scale: ZOOM_PHASE1_END, duration: 0.59 }, 0);
+      tl.to(zoom, { scale: ZOOM_PHASE1_END, duration: 0.59 }, 0);
 
       this.pois.forEach((poi, i) => {
         tl.to(
@@ -465,7 +471,7 @@ export class LocationMapComponent
       tl.to('.lm-caption-near', { opacity: 0.9, duration: 0.05, ease: 'power1.in' }, 0.59);
 
       // 鏡頭再拉遠
-      tl.to(svg, { scale: ZOOM_PHASE2_END, duration: 0.25 }, 0.60);
+      tl.to(zoom, { scale: ZOOM_PHASE2_END, duration: 0.25 }, 0.60);
 
       // 線路 stroke draw-on
       this.routes.forEach((route) => {

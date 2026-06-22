@@ -202,6 +202,8 @@ export class DefaultComponent
   ];
 
   private gsapCtx?: gsap.Context;
+  /** 統一管理所有 <video> 的進視窗播放／離開暫停 */
+  private videoIo?: IntersectionObserver;
 
   constructor(
     injector: Injector,
@@ -215,10 +217,60 @@ export class DefaultComponent
     if (!this.isBrowser) return;
     setTimeout(() => this.onScroll(), 0);
     this.initAnimations();
+    this.initVideoInViewPlayback();
   }
 
   ngOnDestroy(): void {
+    this.videoIo?.disconnect();
     this.gsapCtx?.revert();
+  }
+
+  /**
+   * 統一管理頁面上所有 <video>：進視窗才播、離開就暫停。
+   *
+   * 設計重點（之後替換素材不需改這裡）：
+   * - 用單一 IntersectionObserver 掃描 host 內所有 <video>，與檔名/數量無關；
+   *   日後換影片只是換 <video> 的 src，邏輯自動沿用。
+   * - 在 JS 強制 muted + playsInline，確保瀏覽器允許無互動自動播放——
+   *   就算未來素材的 markup 漏了屬性也不會壞。
+   * - 搭配 template 的 preload="none"：首屏不下載任何影片，play() 時才抓。
+   * - 尊重 prefers-reduced-motion：開啟時完全不自動播放，只留 poster。
+   */
+  private initVideoInViewPlayback(): void {
+    const prefersReduced =
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    const videos = Array.from(
+      this.host.nativeElement.querySelectorAll<HTMLVideoElement>('video'),
+    );
+    if (!videos.length) return;
+
+    videos.forEach((v) => {
+      v.muted = true;
+      v.playsInline = true;
+    });
+
+    if (typeof IntersectionObserver === 'undefined') {
+      videos.forEach((v) => v.play().catch(() => void 0));
+      return;
+    }
+
+    this.videoIo = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            video.play().catch(() => void 0);
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.25 },
+    );
+    videos.forEach((v) => this.videoIo!.observe(v));
   }
 
   private initAnimations(): void {
@@ -745,10 +797,12 @@ export class DefaultComponent
         });
       });
 
-      // ───── Design sections — video card fade-in + staggered autoplay ─────
+      // ───── Design sections — video card fade-in ─────
+      // 影片播放統一由 initVideoInViewPlayback() 的 IntersectionObserver 管理，
+      // 這裡只負責卡片進場淡入。
       (
-        [['#design', 0.25, 350], ['#design-b', 0.2, 250]] as [string, number, number][]
-      ).forEach(([sectionId, stagger, delay]) => {
+        [['#design', 0.25], ['#design-b', 0.2]] as [string, number][]
+      ).forEach(([sectionId, stagger]) => {
         const cards = gsap.utils.toArray<HTMLElement>(`${sectionId} .vg-card`);
         if (!cards.length) return;
         gsap.from(cards, {
@@ -761,14 +815,6 @@ export class DefaultComponent
             trigger: sectionId,
             start: 'top 90%',
             toggleActions: 'play none none none',
-            onEnter: () => {
-              const videos = Array.from(
-                document.querySelectorAll<HTMLVideoElement>(`${sectionId} video`)
-              );
-              videos.forEach((v, i) =>
-                gsap.delayedCall(i * delay / 1000, () => v.play().catch(() => void 0))
-              );
-            },
           },
         });
       });

@@ -775,7 +775,7 @@ p.body {
 
 /* District Intro · 周邊國際特區 */
 .district-intro {
-  background: var(--color-surface-tertiary);
+  background: var(--token-gold-60);
   color: #2b0a0d;
   overflow: hidden;
   position: relative; // 給 .di-exit-veil 的 inset:0 對齊用

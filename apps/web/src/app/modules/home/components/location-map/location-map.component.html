@@ -1,5 +1,8 @@
 <section #section class="lm-section">
   <div #stage class="lm-stage">
+    <!-- GPU-composited zoom layer：GSAP 縮放這層 HTML <div>（一次點陣化、之後交 GPU 合成），
+         而非縮放 <svg> 本身（每幀重繪向量、跨裝置 tempo 不一）。 -->
+    <div #zoom class="lm-zoom">
     <svg
       #map
       class="lm-map"
@@ -156,6 +159,7 @@
         >之序</text>
       </g>
     </svg>
+    </div>
 
     <!-- TEMP: 路徑收集 debug 浮層 — 取得所有路線座標後刪除 -->
     <div *ngIf="false" class="lm-debug-panel">
