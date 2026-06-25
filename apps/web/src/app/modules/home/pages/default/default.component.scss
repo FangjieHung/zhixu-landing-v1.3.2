@@ -230,7 +230,7 @@ ul {
 .cta-dock {
   position: fixed;
   right: 0;
-  top: 60%; // 視窗中下方
+  top: 80%; // 視窗中下方
   z-index: 50;
   display: flex;
   flex-direction: column;
@@ -251,12 +251,11 @@ ul {
 
 /* 直式金色頁籤：頂部 chevron + 直書標籤，左側圓角貼齊右緣 */
 .cta-tab {
+  @apply min-w-14 px-3 py-4;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  min-width: 44px;
-  padding: 14px 12px 18px;
   border: 0;
   cursor: pointer;
   color: #fff;
@@ -266,20 +265,6 @@ ul {
   transition: background var(--dur-base) var(--ease-editorial);
   &:hover {
     background: #946f33;
-  }
-
-  .cta-tab__chevron {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    opacity: 0.92;
-    svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
   }
 
   .cta-tab__label {
@@ -295,11 +280,10 @@ ul {
 
 /* LINE 方形按鈕（50×50） */
 .cta-line {
+  @apply w-14 h-14;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
   border-radius: 12px 0 0 12px;
   background: #06c755; // LINE 品牌綠
   text-decoration: none;
@@ -841,6 +825,15 @@ p.body {
       padding: clamp(80px, 12vh, 120px) 20px 32px;
     }
     .hero-title {
+      gap: 1.25rem;
+      /* 標題上移、留白縮小，避免被前景建築擋住 */
+      padding-top: clamp(44px, 8vh, 80px);
+    }
+    .hero-display {
+      height: 2.5rem;
+    }
+    .hero-lead {
+      margin-top: 0.5rem;
       gap: 1.5rem;
     }
     .hero-title h1 {
@@ -878,8 +871,8 @@ p.body {
   }
 
   /* ── bento 軌道 ──
-     預設（手機 / 無 JS / prefers-reduced-motion）：直向 bento，全部圖片可見。
-     桌機且允許動態時，JS 會加上 .is-horizontal 切成橫向捲動軌道。 */
+     預設（無 JS / prefers-reduced-motion）：直向 bento，全部圖片可見。
+     允許動態時，JS 會加上 .is-horizontal 切成橫向捲動軌道。 */
   .di-track {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -980,7 +973,7 @@ p.body {
     @apply max-w-md space-y-3 mt-10 text-lg;
   }
 
-  /* 編輯式覆蓋層與旋轉圓環：預設隱藏，僅桌機橫向（.is-horizontal）顯示 */
+  /* 編輯式覆蓋層與旋轉圓環：預設隱藏，僅橫向（.is-horizontal）顯示 */
   .di-overlay,
   .di-ring {
     display: none;
@@ -1000,7 +993,7 @@ p.body {
 }
 
 /* ── 桌機橫向 bento ──
-   .is-horizontal 由 JS 在桌機且允許動態時加上：軌道比畫布寬，
+   .is-horizontal 由 JS 在允許動態時加上：軌道比畫布寬，
    GSAP pin 期間整列向左滑。完形心理：初始第三欄被裁約 1/3，暗示可右滑。 */
 @media (min-width: 769px) {
   /* reduce-motion / pre-JS 後備：桌機直向改 4 欄，每段 4 張剛好 1 列 */
@@ -1219,27 +1212,91 @@ p.body {
 /* 把 app-location-map 用負 margin 向上拉一個 viewport，
    消除 district pin-spacer 釋放後到 lm-stage pin 啟動之間的「100vh 深紅空白」。
    原本：pin-spacer 結束 → 100vh 空白 → lm-stage 接著 pin
-   現在：pin-spacer 結束時 lm-section.top 剛好在 viewport top，lm-stage 立即 pin
-   桌機只用；mobile 取消（mobile 沒 pin、不需要這個重疊） */
-@media (min-width: 769px) {
-  app-location-map {
-    display: block;
-    position: relative;
-    z-index: 1;
-    margin-top: -100vh;
-  }
+   現在：pin-spacer 結束時 lm-section.top 剛好在 viewport top，lm-stage 立即 pin。 */
+app-location-map {
+  display: block;
+  position: relative;
+  z-index: 1;
+  margin-top: -100vh;
 }
 
-/* ── mobile bento 微調 ── */
+/* ── mobile：維持桌機的單列橫向排版，由垂直 scroll 驅動水平位移 ── */
 @media (max-width: 768px) {
-  .district-intro {
+  .district-intro.is-horizontal {
+    .di-canvas {
+      height: 100svh;
+      min-height: 560px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
     .di-track {
-      gap: 0.6rem;
-      padding: clamp(1.25rem, 6vw, 2rem);
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      flex: 0 0 auto;
+      width: max-content;
+      height: 100%;
+      grid-template-columns: none; // 取消基底 2 欄 grid
+      grid-template-rows: none;
+      gap: clamp(1rem, 4.5vw, 1.5rem);
+      padding: 0 18vw 0 8vw; // 右側留白，讓最後一張停住時仍有呼吸感
+      overflow: visible;
+      will-change: transform;
+    }
+
+    .di-cell {
+      flex: 0 0 auto;
+      margin: 0;
+      border-radius: 2px;
+      scroll-snap-align: none;
+    }
+
+    .di-img {
+      aspect-ratio: auto;
+      width: min(76vw, 360px);
+      height: min(56svh, 430px);
+      min-height: 320px;
+    }
+
+    figure.di-img:nth-of-type(3n + 1) {
+      height: min(60svh, 450px);
+    }
+
+    figure.di-img:nth-of-type(3n + 2) {
+      width: min(68vw, 320px);
+      height: min(48svh, 380px);
+      transform: translateY(-2svh);
+    }
+
+    figure.di-img:nth-of-type(3n + 3) {
+      width: min(70vw, 340px);
+      height: min(54svh, 410px);
+    }
+
+    .di-cell:not(.di-headline):not(.di-img) {
+      width: min(76vw, 360px);
+    }
+
+    .di-cell > .di-img {
+      width: 100%;
+      height: min(42svh, 320px);
+      min-height: 240px;
+    }
+
+    .di-headline {
+      width: min(78vw, 380px);
+      padding: 0.5rem;
+      justify-content: center;
+    }
+
+    .di-body {
+      margin-top: 1rem; // 收一下基底 mt-10
     }
 
     .di-title {
-      line-height: 1.6;
+      line-height: 1.5;
     }
   }
 }
@@ -1667,8 +1724,13 @@ p.body {
       font-size: clamp(1.2rem, 1.7vw, 1.55rem);
       line-height: 1.85;
       letter-spacing: 0.04em;
-      max-width: 32ch;
+      max-width: 40ch;
       margin: 0;
+
+      /* 每個 lede 元素一行（可斷句排版）；行內過長仍會自然換行 */
+      &__line {
+        display: block;
+      }
     }
 
     /* 規格條列：縮為細節層級（sans 小字、緊湊列高、細線分隔），讓主述成為焦點 */
@@ -1738,7 +1800,7 @@ p.body {
       grid-template-columns: 1fr;
     }
     .sb-image {
-      aspect-ratio: 4 / 5;
+      @apply aspect-video;
     }
     .sb-panel .sb-panel-inner {
       padding: 3rem 1.5rem;
@@ -1790,9 +1852,7 @@ p.body {
 }
 
 .precision .pe-lead {
-  @apply text-base font-sans;
-  line-height: 2.05;
-  letter-spacing: 0.05em;
+  @apply text-lg leading-relaxed font-sans tracking-wide;
   color: var(--fg-2);
   max-width: 46ch;
 }
@@ -1944,7 +2004,7 @@ p.body {
   background: var(--brand-gradient) no-repeat;
   background-position: top;
   color: var(--color-text-on-dark);
-  padding: 8rem 3rem 3rem;
+
   .head {
     display: grid;
     grid-template-columns: 5fr 7fr;
@@ -2025,10 +2085,8 @@ p.body {
   }
   .layouts-hero {
     position: relative;
-    margin-top: 5rem;
-    margin-left: -3rem;
-    margin-right: -3rem;
     overflow: hidden;
+
     .layouts-bg {
       @apply object-cover object-bottom aspect-video max-h-[80svh] min-w-full;
     }
@@ -2041,7 +2099,7 @@ p.body {
   .layouts {
     @apply flex flex-wrap gap-10;
     background-color: var(--sb-panel-cream);
-    color: var(--color-text-on-light);
+    color: var(--token-gold-20);
 
     .lt {
       @apply flex flex-col flex-1 min-w-fit;
@@ -2050,9 +2108,7 @@ p.body {
         @apply text-sm opacity-60;
       }
       .tt {
-        @apply font-serif font-semibold;
-        font-size: clamp(1.6rem, 2.2vw, 2rem);
-        line-height: 1.1;
+        @apply text-3xl font-serif font-semibold leading-normal;
 
         .zh {
           font-family: "Noto Serif TC", serif;
@@ -2209,6 +2265,23 @@ section.frame.catalog {
     border-color: var(--color-text-on-light);
     color: #fff;
   }
+
+  /* Material Symbols 箭頭：偏細字重貼合本頁編輯式調性 */
+  .material-symbols-outlined {
+    font-size: 26px;
+    line-height: 1;
+    font-variation-settings:
+      "wght" 300,
+      "opsz" 24;
+  }
+}
+
+/* 視覺置中：箭頭幾何重心偏一側，肉眼看才會置中 → 左鈕略偏左、右鈕略偏右 */
+.cat-arrow--prev .material-symbols-outlined {
+  transform: translateX(-1px);
+}
+.cat-arrow--next .material-symbols-outlined {
+  transform: translateX(1px);
 }
 
 .catalog-media {
@@ -2294,10 +2367,63 @@ section.frame.catalog {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+
+    /* ── 同意個資政策列：checkbox ＋ 開啟對話框的連結 ── */
+    .form-consent {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.1rem 0.4rem;
+      margin-top: -0.75rem;
+    }
+
+    .consent-check {
+      // 深底配色：未勾選邊框提亮、勾選用品牌色（M16 MDC 以 CSS 變數佈題）
+      --mdc-checkbox-unselected-icon-color: var(--color-divider-on-tertiary);
+      --mdc-checkbox-unselected-hover-icon-color: var(--color-text-on-dark);
+      --mdc-checkbox-unselected-focus-icon-color: var(--color-text-on-dark);
+      --mdc-checkbox-selected-icon-color: var(--color-text-tertiary);
+      --mdc-checkbox-selected-hover-icon-color: var(--color-text-tertiary);
+      --mdc-checkbox-selected-focus-icon-color: var(--color-text-tertiary);
+      --mdc-checkbox-selected-pressed-icon-color: var(--color-text-tertiary);
+
+      ::ng-deep .mdc-label {
+        @apply font-sans;
+        color: var(--color-text-on-dark);
+        font-size: 0.95rem;
+        letter-spacing: 0.04em;
+        padding-left: 0.3rem;
+      }
+    }
+
+    .consent-link {
+      @apply font-sans cursor-pointer tracking-wide;
+      color: var(--token-gold-60);
+      transition: color var(--dur-base) var(--ease-editorial);
+    }
+
+    /* 未勾選同意時的提示（checkbox 非 mat-form-field，需自訂提示列） */
+    .consent-error {
+      flex-basis: 100%;
+      margin: 0.25rem 0 0;
+      @apply font-sans;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      color: #e63c14;
+    }
+
     // mat-form-field dark-theme overrides (fill appearance)
     ::ng-deep mat-form-field {
       width: 100%;
       display: block;
+
+      // 錯誤訊息文字（本專案未載入完整 Material 主題，須自訂顏色與字級）
+      .mat-mdc-form-field-error {
+        @apply font-sans;
+        color: #e63c14;
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+      }
 
       // Fill wrapper: transparent bg, no rounded clip, keep bottom line only.
       // border-radius:0 + a touch of overflow room prevents the floating label
@@ -2369,6 +2495,19 @@ section.frame.catalog {
           color: #e63c14;
         }
       }
+
+      // ── Textarea 浮動標籤修正 ──
+      // textarea 較高，預設置中(top:50%)的標籤在 focus 浮起後仍落在中間偏下；
+      // 改為錨定頂端，與單行欄位一致。
+      .mat-mdc-text-field-wrapper.mdc-text-field--textarea {
+        .mat-mdc-form-field-flex {
+          align-items: flex-start;
+        }
+        .mat-mdc-floating-label,
+        .mdc-floating-label {
+          top: 1.75rem; // = infix padding-top，對齊 textarea 第一行
+        }
+      }
     }
     .radios {
       display: flex;
@@ -2396,8 +2535,7 @@ section.frame.catalog {
     @apply flex flex-col gap-9 not-italic;
 
     .blk {
-      display: flex;
-      flex-direction: column;
+      @apply w-fit flex flex-col;
       gap: 0.5rem;
       .label {
         @apply font-sans;

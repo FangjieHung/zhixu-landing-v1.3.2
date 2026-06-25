@@ -7,10 +7,13 @@ import {
   OnDestroy,
   ChangeDetectorRef,
 } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { BBDBaseComponent } from '@core/shared';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SwiperOptions } from 'swiper';
+import { PrivacyPolicyDialogComponent } from '../../components/privacy-policy-dialog/privacy-policy-dialog.component';
 
 interface Walk {
   p: string;
@@ -47,10 +50,45 @@ export class DefaultComponent
   purpose: 'self' | 'asset' | 'tbd' = 'self';
   submitted = false;
 
+  /** 聯絡表單：點送出才驗證，欄位以 mat-error 呈現；隱私權需勾選同意 */
+  readonly contactForm = new FormGroup({
+    name: new FormControl('', {
+      nonNullable: true,
+      validators: Validators.required,
+    }),
+    phone: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.pattern(/^[0-9\s-]+$/)],
+    }),
+    email: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.email],
+    }),
+    message: new FormControl('', { nonNullable: true }),
+    agreedPrivacy: new FormControl(false, {
+      nonNullable: true,
+      validators: Validators.requiredTrue,
+    }),
+  });
+
   readonly assetBase = 'assets/image';
   readonly img = {
     hero: `${this.assetBase}/photo/hero-landscpae.webp`,
     map: `${this.assetBase}/map/contact-map.webp`,
+  };
+
+   readonly springsBaysSwiperConfig: SwiperOptions = {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    loop: true,
+    grabCursor: true,
+    speed: 800,
+    autoplay: {
+      delay: 4500,
+      disableOnInteraction: false,
+    },
+    observer: true,
+    observeParents: true,
   };
 
   /**
@@ -72,17 +110,21 @@ export class DefaultComponent
     title: string;
     tag: string;
     src: string;
-    lede: string;
+    /** 每個元素＝一行（可斷句排版），模板逐行輸出 */
+    lede: string[];
     stats: string[];
     theme: 'cream' | 'forest' | 'umber';
   }> = [
        {
   id: 'bay-residence',
-  title: '全屋',
+  title: '在容易忽略的地方，體貼著所有的細微感知。',
   tag: '細節成就完美',
   src: `${this.assetBase}/photo/vaf-living.jpg`,
-  lede:
-    '從踏入門的那一刻起，每個選材都在說話。德國太格木地板、日本三協氣密窗、VAF 智慧淨氣、Yale 無感門鎖——全戶標配不為炫耀，而是對真正居住品質的基本堅持。',
+  lede: [
+    '從踏入門的那一刻起，每個選材都在說話。',
+    '德國太格木地板、日本三協氣密窗、VAF 智慧淨氣、Yale 無感門鎖——',
+    '全戶標配不為炫耀，而是對真正居住品質的基本堅持。',
+  ],
   stats: [
     'VAF 智慧浮流系統 · 過濾 PM2.5、黴菌、甲醛',
     '德國太格木地板 · 台灣認證健康材，不含苯、甲醛',
@@ -97,7 +139,11 @@ export class DefaultComponent
       title: '浴室',
       tag: '日常淨心儀式',
       src: `${this.assetBase}/photo/toto-main.jpg`,
-      lede: '無需試探、不必等待，用恰到好處的淋浴溫度喚醒感官，這一刻自然鬆開、緩緩融化。每天在回到家後，都能在這裡，真正地療癒一天的疲憊',
+      lede: [
+        '無需試探、不必等待，用恰到好處的淋浴溫度喚醒感官，',
+        '這一刻自然鬆開、緩緩融化。',
+        '每天在回到家後，都能在這裡，真正地療癒一天的疲憊。',
+      ],
       stats: [
         'TOTO 全自動智能馬桶 · 一體成型免縫設計',
         'GROHE 定溫花灑 · SmartControl 智慧恆溫',
@@ -112,7 +158,11 @@ export class DefaultComponent
       title: '廚房',
       tag: '烹飪成為藝術',
       src: `${this.assetBase}/photo/stosa-main.jpg`,
-      lede: '當洗碗機溫柔承接了杯盤狼藉後的鬆弛，暖盤機悄悄溫熱著器皿，這些體貼入微的細節，讓料理回歸最本質的模樣：輕鬆、從容，享受全然被療癒的料理時光。',
+      lede: [
+        '當洗碗機溫柔承接了杯盤狼藉後的鬆弛，暖盤機悄悄溫熱著器皿，',
+        '這些體貼入微的細節，讓料理回歸最本質的模樣：',
+        '輕鬆、從容，享受全然被療癒的料理時光。',
+      ],
       stats: [
         'STOSA 義大利廚具 · 創立逾 164 年歐洲頂級品牌',
         'SILESTONE 賽麗石檯面 · 超硬度抗刮耐熱',
@@ -128,7 +178,11 @@ export class DefaultComponent
       title: 'Amenities',
       tag: 'LIFE ELEVATED BEYOND THE UNIT',
       src: `${this.assetBase}/photo/skylounge-main.jpg`,
-      lede: '走出家門，生活仍在延伸。從幾何光影門廳到頂樓 Sky Lounge，從無邊際泳池到私人影院，每一處公共空間都以飯店規格設計——讓日常成為度假，讓棟內即是目的地。',
+      lede: [
+        '走出家門，生活仍在延伸。',
+        '從幾何光影門廳到頂樓 Sky Lounge，從無邊際泳池到私人影院，',
+        '每一處公共空間都以飯店規格設計——讓日常成為度假，讓棟內即是目的地。',
+      ],
       stats: [
         'Sky Lounge 頂樓天空酒廊 · 金色弧形吧台環繞城市天際線',
         '戶外無邊際泳池 · 櫻花樹列陣四季皆景',
@@ -199,21 +253,17 @@ export class DefaultComponent
   };
 
   readonly navItems: Array<{ id: string; label: string }> = [
-    { id: 'location-map', label: '水湳特區' },
-    { id: 'trust', label: '甲級精工' },
+    { id: 'district-intro', label: '生活樣貌' },
+    { id: 'location-map', label: '漫遊水湳' },
+    { id: 'design', label: '私藏空間' },
+    { id: 'trust', label: '甲級匠心' },
     { id: 'spec', label: '精工格局' },
-    { id: 'springs-bays', label: '生活樣貌' },
-    { id: 'design', label: '大師巨作' },
-    { id: 'contact', label: '預約鑒賞' },
   ];
 
   readonly mobileLabels: Record<string, string> = {
-    'location-map': '社區',
-    trust: '甲級',
-    spec: '規格',
-    'springs-bays': '樣貌',
-    design: '生活',
-    contact: '預約',
+    locationMap: '漫遊水湳',
+    design: '私藏空間',
+    spec: '精工格局',
   };
 
   mobileHiddenIds = ['location-map', 'trust', 'design'];
@@ -283,7 +333,8 @@ export class DefaultComponent
   constructor(
     injector: Injector,
     private cdr: ChangeDetectorRef,
-    private host: ElementRef<HTMLElement>
+    private host: ElementRef<HTMLElement>,
+    private dialog: MatDialog
   ) {
     super(injector);
   }
@@ -437,176 +488,153 @@ export class DefaultComponent
       if (diSections.length) {
         const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-        if (!isMobile) {
-          diSections.forEach((diSection, idx) => {
-            const diCanvas = diSection.querySelector<HTMLElement>('.di-canvas');
-            const diTrack = diSection.querySelector<HTMLElement>('.di-track');
-            if (!diCanvas || !diTrack) return;
-            // 只有最後一段做深紅 veil 收尾、與 location-map(-100vh) 同步；前面段橫滑後直接 unpin
-            const isLast = idx === diSections.length - 1;
+        diSections.forEach((diSection, idx) => {
+          const diCanvas = diSection.querySelector<HTMLElement>('.di-canvas');
+          const diTrack = diSection.querySelector<HTMLElement>('.di-track');
+          if (!diCanvas || !diTrack) return;
+          // 只有最後一段做深紅 veil 收尾、與 location-map(-100vh) 同步；前面段橫滑後直接 unpin
+          const isLast = idx === diSections.length - 1;
 
-            // 切成橫向 bento 軌道（寬版排列由 CSS 的 .is-horizontal 控制）
-            diSection.classList.add('is-horizontal');
+          // 切成橫向 bento 軌道（寬版排列由 CSS 的 .is-horizontal 控制）
+          diSection.classList.add('is-horizontal');
 
-            // ── 編輯式覆蓋層：底部進度條 + 頁碼／文案 ──
-            const diFill =
-              diSection.querySelector<HTMLElement>('.di-progress-fill');
-            const diCounter =
-              diSection.querySelector<HTMLElement>('.di-counter');
-            const diCurEl =
-              diSection.querySelector<HTMLElement>('.di-counter-cur');
-            const diTotalEl =
-              diSection.querySelector<HTMLElement>('.di-counter-total');
-            const diImgCount = diSection.querySelectorAll('.di-img').length;
+          // ── 編輯式覆蓋層：底部進度條 + 頁碼／文案 ──
+          const diFill =
+            diSection.querySelector<HTMLElement>('.di-progress-fill');
+          const diCounter = diSection.querySelector<HTMLElement>('.di-counter');
+          const diCurEl =
+            diSection.querySelector<HTMLElement>('.di-counter-cur');
+          const diTotalEl =
+            diSection.querySelector<HTMLElement>('.di-counter-total');
+          const diImgCount = diSection.querySelectorAll('.di-img').length;
 
-            // phrase 模式：data-stops 提供「圖片索引上限 → 前導詞 + 說明」對照，隨橫滑切換文案
-            type DiStop = { to: number; lead: string; note: string };
-            let diStops: DiStop[] = [];
-            const rawStops = diCounter?.dataset['stops'];
-            if (rawStops) {
-              try {
-                diStops = JSON.parse(rawStops) as DiStop[];
-              } catch {
-                diStops = [];
-              }
+          // phrase 模式：data-stops 提供「圖片索引上限 → 前導詞 + 說明」對照，隨橫滑切換文案
+          type DiStop = { to: number; lead: string; note: string };
+          let diStops: DiStop[] = [];
+          const rawStops = diCounter?.dataset['stops'];
+          if (rawStops) {
+            try {
+              diStops = JSON.parse(rawStops) as DiStop[];
+            } catch {
+              diStops = [];
             }
-            // 數字模式才預填總數；phrase 模式文字由 data-stops 決定
-            if (diTotalEl && !diStops.length)
-              diTotalEl.textContent = String(diImgCount).padStart(2, '0');
+          }
+          // 數字模式才預填總數；phrase 模式文字由 data-stops 決定
+          if (diTotalEl && !diStops.length)
+            diTotalEl.textContent = String(diImgCount).padStart(2, '0');
 
-            // 進度（0→1）同步驅動進度條 scaleX 與頁碼／文案
-            const diDriver = { p: 0 };
-            const setDiProgress = () => {
-              if (diFill) gsap.set(diFill, { scaleX: diDriver.p });
-              if (!diImgCount) return;
-              const i = Math.min(
-                diImgCount,
-                Math.max(1, Math.floor(diDriver.p * diImgCount) + 1)
-              );
-              if (diStops.length) {
-                const stop =
-                  diStops.find((s) => i <= s.to) ?? diStops[diStops.length - 1];
-                if (diCurEl) diCurEl.textContent = stop.lead;
-                if (diTotalEl) diTotalEl.textContent = stop.note;
-              } else if (diCurEl) {
-                diCurEl.textContent = String(i).padStart(2, '0');
-              }
-            };
-            setDiProgress();
-
-            // ── Pre-pin entry：section 進入視窗 1/4 起，canvas 滑入淡入 ──
-            gsap.fromTo(
-              diCanvas,
-              { yPercent: 12, opacity: 0.55 },
-              {
-                yPercent: 0,
-                opacity: 1,
-                ease: 'none',
-                scrollTrigger: {
-                  trigger: diSection,
-                  start: 'top 75%',
-                  end: 'top top',
-                  scrub: 0.6,
-                },
-              }
+          // 進度（0→1）同步驅動進度條 scaleX 與頁碼／文案
+          const diDriver = { p: 0 };
+          const setDiProgress = () => {
+            if (diFill) gsap.set(diFill, { scaleX: diDriver.p });
+            if (!diImgCount) return;
+            const i = Math.min(
+              diImgCount,
+              Math.max(1, Math.floor(diDriver.p * diImgCount) + 1)
             );
-
-            // 橫向位移量＝軌道比畫布多出來的寬度（function 值，refresh 時重算）
-            const getShift = () =>
-              -Math.max(0, diTrack.scrollWidth - diCanvas.clientWidth);
-
-            if (isLast) {
-              // ── 銜接 location-map 的關鍵時序 ──
-              // location-map 有 margin-top:-100vh，會從畫面底部往上升起。
-              // outroDur 永遠 = 1/pinVh = 1 個 viewport，剛好對齊地圖升起的那一刻。
-              const pinVh = 2.4; // 4 張圖、軌道較短 → pin 較短
-              const outroStart = 1 - 1 / pinVh; // 地圖開始上升、veil 同步覆蓋的進度
-              const slideEnd = outroStart - 0.06; // 橫滑提前一點結束，最後一張先完整露出
-              const outroDur = 1 - outroStart;
-
-              // ── Pinned timeline：照片整列向左滑 → 定格 → outro 銜接 location-map ──
-              const diTl = gsap.timeline({
-                defaults: { ease: 'none' },
-                scrollTrigger: {
-                  trigger: diSection,
-                  start: 'top top',
-                  end: () => `+=${window.innerHeight * pinVh}`,
-                  pin: true,
-                  pinSpacing: true,
-                  scrub: 0.6,
-                  anticipatePin: 1,
-                  invalidateOnRefresh: true,
-                },
-              });
-
-              // 0 → slideEnd：bento 軌道向左滑（橫向捲動主體，最後一張在此完整露出）
-              diTl.to(diTrack, { x: getShift, duration: slideEnd }, 0);
-              // 進度條 + 頁碼與橫滑同步（並行於 0 位置、同 duration）
-              diTl.to(
-                diDriver,
-                { p: 1, duration: slideEnd, onUpdate: setDiProgress },
-                0
-              );
-              // outroStart → 1：canvas 上推 + 深紅 veil 覆蓋，與地圖升起同步，無縫銜接
-              diTl.to(
-                diCanvas,
-                { yPercent: -14, ease: 'power2.in', duration: outroDur },
-                outroStart
-              );
-              const veil = diSection.querySelector<HTMLElement>('.di-exit-veil');
-              if (veil) {
-                diTl.to(
-                  veil,
-                  { opacity: 1, ease: 'power1.in', duration: outroDur },
-                  outroStart
-                );
-              }
-            } else {
-              // 前面段：橫滑後直接 unpin 接到下一段（同金色底、不需 veil）
-              const pinVh = 1.8;
-              const slideEnd = 0.92; // 0.92 → 1 留一點定格讓最後一張完整露出
-              const diTl = gsap.timeline({
-                defaults: { ease: 'none' },
-                scrollTrigger: {
-                  trigger: diSection,
-                  start: 'top top',
-                  end: () => `+=${window.innerHeight * pinVh}`,
-                  pin: true,
-                  pinSpacing: true,
-                  scrub: 0.6,
-                  anticipatePin: 1,
-                  invalidateOnRefresh: true,
-                },
-              });
-              diTl.to(diTrack, { x: getShift, duration: slideEnd }, 0);
-              diTl.to(
-                diDriver,
-                { p: 1, duration: slideEnd, onUpdate: setDiProgress },
-                0
-              );
+            if (diStops.length) {
+              const stop =
+                diStops.find((s) => i <= s.to) ?? diStops[diStops.length - 1];
+              if (diCurEl) diCurEl.textContent = stop.lead;
+              if (diTotalEl) diTotalEl.textContent = stop.note;
+            } else if (diCurEl) {
+              diCurEl.textContent = String(i).padStart(2, '0');
             }
-          });
-        } else {
-          // Mobile：直向 bento，逐格淡入，不做 pin（兩段所有 cell 一起處理）
-          const diCells = gsap.utils.toArray<HTMLElement>(
-            '.district-intro .di-cell'
-          );
-          diCells.forEach((cell) => gsap.set(cell, { opacity: 0, y: 28 }));
-          diCells.forEach((cell, i) => {
-            gsap.to(cell, {
+          };
+          setDiProgress();
+
+          // ── Pre-pin entry：section 進入視窗 1/4 起，canvas 滑入淡入 ──
+          gsap.fromTo(
+            diCanvas,
+            { yPercent: 12, opacity: 0.55 },
+            {
+              yPercent: 0,
               opacity: 1,
-              y: 0,
-              duration: 0.8,
-              ease,
-              delay: i * 0.04,
+              ease: 'none',
               scrollTrigger: {
-                trigger: cell,
-                start: 'top 88%',
-                toggleActions: 'play none none none',
+                trigger: diSection,
+                start: 'top 75%',
+                end: 'top top',
+                scrub: 0.6,
+              },
+            }
+          );
+
+          // 橫向位移量＝軌道比畫布多出來的寬度（function 值，refresh 時重算）
+          const getShift = () =>
+            -Math.max(0, diTrack.scrollWidth - diCanvas.clientWidth);
+
+          if (isLast) {
+            // ── 銜接 location-map 的關鍵時序 ──
+            // location-map 有 margin-top:-100vh，會從畫面底部往上升起。
+            // outroDur 永遠 = 1/pinVh = 1 個 viewport，剛好對齊地圖升起的那一刻。
+            const pinVh = isMobile ? 3.8 : 2.4; // 手機視窗窄，拉長 pin 距離避免橫滑過快
+            const outroStart = 1 - 1 / pinVh; // 地圖開始上升、veil 同步覆蓋的進度
+            const slideEnd = outroStart - 0.06; // 橫滑提前一點結束，最後一張先完整露出
+            const outroDur = 1 - outroStart;
+
+            // ── Pinned timeline：照片整列向左滑 → 定格 → outro 銜接 location-map ──
+            const diTl = gsap.timeline({
+              defaults: { ease: 'none' },
+              scrollTrigger: {
+                trigger: diSection,
+                start: 'top top',
+                end: () => `+=${window.innerHeight * pinVh}`,
+                pin: true,
+                pinSpacing: true,
+                scrub: 0.6,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
               },
             });
-          });
-        }
+
+            // 0 → slideEnd：bento 軌道向左滑（橫向捲動主體，最後一張在此完整露出）
+            diTl.to(diTrack, { x: getShift, duration: slideEnd }, 0);
+            // 進度條 + 頁碼與橫滑同步（並行於 0 位置、同 duration）
+            diTl.to(
+              diDriver,
+              { p: 1, duration: slideEnd, onUpdate: setDiProgress },
+              0
+            );
+            // outroStart → 1：canvas 上推 + 深紅 veil 覆蓋，與地圖升起同步，無縫銜接
+            diTl.to(
+              diCanvas,
+              { yPercent: -14, ease: 'power2.in', duration: outroDur },
+              outroStart
+            );
+            const veil = diSection.querySelector<HTMLElement>('.di-exit-veil');
+            if (veil) {
+              diTl.to(
+                veil,
+                { opacity: 1, ease: 'power1.in', duration: outroDur },
+                outroStart
+              );
+            }
+          } else {
+            // 前面段：橫滑後直接 unpin 接到下一段（同金色底、不需 veil）
+            const pinVh = isMobile ? 3.2 : 1.8;
+            const slideEnd = 0.92; // 0.92 → 1 留一點定格讓最後一張完整露出
+            const diTl = gsap.timeline({
+              defaults: { ease: 'none' },
+              scrollTrigger: {
+                trigger: diSection,
+                start: 'top top',
+                end: () => `+=${window.innerHeight * pinVh}`,
+                pin: true,
+                pinSpacing: true,
+                scrub: 0.6,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+              },
+            });
+            diTl.to(diTrack, { x: getShift, duration: slideEnd }, 0);
+            diTl.to(
+              diDriver,
+              { p: 1, duration: slideEnd, onUpdate: setDiProgress },
+              0
+            );
+          }
+        });
       }
 
       // ───── BUILDER-DEEP (甲級精工) — parallax bg + sticky 左文 + 卡片淡入 ─────
@@ -949,7 +977,11 @@ export class DefaultComponent
   scrollToId(id: string, offset = 20): void {
     if (typeof window === 'undefined') return;
     const el = document.getElementById(id);
-    if (el) window.scrollTo({ top: el.offsetTop - offset, behavior: 'smooth' });
+    if (!el) return;
+    // 用 getBoundingClientRect 而非 offsetTop：district-intro 被 GSAP pin 後會變成
+    // position:fixed，offsetTop 不再代表它在文件中的實際高度，算出來的目標位置會錯。
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
   }
 
   trackByIndex(index: number): number {
@@ -960,8 +992,22 @@ export class DefaultComponent
     return v.split(' / ');
   }
 
-  submit(event: Event): void {
-    event.preventDefault();
+  submit(): void {
+    // 點送出才驗證：無效則標記全部欄位為 touched，觸發 mat-error / 同意提示
+    if (this.contactForm.invalid) {
+      this.contactForm.markAllAsTouched();
+      return;
+    }
     this.submitted = true;
+  }
+
+  /** 開啟「個人資料保護政策暨隱私權聲明」對話框 */
+  openPrivacyPolicy(): void {
+    this.dialog.open(PrivacyPolicyDialogComponent, {
+      width: 'min(680px, 92vw)',
+      maxHeight: '85vh',
+      autoFocus: false,
+      panelClass: 'pp-dialog-panel',
+    });
   }
 }

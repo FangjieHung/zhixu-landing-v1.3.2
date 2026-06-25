@@ -38,35 +38,20 @@
 }
 
 .social-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+  @apply flex flex-col gap-6;
 }
 
 .social-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  padding-left: 1rem;
-  border-left: 2px solid #4a1d1b;
+  @apply flex flex-col justify-start items-start gap-1 pr-4;
+  border-left: 2px solid var(--color-surface-tertiary);
 
   .platform {
-    @apply font-sans;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
+    @apply font-sans text-lg font-bold tracking-wider;
     color: var(--color-text-on-dark);
   }
 
   .desc {
-    @apply font-sans;
-    font-size: 0.95rem;
-    color: #c1a49b;
-    line-height: 1.6;
-    letter-spacing: 0.02em;
+    @apply font-sans text-base leading-normal tracking-wide;
+    color: var(--token-gold-80);
   }
 }

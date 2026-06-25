@@ -1,0 +1,108 @@
+:host {
+  display: block;
+  position: relative; /* 右上角關閉鈕的定位基準 */
+  /* 暖色系深棕字、米白底，貼合品牌編輯式調性 */
+  --pp-fg: #3a2c26;
+  --pp-fg-dim: #6f5b50;
+  --pp-accent: #8b5e3c;
+  --pp-divider: rgba(139, 94, 60, 0.22);
+}
+
+/* 右上角關閉鈕（Material Symbols「close」） */
+.pp-close-x {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--pp-fg-dim);
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+
+  .material-symbols-outlined {
+    font-size: 24px;
+    line-height: 1;
+    font-variation-settings:
+      "wght" 300,
+      "opsz" 24;
+  }
+
+  &:hover {
+    background: rgba(139, 94, 60, 0.1);
+    color: var(--pp-accent);
+  }
+}
+
+.pp-title {
+  margin: 0;
+  font-family: "Noto Serif TC", serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  color: var(--pp-accent);
+  border-bottom: 1px solid var(--pp-divider);
+}
+
+.pp-content {
+  padding: 1.25rem 1.75rem 1.5rem; /* 取消底部按鈕後，內文自留收尾留白 */
+  color: var(--pp-fg);
+  font-family: "Noto Sans TC", sans-serif;
+
+  /* 內文段落 */
+  p {
+    margin: 0 0 0.9rem;
+    font-size: 0.95rem;
+    line-height: 1.95;
+    letter-spacing: 0.02em;
+  }
+
+  .pp-intro {
+    color: var(--pp-fg-dim);
+    margin-bottom: 1.5rem;
+  }
+}
+
+.pp-section {
+  margin-bottom: 1.75rem;
+
+  &:last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  h3 {
+    margin: 0 0 0.75rem;
+    font-family: "Noto Serif TC", serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--pp-accent);
+  }
+
+  ul {
+    margin: 0 0 0.9rem;
+    padding-left: 1.25rem;
+    list-style: disc;
+
+    li {
+      margin-bottom: 0.65rem;
+      font-size: 0.95rem;
+      line-height: 1.95;
+      letter-spacing: 0.02em;
+
+      &::marker {
+        color: var(--pp-accent);
+      }
+    }
+  }
+}

@@ -42,6 +42,7 @@
         class="hero-bg"
         [src]="heroLayers.background"
         alt="之序 · 城市綠洲遠景"
+        style="object-fit: cover"
       />
       <div class="hero-title">
         <p class="hero-subtitle">
@@ -52,16 +53,18 @@
             class="hero-display hero-display--01"
             [src]="heroLayers.display01"
             alt="循自然之序，"
+            style="object-fit: contain"
           />
           <img
             class="hero-display hero-display--02"
             [src]="heroLayers.display02"
-            alt="隱城市綠洲"
+            alt="隱城市綠洲 中央公園"
+            style="object-fit: contain"
           />
         </h1>
         <div class="hero-lead">
           <div class="hero-lead-copy">
-            <p>在千坪獨立街廓中，為自己留下一座森林私域</p>
+            <p>在千坪獨立街廓中，為自己留下一座森林私域。</p>
             <p>這一席大隱市心的居所，是你的生活嶄新篇章。</p>
           </div>
           <button (click)="scrollToId('contact')" class="primary">
@@ -73,6 +76,7 @@
         class="hero-buildings"
         [src]="heroLayers.buildings"
         alt="之序 · 建築外觀"
+        style="object-fit: cover"
       />
     </div>
 
@@ -246,13 +250,14 @@
       </div>
       <div class="di-overlay" aria-hidden="true">
         <div class="di-progress"><span class="di-progress-fill"></span></div>
-        <div *ngIf="false"
+        <div
+          *ngIf="false"
           class="di-counter is-phrase"
           data-stops='[{"to":3,"lead":"咫尺","note":"20萬坪綠海"},{"to":6,"lead":"延伸","note":"城市速度"}]'
         >
           <span class="di-counter-cur">咫尺</span>
           <span class="di-counter-sep">． </span>
-          <span class="di-counter-total">20萬坪綠海</span>
+          <span class="di-counter-total">20 萬坪綠海</span>
         </div>
       </div>
     </div>
@@ -267,7 +272,7 @@
           <h2 class="di-title">週末，<br />由藝術接棒</h2>
           <div class="di-body">
             <p>
-              居住不只構築在四面牆內，更是將整座城市的精華與遠景，打包進你的散步生活圈。
+              居住不只構築在四面牆內，更是將整座城市的精華與遠景，打包進你的生活圈。
             </p>
           </div>
         </div>
@@ -399,19 +404,23 @@
           <div class="catalog-nav">
             <button
               type="button"
-              class="cat-arrow"
+              class="cat-arrow cat-arrow--prev"
               aria-label="上一個"
               (click)="gardenSwiper.swiperRef.slidePrev()"
             >
-              <span aria-hidden="true">&#8249;</span>
+              <span class="material-symbols-outlined" aria-hidden="true"
+                >chevron_left</span
+              >
             </button>
             <button
               type="button"
-              class="cat-arrow"
+              class="cat-arrow cat-arrow--next"
               aria-label="下一個"
               (click)="gardenSwiper.swiperRef.slideNext()"
             >
-              <span aria-hidden="true">&#8250;</span>
+              <span class="material-symbols-outlined" aria-hidden="true"
+                >chevron_right</span
+              >
             </button>
           </div>
         </div>
@@ -466,19 +475,23 @@
           <div class="catalog-nav">
             <button
               type="button"
-              class="cat-arrow"
+              class="cat-arrow cat-arrow--prev"
               aria-label="上一個"
               (click)="lobbySwiper.swiperRef.slidePrev()"
             >
-              <span aria-hidden="true">&#8249;</span>
+              <span class="material-symbols-outlined" aria-hidden="true"
+                >chevron_left</span
+              >
             </button>
             <button
               type="button"
-              class="cat-arrow"
+              class="cat-arrow cat-arrow--next"
               aria-label="下一個"
               (click)="lobbySwiper.swiperRef.slideNext()"
             >
-              <span aria-hidden="true">&#8250;</span>
+              <span class="material-symbols-outlined" aria-hidden="true"
+                >chevron_right</span
+              >
             </button>
           </div>
         </div>
@@ -512,7 +525,7 @@
   </section>
 
   <!-- SPRINGS BAYS · sticky-stacking 半屏雙欄敘事 -->
-  <section class="springs-bays" id="springs-bays">
+  <section *ngIf="false" class="springs-bays" id="springs-bays">
     <article
       *ngFor="let bay of springsBays; let i = index; trackBy: trackByIndex"
       class="sb-bay"
@@ -520,13 +533,28 @@
       [attr.data-theme]="bay.theme"
       [style.z-index]="i + 1"
     >
+    <swiper
+      class="springs-bays__swiper"
+      [config]="springsBaysSwiperConfig"
+    >
+      <ng-template
+        swiperSlide
+        *ngFor="let bay of springsBays; trackBy: trackByIndex"
+      >
       <div class="sb-frame">
         <div class="sb-image">
           <img [src]="bay.src" [alt]="bay.title" />
         </div>
+
         <aside class="sb-panel">
           <div class="sb-panel-inner">
-            <p class="sb-lede">{{ bay.lede }}</p>
+            <p class="sb-lede">
+              <span
+                class="sb-lede__line"
+                *ngFor="let line of bay.lede; trackBy: trackByIndex"
+                >{{ line }}</span
+              >
+            </p>
 
             <ul class="sb-stats">
               <li *ngFor="let s of bay.stats; trackBy: trackByIndex">
@@ -536,6 +564,8 @@
           </div>
         </aside>
       </div>
+      </ng-template>
+      </swiper>
     </article>
   </section>
 
@@ -638,8 +668,8 @@
   </section>
 
   <!-- Spec Sheet -->
-  <section *ngIf="false" class="spec" id="spec">
-    <div class="head">
+  <section class="spec" id="spec">
+    <div *ngIf="false" class="head">
       <div>
         <div class="eyebrow">
           <span class="num">堅固基礎</span>
@@ -648,7 +678,7 @@
       </div>
     </div>
 
-    <div class="grid">
+    <div *ngIf="false" class="grid">
       <div class="cell" *ngFor="let c of specCells; trackBy: trackByIndex">
         <div class="k">{{ c.k }}</div>
         <div class="v">
@@ -668,13 +698,13 @@
     </div>
 
     <div class="layouts-hero">
+      <!--
       <img
         class="layouts-bg"
         src="assets/image/photo/terrace.webp"
         alt=""
         aria-hidden="true"
       />
-      <!--
     <div class="layouts-overlay"></div>
     -->
       <div class="layouts">
@@ -686,9 +716,6 @@
           <div class="desc">
             精品自住首選——方正格局、雙衛皆開窗、光線直進不折。
           </div>
-          <button class="tl self-start" (click)="scrollToId('contact')">
-            索取型錄
-          </button>
         </div>
         <div class="lt">
           <div class="label-sm">多一點的餘裕</div>
@@ -698,9 +725,6 @@
           <div class="desc">
             給自己更多餘裕——大主臥、寬景陽台、讓四季進得來的空間尺度。
           </div>
-          <button class="tl self-start" (click)="scrollToId('contact')">
-            索取型錄
-          </button>
         </div>
       </div>
     </div>
@@ -716,51 +740,84 @@
     </div>
 
     <div class="body-grid">
-      <form class="form" (submit)="submit($event)">
+      <form class="form" [formGroup]="contactForm" (ngSubmit)="submit()">
         <ng-container *ngIf="!submitted; else thanks">
           <mat-form-field appearance="fill">
             <mat-label>姓名</mat-label>
             <input
               matInput
-              id="contact-name"
+              formControlName="name"
               type="text"
               placeholder="您的稱呼"
-              required
             />
+            <mat-error *ngIf="contactForm.get('name')?.hasError('required')"
+              >請填寫您的稱呼</mat-error
+            >
           </mat-form-field>
 
           <mat-form-field appearance="fill">
             <mat-label>手機</mat-label>
             <input
               matInput
-              id="contact-phone"
+              formControlName="phone"
               type="tel"
               placeholder="09XX XXX XXX"
-              required
-              pattern="[0-9 \-]+"
             />
+            <mat-error *ngIf="contactForm.get('phone')?.hasError('required')"
+              >請填寫手機號碼</mat-error
+            >
+            <mat-error *ngIf="contactForm.get('phone')?.hasError('pattern')"
+              >手機格式不正確</mat-error
+            >
           </mat-form-field>
 
           <mat-form-field appearance="fill">
             <mat-label>電子郵件</mat-label>
             <input
               matInput
-              id="contact-email"
+              formControlName="email"
               type="email"
               placeholder="your@email.com"
-              required
             />
+            <mat-error *ngIf="contactForm.get('email')?.hasError('required')"
+              >請填寫電子郵件</mat-error
+            >
+            <mat-error *ngIf="contactForm.get('email')?.hasError('email')"
+              >電子郵件格式不正確</mat-error
+            >
           </mat-form-field>
 
-          <mat-form-field appearance="fill" floatLabel="always">
+          <mat-form-field appearance="fill">
             <mat-label>留言</mat-label>
             <textarea
               matInput
-              id="contact-message"
+              formControlName="message"
               placeholder="請留下您預計賞屋時間，或方便聯繫時間"
               rows="4"
             ></textarea>
           </mat-form-field>
+
+          <div class="form-consent">
+            <mat-checkbox class="consent-check" formControlName="agreedPrivacy"
+              >我已詳閱並同意</mat-checkbox
+            >
+            <button
+              type="button"
+              class="consent-link"
+              (click)="openPrivacyPolicy()"
+            >
+              《個人資料保護政策暨隱私權聲明》
+            </button>
+            <p
+              class="consent-error"
+              *ngIf="
+                contactForm.get('agreedPrivacy')?.invalid &&
+                contactForm.get('agreedPrivacy')?.touched
+              "
+            >
+              請先閱讀並同意個人資料保護政策暨隱私權聲明
+            </p>
+          </div>
 
           <button type="submit" class="submit">預約鑒賞</button>
         </ng-container>
@@ -785,29 +842,25 @@
           <div class="label">營業時間</div>
           <div class="value">
             <p>每日 9:00 — 19:00</p>
-            <p>預約優先</p>
           </div>
         </div>
         <div class="blk">
           <div class="label">電話</div>
           <a class="value" href="tel:+886422977777">04 2297 7777</a>
         </div>
-        <div class="blk">
-          <div
-            style="
-              display: flex;
-              gap: 1.5rem;
-              align-items: flex-end;
-              margin-top: 0.5rem;
-            "
-          >
-            <div class="qr" aria-hidden="true"></div>
-            <div class="value" style="font-size: 13px; max-width: 20ch">
-              <p>&#64;zhixu-taichung</p>
-              <span class="en" style="margin-top: 0">掃描或 ID 搜尋</span>
+        <a class="blk" href="https://line.me/R/ti/p/@020xhcbv" target="_blank">
+          <div class="flex gap-1 items-end w-full mt-2">
+            <img
+              src="assets/image/contact/line-fuhua-inno.png"
+              alt="富華心聚落官方 LINE"
+              class="w-40 h-40 object-contain"
+            />
+            <div class="value">
+              <span>掃描或 ID 搜尋</span>
+              <p>&#64;fuhua-inno</p>
             </div>
           </div>
-        </div>
+        </a>
         <a
           href="https://maps.app.goo.gl/rEoJMzbfVJVQYr7A9"
           class="ph linen map"
