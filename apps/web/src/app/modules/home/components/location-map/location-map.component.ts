@@ -115,7 +115,7 @@ export class LocationMapComponent
     { x: 755,  y: 592, min: 5,  name: '中央公園', reveal: 0.22, anchor: 'end',   vAnchor: 'above' },
     { x: 776,  y: 363, min: 16,  name: '台中綠美圖',        reveal: 0.25, anchor: 'end',   vAnchor: 'above' },
     { x: 710,  y: 248, min: 24,  name: '水湳轉運中心',      reveal: 0.28, anchor: 'end',   vAnchor: 'above' },
-    { x: 630,  y: 320, min: 10,  name: '台中國際會展中心',  reveal: 0.31, anchor: 'start', vAnchor: 'above' },
+    { x: 630,  y: 320, min: 20,  name: '台中國際會展中心',  reveal: 0.31, anchor: 'start', vAnchor: 'above' },
     { x: 707,  y: 779, min: 10,  name: '台中超巨蛋',        reveal: 0.34, anchor: 'end',   vAnchor: 'below' },
     { x: 853,  y: 770, min: 8,  name: '台中流行影音中心',  reveal: 0.37, anchor: 'start', vAnchor: 'below' },
     { x: 855,  y: 697, min: 6,  name: '水湳經貿園區站',    reveal: 0.40, anchor: 'start', vAnchor: 'above' },
