@@ -449,13 +449,12 @@ p.body {
       height: 100%;
     }
 
-    /* 前景建築：往下延伸並以頂端對齊，把建築基座留到視窗下緣外，
-       預留向上 parallax 位移的空間，捲動時不會露出底部空隙。 */
     > .hero-buildings {
-      top: 0;
-      left: 0;
-      height: 110%;
-      object-position: center top;
+      @apply top-auto left-auto h-2/3 md:h-full -bottom-[10%];
+    }
+
+    > .hero-buildings {
+      object-position: 65% 50%;
     }
   }
 
@@ -473,7 +472,7 @@ p.body {
     pointer-events: none;
   }
 
-  --hero-paddings: clamp(96px, 14vh, 160px) clamp(20px, 4vw, 64px) clamp(32px, 6vh, 56px);
+  --hero-paddings: clamp(96px, 14vh, 160px) clamp(20px, 4vw, 64px) clamp(32px, 6vh, 24px);
 
   /* 只剩底部 foot：靠下對齊。pointer-events:none 讓點擊穿透到場景內的 .hero-lead 按鈕 */
   .hero-content {
@@ -509,6 +508,11 @@ p.body {
   .hero-buildings {
     object-fit: cover;
     z-index: 2;
+    pointer-events: none;
+  }
+
+  .hero-buildings-fade {
+    @apply z-10 bg-gradient-to-t from-black/80 to-black/0 w-full h-1/4 bottom-0 absolute left-0;
     pointer-events: none;
   }
 
