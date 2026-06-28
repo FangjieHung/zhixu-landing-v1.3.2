@@ -1,5 +1,5 @@
 <!-- Sticky topbar -->
-<div class="version-note">[v1.2.0] 測試版，僅供內部預覽使用。</div>
+<div class="version-note">[v1.3.0] 測試版，僅供內部預覽使用。</div>
 <header class="topbar" [class.shown]="scrolled">
   <a class="mark" routerLink="/">
     <img src="assets/image/logo/type-main.svg" alt="之序" />
@@ -125,67 +125,61 @@
     </div>
   </section>
 
-  <!-- District Intro 第一段 · 周邊國際特區 · bento 橫向捲動（4 張） -->
+  <!-- District Intro · 漫步中央公園 · Swiper 自動輪播（大圖高低錯落）-->
   <section class="district-intro" id="district-intro">
     <div class="di-canvas">
-      <div class="di-track">
-        <div class="di-cell di-headline">
-          <h2 class="di-title">漫步中央公園</h2>
-          <div class="di-body">
-            <p>框景一段悠閒的日光散策。</p>
-            <p>20 萬坪綿延的綠意，溫柔包容著<br />最值得珍藏的平凡日常</p>
-          </div>
+      <div class="di-cell di-headline">
+        <h2 class="di-title">漫步中央公園</h2>
+        <div class="di-body">
+          <p>
+            牽著孩子與毛孩，<br />在這裡一邊乘涼、<br />一邊看著他們在晴朗間無憂奔跑。
+          </p>
+          <p>20 萬坪綿延的綠意，溫柔包容著<br />最值得珍藏的平凡日常</p>
         </div>
+      </div>
+      <swiper
+        class="di-swiper"
+        [config]="districtSwiperConfig"
+        (slideChange)="onDistrictSlide($event)"
+      >
+        <ng-template swiperSlide>
+          <figure class="di-cell di-img di-img--01">
+            <img
+              src="assets/image/infrastructure/002-central-park.webp"
+              alt="中央公園空拍景觀"
+              loading="lazy"
+            />
+            <figcaption class="caption-fade">
+              <span class="caption-title">中央公園</span>
+              <span class="caption-sub">
+                <span class="caption-sub__desc"
+                  >67 公頃都會綠肺，慢跑與散步成為四季風景的延伸</span
+                >
+                <span class="caption-sub__note">圖 / 台中市政府</span>
+              </span>
+            </figcaption>
+          </figure>
+        </ng-template>
 
-        <figure class="di-cell di-img di-img--01">
-          <img
-            src="assets/image/infrastructure/002-central-park.webp"
-            alt="中央公園空拍景觀"
-            loading="lazy"
-          />
-          <figcaption class="caption-fade">
-            <span class="caption-title">中央公園</span>
-            <span class="caption-sub">
-              <span class="caption-sub__desc"
-                >67 公頃都會綠肺，慢跑與散步成為四季風景的延伸</span
-              >
-              <span class="caption-sub__note">圖 / 台中市政府</span>
-            </span>
-          </figcaption>
-        </figure>
-        <div class="di-ring left-[41%]" aria-hidden="true">
-          <svg viewBox="0 0 120 120">
-            <defs>
-              <path
-                id="di-ring-path-a"
-                d="M60,60 m-44,0 a44,44 0 1,0 88,0 a44,44 0 1,0 -88,0"
-              />
-            </defs>
-            <text>
-              <textPath href="#di-ring-path-a">
-                · GREEN LIVING · GREEN LIVING
-              </textPath>
-            </text>
-          </svg>
-        </div>
+        <ng-template swiperSlide>
+          <figure class="di-cell di-img di-img--02">
+            <img
+              src="assets/image/infrastructure/xinping-park.webp"
+              alt="新平公園"
+              loading="lazy"
+            />
+            <figcaption class="caption-fade">
+              <span class="caption-title">新平公園</span>
+              <span class="caption-sub">
+                <span class="caption-sub__desc">萬坪綠蔭下的共融樂園</span>
+                <span class="caption-sub__note">實景拍攝</span>
+              </span>
+            </figcaption>
+          </figure>
+        </ng-template>
 
-        <figure class="di-cell di-img di-img--02">
-          <img
-            src="assets/image/infrastructure/xinping-park.webp"
-            alt="新平公園"
-            loading="lazy"
-          />
-          <figcaption class="caption-fade">
-            <span class="caption-title">新平公園</span>
-            <span class="caption-sub">
-              <span class="caption-sub__desc">萬坪綠蔭下的共融樂園</span>
-              <span class="caption-sub__note">實景拍攝</span>
-            </span>
-          </figcaption>
-        </figure>
-
-        <div class="di-cell">
-          <figure class="di-img di-img--03">
+        <ng-template swiperSlide>
+          <figure class="di-cell di-img di-img--03">
             <img
               src="assets/image/infrastructure/detention-basin.webp"
               alt="水湳蓄水池 粉紅楓林木合成示意圖"
@@ -199,36 +193,75 @@
               </span>
             </figcaption>
           </figure>
-          <p class="di-describe">
-            牽著孩子與毛孩，<br />在這裡一邊乘涼、<br />一邊看著他們在晴朗間無憂奔跑。
+        </ng-template>
+      </swiper>
+
+      <div class="di-ring left-[41%]" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <defs>
+            <path
+              id="di-ring-path-a"
+              d="M60,60 m-44,0 a44,44 0 1,0 88,0 a44,44 0 1,0 -88,0"
+            />
+          </defs>
+          <text>
+            <textPath href="#di-ring-path-a">
+              · GREEN LIVING · GREEN LIVING · GREEN LIVING
+            </textPath>
+          </text>
+        </svg>
+      </div>
+
+      <div class="di-overlay" aria-hidden="true">
+        <div
+          class="di-counter is-phrase"
+          data-stops='[{"to":99,"lead":"Endless","note":"Green"}]'
+        >
+          <span class="di-counter-cur">Endless</span>
+          <span class="di-counter-sep">． </span>
+          <span class="di-counter-total">Green</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- District Intro · 通勤路上 · Swiper 自動輪播（大圖高低錯落）-->
+  <section class="district-intro" id="district-intro-commute">
+    <div class="di-canvas">
+      <div class="di-cell di-headline">
+        <h2 class="di-title">通勤路上，<br />告別塞車的焦慮</h2>
+        <div class="di-body">
+          <p>
+            縮短了與家的距離，<br />換成趕得及下班回家<br />與最愛的人共享晚餐。
           </p>
         </div>
-        <div class="di-cell di-headline">
-          <h2 class="di-title">通勤路上，<br />告別塞車的焦慮</h2>
-          <div class="di-body">
-            <p>
-              縮短了與家的距離，<br />換成趕得及下班回家<br />與最愛的人共享晚餐。
-            </p>
-          </div>
-        </div>
-        <figure class="di-cell di-img di-img--04">
-          <img
-            src="assets/image/infrastructure/001-central-science-park.webp"
-            alt="中部科學園區空拍景觀"
-            loading="lazy"
-          />
-          <figcaption class="caption-fade">
-            <span class="caption-title">中部科學園區</span>
-            <span class="caption-sub">
-              <span class="caption-sub__desc"
-                >中台灣科技引擎，富人菁英匯聚的生活半徑</span
-              >
-              <span class="caption-sub__note">圖／中科管理局</span>
-            </span>
-          </figcaption>
-        </figure>
-        <div class="di-cell">
-          <figure class="di-img di-img--05">
+      </div>
+      <swiper
+        class="di-swiper"
+        [config]="districtSwiperConfig"
+        (slideChange)="onDistrictSlide($event)"
+      >
+        <ng-template swiperSlide>
+          <figure class="di-cell di-img di-img--04">
+            <img
+              src="assets/image/infrastructure/001-central-science-park.webp"
+              alt="中部科學園區空拍景觀"
+              loading="lazy"
+            />
+            <figcaption class="caption-fade">
+              <span class="caption-title">中部科學園區</span>
+              <span class="caption-sub">
+                <span class="caption-sub__desc"
+                  >中台灣科技引擎，富人菁英匯聚的生活半徑</span
+                >
+                <span class="caption-sub__note">圖／中科管理局</span>
+              </span>
+            </figcaption>
+          </figure>
+        </ng-template>
+
+        <ng-template swiperSlide>
+          <figure class="di-cell di-img di-img--05">
             <img
               src="assets/image/infrastructure/007-shuinan-transit.webp"
               alt="水湳轉運中心"
@@ -244,107 +277,113 @@
               </span>
             </figcaption>
           </figure>
-          <p class="di-describe">
-            旅途不再是生活的負擔，而是一段溫柔的留白。<br />
-            這段路程，好好卸下白日的武裝<br />
-            把最純粹的平靜留給自己。
-          </p>
-        </div>
+        </ng-template>
 
-        <figure class="di-cell di-img di-img--06">
-          <img
-            src="assets/image/infrastructure/005-mrt-green-line.webp"
-            alt="捷運綠線月台實景"
-            loading="lazy"
-          />
-          <figcaption class="caption-fade">
-            <span class="caption-title">捷運綠線</span>
-            <span class="caption-sub">
-              <span class="caption-sub__desc"
-                >軌道串起七期與水湳，連通勤都成為移動的風景</span
-              >
-              <span class="caption-sub__note">圖／台中市政府</span>
-            </span>
-          </figcaption>
-        </figure>
+        <ng-template swiperSlide>
+          <figure class="di-cell di-img di-img--06">
+            <img
+              src="assets/image/infrastructure/005-mrt-green-line.webp"
+              alt="捷運綠線月台實景"
+              loading="lazy"
+            />
+            <figcaption class="caption-fade">
+              <span class="caption-title">捷運綠線</span>
+              <span class="caption-sub">
+                <span class="caption-sub__desc"
+                  >軌道串起七期與水湳，連通勤都成為移動的風景</span
+                >
+                <span class="caption-sub__note">圖／台中市政府</span>
+              </span>
+            </figcaption>
+          </figure>
+        </ng-template>
+      </swiper>
+
+      <div class="di-ring left-[40%]" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <defs>
+            <path
+              id="di-ring-path-c"
+              d="M60,60 m-44,0 a44,44 0 1,0 88,0 a44,44 0 1,0 -88,0"
+            />
+          </defs>
+          <text>
+            <textPath href="#di-ring-path-c">
+              · URBAN PULSE · URBAN PULSE· URBAN PULSE
+            </textPath>
+          </text>
+        </svg>
       </div>
+
       <div class="di-overlay" aria-hidden="true">
-        <div class="di-progress"><span class="di-progress-fill"></span></div>
         <div
           class="di-counter is-phrase"
-          data-stops='[{"to":3,"lead":"Endless","note":"Green"},{"to":6,"lead":"Urban","note":"Pulse"}]'
+          data-stops='[{"to":99,"lead":"Urban","note":"Pulse"}]'
         >
-          <span class="di-counter-cur">Endless</span>
+          <span class="di-counter-cur">Urban</span>
           <span class="di-counter-sep">． </span>
-          <span class="di-counter-total">Green</span>
+          <span class="di-counter-total">Pulse</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- District Intro 第二段 · 大師地標 · bento 橫向捲動（4 張）；最後一段收尾接 location-map -->
+  <!-- District Intro · 大師地標 · Swiper 自動輪播（大圖高低錯落）；收尾接 location-map -->
   <section class="district-intro" id="district-intro-b">
     <div class="di-canvas">
-      <div class="di-track">
-        <!-- 第一格：標題（TODO：第二段標題文案待確認） -->
-        <div class="di-cell di-headline">
-          <h2 class="di-title">週末，<br />由藝術接棒</h2>
-          <div class="di-body">
-            <p>
-              居住不只構築在四面牆內，更是將整座城市的精華與遠景，打包進你的生活圈。
-            </p>
-          </div>
+      <div class="di-cell di-headline">
+        <h2 class="di-title">週末，<br />由藝術接棒</h2>
+        <div class="di-body">
+          <p>
+            居住不只構築在四面牆內，<br />更是將整座城市的精華與遠景，打包進你的生活圈。
+          </p>
         </div>
+      </div>
+      <swiper
+        class="di-swiper"
+        [config]="districtSwiperConfig"
+        (slideChange)="onDistrictSlide($event)"
+      >
+        <ng-template swiperSlide>
+          <figure class="di-cell di-img di-img--01">
+            <img
+              src="assets/image/infrastructure/004-green-art-museum.webp"
+              alt="臺中綠美圖建築外觀"
+              loading="lazy"
+            />
+            <figcaption class="caption-fade">
+              <span class="caption-title">臺中綠美圖</span>
+              <span class="caption-sub">
+                <span class="caption-sub__desc"
+                  >由妹島和世操刀的森林美術館，把藝術與閱讀種進日常</span
+                >
+                <span class="caption-sub__note">圖／台中市政府</span>
+              </span>
+            </figcaption>
+          </figure>
+        </ng-template>
 
-        <figure class="di-cell di-img di-img--01">
-          <img
-            src="assets/image/infrastructure/004-green-art-museum.webp"
-            alt="臺中綠美圖建築外觀"
-            loading="lazy"
-          />
-          <figcaption class="caption-fade">
-            <span class="caption-title">臺中綠美圖</span>
-            <span class="caption-sub">
-              <span class="caption-sub__desc"
-                >由妹島和世操刀的森林美術館，把藝術與閱讀種進日常</span
-              >
-              <span class="caption-sub__note">圖／台中市政府</span>
-            </span>
-          </figcaption>
-        </figure>
-        <div class="di-ring right-[35%]" aria-hidden="true">
-          <svg viewBox="0 0 120 120">
-            <defs>
-              <path
-                id="di-ring-path-b"
-                d="M60,60 m-44,0 a44,44 0 1,0 88,0 a44,44 0 1,0 -88,0"
-              />
-            </defs>
-            <text>
-              <textPath href="#di-ring-path-b">
-                · ARTS &amp; CULTURE · ARTS &amp; CULTURE
-              </textPath>
-            </text>
-          </svg>
-        </div>
-        <figure class="di-cell di-img di-img--02">
-          <img
-            src="assets/image/infrastructure/006-taichung-arena.webp"
-            alt="台中巨蛋"
-            loading="lazy"
-          />
-          <figcaption class="caption-fade">
-            <span class="caption-title">台中巨蛋</span>
-            <span class="caption-sub">
-              <span class="caption-sub__desc"
-                >萬人國際巨蛋，演唱會與賽事都在生活圈內</span
-              >
-              <span class="caption-sub__note">圖／台中市政府</span>
-            </span>
-          </figcaption>
-        </figure>
-        <div class="di-cell">
-          <figure class="di-img di-img--03">
+        <ng-template swiperSlide>
+          <figure class="di-cell di-img di-img--02">
+            <img
+              src="assets/image/infrastructure/006-taichung-arena.webp"
+              alt="台中巨蛋"
+              loading="lazy"
+            />
+            <figcaption class="caption-fade">
+              <span class="caption-title">台中巨蛋</span>
+              <span class="caption-sub">
+                <span class="caption-sub__desc"
+                  >萬人國際巨蛋，演唱會與賽事都在生活圈內</span
+                >
+                <span class="caption-sub__note">圖／台中市政府</span>
+              </span>
+            </figcaption>
+          </figure>
+        </ng-template>
+
+        <ng-template swiperSlide>
+          <figure class="di-cell di-img di-img--03">
             <img
               src="assets/image/infrastructure/003-exhibition-center.webp"
               alt="台中國際會展中心"
@@ -360,32 +399,48 @@
               </span>
             </figcaption>
           </figure>
-          <p class="di-describe">
-            不追逐繁華，<br />因為繁華早已在窗外熱烈等候
-          </p>
-        </div>
-        <figure class="di-cell di-img di-img--04">
-          <img
-            src="assets/image/infrastructure/008-cmu-art-museum.webp"
-            alt="中國醫藥大學美術館"
-            loading="lazy"
-          />
-          <figcaption class="caption-fade">
-            <span class="caption-title">中國醫藥大學美術館</span>
-            <span class="caption-sub">
-              <span class="caption-sub__desc"
-                >大學城的人文厚度，醫療與藝術並肩生長</span
-              >
-              <span class="caption-sub__note">圖 / 台中市政府</span>
-            </span>
-          </figcaption>
-        </figure>
+        </ng-template>
+
+        <ng-template swiperSlide>
+          <figure class="di-cell di-img di-img--04">
+            <img
+              src="assets/image/infrastructure/008-cmu-art-museum.webp"
+              alt="中國醫藥大學美術館"
+              loading="lazy"
+            />
+            <figcaption class="caption-fade">
+              <span class="caption-title">中國醫藥大學美術館</span>
+              <span class="caption-sub">
+                <span class="caption-sub__desc"
+                  >大學城的人文厚度，醫療與藝術並肩生長</span
+                >
+                <span class="caption-sub__note">圖 / 台中市政府</span>
+              </span>
+            </figcaption>
+          </figure>
+        </ng-template>
+      </swiper>
+
+      <div class="di-ring right-[35%]" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <defs>
+            <path
+              id="di-ring-path-b"
+              d="M60,60 m-44,0 a44,44 0 1,0 88,0 a44,44 0 1,0 -88,0"
+            />
+          </defs>
+          <text>
+            <textPath href="#di-ring-path-b">
+              · ARTS CULTURE · ARTS CULTURE · ARTS CULTURE
+            </textPath>
+          </text>
+        </svg>
       </div>
+
       <div class="di-overlay" aria-hidden="true">
-        <div class="di-progress"><span class="di-progress-fill"></span></div>
         <div
           class="di-counter is-phrase"
-          data-stops='[{"to":2,"lead":"Artistic","note":"Culture"},{"to":4,"lead":"Global","note":"Stage"}]'
+          data-stops='[{"to":3,"lead":"Artistic","note":"Culture"},{"to":99,"lead":"Global","note":"Stage"}]'
         >
           <span class="di-counter-cur">Artistic</span>
           <span class="di-counter-sep">． </span>
@@ -393,10 +448,6 @@
         </div>
       </div>
     </div>
-
-    <!-- exit veil：pin 末段淡入，銜接下一節深色 location-map
-       注意必須在 .di-canvas 外，否則會跟 canvas 一起上推、暴露 section 米色底 -->
-    <div class="di-exit-veil" aria-hidden="true"></div>
   </section>
 
   <!-- The Location · scroll-driven map -->
@@ -545,48 +596,35 @@
     </div>
   </section>
 
-  <!-- SPRINGS BAYS · sticky-stacking 半屏雙欄敘事 -->
-  <section *ngIf="false" class="springs-bays" id="springs-bays">
-    <article
-      *ngFor="let bay of springsBays; let i = index; trackBy: trackByIndex"
-      class="sb-bay"
-      [attr.id]="bay.id"
-      [attr.data-theme]="bay.theme"
-      [style.z-index]="i + 1"
-    >
-      <swiper class="springs-bays__swiper" [config]="springsBaysSwiperConfig">
-        <ng-template
-          swiperSlide
-          *ngFor="let bay of springsBays; trackBy: trackByIndex"
-        >
-          <div class="sb-frame">
-            <div class="sb-image">
-              <img [src]="bay.src" [alt]="bay.title" />
-            </div>
+  <!-- Cinematic full-bleed video · 國際生活序章 -->
+  <section
+    class="cinema"
+    id="cinema"
+    aria-label="在最好的時代，揭開國際生活序章"
+  >
+    <div class="cinema-copy">
+      <p class="cinema-lead">台灣曼哈頓，共鳴至上生活</p>
+      <p class="cinema-verse">
+        建築如光，流轉著國際願景；<br />
+        建築如山，安頓著從容靈魂；<br />
+        建築如人，回應著遠大追求。
+      </p>
+      <p class="cinema-sign">外在引領城市，內在歸心自己。</p>
+    </div>
 
-            <aside class="sb-panel">
-              <div class="sb-panel-inner">
-                <p class="sb-lede">
-                  <span
-                    class="sb-lede__line"
-                    *ngFor="let line of bay.lede; trackBy: trackByIndex"
-                    >{{ line }}</span
-                  >
-                </p>
-
-                <ul class="sb-stats">
-                  <li *ngFor="let s of bay.stats; trackBy: trackByIndex">
-                    <span class="sb-stat">{{ s }}</span>
-                  </li>
-                </ul>
-              </div>
-            </aside>
-          </div>
-        </ng-template>
-      </swiper>
-    </article>
+    <div class="cinema-media">
+      <video
+        class="cinema-video"
+        muted
+        loop
+        playsinline
+        preload="none"
+        poster="assets/video/facilities/night-facade.webp"
+        src="assets/video/facilities/night-facade-hd.webm"
+      ></video>
+      <p class="cinema-disclaimer">情境示意僅供參考</p>
+    </div>
   </section>
-
   <!-- PRECISION · 甲級精工：信任主張 + 四格實績 -->
   <section class="precision" id="trust">
     <div class="pre-essay">
@@ -625,66 +663,6 @@
     </div>
   </section>
 
-  <!-- Trust -->
-  <section *ngIf="false" class="trust" id="trust">
-    <div class="builder-deep" id="builder-deep">
-      <div class="bd-bg" aria-hidden="true">
-        <video class="bd-bg-video" muted loop playsinline preload="none">
-          <source
-            src="assets/video/cons-site/bg-video.webm"
-            type="video/webm"
-          />
-        </video>
-      </div>
-      <div class="bd-overlay" aria-hidden="true"></div>
-
-      <h2 class="anchor-q">
-        用三十年耕耘做同一件事<br />
-        <span class="lighter">蓋一棟值得等待的房子。</span>
-      </h2>
-
-      <div class="bd-right">
-        <div class="bd-stat">
-          <h3 class="bd-title"><span>國家級</span><span>甲級營造</span></h3>
-          <p class="bd-describe">
-            以承攬國家公共工程的最高嚴苛標準，把關結構的每一道細節，為您與家人築起足以傳承世代的安心基石。
-          </p>
-        </div>
-        <div class="bd-stat">
-          <h3 class="bd-title"><span>半世紀</span><span>職人紀律</span></h3>
-          <p class="bd-describe">
-            源自 1976 年高章營造的扎實根基，半百年來始終如一的工地嚴格紀律。
-          </p>
-        </div>
-        <div class="bd-stat">
-          <h3 class="bd-title"><span>業界領先</span><span>工地高標準</span></h3>
-          <p class="bd-describe">
-            2009 年起率先推行 24 小時全面監控，更堅持材料進場全數嚴格抽檢。
-          </p>
-        </div>
-        <div class="bd-stat">
-          <h3 class="bd-title"><span>3D</span><span>模擬蓋房</span></h3>
-          <p class="bd-describe">
-            全面導入 BIM 衝突管理系統，確保施工零誤差，進行科技化營建流程。
-          </p>
-        </div>
-
-        <div class="bd-essay-wrap">
-          <p class="bd-essay">
-            富華創新承襲總太三十年耕耘，我們不只蓋一座房子，更是以每一個住進的家庭思考、及嚴苛標準的工程標準，用心蓋出一座足以傳承世代傳家行館。
-          </p>
-          <p class="bd-essay">
-            外在，是震撼城市的永恆立面；<br />
-            內在，是安放您與家人、財富最優雅的避風港。
-          </p>
-          <p class="bd-essay">
-            <span class="strong">頂級的奢飲，從不需喧嘩。</span>
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Spec Sheet -->
   <section class="spec" id="spec">
     <div *ngIf="false" class="head">
@@ -715,7 +693,7 @@
       </div>
     </div>
 
-    <div *ngIf="false" class="layouts-hero">
+    <div class="layouts-hero">
       <!--
       <img
         class="layouts-bg"
@@ -726,40 +704,77 @@
     <div class="layouts-overlay"></div>
     -->
       <div class="layouts">
-        <div class="lt">
-          <div class="label-sm">精準的選擇</div>
+        <div class="lt" *ngFor="let lt of layoutPlans; trackBy: trackByIndex">
+          <figure class="lt-plan">
+            <img
+              [src]="lt.plan"
+              [alt]="lt.size + ' ' + lt.spec + ' 格局示意圖'"
+              loading="lazy"
+            />
+          </figure>
+          <div class="label-sm">{{ lt.label }}</div>
           <div class="tt">
-            47 坪<span class="zh">三房 · 兩衛 · 大陽台</span>
+            {{ lt.size }}<span class="zh">{{ lt.spec }}</span>
           </div>
-          <div class="desc">
-            精品自住首選——方正格局、雙衛皆開窗、光線直進不折。
-          </div>
-        </div>
-        <div class="lt">
-          <div class="label-sm">多一點的餘裕</div>
-          <div class="tt">
-            52 坪<span class="zh">三房 · 雙主臥 · 寬景陽台</span>
-          </div>
-          <div class="desc">
-            給自己更多餘裕——大主臥、寬景陽台、讓四季進得來的空間尺度。
-          </div>
+          <div class="desc">{{ lt.desc }}</div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="faq" id="faq">
+  <section *ngIf="false" class="faq" id="faq">
     <div class="faq-inner">
       <span class="faq-eyebrow">FAQ · 常見問答</span>
       <h2 class="faq-title">關於之序，您可能想了解</h2>
       <div class="faq-list">
-        <details class="faq-item" *ngFor="let item of faqs; trackBy: trackByIndex">
+        <details
+          class="faq-item"
+          *ngFor="let item of faqs; trackBy: trackByIndex"
+        >
           <summary class="faq-q">
             <span class="faq-q-text">{{ item.q }}</span>
             <span class="faq-icon" aria-hidden="true">+</span>
           </summary>
           <p class="faq-a">{{ item.a }}</p>
         </details>
+      </div>
+    </div>
+  </section>
+  <!-- Brand banner · 繁花將綻 — flower 主視覺 + 雙 logo + 案名標語 -->
+  <section
+    class="brand-banner"
+    id="brand-banner"
+    aria-label="序章寫就 繁花將綻"
+  >
+    <img
+      class="bb-flower"
+      src="assets/image/logo/flower.webp"
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+    />
+    <div class="bb-veil" aria-hidden="true"></div>
+
+    <div class="bb-inner">
+      <img
+        class="bb-corp"
+        src="assets/image/logo/fuhua-inno-logo.webp"
+        alt="富華創新 · 上市公司 3056"
+      />
+
+      <div class="bb-headline">
+        <p class="bb-lead">序章寫就</p>
+        <h2 class="bb-title">繁花將綻</h2>
+      </div>
+
+      <div class="bb-foot">
+        <img class="bb-mark" src="assets/image/logo/type-main.svg" alt="之序" />
+        <ul class="bb-meta">
+          <li>中央公園</li>
+          <li>2775 坪都會莊園</li>
+          <li>47·52 坪</li>
+          <li><a href="tel:+886422977777">2297-7777</a></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -827,7 +842,7 @@
               matInput
               formControlName="message"
               placeholder="請留下您預計賞屋時間，或方便聯繫時間"
-              rows="4"
+              rows="1"
             ></textarea>
           </mat-form-field>
 

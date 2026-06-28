@@ -288,12 +288,6 @@ export class DefaultComponent
       poster: 'assets/video/facilities/yoga-studio.webp',
       caption: '瑜珈教室',
     },
-    {
-      src: 'assets/video/facilities/night-facade.webm',
-      srcHd: 'assets/video/facilities/night-facade-hd.webm',
-      poster: 'assets/video/facilities/night-facade.webp',
-      caption: '建築夜景',
-    },
   ];
 
   readonly lobbyClips: FacilityClip[] = [
@@ -354,6 +348,16 @@ export class DefaultComponent
     watchSlidesProgress: true,
   };
 
+  /** district-intro 三段共用：大圖高低錯落 + 自動輪播 + 無限循環 + 可拖曳 */
+  readonly districtSwiperConfig: SwiperOptions = {
+    slidesPerView: 'auto',
+    spaceBetween: 28,
+    grabCursor: true,
+    speed: 800,
+    //centeredSlides: true,
+    watchSlidesProgress: true,
+  };
+
   readonly navItems: Array<{ id: string; label: string }> = [
     { id: 'district-intro', label: '生活樣貌' },
     { id: 'location-map', label: '漫遊水湳' },
@@ -374,6 +378,35 @@ export class DefaultComponent
 
   mobileHidden(id: string): boolean {
     return this.isMobileView() && this.mobileHiddenIds.includes(id);
+  }
+
+  /**
+   * district 三段 swiper 切換時，依目前 slide 更新該段左下 di-counter is-phrase 文案。
+   * data-stops 形如 [{to,lead,note}]：slide 序（1 起算）≤ to 即套用該組詞。
+   */
+  onDistrictSlide(event: unknown): void {
+    const swiper = Array.isArray(event) ? event[0] : (event as { realIndex?: number; el?: HTMLElement });
+    const section = swiper?.el?.closest?.('.district-intro') as HTMLElement | null;
+    if (!section) return;
+    const counter = section.querySelector<HTMLElement>('.di-counter');
+    const curEl = section.querySelector<HTMLElement>('.di-counter-cur');
+    const totalEl = section.querySelector<HTMLElement>('.di-counter-total');
+    if (!counter || !curEl || !totalEl) return;
+
+    let stops: Array<{ to: number; lead: string; note: string }> = [];
+    try {
+      stops = JSON.parse(counter.dataset['stops'] ?? '[]');
+    } catch {
+      stops = [];
+    }
+    if (!stops.length) return;
+
+    const i = (swiper.realIndex ?? 0) + 1;
+    const stop = stops.find((s) => i <= s.to) ?? stops[stops.length - 1];
+    if (curEl.textContent !== stop.lead) {
+      curEl.textContent = stop.lead;
+      totalEl.textContent = stop.note;
+    }
   }
 
   readonly walks: Walk[] = [
@@ -403,6 +436,33 @@ export class DefaultComponent
       k: '續接器等級',
       v: 'SA級',
       sub: '最高等級鋼筋續接工法',
+    },
+  ];
+
+  /**
+   * 格局產品（#spec）：47 / 52 坪兩款。
+   * plan 目前為佔位圖（coming-soon.svg），實際格局圖丟進 assets/image/layout/ 後替換 plan 即可。
+   */
+  readonly layoutPlans: Array<{
+    label: string;
+    size: string;
+    spec: string;
+    desc: string;
+    plan: string;
+  }> = [
+    {
+      label: '精準的選擇',
+      size: '47 坪',
+      spec: '三房 · 兩衛 · 大陽台',
+      desc: '精品自住首選——方正格局、雙衛皆開窗、光線直進不折。',
+      plan: `${this.assetBase}/illustration/coming-soon.svg`,
+    },
+    {
+      label: '多一點的餘裕',
+      size: '52 坪',
+      spec: '三房 · 雙主臥 · 寬景陽台',
+      desc: '給自己更多餘裕——大主臥、寬景陽台、讓四季進得來的空間尺度。',
+      plan: `${this.assetBase}/illustration/coming-soon.svg`,
     },
   ];
 
@@ -608,180 +668,9 @@ export class DefaultComponent
         },
       });
 
-      // ───── DISTRICT INTRO · 兩段 bento 橫向捲動（各 4 張；最後一段收尾接 location-map） ─────
-      const diSections = gsap.utils.toArray<HTMLElement>('.district-intro');
-      if (diSections.length) {
-        const isMobile = window.matchMedia('(max-width: 768px)').matches;
-
-        diSections.forEach((diSection, idx) => {
-          const diCanvas = diSection.querySelector<HTMLElement>('.di-canvas');
-          const diTrack = diSection.querySelector<HTMLElement>('.di-track');
-          if (!diCanvas || !diTrack) return;
-          // 只有最後一段做深紅 veil 收尾、與 location-map(-100vh) 同步；前面段橫滑後直接 unpin
-          const isLast = idx === diSections.length - 1;
-
-          // 切成橫向 bento 軌道（寬版排列由 CSS 的 .is-horizontal 控制）
-          diSection.classList.add('is-horizontal');
-
-          // ── 編輯式覆蓋層：底部進度條 + 頁碼／文案 ──
-          const diFill =
-            diSection.querySelector<HTMLElement>('.di-progress-fill');
-          const diCounter = diSection.querySelector<HTMLElement>('.di-counter');
-          const diCurEl =
-            diSection.querySelector<HTMLElement>('.di-counter-cur');
-          const diTotalEl =
-            diSection.querySelector<HTMLElement>('.di-counter-total');
-          const diImgCount = diSection.querySelectorAll('.di-img').length;
-
-          // phrase 模式：data-stops 提供「圖片索引上限 → 前導詞 + 說明」對照，隨橫滑切換文案
-          type DiStop = { to: number; lead: string; note: string };
-          let diStops: DiStop[] = [];
-          const rawStops = diCounter?.dataset['stops'];
-          if (rawStops) {
-            try {
-              diStops = JSON.parse(rawStops) as DiStop[];
-            } catch {
-              diStops = [];
-            }
-          }
-          // 數字模式才預填總數；phrase 模式文字由 data-stops 決定
-          if (diTotalEl && !diStops.length)
-            diTotalEl.textContent = String(diImgCount).padStart(2, '0');
-
-          // 進度（0→1）同步驅動進度條 scaleX 與頁碼／文案
-          const diDriver = { p: 0 };
-          // phrase 模式：記住目前生效的 stop，只在文案真的切換的那一刻 fade，避免每個 scroll tick 都觸發
-          let activeDiStop: DiStop | null = null;
-          const setDiProgress = () => {
-            if (diFill) gsap.set(diFill, { scaleX: diDriver.p });
-            if (!diImgCount) return;
-            const i = Math.min(
-              diImgCount,
-              Math.max(1, Math.floor(diDriver.p * diImgCount) + 1)
-            );
-            if (diStops.length) {
-              const stop =
-                diStops.find((s) => i <= s.to) ?? diStops[diStops.length - 1];
-              if (stop !== activeDiStop) {
-                activeDiStop = stop;
-                const fadeTargets = [diCurEl, diTotalEl].filter(
-                  (el): el is HTMLElement => !!el
-                );
-                gsap.to(fadeTargets, {
-                  opacity: 0,
-                  duration: 0.18,
-                  ease: 'power1.in',
-                  overwrite: true,
-                  onComplete: () => {
-                    if (diCurEl) diCurEl.textContent = stop.lead;
-                    if (diTotalEl) diTotalEl.textContent = stop.note;
-                    gsap.to(fadeTargets, {
-                      opacity: 1,
-                      duration: 0.24,
-                      ease: 'power1.out',
-                    });
-                  },
-                });
-              }
-            } else if (diCurEl) {
-              diCurEl.textContent = String(i).padStart(2, '0');
-            }
-          };
-          setDiProgress();
-
-          // ── Pre-pin entry：section 進入視窗 1/4 起，canvas 滑入淡入 ──
-          gsap.fromTo(
-            diCanvas,
-            { yPercent: 12, opacity: 0.55 },
-            {
-              yPercent: 0,
-              opacity: 1,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: diSection,
-                start: 'top 75%',
-                end: 'top top',
-                scrub: 0.6,
-              },
-            }
-          );
-
-          // 橫向位移量＝軌道比畫布多出來的寬度（function 值，refresh 時重算）
-          const getShift = () =>
-            -Math.max(0, diTrack.scrollWidth - diCanvas.clientWidth);
-
-          if (isLast) {
-            // ── 銜接 location-map 的關鍵時序 ──
-            // location-map 有 margin-top:-100vh，會從畫面底部往上升起。
-            // outroDur 永遠 = 1/pinVh = 1 個 viewport，剛好對齊地圖升起的那一刻。
-            const pinVh = isMobile ? 3.8 : 2.4; // 手機視窗窄，拉長 pin 距離避免橫滑過快
-            const outroStart = 1 - 1 / pinVh; // 地圖開始上升、veil 同步覆蓋的進度
-            const slideEnd = outroStart - 0.06; // 橫滑提前一點結束，最後一張先完整露出
-            const outroDur = 1 - outroStart;
-
-            // ── Pinned timeline：照片整列向左滑 → 定格 → outro 銜接 location-map ──
-            const diTl = gsap.timeline({
-              defaults: { ease: 'none' },
-              scrollTrigger: {
-                trigger: diSection,
-                start: 'top top',
-                end: () => `+=${window.innerHeight * pinVh}`,
-                pin: true,
-                pinSpacing: true,
-                scrub: 0.6,
-                anticipatePin: 1,
-                invalidateOnRefresh: true,
-              },
-            });
-
-            // 0 → slideEnd：bento 軌道向左滑（橫向捲動主體，最後一張在此完整露出）
-            diTl.to(diTrack, { x: getShift, duration: slideEnd }, 0);
-            // 進度條 + 頁碼與橫滑同步（並行於 0 位置、同 duration）
-            diTl.to(
-              diDriver,
-              { p: 1, duration: slideEnd, onUpdate: setDiProgress },
-              0
-            );
-            // outroStart → 1：canvas 上推 + 深紅 veil 覆蓋，與地圖升起同步，無縫銜接
-            diTl.to(
-              diCanvas,
-              { yPercent: -14, ease: 'power2.in', duration: outroDur },
-              outroStart
-            );
-            const veil = diSection.querySelector<HTMLElement>('.di-exit-veil');
-            if (veil) {
-              diTl.to(
-                veil,
-                { opacity: 1, ease: 'power1.in', duration: outroDur },
-                outroStart
-              );
-            }
-          } else {
-            // 前面段：橫滑後直接 unpin 接到下一段（同金色底、不需 veil）
-            const pinVh = isMobile ? 3.2 : 1.8;
-            const slideEnd = 0.92; // 0.92 → 1 留一點定格讓最後一張完整露出
-            const diTl = gsap.timeline({
-              defaults: { ease: 'none' },
-              scrollTrigger: {
-                trigger: diSection,
-                start: 'top top',
-                end: () => `+=${window.innerHeight * pinVh}`,
-                pin: true,
-                pinSpacing: true,
-                scrub: 0.6,
-                anticipatePin: 1,
-                invalidateOnRefresh: true,
-              },
-            });
-            diTl.to(diTrack, { x: getShift, duration: slideEnd }, 0);
-            diTl.to(
-              diDriver,
-              { p: 1, duration: slideEnd, onUpdate: setDiProgress },
-              0
-            );
-          }
-        });
-      }
+      // ───── DISTRICT INTRO · 三段 Swiper 自動輪播（大圖高低錯落）─────
+      // 改用 Swiper（autoplay + loop + slidesPerView:'auto'），不再用 GSAP pin；
+      // 左下 di-counter is-phrase 由 onDistrictSlide() 隨 slide 切換文案。
 
       // ───── BUILDER-DEEP (甲級精工) — parallax bg + sticky 左文 + 卡片淡入 ─────
       const bdSection = root.querySelector<HTMLElement>('.builder-deep');

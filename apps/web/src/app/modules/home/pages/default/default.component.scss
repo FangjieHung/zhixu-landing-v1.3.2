@@ -1,5 +1,5 @@
 :host {
-  --color-surface-light: #f8f0ec;
+  --color-surface-light: #fffbf5;
   --color-surface-tertiary: #8c142d;
   --color-surface-tertiary-dark: #230000;
 
@@ -868,37 +868,46 @@ p.body {
 /* District Intro · 周邊國際特區 */
 .district-intro {
   background: var(--md-sys-color-surface-bright);
-  position: relative; // 給 .di-exit-veil 的 inset:0 對齊用
+  position: relative;
   color: var(--token-gold-30);
+  padding-block: clamp(2.5rem, 7vw, 5.5rem);
+  overflow: hidden; // 大圖／ring 溢出時不產生整頁橫向捲軸
+
   .di-canvas {
     position: relative;
   }
 
-  /* ── bento 軌道 ──
-     預設（無 JS / prefers-reduced-motion）：直向 bento，全部圖片可見。
-     允許動態時，JS 會加上 .is-horizontal 切成橫向捲動軌道。 */
-  .di-track {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.8rem;
-    padding: clamp(1.5rem, 6vw, 3rem);
+  /* ── Swiper 水平自動輪播：大圖高低錯落 ── */
+  .di-swiper {
+    @apply px-6 w-full h-auto;
+    padding-block: clamp(1rem, 4vh, 3rem); // 給高低錯落位移留上下空間
+  }
+  /* 不同高度的 slide 垂直置中 → 自然高低錯落（swiper 內部元素需穿透封裝） */
+  .di-swiper ::ng-deep .swiper-wrapper {
+    align-items: center;
+  }
+  .di-swiper ::ng-deep .swiper-slide {
+    width: auto; // slidesPerView:'auto' → 寬度依內容
+    height: auto;
+    display: flex;
+    align-items: center;
   }
 
   .di-cell {
     position: relative;
-    margin: 0; // figure 預設左右 40px margin → grid 對齊用，需歸零
-    border-radius: 6px;
-    overflow: hidden;
-
-    .di-describe {
-      @apply text-lg pt-5 mt-auto max-w-full;
-    }
+    margin: 0;
+    border-radius: 3px;
   }
 
+  /* 圖卡基準：固定近 16:9，以寬度做大小變化（高度由 aspect-ratio 算出，不再狹長）*/
   .di-img {
-    aspect-ratio: 4 / 3;
+    position: relative; // 內部 absolute img/caption/漸層以此 figure 為基準
+    aspect-ratio: 16 / 9;
+    width: clamp(300px, 52vw, 760px);
+    height: auto;
+    border-radius: 3px;
+    overflow: hidden;
     background: rgba(0, 0, 0, 0.04);
-    will-change: transform, opacity;
 
     img {
       position: absolute;
@@ -918,6 +927,22 @@ p.body {
       pointer-events: none;
       background: linear-gradient(to top, rgba(0, 0, 0, 0.64) 0%, rgba(0, 0, 0, 0.2) 34%, rgba(0, 0, 0, 0) 60%);
     }
+  }
+
+  /* 高低錯落：僅改寬度（維持 16:9）+ 上下位移（modifier：公園 01–03／通勤 04–06／大師 01–04 循環）*/
+  .di-img--01,
+  .di-img--04 {
+    width: clamp(340px, 60vw, 880px); // 主視覺寬幅大圖
+  }
+  .di-img--02,
+  .di-img--05 {
+    width: clamp(280px, 42vw, 600px); // 中幅，往上提
+    transform: translateY(-3vh);
+  }
+  .di-img--03,
+  .di-img--06 {
+    width: clamp(300px, 50vw, 720px); // 中大幅，往下沉
+    transform: translateY(3vh);
   }
 
   /* ── 兩行式 caption：地名 + 一句吸引人的說明 ── */
@@ -959,229 +984,66 @@ p.body {
     opacity: 0.7;
   }
 
-  /* 標題格：手機版佔滿整行*/
+  /* 標題格（也是一張 slide）：左對齊、垂直置中 */
   .di-headline {
-    @apply flex flex-col justify-center items-start w-fit m-auto;
-    padding: 0.5rem 0.25rem 0.75rem;
-    will-change: opacity, transform;
+    @apply flex flex-col justify-center items-start px-5 pt-4 md:px-28 md:pt-20;
   }
 
   .di-title {
     @apply font-serif font-bold tracking-wider text-black;
-    font-size: clamp(2.5rem, 5.6vw, 2rem);
-    line-height: 1.55;
-    max-width: 22ch;
+    font-size: clamp(2.2rem, 4.6vw, 4.4rem);
+    line-height: 1.18;
+    max-width: 14ch;
   }
 
   .di-body {
-    @apply max-w-md space-y-3 mt-10 text-lg;
+    @apply space-y-3 mt-6 text-lg;
+    max-width: 32ch;
   }
 
-  /* 編輯式覆蓋層與旋轉圓環：預設隱藏，僅橫向（.is-horizontal）顯示 */
-  .di-overlay,
+  /* ── 旋轉裝飾圓環（疊在輪播上方）── */
   .di-ring {
-    // display: none;
-  }
-
-  /* ── exit veil：pin 末段淡入，把米色畫面收進深紅預告下一節 ── */
-  .di-exit-veil {
+    @apply hidden md:block;
     position: absolute;
-    inset: 0;
-    z-index: 5;
+    bottom: 10%;
+    z-index: 10;
+    right: -20%;
+    left: auto;
+    width: clamp(220px, 24vw, 384px);
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
     pointer-events: none;
-    opacity: 0;
-    /* 整片實色深紅，由 GSAP 控 opacity 0→1，配合 di-canvas 上推形成「捲簾收尾」 */
-    background: var(--map-bg);
-    will-change: opacity;
-  }
-}
+    animation: di-ring-spin 22s linear infinite;
 
-/* ── 桌機橫向 bento ──
-   .is-horizontal 由 JS 在允許動態時加上：軌道比畫布寬，
-   GSAP pin 期間整列向左滑。完形心理：初始第三欄被裁約 1/3，暗示可右滑。 */
-@media (min-width: 769px) {
-  /* reduce-motion / pre-JS 後備：桌機直向改 4 欄，每段 4 張剛好 1 列 */
-  .district-intro:not(.is-horizontal) {
-    .di-track {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
-
-  .district-intro.is-horizontal {
-    .di-canvas {
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-    }
-
-    /* ── 單列水平軌道：卡片高低錯落漂浮（仿 ELSE 編輯式）；GSAP 期間整列左滑 ── */
-    .di-track {
-      display: flex;
-      align-items: center;
-      flex: 0 0 auto;
-      width: max-content;
-      height: 100vh;
-      gap: clamp(1.4rem, 2.6vw, 3.2rem);
-      grid-template-columns: none; // 取消基底 grid 設定
-      grid-template-rows: none;
-      // 右側留白：scrollWidth 含此 padding → 橫滑要滑過它才算到底
-      padding: 0 8vw 0 5vw;
-      will-change: transform;
-    }
-
-    .di-cell {
-      flex: 0 0 auto;
-      height: auto;
-      border-radius: 2px;
-    }
-
-    /* 圖卡預設：置中、固定寬高。下面用 :nth-of-type(figure) 製造高低錯落，
-       不論標題（div）穿插在哪都能穩定計數，內容增刪不必動 CSS。 */
-    .di-img {
-      aspect-ratio: auto;
-      width: 32vw;
-      height: 56vh;
-      align-self: center;
-    }
-    figure.di-img:nth-of-type(3n + 1) {
-      @apply h-[64svh];
-      align-self: center;
-
-      &.di-img--01 {
-        @apply w-auto aspect-video;
-      }
-    }
-    figure.di-img:nth-of-type(3n + 2) {
-      width: 21vw;
-      height: 48vh;
-      align-self: flex-end;
-      transform: translateY(-3vh);
-    }
-    figure.di-img:nth-of-type(3n + 3) {
-      width: 23vw;
-      height: 58vh;
-      align-self: center;
-    }
-    /* 每組 hero（col-span-2）＝最大、落地對齊，像 ELSE 的主商品照。
-       用 figure.di-img.col-span-2 與上面 nth-of-type 同特異度，靠後出現勝出。 */
-    figure.di-img.col-span-2 {
-      width: 32vw;
-      height: 74vh;
-      align-self: center;
-    }
-
-    /* 標題格：超大左側標題、垂直置中、佔較寬一欄 */
-    .di-headline {
-      align-self: center;
-      width: clamp(360px, 33vw, 600px);
-      margin: 0;
-      padding: 0 2vw;
-    }
-
-    .di-title {
-      font-size: clamp(2.6rem, 4.6vw, 4.6rem);
-      line-height: 1.12;
-      letter-spacing: 0.01em;
-      max-width: 14ch;
-    }
-
-    .di-body {
-      @apply text-xl leading-loose;
-      margin-top: 1.6rem;
-      max-width: 32ch;
-    }
-
-    .di-cell .caption-fade {
-      padding: 1rem 1.1rem;
-    }
-
-    /* ── 旋轉圓環（裝飾，疊在中央圖上）── */
-    .di-ring {
-      @apply w-96 h-96;
-      display: block;
-      position: absolute;
-      z-index: 2;
-      top: 35%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      animation: di-ring-spin 20s linear infinite;
-
-      svg {
-        width: 100%;
-        height: 100%;
-      }
-      text {
-        @apply font-serif text-sm font-light;
-        letter-spacing: 0.25rem;
-        fill: var(--token-gold-80);
-        text-transform: uppercase;
-      }
-    }
-
-    /* ── 覆蓋層：側邊直書主題、底部進度條、頁碼（固定於畫布，不隨軌道滑動）── */
-    .di-overlay {
-      display: block;
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .di-progress {
-      position: absolute;
-      left: 5vw;
-      bottom: 8vh;
-      width: clamp(120px, 16vw, 280px);
-      height: 2px;
-      background: rgba(43, 10, 13, 0.18);
-      overflow: hidden;
-    }
-    .di-progress-fill {
-      display: block;
+    svg {
       width: 100%;
       height: 100%;
-      background: var(--color-text-tertiary);
-      transform: scaleX(0);
-      transform-origin: left center;
     }
-
-    .di-counter {
-      @apply right-5 -bottom-5 opacity-20;
+    text {
+      @apply font-serif;
+      font-size: 8px;
+      letter-spacing: 0.32em;
+      fill: var(--token-gold-60);
+      text-transform: uppercase;
     }
   }
-}
 
-/* ── 平板區間（769–1024px）：vw 寬 + vh 高各自獨立換算，直向螢幕下會被拉成過窄的長條圖。
-   改成「定高 + aspect-ratio」讓寬度跟著高度成比例算出，不再受螢幕方向影響。 ── */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .district-intro.is-horizontal {
-    .di-img {
-      aspect-ratio: 4 / 5;
-      width: auto;
-      height: 52vh;
-    }
-    figure.di-img:nth-of-type(3n + 1) {
-      aspect-ratio: 4 / 5;
-      width: auto;
-      height: 60svh;
-    }
-    figure.di-img:nth-of-type(3n + 2) {
-      aspect-ratio: 3 / 4;
-      width: auto;
-      height: 44vh;
-      transform: translateY(-2vh);
-    }
-    figure.di-img:nth-of-type(3n + 3) {
-      aspect-ratio: 2 / 3;
-      width: auto;
-      height: 54vh;
-    }
-    figure.di-img.col-span-2 {
-      aspect-ratio: 4 / 3;
-      width: auto;
-      height: 64vh;
-    }
+  /* ── 左下 is-phrase 計數器（編輯式裝飾，隨 slide 切換文案）── */
+  .di-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .di-counter {
+    @apply right-0 absolute flex font-serif -top-10;
+    align-items: baseline;
+    gap: 0.12em;
+    font-size: clamp(2rem, 8vw, 8.6rem);
+    line-height: 1;
+    letter-spacing: 0.01em;
+    color: var(--token-gold-60);
+    opacity: 0.2;
   }
 }
 
@@ -1196,15 +1058,6 @@ p.body {
   }
 }
 
-/* GSAP 為 district-intro 自動建立的 pin-spacer 區域，原本繼承 host 米色 → 釋放時露出米色斷層。
-   第一段後面接金色第二段 → 染金色；第二段後面接 location-map → 染深紅，無縫接軌。 */
-:host ::ng-deep .pin-spacer:has(> #district-intro) {
-  background: var(--token-gold-80);
-}
-:host ::ng-deep .pin-spacer:has(> #district-intro-b) {
-  background: var(--map-bg);
-}
-
 /* GSAP 包 .lm-stage 的 pin-spacer：pin 釋放後 padding 區會露出米色 lm-section bg，
    產生「飛走的 stage 下方又出現一張米色 + 殘影 stage」的視覺幻象。
    染深紅跟 stage 同色 → pin 釋放後 padding 與 stage 顏色一致，無視覺斷層。
@@ -1213,255 +1066,106 @@ p.body {
   background: var(--map-bg);
 }
 
-/* 把 app-location-map 用負 margin 向上拉一個 viewport，
-   消除 district pin-spacer 釋放後到 lm-stage pin 啟動之間的「100vh 深紅空白」。
-   原本：pin-spacer 結束 → 100vh 空白 → lm-stage 接著 pin
-   現在：pin-spacer 結束時 lm-section.top 剛好在 viewport top，lm-stage 立即 pin。 */
+/* district-intro 已移除 GSAP pin，無 pin-spacer 與 100vh 空白需補償，
+   故 margin-top 歸零，讓 location-map 自然接在第三段 bento 之後。 */
 app-location-map {
   display: block;
   position: relative;
   z-index: 1;
-  margin-top: -100vh;
+  margin-top: 0;
 }
 
-/* ── mobile：維持桌機的單列橫向排版，由垂直 scroll 驅動水平位移 ── */
-@media (max-width: 768px) {
-  .district-intro.is-horizontal {
-    .di-canvas {
-      height: 100svh;
-      min-height: 560px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-    }
+/* ── Cinematic 影片 + 文案 · 國際生活序章 ──
+   左右雙欄：黑底文案在左、影片在右；文字不壓圖。手機改上下堆疊（文案上、影片下）。 */
+.cinema {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column; // 手機：堆疊
+  background: #000;
 
-    .di-track {
-      display: flex;
-      flex-wrap: nowrap;
-      align-items: center;
-      flex: 0 0 auto;
-      width: max-content;
-      height: 100%;
-      grid-template-columns: none; // 取消基底 2 欄 grid
-      grid-template-rows: none;
-      gap: clamp(1rem, 4.5vw, 1.5rem);
-      padding: 0 18vw 0 8vw; // 右側留白，讓最後一張停住時仍有呼吸感
-      overflow: visible;
-      will-change: transform;
-    }
-
-    .di-cell {
-      flex: 0 0 auto;
-      margin: 0;
-      border-radius: 2px;
-      scroll-snap-align: none;
-    }
-
-    .di-img {
-      aspect-ratio: auto;
-      width: min(86vw, 360px);
-      height: min(56svh, 430px);
-      min-height: 320px;
-    }
-
-    figure.di-img:nth-of-type(3n + 1) {
-      height: min(60svh, 450px);
-    }
-
-    figure.di-img:nth-of-type(3n + 2) {
-      width: min(72vw, 320px);
-      height: min(48svh, 380px);
-      transform: translateY(-2svh);
-    }
-
-    figure.di-img:nth-of-type(3n + 3) {
-      width: min(78vw, 340px);
-      height: min(54svh, 410px);
-    }
-
-    .di-cell:not(.di-headline):not(.di-img) {
-      width: min(86vw, 360px);
-    }
-
-    .di-cell > .di-img {
-      width: 100%;
-      height: min(42svh, 320px);
-      min-height: 240px;
-    }
-
-    .di-headline {
-      width: min(78vw, 380px);
-      padding: 0.5rem;
-      justify-content: center;
-    }
-
-    .di-body {
-      margin-top: 1rem; // 收一下基底 mt-10
-    }
-
-    .di-title {
-      line-height: 1.5;
-    }
-  }
-
-  /* ── 覆蓋層（進度條＋文案計數器）：手機版也要顯示，沿用桌機邏輯但縮小尺寸與位置 ── */
-  .di-overlay {
-    display: block;
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-  }
-
-  .di-progress {
-    position: absolute;
-    left: 6vw;
-    bottom: 4.5svh;
-    width: clamp(90px, 28vw, 180px);
-    height: 2px;
-    background: rgba(43, 10, 13, 0.18);
-    overflow: hidden;
-  }
-  .di-progress-fill {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: var(--color-text-tertiary);
-    transform: scaleX(0);
-    transform-origin: left center;
-  }
-}
-.di-counter {
-  @apply absolute flex font-serif items-center gap-2 left-8 right-auto bottom-10 opacity-60;
-  font-size: clamp(2.4rem, 10vw, 4.4rem);
-  color: var(--token-gold-80);
-}
-
-/* Trust */
-.trust {
-  background-color: var(--color-surface-tertiary);
-  /* trust 接在 design (米色) 之後 → 深咖 trust 頂部 fade from 米色 */
-
-  background-size: 100% 16vh;
-  background-repeat: no-repeat;
-  background-position: top;
-  color: var(--color-text-on-dark);
-  padding: 5rem 3rem;
-  border-bottom: 1px solid var(--color-divider-on-tertiary);
-  .trust-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--color-divider-on-tertiary);
-    margin-bottom: 3rem;
-    .eyebrow {
-      color: #c1a49b;
-    }
-    .right {
-      color: #c1a49b;
-      @apply font-sans;
-      font-size: 1rem;
-      letter-spacing: 0.04em;
-      max-width: 42ch;
-      line-height: 1.9;
-    }
-  }
-  /*
-  .trust-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-  }
-    */
-  .cell {
+  .cinema-copy {
+    flex: 1;
+    background: var(--color-surface-tertiary-dark);
+    color: #fff;
+    padding: clamp(2.5rem, 7vw, 5.5rem) clamp(1.5rem, 6vw, 5rem);
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
-    padding-right: 1rem;
-    border-right: 1px solid var(--color-divider-on-tertiary);
-    min-height: 180px;
-    &:last-child {
-      border-right: 0;
-    }
-    .label-sm {
-      @apply font-sans;
-      font-size: 0.875rem;
-      font-weight: 600;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--fg-2-dim);
-    }
-    .big {
-      @apply font-serif;
-      font-size: clamp(1.6rem, 2.4vw, 2.2rem);
-      line-height: 1.1;
-      font-weight: 400;
-      text-transform: uppercase;
-      color: var(--color-text-on-dark);
-      &.zh {
-        font-family: "Noto Serif TC", serif;
-        text-transform: none;
-        letter-spacing: 0.04em;
-      }
-    }
-    .sub {
-      @apply font-sans;
-      font-size: 1rem;
-      line-height: 1.85;
-      letter-spacing: 0.04em;
-      color: #c1a49b;
-    }
-    &.accent-cell {
-      background: rgba(139, 94, 60, 0.06);
-      padding-left: 1rem;
-      border-left: 1px solid rgba(139, 94, 60, 0.4);
-      margin-left: -1rem;
-    }
+    align-items: flex-start;
+    justify-content: center;
+    gap: clamp(1.5rem, 4vw, 2.75rem);
+    text-align: left;
+    font-family: "Noto Serif TC", serif;
   }
-  .lineage {
-    grid-column: 1 / -1;
-    margin-top: 3.5rem;
-    padding-top: 2.5rem;
-    border-top: 1px solid var(--color-divider-on-tertiary);
-    display: grid;
-    grid-template-columns: 4fr 8fr;
-    gap: 2rem;
-    .quote {
-      font-family: "Noto Serif TC", serif;
-      font-size: clamp(1.1rem, 1.8vw, 1.6rem);
-      line-height: 1.7;
-      letter-spacing: 0.04em;
-      color: var(--color-text-on-dark);
-      text-transform: none;
-      .lighter {
-        color: #c1a49b;
-      }
-    }
+
+  .cinema-lead {
+    margin: 0;
+    font-size: clamp(1.45rem, 3.4vw, 2.6rem);
+    font-weight: 600;
+    line-height: 1.7;
+    letter-spacing: 0.08em;
   }
-}
-@media (max-width: 900px) {
-  .trust {
-    padding: 3rem 1.25rem;
-    .trust-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+
+  .cinema-verse {
+    margin: 0;
+    font-size: clamp(1.05rem, 1.9vw, 1.45rem);
+    font-weight: 400;
+    line-height: 2.1;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .cinema-sign {
+    margin: 0;
+    font-size: clamp(1.2rem, 2.4vw, 1.8rem);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--fg-1-bright);
+  }
+
+  .cinema-media {
+    position: relative;
+    flex: 1;
+    min-height: 46svh;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+
+  .cinema-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .cinema-disclaimer {
+    position: absolute;
+    right: clamp(1rem, 3vw, 2.5rem);
+    bottom: clamp(0.75rem, 2vh, 1.5rem);
+    z-index: 2;
+    margin: 0;
+    font-size: 0.8rem;
+    font-family: "Noto Sans TC", sans-serif;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.6);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  }
+
+  /* 桌機：左右雙欄；文案窄欄、影片寬欄 */
+  @media (min-width: 960px) {
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 88svh;
+
+    .cinema-copy {
+      flex: 0 0 42%;
+      max-width: 42%;
     }
-    .cell {
-      border-right: 0;
-      border-bottom: 1px solid var(--color-divider-on-tertiary);
-      padding-bottom: 1.5rem;
+    .cinema-media {
+      flex: 1;
       min-height: auto;
-      &.accent-cell {
-        margin-left: 0;
-      }
-    }
-    .lineage {
-      grid-template-columns: 1fr;
-    }
-    .trust-head {
-      flex-direction: column;
-      gap: 1rem;
     }
   }
 }
@@ -1683,172 +1387,9 @@ app-location-map {
   }
 }
 
-/* ════════════════════════════════════════════════════════════
-   SPRINGS BAYS · image-left / coloured-panel-right (pinned + parallax)
-   ════════════════════════════════════════════════════════════ */
-.springs-bays {
-  background: var(--color-surface-tertiary);
-  --sb-panel-cream: #eddcc0;
-  --sb-panel-cream-ink: #2b0a0d;
-  --sb-panel-cream-rule: rgba(31, 26, 20, 0.18);
-  --sb-panel-forest: #4a0d1d;
-  --sb-panel-forest-ink: #eddcc0;
-  --sb-panel-forest-rule: rgba(230, 220, 198, 0.22);
-  --sb-panel-umber: #3a1110;
-  --sb-panel-umber-ink: #eddcc0;
-  --sb-panel-umber-rule: rgba(239, 226, 198, 0.2);
-}
-
-/* The springs-bays container is pinned by GSAP; pinSpacing reserves the
-   total scroll distance. Bays are absolutely positioned inside, so the
-   container itself only needs one viewport of height. */
-.springs-bays {
-  position: relative;
-  height: 100vh;
-}
-
-.sb-bay {
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 100vh;
-  /* Bay 2..n start below viewport and slide up via GSAP. Bay 1 stays put. */
-  will-change: transform;
-
-  .sb-frame {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background: var(--color-surface-tertiary);
-  }
-
-  .sb-image {
-    position: relative;
-    overflow: hidden;
-    background: #150202;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: brightness(0.94);
-      will-change: transform;
-    }
-  }
-
-  .sb-panel {
-    position: relative;
-    display: flex;
-    align-items: stretch;
-    overflow: hidden;
-    will-change: transform;
-
-    .sb-panel-inner {
-      width: 100%;
-      padding: 5rem 4rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 3rem;
-    }
-
-    /* 主述：放大為面板的主聲音（serif、舒展行距、窄欄好讀） */
-    .sb-lede {
-      @apply font-serif;
-      font-size: clamp(1.2rem, 1.7vw, 1.55rem);
-      line-height: 1.85;
-      letter-spacing: 0.04em;
-      max-width: 40ch;
-      margin: 0;
-
-      /* 每個 lede 元素一行（可斷句排版）；行內過長仍會自然換行 */
-      &__line {
-        display: block;
-      }
-    }
-
-    /* 規格條列：縮為細節層級（sans 小字、緊湊列高、細線分隔），讓主述成為焦點 */
-    .sb-stats {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      li {
-        padding: 0.85rem 0;
-        border-top: 1px solid currentColor;
-        opacity: 0.82;
-        &:last-child {
-          border-bottom: 1px solid currentColor;
-        }
-        .sb-stat {
-          @apply font-sans;
-          font-size: clamp(0.85rem, 1vw, 0.95rem);
-          line-height: 1.6;
-          letter-spacing: 0.02em;
-          font-weight: 400;
-          display: block;
-        }
-      }
-    }
-  }
-
-  /* theme: cream */
-  &[data-theme="cream"] .sb-panel {
-    background: var(--sb-panel-cream);
-    color: var(--sb-panel-cream-ink);
-    .sb-stats li {
-      border-color: var(--sb-panel-cream-rule);
-    }
-  }
-  /* theme: forest (dark green) */
-  &[data-theme="forest"] .sb-panel {
-    background: var(--sb-panel-forest);
-    color: var(--sb-panel-forest-ink);
-    .sb-stats li {
-      border-color: var(--sb-panel-forest-rule);
-    }
-  }
-  /* theme: umber (dark warm) */
-  &[data-theme="umber"] .sb-panel {
-    background: var(--sb-panel-umber);
-    color: var(--sb-panel-umber-ink);
-    .sb-stats li {
-      border-color: var(--sb-panel-umber-rule);
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .springs-bays {
-    height: auto;
-  }
-  .sb-bay {
-    /* mobile: drop the pin, stack vertically, image above panel */
-    position: relative;
-    height: auto;
-    transform: none !important;
-    .sb-frame {
-      position: relative;
-      height: auto;
-      grid-template-columns: 1fr;
-    }
-    .sb-image {
-      @apply aspect-video;
-    }
-    .sb-panel .sb-panel-inner {
-      padding: 3rem 1.5rem;
-      gap: 2rem;
-    }
-  }
-}
-
 /* ───── PRECISION · 甲級精工（仿截圖：暗底主張橫列 + 四格實績）───── */
 .precision {
-  background: var(--color-surface-tertiary-dark);
-  color: var(--fg-2);
+  background: var(--color-surface-light);
   padding: clamp(3.5rem, 7vw, 6rem) clamp(20px, 5vw, 80px);
   display: flex;
   flex-direction: column;
@@ -1864,41 +1405,33 @@ app-location-map {
 }
 
 .precision .pe-eyebrow {
-  @apply font-sans;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.36em;
-  color: var(--color-text-tertiary);
+  @apply text-base font-bold tracking-wider;
+  color: var(--token-burgundy-40);
   margin-bottom: 0.25rem;
 }
 
 .precision .pre-essay h2 {
-  margin: 0;
-  font-family: "Noto Serif TC", serif;
-  font-weight: 500;
+  @apply text-black font-semibold font-serif;
   font-size: clamp(1.9rem, 3.4vw, 3.1rem);
   line-height: 1.5;
   letter-spacing: 0.03em;
-  color: var(--fg-1);
   text-wrap: balance;
 }
 
-.precision .pre-essay p {
-  margin: 0;
+.precision .pre-essay {
+  color: var(--token-gold-30);
 }
 
 .precision .pe-lead {
   @apply text-lg leading-relaxed font-sans tracking-wide;
-  color: var(--fg-2);
   max-width: 46ch;
 }
 
 .precision .pe-verse {
-  font-family: "Noto Serif TC", serif;
+  @apply font-serif font-medium;
   font-size: clamp(1.05rem, 1.5vw, 1.3rem);
   line-height: 1.95;
   letter-spacing: 0.05em;
-  color: var(--token-rose-muted);
 }
 
 .precision .pe-sign {
@@ -1907,7 +1440,8 @@ app-location-map {
   font-size: clamp(1.2rem, 1.9vw, 1.6rem);
   line-height: 1.5;
   letter-spacing: 0.1em;
-  color: var(--fg-1-bright);
+  font-weight: 600;
+  color: var(--token-burgundy-40);
 }
 
 /* 兩則信任主張 —— 以細線與序章分隔；中央直線分欄、兩側等寬 */
@@ -1917,7 +1451,7 @@ app-location-map {
   grid-template-columns: 1fr 1fr;
   gap: clamp(2rem, 5vw, 6rem);
   padding-top: clamp(2.5rem, 4vw, 3.5rem);
-  border-top: 1px solid var(--color-divider-on-tertiary);
+  border-top: 1px solid var(--sb-panel-cream-rule);
 }
 
 .precision .pc-claims::before {
@@ -1927,7 +1461,7 @@ app-location-map {
   bottom: 0;
   left: 50%;
   width: 1px;
-  background: var(--color-divider-on-tertiary);
+  background: var(--sb-panel-cream-rule);
 }
 
 .precision .pc-claim {
@@ -1938,21 +1472,15 @@ app-location-map {
 }
 
 .precision .pc-title {
-  margin: 0;
-  font-family: "Noto Serif TC", serif;
+  @apply font-serif font-semibold text-black;
   font-size: clamp(1.4rem, 2vw, 1.95rem);
   line-height: 1.4;
   letter-spacing: 0.06em;
-  font-weight: 500;
-  color: var(--fg-1);
 }
 
 .precision .pc-desc {
-  @apply text-base font-sans;
-  margin: 0;
-  line-height: 2;
-  letter-spacing: 0.03em;
-  color: var(--fg-2);
+  @apply text-lg tracking-wider;
+  color: var(--token-gold-30);
 }
 
 /* 下方四格實績影像 */
@@ -2138,8 +1666,26 @@ app-location-map {
     color: var(--token-gold-20);
 
     .lt {
-      @apply flex flex-col flex-1 min-w-fit;
+      @apply flex flex-col flex-1;
+      flex-basis: clamp(280px, 40%, 460px);
       gap: 1rem;
+      /* 格局圖框：白底鑲嵌、等比留白，圖以 contain 完整呈現（佔位圖／實際格局圖通用） */
+      .lt-plan {
+        margin: 0 0 0.5rem;
+        aspect-ratio: 4 / 3;
+        border: 1px solid var(--sb-panel-cream-rule);
+        border-radius: 4px;
+        background: #fffaf2;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          padding: clamp(1rem, 4%, 2.5rem);
+          display: block;
+        }
+      }
       .label-sm {
         @apply text-sm opacity-60;
       }
@@ -2367,6 +1913,149 @@ section.frame.catalog {
   .catalog-swiper {
     height: 64vw;
     min-height: 280px;
+  }
+}
+
+/* Brand banner · 繁花將綻 — flower 主視覺鋪底，雙 logo + 案名標語疊上 */
+.brand-banner {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface-tertiary);
+  min-height: clamp(340px, 42vw, 540px);
+  display: flex;
+
+  .bb-flower {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 70% center;
+  }
+
+  /* 雙層遮罩：左／下加深保字，讓中央花朵保留光感 */
+  .bb-veil {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      // linear-gradient(180deg, rgba(20, 2, 2, 0.32) 0%, rgba(20, 2, 2, 0) 32%, rgba(20, 2, 2, 0.62) 100%);
+      linear-gradient(90deg, rgba(20, 2, 2, 0.5) 0%, rgba(20, 2, 2, 0.3) 42%, rgba(20, 2, 2, 0.88) 100%);
+  }
+
+  .bb-inner {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 5vw, 4rem);
+  }
+
+  /* 左上：富華創新（上市公司 3056）— logo 本身為淺色，直接疊深底 */
+  .bb-corp {
+    width: clamp(120px, 14vw, 180px);
+    height: auto;
+    object-fit: contain;
+    align-self: flex-start;
+  }
+
+  /* 中央：序章寫就（金）／繁花將綻（白，大字寬間距）*/
+  .bb-headline {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: clamp(0.5rem, 1.5vw, 1rem);
+    padding: 1.5rem 0;
+  }
+
+  .bb-lead {
+    margin: 0;
+    font-family: "Noto Serif TC", serif;
+    font-weight: 500;
+    font-size: clamp(1.2rem, 2.6vw, 1.9rem);
+    letter-spacing: 0.5em;
+    text-indent: 0.5em; // 補回 letter-spacing 造成的右側偏移
+    color: var(--fg-1);
+  }
+
+  .bb-title {
+    margin: 0;
+    font-family: "Noto Serif TC", serif;
+    font-weight: 600;
+    font-size: clamp(2.6rem, 7vw, 5rem);
+    line-height: 1.1;
+    letter-spacing: 0.32em;
+    text-indent: 0.32em;
+    color: var(--color-text-on-dark);
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+  }
+
+  /* 底部：之序 wordmark + 案名資訊（｜分隔）*/
+  .bb-foot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(0.75rem, 2.5vw, 1.75rem);
+  }
+
+  .bb-mark {
+    width: clamp(70px, 8vw, 104px);
+    height: auto;
+    object-fit: contain;
+    flex: 0 0 auto;
+  }
+
+  .bb-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6em 0.9em;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: "Noto Serif TC", serif;
+    font-size: clamp(0.95rem, 1.6vw, 1.25rem);
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.88);
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.9em;
+
+      &:not(:last-child)::after {
+        content: "";
+        width: 1px;
+        height: 1em;
+        background: rgba(255, 255, 255, 0.4);
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--dur-base) var(--ease-editorial);
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .brand-banner {
+    .bb-flower {
+      object-position: 75% center;
+    }
+    .bb-foot {
+      gap: 0.75rem 1rem;
+    }
   }
 }
 
@@ -2621,79 +2310,5 @@ section.frame.catalog {
       grid-template-columns: 1fr;
       gap: 2rem;
     }
-  }
-}
-
-/* ───── FAQ 常見問答（#faq / AEO） ─────
-   原生 <details> 手風琴：無需 JS、prerender 即為純文字，AI 與搜尋引擎可直接讀取。 */
-.faq {
-  background: var(--color-surface-light);
-  color: var(--color-text-on-light);
-  padding: clamp(64px, 10vh, 120px) clamp(20px, 5vw, 64px);
-
-  .faq-inner {
-    max-width: 880px;
-    margin: 0 auto;
-  }
-
-  .faq-eyebrow {
-    display: block;
-    font-size: 0.75rem;
-    letter-spacing: 0.22em;
-    color: var(--color-text-tertiary);
-    margin-bottom: 0.75rem;
-  }
-
-  .faq-title {
-    margin: 0 0 2.5rem;
-    font-family: "Noto Serif TC", serif;
-    font-size: clamp(1.5rem, 3.2vw, 2.25rem);
-    font-weight: 500;
-    letter-spacing: 0.04em;
-  }
-
-  .faq-item {
-    border-top: 1px solid rgba(43, 10, 13, 0.14);
-    padding: 1.25rem 0;
-
-    &:last-child {
-      border-bottom: 1px solid rgba(43, 10, 13, 0.14);
-    }
-  }
-
-  .faq-q {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    cursor: pointer;
-    list-style: none;
-    font-family: "Noto Serif TC", serif;
-    font-size: clamp(1rem, 2vw, 1.15rem);
-    font-weight: 500;
-    line-height: 1.6;
-
-    &::-webkit-details-marker {
-      display: none;
-    }
-  }
-
-  .faq-icon {
-    flex: 0 0 auto;
-    font-size: 1.5rem;
-    line-height: 1;
-    color: var(--color-text-tertiary);
-    transition: transform var(--dur-base, 400ms) var(--ease-editorial, ease);
-  }
-
-  .faq-item[open] .faq-icon {
-    transform: rotate(45deg);
-  }
-
-  .faq-a {
-    margin: 1rem 0 0;
-    font-size: clamp(0.9rem, 1.8vw, 1rem);
-    line-height: 1.9;
-    color: var(--color-text-secondary);
   }
 }

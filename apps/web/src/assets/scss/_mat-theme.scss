@@ -9,11 +9,6 @@
         border-right: none;
     }
 
-    .mdc-notched-outline__leading,
-    .mdc-notched-outline__trailing {
-        // --mdc-outlined-text-field-container-shape: 1.5rem;
-    }
-
     // form hint
     .mat-mdc-form-field-hint-wrapper,
     .mat-mdc-form-field-error-wrapper {
@@ -22,9 +17,5 @@
         .mat-mdc-form-field-bottom-align::before {
             @apply flex h-auto pt-0.5;
         }
-    }
-
-    .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
-        //top: 1.75rem;
     }
 }
