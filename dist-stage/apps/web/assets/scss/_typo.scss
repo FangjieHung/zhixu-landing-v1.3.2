@@ -1,0 +1,141 @@
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  Typography System
+//
+//  Scale categories
+//  ────────────────
+//  display  → hero-level, largest responsive heading
+//  title    → section & block headings (xl / large / medium / small / xs)
+//  headline → preserved from templates (headline-medium)
+//  body     → running text (large / medium)
+//  label    → eyebrows, captions, metadata (large / eyebrow / eyebrow-sm / small)
+//
+//  Color roles  (composable classes, applied separately in markup)
+//  ────────────────────────────────────────────────────────────────
+//  On surface (light) bg   → .text-primary  .text-secondary  .text-muted
+//  On primary (dark) bg    → .text-on-primary  .text-on-primary-muted  .text-accent-fixed
+//  On secondary bg         → .text-on-secondary
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// ── Font Family ──────────────────────────────────────────────────────────────
+// Serif headline face — apply to any decorative heading or stat number.
+.font-headline {
+  font-family: "Noto Serif TC", serif;
+  font-optical-sizing: auto;
+  @apply font-bold not-italic;
+}
+
+// ━━━ DISPLAY ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Hero-level heading — scales from 32 px (mobile) up to 60 px (xl screen).
+
+.display-large {
+  @apply font-bold text-3xl sm:text-4xl md:text-5xl xl:text-6xl leading-tight;
+}
+
+// ━━━ TITLE  (section & block headings) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//
+//  xl     36 px          org-structure, parent-company titles
+//  large  32 → 36 px     brand / mission / persona / bento / products / franchise
+//  medium 24 → 32 px     cert / safety / process / liability
+//  small  24 px          supplier heading, product card names
+//  xs     18 px          safety items, contact headings
+
+.title-xl {
+  @apply font-bold text-4xl leading-tight;
+}
+
+.title-large {
+  @apply font-bold text-3xl md:text-4xl leading-snug;
+}
+
+.title-medium {
+  @apply font-bold text-2xl md:text-3xl;
+}
+
+.title-small {
+  @apply font-bold text-2xl;
+}
+
+.title-xs {
+  @apply font-bold text-lg;
+}
+
+// ━━━ HEADLINE  (kept for direct template usage — do not change) ━━━━━━━━━━━━
+// Used as class="headline-medium" in persona item <h4> elements.
+
+.headline-medium {
+  @apply text-2xl font-medium tracking-normal;
+}
+
+// ━━━ BODY ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+.body-medium {
+  @apply text-base font-normal;
+}
+
+// ━━━ LABEL ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//
+//  large       14 px / font-medium      kept for direct template usage
+//  eyebrow     12 px / all-caps / wide  most-repeated decorative label
+//  eyebrow-sm  14 px / all-caps / wide  slightly larger variant (org / parent)
+//  small       12 px plain              source lines, hint text
+
+.label-large {
+  @apply text-sm leading-5 font-medium;
+}
+
+.label-eyebrow {
+  @apply text-xs tracking-widest uppercase block;
+}
+
+.label-eyebrow-sm {
+  @apply text-sm tracking-widest uppercase block;
+}
+
+.label-small {
+  @apply text-xs;
+}
+
+// ━━━ COLOR ROLES ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//
+//  These single-purpose classes set ONLY color — they compose with any scale class.
+//
+//  ── On surface (light) backgrounds ──────────────────────────────────────────
+//  text-primary       brand green    headings, prices, key values
+//  text-secondary     warm accent    eyebrows, stat labels, icon accents
+//  text-muted         on-surface-v   body copy, descriptions, captions
+//
+//  ── On primary (dark green) backgrounds ─────────────────────────────────────
+//  text-on-primary         full-contrast white   large headings inside primary sections
+//  text-on-primary-muted   softer container tone body / description inside primary sections
+//  text-accent-fixed       secondary-fixed warm  eyebrows / decorative labels on dark bg
+//
+//  ── On secondary backgrounds ────────────────────────────────────────────────
+//  text-on-secondary   readable body text on secondary bg
+
+.text-primary {
+  color: var(--md-sys-color-primary);
+}
+
+.text-secondary {
+  color: var(--md-sys-color-secondary);
+}
+
+.text-muted {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.text-on-primary {
+  color: var(--md-sys-color-on-primary);
+}
+
+.text-on-primary-muted {
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.text-accent-fixed {
+  color: var(--md-sys-color-secondary-fixed);
+}
+
+.text-on-secondary {
+  color: var(--md-sys-color-on-secondary);
+}
