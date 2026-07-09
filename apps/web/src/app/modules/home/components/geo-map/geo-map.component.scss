@@ -29,34 +29,26 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 
   &__zoom {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 12px;
+    @apply flex gap-1 pt-2 pb-1;
 
-    button {
-      width: 28px;
-      height: 28px;
+    > button {
+      @apply flex-1 min-w-10 h-10 bg-transparent;
       border: 1px solid var(--gm-gold);
+
       border-radius: 4px;
-      background: transparent;
       color: var(--gm-gold);
-      font-size: 16px;
+      font-size: 1.2rem;
       line-height: 1;
       cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease;
+      transition:
+        background 0.15s ease,
+        color 0.15s ease;
 
       &:hover {
         background: var(--gm-gold);
         color: var(--gm-ink);
       }
     }
-  }
-
-  &__title {
-    margin: 0 0 8px;
-    color: var(--gm-gold);
-    font-size: 12px;
-    letter-spacing: 0.08em;
   }
 
   &__item {
@@ -87,7 +79,7 @@
     }
 
     input:checked + &::after {
-      content: '';
+      content: "";
       position: absolute;
       left: 4px;
       top: 1px;
@@ -138,7 +130,9 @@
   color: var(--gm-ink);
   font-size: 11px;
   font-weight: 700;
-  text-shadow: 0 0 3px var(--gm-cream), 0 0 3px var(--gm-cream),
+  text-shadow:
+    0 0 3px var(--gm-cream),
+    0 0 3px var(--gm-cream),
     0 0 3px var(--gm-cream);
   pointer-events: none;
 
@@ -155,7 +149,9 @@
   color: var(--gm-ink);
   font-size: 11px;
   font-weight: 600;
-  text-shadow: 0 0 3px var(--gm-cream), 0 0 3px var(--gm-cream),
+  text-shadow:
+    0 0 3px var(--gm-cream),
+    0 0 3px var(--gm-cream),
     0 0 3px var(--gm-cream);
   pointer-events: none;
 
@@ -164,12 +160,17 @@
   }
 }
 
-::ng-deep .leaflet-popup-content-wrapper {
+::ng-deep .gm-site-label {
   background: rgba(18, 16, 14, 0.92);
+  border: 1px solid rgba(201, 184, 138, 0.35);
   color: var(--gm-cream);
+  font-weight: 600;
+  padding: 6px 10px;
   border-radius: 8px;
-}
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  z-index: 10;
 
-::ng-deep .leaflet-popup-tip {
-  background: rgba(18, 16, 14, 0.92);
+  &::before {
+    border-top-color: rgba(18, 16, 14, 0.92);
+  }
 }

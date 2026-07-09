@@ -1029,8 +1029,6 @@ export class DefaultComponent
       //    對於 cross-component pin（如 child component 的 ScrollTrigger 在 parent
       //    建立 pin-spacer 前先 init），static refresh 不會重新偵測 spacer
       //    影響後續 trigger 的位置。必須逐個 instance refresh 才會修正 start/end。
-      //    （location-map 的 lm-stage pin 起始位置就因此偏早 1260px = district
-      //    pin-spacer 高度）
       const refreshAll = () => {
         ScrollTrigger.getAll().forEach((t) => t.refresh());
       };

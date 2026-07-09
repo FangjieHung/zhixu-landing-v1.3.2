@@ -337,7 +337,6 @@ section.frame {
 }
 
 /* Frame bridges — section 頂部 16vh 漸層銜接上一節色調 */
-/* design 接在 lm-stage (#32070f 深紅) 之後 → 米色 design 頂部 fade from 深紅 */
 section.frame.design {
   background-size: 100% 16vh;
   background-repeat: no-repeat;
@@ -1072,23 +1071,6 @@ p.body {
   }
 }
 
-/* GSAP 包 .lm-stage 的 pin-spacer：pin 釋放後 padding 區會露出米色 lm-section bg，
-   產生「飛走的 stage 下方又出現一張米色 + 殘影 stage」的視覺幻象。
-   染深紅跟 stage 同色 → pin 釋放後 padding 與 stage 顏色一致，無視覺斷層。
-   注意：location-map 是 child component，需用 ::ng-deep 穿透 view encapsulation。 */
-:host ::ng-deep .pin-spacer:has(> .lm-stage) {
-  background: var(--map-bg);
-}
-
-/* district-intro 已移除 GSAP pin，無 pin-spacer 與 100vh 空白需補償，
-   故 margin-top 歸零，讓 location-map 自然接在第三段 bento 之後。 */
-app-location-map {
-  display: block;
-  position: relative;
-  z-index: 1;
-  margin-top: 0;
-}
-
 /* ── Cinematic 影片 + 文案 · 國際生活序章 ──
    左右雙欄：黑底文案在左、影片在右；文字不壓圖。手機改上下堆疊（文案上、影片下）。 */
 .cinema {
@@ -1412,8 +1394,7 @@ app-location-map {
 
 /* 實績 */
 .precision .pc-grid {
-  @apply grid grid-cols-3 gap-px;
-  background: var(--color-divider);
+  @apply grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-px;
 }
 
 .precision .pc-card {
@@ -1458,12 +1439,6 @@ app-location-map {
   color: var(--token-gold-80);
 }
 
-@media (max-width: 768px) {
-  .precision .pc-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 /* Spec */
 .spec {
   background-color: var(--sb-panel-cream);
@@ -1471,7 +1446,7 @@ app-location-map {
   padding: 5rem 3rem;
 
   .layouts-hero {
-    @apply grid grid-cols-2 gap-10;
+    @apply grid grid-cols-1 lg:grid-cols-2 lg:gap-10;
   }
 
   .spec-img {
@@ -1560,7 +1535,7 @@ app-location-map {
       }
 
       .tt {
-        @apply text-4xl font-serif font-semibold leading-normal border-r pr-6 mr-2;
+        @apply text-4xl font-serif font-semibold leading-normal border-r pr-6 mr-2 w-14;
         border-color: var(--token-gold-60);
       }
 

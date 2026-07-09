@@ -40,7 +40,7 @@ export class GeoMapComponent
   readonly layers: LayerConfig[] = [
     {
       key: 'amenities',
-      label: '生活機能',
+      label: '地標建設',
       url: 'assets/data/amenities.geojson',
       visible: true,
     },
@@ -125,7 +125,12 @@ export class GeoMapComponent
 
     L.marker(SITE_CENTER, { icon: siteIcon })
       .addTo(map)
-      .bindPopup('<strong>富華創新【之序】基地位置</strong>');
+      .bindTooltip('富華創新【之序】基地位置', {
+        permanent: true,
+        direction: 'top',
+        offset: [0, -14],
+        className: 'gm-site-label',
+      });
 
     this.layers.forEach((config) => this.loadLayer(L, config));
   }
