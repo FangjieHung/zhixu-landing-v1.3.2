@@ -42,7 +42,7 @@
 }
 
 .social-item {
-  @apply flex flex-col justify-start items-start gap-1 pr-4;
+  @apply flex flex-col justify-start items-start gap-1 pl-4;
   border-left: 2px solid var(--color-surface-tertiary);
 
   .platform {
