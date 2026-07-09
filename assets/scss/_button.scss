@@ -1,0 +1,246 @@
+// ─── Angular Material toggle reset ───────────────────────────────────────────
+.mat-button-toggle-group.mat-button-toggle-group-appearance-standard {
+  --mat-standard-button-toggle-shape: 0px;
+}
+
+// ─── Global MDC / anchor reset ────────────────────────────────────────────────
+a.mdc-button,
+a.mdc-icon-button,
+a.mdc-stroked-button,
+a.mdc-flat-button,
+a.mdc-menu-trigger,
+button.mdc-button,
+button.mdc-icon-button,
+button.mdc-stroked-button,
+button.mdc-flat-button,
+button.mdc-menu-trigger,
+button[class^="btn-"],
+a[class^="btn-"],
+button,
+a {
+  @apply transition-all ease-in-out duration-300 flex items-center justify-center;
+  --mdc-text-button-container-shape: 0px;
+}
+
+// ─── M3 Button Base ───────────────────────────────────────────────────────────
+[class*="btn-"] {
+  @apply tracking-widest text-sm transition-all ease-in-out duration-300;
+}
+
+// ─── M3 Filled button ─────────────────────────────────────────────────────────
+// High emphasis — primary action on light background
+.btn-filled,
+.btn-primary {
+  @apply px-8 py-4;
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+// ─── M3 Filled Tonal button ───────────────────────────────────────────────────
+// Medium-high emphasis — warm golden accent, typically on dark background
+.btn-tonal {
+  @apply px-8 py-4;
+  background-color: var(--token-gold-70);
+  color: var(--md-sys-color-on-secondary-fixed);
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+// ─── M3 Outlined button ───────────────────────────────────────────────────────
+// Medium emphasis — on light/surface background
+.btn-outlined,
+.btn-outline {
+  @apply border bg-transparent;
+  border-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-primary);
+  &:hover {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+  }
+}
+
+// ─── M3 Outlined Inverse ──────────────────────────────────────────────────────
+// Medium emphasis — on dark / primary-color background
+.btn-outlined-inverse,
+.btn-outline-inverse {
+  @apply px-8 py-4 border flex items-center justify-center transition-all;
+  border-color: color-mix(in srgb, var(--md-sys-color-on-primary) 10%, transparent);
+  &:hover {
+    border-color: var(--md-sys-color-secondary-fixed);
+    color: var(--md-sys-color-secondary-fixed);
+  }
+}
+
+// ─── M3 Secondary filled ──────────────────────────────────────────────────────
+.btn-secondary {
+  @apply px-8 py-4;
+  background-color: var(--md-sys-color-secondary);
+  color: var(--md-sys-color-on-secondary);
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+// ─── M3 Text button ───────────────────────────────────────────────────────────
+// Low emphasis — subtle action
+.btn-text,
+.btn-ghost {
+  @apply bg-transparent;
+  color: var(--md-sys-color-primary);
+  &:hover {
+    background-color: var(--md-sys-color-surface-container);
+  }
+}
+
+// ─── M3 Elevated button ───────────────────────────────────────────────────────
+.btn-elevated {
+  @apply px-8 py-4 shadow-md;
+  background-color: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-primary);
+  &:hover {
+    @apply shadow-lg;
+  }
+}
+
+// ─── Size modifiers ───────────────────────────────────────────────────────────
+.btn-sm {
+  @apply px-4 py-2 text-xs;
+}
+.btn-lg {
+  @apply px-10 py-5 min-h-14;
+}
+
+// ─── Shared state ─────────────────────────────────────────────────────────────
+[class*="btn-"].disabled,
+[class*="btn-"]:disabled {
+  @apply shadow-none grayscale opacity-60 pointer-events-none;
+}
+
+// ─── Dropdown menu ────────────────────────────────────────────────────────────
+.menu-wrap {
+  @apply relative;
+
+  .menu-list {
+    @apply hidden absolute top-0 right-0 pt-16 min-w-max;
+  }
+
+  &:hover .menu-list,
+  .menu-list.show {
+    @apply block;
+  }
+
+  .menu-list a,
+  .menu-list button {
+    @apply flex items-center;
+  }
+}
+
+.mdc-checkbox .mdc-checkbox__native-control:enabled ~ .mdc-checkbox__background .mdc-checkbox__checkmark {
+  --mdc-checkbox-selected-checkmark-color: white;
+}
+
+// ─── Image upload label ───────────────────────────────────────────────────────
+.upload-img-label {
+  @apply w-full block ease-in-out cursor-pointer;
+
+  .dash-hint {
+    @apply flex items-center flex-col justify-center w-full h-full
+           border-2 border-dashed border-[var(--md-sys-color-outline-variant)]
+           py-6 text-[var(--md-sys-color-on-surface-variant)]
+           hover:bg-[var(--md-sys-color-surface-container-low)]
+           rounded-none;
+  }
+
+  p {
+    @apply font-medium text-base;
+  }
+
+  .uploaded-img {
+    @apply relative overflow-hidden;
+  }
+  .uploaded-img img {
+    @apply object-cover w-full h-full;
+  }
+  .uploaded-img .btn-ghost {
+    @apply absolute bottom-0 right-0;
+  }
+}
+
+.btn-stroked {
+  color: var(--fg-1);
+  cursor: pointer;
+  @apply flex flex-col;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 45px;
+
+  max-width: 160px;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 100%;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.btn-stroked {
+  border: 1px solid #00000000;
+  box-shadow: inset 0 0 20px rgba(var(--fg-1), 0);
+  outline: 1px solid;
+  outline-color: rgba(var(--fg-1), 0.5);
+  outline-offset: 0px;
+  text-shadow: none;
+  transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.btn-stroked:hover {
+  border: 1px solid;
+  box-shadow:
+    inset 0 0 20px rgba(var(--fg-1), 0.5),
+    0 0 20px rgba(#000, 0.2);
+  outline-color: rgba(#000, 0);
+  outline-offset: 15px;
+}
+
+button.submit {
+  @apply px-5 py-4;
+  margin-top: 1rem;
+  @apply font-sans;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--md-sys-color-on-secondary-fixed);
+  background: var(--md-sys-color-secondary-fixed);
+  border: 0;
+  cursor: pointer;
+  align-self: flex-start;
+  transition:
+    color var(--dur-base) var(--ease-editorial),
+    background var(--dur-base) var(--ease-editorial);
+  &:hover {
+    color: var(--md-sys-color-secondary-fixed);
+    background: var(--md-sys-color-inverse-surface);
+  }
+}
+
+button.primary {
+  @apply text-white font-medium;
+  @apply font-sans;
+  font-size: 1rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background-color: var(--token-gold-40);
+  padding: 18px 26px;
+  border: 0;
+  cursor: pointer;
+  &:hover {
+    color: var(--token-gold-70);
+    background: var(--md-sys-color-inverse-surface);
+  }
+}

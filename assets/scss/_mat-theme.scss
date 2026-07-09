@@ -1,0 +1,21 @@
+// Normalize
+.mat-mdc-form-field {
+
+    .mat-mdc-form-field-flex {
+        @apply min-h-12;
+    }
+
+    .mat-mdc-text-field-wrapper.mdc-text-field .mdc-notched-outline__notch {
+        border-right: none;
+    }
+
+    // form hint
+    .mat-mdc-form-field-hint-wrapper,
+    .mat-mdc-form-field-error-wrapper {
+        padding: 0;
+
+        .mat-mdc-form-field-bottom-align::before {
+            @apply flex h-auto pt-0.5;
+        }
+    }
+}
