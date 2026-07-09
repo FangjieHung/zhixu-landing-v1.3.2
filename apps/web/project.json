@@ -36,6 +36,7 @@
         "styles": [
           "./node_modules/ngx-spinner/animations/ball-grid-beat.css",
           "./node_modules/@angular/cdk/overlay-prebuilt.css",
+          "./node_modules/leaflet/dist/leaflet.css",
           "apps/web/src/styles.scss"
         ],
         "scripts": [],

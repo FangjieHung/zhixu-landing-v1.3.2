@@ -117,15 +117,6 @@ ul {
   }
 }
 
-// Demo
-.version-note {
-  @apply text-sm bg-black text-white w-full inset-x-0 top-0 h-10 py-3 z-10 text-center;
-
-  ~ .topbar {
-    @apply top-10;
-  }
-}
-
 /* Topbar */
 .topbar {
   @apply flex justify-between flex-wrap;
@@ -396,16 +387,6 @@ p.body {
   letter-spacing: 0.01em;
   color: var(--fg-1);
   margin: 0 0 1rem;
-  &.zh {
-    @apply font-sans;
-    font-size: 1rem;
-    line-height: 2.05;
-    letter-spacing: 0.06em;
-  }
-  &.lg.zh {
-    font-size: 0.9375rem;
-    line-height: 2.1;
-  }
 }
 .muted {
   color: var(--fg-2);
@@ -921,7 +902,7 @@ p.body {
     border-radius: 3px;
   }
 
-  /* 圖卡基準：固定近 16:9，以寬度做大小變化（高度由 aspect-ratio 算出，不再狹長）*/
+  /* 圖卡統一尺寸：固定 16:9，所有圖卡同寬（高度由 aspect-ratio 算出）*/
   .di-img {
     position: relative; // 內部 absolute img/caption/漸層以此 figure 為基準
     aspect-ratio: 16 / 9;
@@ -963,22 +944,6 @@ p.body {
         opacity: 1;
       }
     }
-  }
-
-  /* 高低錯落：僅改寬度（維持 16:9）+ 上下位移（modifier：公園 01–03／通勤 04–06／大師 01–04 循環）*/
-  .di-img--01,
-  .di-img--04 {
-    width: clamp(340px, 60vw, 880px); // 主視覺寬幅大圖
-  }
-  .di-img--02,
-  .di-img--05 {
-    width: clamp(280px, 42vw, 600px); // 中幅，往上提
-    transform: translateY(-3vh);
-  }
-  .di-img--03,
-  .di-img--06 {
-    width: clamp(300px, 50vw, 720px); // 中大幅，往下沉
-    transform: translateY(3vh);
   }
 
   /* ── 兩行式 caption：地名 + 一句吸引人的說明 ── */
@@ -1445,105 +1410,14 @@ app-location-map {
   gap: clamp(2.75rem, 5.5vw, 4.75rem);
 }
 
-/* ── 序章：建立由大到小的閱讀層級 ──
-   eyebrow(紅·定位) → 主標(serif 金·主角) → 本文(sans 弱·最小) → 對句(serif 米) → 收尾(serif 亮金·尾韻) */
-.precision .pre-essay {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.precision .pe-eyebrow {
-  @apply text-base font-bold tracking-wider;
-  color: var(--token-burgundy-40);
-  margin-bottom: 0.25rem;
-}
-
-.precision .pre-essay h2 {
-  @apply text-black font-semibold font-serif;
-  font-size: clamp(1.9rem, 3.4vw, 3.1rem);
-  line-height: 1.5;
-  letter-spacing: 0.03em;
-  text-wrap: balance;
-}
-
-.precision .pre-essay {
-  color: var(--token-gold-30);
-}
-
-.precision .pe-lead {
-  @apply text-lg leading-relaxed font-sans tracking-wide;
-  max-width: 46ch;
-}
-
-.precision .pe-verse {
-  @apply font-serif font-medium;
-  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
-  line-height: 1.95;
-  letter-spacing: 0.05em;
-}
-
-.precision .pe-sign {
-  margin-top: 0.4rem;
-  font-family: "Noto Serif TC", serif;
-  font-size: clamp(1.2rem, 1.9vw, 1.6rem);
-  line-height: 1.5;
-  letter-spacing: 0.1em;
-  font-weight: 600;
-  color: var(--token-burgundy-40);
-}
-
-/* 兩則信任主張 —— 以細線與序章分隔；中央直線分欄、兩側等寬 */
-.precision .pc-claims {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 5vw, 6rem);
-  padding-top: clamp(2.5rem, 4vw, 3.5rem);
-  border-top: 1px solid var(--sb-panel-cream-rule);
-}
-
-.precision .pc-claims::before {
-  content: "";
-  position: absolute;
-  top: clamp(2.5rem, 4vw, 3.5rem);
-  bottom: 0;
-  left: 50%;
-  width: 1px;
-  background: var(--sb-panel-cream-rule);
-}
-
-.precision .pc-claim {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 46ch;
-}
-
-.precision .pc-title {
-  @apply font-serif font-semibold text-black;
-  font-size: clamp(1.4rem, 2vw, 1.95rem);
-  line-height: 1.4;
-  letter-spacing: 0.06em;
-}
-
-.precision .pc-desc {
-  @apply text-lg tracking-wider;
-  color: var(--token-gold-30);
-}
-
-/* 下方四格實績影像 */
+/* 實績 */
 .precision .pc-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
+  @apply grid grid-cols-3 gap-px;
   background: var(--color-divider);
 }
 
 .precision .pc-card {
-  position: relative;
-  aspect-ratio: 3 / 5;
-  overflow: hidden;
+  @apply aspect-[3/4] relative overflow-hidden;
   background: #150202;
 
   img {
@@ -1552,7 +1426,6 @@ app-location-map {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.68);
     transition:
       transform var(--dur-slow) var(--ease-editorial),
       filter var(--dur-slow) var(--ease-editorial);
@@ -1563,13 +1436,12 @@ app-location-map {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(15, 2, 2, 0.55) 0%, rgba(15, 2, 2, 0) 34%, rgba(15, 2, 2, 0.62) 100%);
+    background: linear-gradient(180deg, rgba(#000, 0.6) 0%, rgba(#000, 0) 30%);
     pointer-events: none;
   }
 
   &:hover img {
     transform: scale(1.05);
-    filter: brightness(0.8);
   }
 }
 
@@ -1581,32 +1453,12 @@ app-location-map {
   right: clamp(1.2rem, 2vw, 2rem);
 }
 
-.precision .pc-no {
-  display: block;
-  font-family: "Playfair Display", serif;
-  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
-  line-height: 1;
-  letter-spacing: 0.04em;
-  color: var(--fg-1);
-}
-
 .precision .pc-brand {
-  display: block;
-  margin-top: 0.65rem;
-  font-family: "Noto Serif TC", serif;
-  font-size: 0.95rem;
-  letter-spacing: 0.22em;
-  color: var(--color-text-on-dark);
+  @apply font-serif text-2xl font-black tracking-widest;
+  color: var(--token-gold-80);
 }
 
 @media (max-width: 768px) {
-  .precision .pc-claims {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  .precision .pc-claims::before {
-    display: none;
-  }
   .precision .pc-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1614,82 +1466,106 @@ app-location-map {
 
 /* Spec */
 .spec {
-  background: var(--brand-gradient) no-repeat;
-  background-position: top;
-  color: var(--color-text-on-dark);
+  background-color: var(--sb-panel-cream);
+  color: var(--token-gold-20);
+  padding: 5rem 3rem;
 
-  .pull-wrap {
-    margin-top: 5rem;
-    display: grid;
-    grid-template-columns: 5fr 7fr;
-    gap: 3rem;
-    align-items: start;
-    .pull {
-      font-family: "Noto Serif TC", serif;
-      font-size: clamp(1.8rem, 2.6vw, 2.4rem);
-      line-height: 1.55;
-      letter-spacing: 0.04em;
-      color: var(--fg-1);
-      text-transform: none;
-      .quiet {
-        color: #c1a49b;
-      }
-    }
-  }
   .layouts-hero {
-    position: relative;
-    overflow: hidden;
+    @apply grid grid-cols-2 gap-10;
+  }
 
-    .layouts {
-      margin-top: 0;
-      padding: 5rem 3rem;
+  .spec-img {
+    @apply bg-white aspect-video w-full py-10 max-w-4xl;
+    position: relative;
+
+    img {
+      @apply w-full object-contain h-full;
     }
   }
+
+  .spec-img-cta {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1.5rem;
+    border: 0;
+    background: rgba(43, 10, 13, 0.35);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition: background var(--dur-base) var(--ease-editorial);
+
+    &:hover {
+      background: rgba(43, 10, 13, 0.5);
+    }
+
+    p {
+      @apply font-serif;
+      margin: 0;
+      color: #fff;
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      line-height: 1.6;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  .lt-plan-wrap {
+    position: relative;
+  }
+
+  .lt-plan-swiper {
+    @apply pb-10;
+  }
+
+  .lt-plan-swiper ::ng-deep .swiper-pagination-bullet {
+    background: var(--fg-1-ink);
+    opacity: 0.3;
+  }
+  .lt-plan-swiper ::ng-deep .swiper-pagination-bullet-active {
+    opacity: 1;
+  }
+  .lt-plan-swiper ::ng-deep .swiper-pagination {
+    @apply text-center;
+    bottom: 0.5rem;
+  }
+
+  .lt-plan-prev,
+  .lt-plan-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 11;
+  }
+  .lt-plan-prev {
+    left: 0.75rem;
+  }
+  .lt-plan-next {
+    right: 0.75rem;
+  }
+
   .layouts {
-    @apply flex flex-wrap gap-10;
-    background-color: var(--sb-panel-cream);
-    color: var(--token-gold-20);
+    @apply flex flex-col gap-y-20 w-fit m-auto;
 
     .lt {
-      @apply flex flex-col flex-1;
-      flex-basis: clamp(280px, 40%, 460px);
-      gap: 1rem;
-      /* 格局圖框：白底鑲嵌、等比留白，圖以 contain 完整呈現（佔位圖／實際格局圖通用） */
-      .lt-plan {
-        margin: 0 0 0.5rem;
-        aspect-ratio: 4 / 3;
-        border: 1px solid var(--sb-panel-cream-rule);
-        border-radius: 4px;
-        background: #fffaf2;
-        overflow: hidden;
+      @apply flex items-center gap-4;
 
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          padding: clamp(1rem, 4%, 2.5rem);
-          display: block;
-        }
-      }
       .label-sm {
         @apply text-sm opacity-60;
       }
-      .tt {
-        @apply text-3xl font-serif font-semibold leading-normal;
 
-        .zh {
-          font-family: "Noto Serif TC", serif;
-          text-transform: none;
-          margin-left: 12px;
-          font-size: 0.7em;
-          letter-spacing: 0.06em;
-        }
+      .tt {
+        @apply text-4xl font-serif font-semibold leading-normal border-r pr-6 mr-2;
+        border-color: var(--token-gold-60);
       }
+
       .desc {
-        @apply font-sans;
-        font-size: 1rem;
-        line-height: 1.95;
-        letter-spacing: 0.06em;
+        @apply text-base tracking-wider;
       }
     }
   }
@@ -1919,9 +1795,7 @@ section.frame.catalog {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background:
-      // linear-gradient(180deg, rgba(20, 2, 2, 0.32) 0%, rgba(20, 2, 2, 0) 32%, rgba(20, 2, 2, 0.62) 100%);
-      linear-gradient(90deg, rgba(20, 2, 2, 0.5) 0%, rgba(20, 2, 2, 0.3) 42%, rgba(20, 2, 2, 0.88) 100%);
+    background: linear-gradient(90deg, rgba(20, 2, 2, 0.5) 0%, rgba(20, 2, 2, 0.3) 42%, rgba(20, 2, 2, 0.88) 100%);
   }
 
   .bb-inner {
@@ -1933,12 +1807,10 @@ section.frame.catalog {
     padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 5vw, 4rem);
   }
 
-  /* 左上：富華創新（上市公司 3056）— logo 本身為淺色，直接疊深底 */
   .bb-corp {
-    width: clamp(120px, 14vw, 180px);
-    height: auto;
+    width: clamp(7.5rem, 14vw, 120px);
     object-fit: contain;
-    align-self: flex-start;
+    margin: auto;
   }
 
   /* 中央：序章寫就（金）／繁花將綻（白，大字寬間距）*/
@@ -1950,7 +1822,7 @@ section.frame.catalog {
     justify-content: center;
     text-align: center;
     gap: clamp(0.5rem, 1.5vw, 1rem);
-    padding: 1.5rem 0;
+    padding: 0 0 1.5rem;
   }
 
   .bb-lead {
@@ -1989,44 +1861,6 @@ section.frame.catalog {
     height: auto;
     object-fit: contain;
     flex: 0 0 auto;
-  }
-
-  .bb-meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6em 0.9em;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-family: "Noto Serif TC", serif;
-    font-size: clamp(0.95rem, 1.6vw, 1.25rem);
-    letter-spacing: 0.08em;
-    color: rgba(255, 255, 255, 0.88);
-
-    li {
-      display: flex;
-      align-items: center;
-      gap: 0.9em;
-
-      &:not(:last-child)::after {
-        content: "";
-        width: 1px;
-        height: 1em;
-        background: rgba(255, 255, 255, 0.4);
-      }
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-      transition: color var(--dur-base) var(--ease-editorial);
-
-      &:hover {
-        color: #fff;
-      }
-    }
   }
 }
 

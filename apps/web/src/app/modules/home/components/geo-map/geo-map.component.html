@@ -1,0 +1,21 @@
+<section class="gm-wrap">
+  <div #mapEl class="gm-map" role="img" aria-label="之序周邊重劃區與公共設施用地地圖"></div>
+
+  <div class="gm-panel">
+    <div class="gm-panel__zoom">
+      <button type="button" aria-label="放大" (click)="zoomIn()">+</button>
+      <button type="button" aria-label="縮小" (click)="zoomOut()">−</button>
+    </div>
+
+    <p class="gm-panel__title">圖層</p>
+    <label class="gm-panel__item" *ngFor="let layer of layers">
+      <input
+        type="checkbox"
+        [checked]="layer.visible"
+        (change)="toggleLayer(layer)"
+      />
+      <span class="gm-panel__check" aria-hidden="true"></span>
+      <span class="gm-panel__label">{{ layer.label }}</span>
+    </label>
+  </div>
+</section>

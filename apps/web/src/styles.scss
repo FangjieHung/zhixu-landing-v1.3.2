@@ -13,12 +13,6 @@
 @import "swiper/scss/pagination";
 @import "assets/scss/swiper";
 
-// ─── Material Symbols 字型顯示策略 ───────────────────────────────────────────
-// 預設行為：瀏覽器等字型下載完才顯示文字（FOIT），會造成版面空白。
-// font-display: optional → 若字型在極短時間內未能載入，直接略過，
-//   優先渲染內容；字型下載完後下次瀏覽時才生效（不重排）。
-// 選用 optional 而非 swap 的原因：
-//   icon 是裝飾性的，空白比版面跳動（layout shift）對 CLS 分數傷害更小。
 @font-face {
   font-family: "Material Symbols Outlined";
   font-display: optional;

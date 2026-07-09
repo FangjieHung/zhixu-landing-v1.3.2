@@ -40,6 +40,15 @@ interface FacilityClip {
   poster: string;
   caption: string;
 }
+
+/** district-intro 系列 swiper 投影片：大圖 + 標題 + 說明 + 出處，三段共用同一形狀 */
+interface DistrictSlide {
+  src: string;
+  alt: string;
+  title: string;
+  desc: string;
+  note: string;
+}
 @Component({
   selector: 'app-default',
   templateUrl: './default.component.html',
@@ -180,22 +189,7 @@ export class DefaultComponent
     },
   ];
 
-  /**
-   * 甲級精工 #trust：頂部兩則信任主張（標題＋說明）＋ 下方四格實績展示。
-   * 仿截圖排版：暗底主張橫列 → 四欄等寬深色影像（序號＋品牌＋側邊直書標籤）。
-   */
-  readonly precisionPoints: Array<{ title: string; desc: string }> = [
-    {
-      title: '國家級甲級營造',
-      desc: '以承攬國家公共工程的最高嚴苛標準，把關結構的每一道細節，為您與家人築起足以傳承世代的安心基石。',
-    },
-    {
-      title: '工地高標準領先業界',
-      desc: '2009 年起率先推行 24 小時全面監控，更堅持材料進場全數嚴格抽檢。',
-    },
-  ];
-
-  /** 四格實績影像（暫用既有素材，可日後替換為實際工程照） */
+  /** 實績 */
   readonly precisionShowcase: Array<{ no: string; src: string; tag: string }> =
     [
       {
@@ -206,17 +200,12 @@ export class DefaultComponent
       {
         no: '02',
         src: `${this.assetBase}/showcase/precision-02.webp`,
-        tag: '心之所向',
+        tag: '東方帝國',
       },
       {
         no: '03',
         src: `${this.assetBase}/showcase/precision-03.webp`,
-        tag: '織築',
-      },
-      {
-        no: '04',
-        src: `${this.assetBase}/showcase/precision-04.webp`,
-        tag: '澐光',
+        tag: '東方花園廣場',
       },
     ];
 
@@ -341,6 +330,27 @@ export class DefaultComponent
     watchSlidesProgress: true,
   };
 
+  /** 格局規劃圖（#spec 左側）：單張全幅顯示 + 分頁點 + 左右箭頭，無自動輪播 */
+  readonly layoutSwiperConfig: SwiperOptions = {
+    slidesPerView: 1,
+    loop: true,
+    grabCursor: true,
+    speed: 600,
+    observer: true,
+    observeParents: true,
+    pagination: {
+      clickable: true,
+    },
+  };
+
+  readonly layoutPlanImages: string[] = [
+    `${this.assetBase}/layouts/001.webp`,
+    `${this.assetBase}/layouts/002.webp`,
+    `${this.assetBase}/layouts/003.webp`,
+    `${this.assetBase}/layouts/004.webp`,
+    `${this.assetBase}/layouts/005.webp`,
+  ];
+
   /** district-intro 三段共用：大圖高低錯落 + 自動輪播 + 可拖曳 */
   readonly districtSwiperConfig: SwiperOptions = {
     slidesPerView: 'auto',
@@ -357,6 +367,69 @@ export class DefaultComponent
       clickable: true,
     },
   };
+
+  /** 「通勤路上」（#district-intro-commute）swiper 投影片資料 */
+  readonly commuteSlides: DistrictSlide[] = [
+    {
+      src: `${this.assetBase}/infrastructure/001-central-science-park.webp`,
+      alt: '中部科學園區空拍景觀',
+      title: '中部科學園區',
+      desc: '中台灣科技引擎，富人菁英匯聚的生活半徑',
+      note: '圖／中科管理局',
+    },
+    {
+      src: `${this.assetBase}/infrastructure/007-shuinan-transit.webp`,
+      alt: '水湳轉運中心',
+      title: '水湳轉運中心',
+      desc: '城市轉運核心，無縫接軌四方移動',
+      note: '圖／台中市政府',
+    },
+    {
+      src: `${this.assetBase}/infrastructure/005-mrt-green-line.webp`,
+      alt: '捷運綠線月台實景',
+      title: '捷運綠線',
+      desc: '軌道串起七期與水湳，連通勤都成為移動的風景',
+      note: '圖／台中市政府',
+    },
+  ];
+
+  readonly landmarkSlides: DistrictSlide[] = [
+    {
+      src: `${this.assetBase}/infrastructure/004-green-art-museum.webp`,
+      alt: '臺中綠美圖建築外觀',
+      title: '臺中綠美圖',
+      desc: '由妹島和世操刀的森林美術館，把藝術與閱讀種進日常',
+      note: '圖／台中市政府',
+    },
+    {
+      src: `${this.assetBase}/infrastructure/006-taichung-arena.webp`,
+      alt: '台中巨蛋',
+      title: '台中巨蛋',
+      desc: '萬人國際巨蛋，演唱會與賽事都在生活圈內',
+      note: '圖／台中市政府',
+    },
+    {
+      src: `${this.assetBase}/infrastructure/003-exhibition-center.webp`,
+      alt: '台中國際會展中心',
+      title: '台中國際會展中心',
+      desc: '國際會展能量，門前即是世界級的商機舞台',
+      note: '圖 / 台中市政府',
+    },
+    {
+      src: `${this.assetBase}/infrastructure/008-cmu-art-museum.webp`,
+      alt: '中國醫藥大學美術館',
+      title: '中國醫藥大學美術館',
+      desc: '大學城的人文厚度，醫療與藝術並肩生長',
+      note: '圖 / 台中市政府',
+    },
+        {
+      src: `${this.assetBase}/infrastructure/009.webp`,
+      alt: '台中流行影音中心',
+      title: '台中流行影音中心',
+      desc: '多元文創與影像內容的重要地標，孕育新世代的創意能量',
+      note: '圖 / 台中市政府',
+    },
+  ];
 
   /**
    * district 三段 swiper 切換時，依目前 slide 更新該段左下 di-counter is-phrase 文案。
@@ -420,22 +493,19 @@ export class DefaultComponent
   readonly layoutPlans: Array<{
     label: string;
     size: string;
-    spec: string;
     desc: string;
     plan: string;
   }> = [
     {
       label: '精準的選擇',
       size: '47 坪',
-      spec: '三房 · 兩衛 · 大陽台',
-      desc: '精品自住首選——方正格局、雙衛皆開窗、光線直進不折。',
+      desc: '方正格局、雙衛皆開窗、光線直進不折。',
       plan: `${this.assetBase}/illustration/coming-soon.svg`,
     },
     {
       label: '多一點的餘裕',
       size: '52 坪',
-      spec: '三房 · 雙主臥 · 寬景陽台',
-      desc: '給自己更多餘裕——大主臥、寬景陽台、讓四季進得來的空間尺度。',
+      desc: '大主臥、寬景陽台、讓四季進得來的空間尺度。',
       plan: `${this.assetBase}/illustration/coming-soon.svg`,
     },
   ];
